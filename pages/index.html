@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新创动力 | 后台管理系统 V3.0</title>
+<script src="../js/load.js"></script>
+<script src="../js/main.js"></script>
+</head>
+
+<body>
+<!--header begin-->
+<div class="com-headerBox">
+<div class="com-headerTop com-bg">
+<div class="com-logo"></div>
+<div class="com-htRight">
+<div class="com-userHea" style="background:url(http://www.icpnt.com<{$Think.session.headImg}>) center no-repeat;background-size: cover;"></div>
+<div class="com-userName"><{$Think.session.reName}> <i class="fa fa-sort-desc downArrow"></i></div>
+<ul class="com-heaMenu">
+<li><a href="javascript:void(0)"><i class="fa fa-home"></i> 首页</a></li>
+<li><a href="javascript:void(0)"><i class="fa fa-flag"></i> 皮肤</a></li>
+<li><a href="javascript:void(0)"><i class="fa fa-cog"></i> 设置</a></li>
+<li><a href="javascript:void(0)"><i class="fa fa-question-circle"></i> 帮助</a></li>
+<li><a class="topLogOut" href="javascript:void(0)"><i class="fa fa-power-off"></i> 退出</a></li>
+</ul>
+</div>
+</div>
+<div class="com-hederMenu">
+<div class="com-hideIcon" title="展开左侧菜单" data-state="hide"><i class="fa fa-bars"></i></div>
+<ul class="com-hmUl">
+<volist name="moList" id="vo">
+<if condition="$i eq 1 ">
+<li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i> <{$vo.moduleTypeName}></a></li>
+<else/>
+<li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i> <{$vo.moduleTypeName}></a></li>
+</if>
+</volist>
+</ul>
+</div>
+</div>
+<!--header end-->
+
+<!--left begin-->
+<div class="com-leftBox">
+<div class="com-lbLeftShadow"></div>
+<ul class="com-leftMenu">
+
+</ul>
+</div>
+<!--left begin-->
+
+<!--right begin-->
+<div class="com-rightBox">
+<iframe name="right" id="icpnt_iframe" frameborder="0" scrolling="auto" width="100%" height="100%" src="welcome.html"></iframe>
+</div>
+<!--right end-->
+
+</body>
+</html>

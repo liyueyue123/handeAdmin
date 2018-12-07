@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加信息</title>
+<script src="/js/load.js"></script>
+<link rel="stylesheet" href="/css/rightCommon.css">
+<style>
+label{ padding:0 10px; margin:0; height:50px; line-height:50px; cursor:pointer;}
+</style>
+<script>
+$(document).ready(function(e) {
+	getEditData(function(jdata){
+		$('input.serviceIDS').each(function(index, element) {
+            var thisVal = $(this).val();
+			var label = jdata.serviceIDS.split(",");
+			for(var i=0;i<label.length;i++){
+				if(thisVal == label[i]){
+					$(this).attr("checked","checked");
+					$(this).parents('div.icheckbox_flat-blue').addClass('checked');
+				}
+			}
+        });
+	});
+	
+	//自动计算续费日期
+	$('input#signUpDate').change(function(){
+		var thisVal = $(this).val();
+		var date = new Date(Date.parse(thisVal.replace(/-/g,  "/")));
+		date.setFullYear(date.getFullYear()+1);
+		$('input#serviceDate').val(formatDate(date));
+	});
+	
+	//自动计算已付和未付
+	$('input#proportion').keyup(function(){
+		var thisVal = $(this).val();
+		var costVal = $('input#cost').val();
+		if(costVal != ''){
+			if(thisVal != '' && parseInt(thisVal) <= 100){
+				var prepaid = (costVal * thisVal) / 100;
+				var unpaid = costVal - prepaid;
+				$('input#prepaid').val(prepaid.toFixed(2));
+				$('input#unpaid').val(unpaid.toFixed(2));
+			}else if(parseInt(thisVal) > 100){
+				$.show({
+					title:'错误提示！',
+					content:'已付比例不能大于100%！',
+					closeCallback : function(){
+						$('input#prepaid').val('');
+						$('input#unpaid').val('');
+						$('input#proportion').val('').focus();
+					}
+			});
+				
+			}else{
+				$('input#prepaid').val('');
+				$('input#unpaid').val('');
+			}
+		}else{
+			$.show({
+				title:'错误提示！',
+				content:'请先输入合同总金额！',
+				closeCallback : function(){
+					$('input#proportion').val('');
+					$('input#cost').focus();
+				}
+			});
+		}
+	});
+	
+	
+	
+	
+	
+});
+	
+	var formatDate = function (date) {  
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? '0' + m : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    return y + '-' + m + '-' + d;  
+};  
+</script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+<div class="navbar-header">
+<a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> <span id="changeTitle">添加</span>信息</a>
+</div>
+</nav>
+
+<div class="add-box">
+<form class="addForm" id="form1" name="form1" method="post" action="__APP__/Common/addData/table/Contract">
+<input name="id" type="hidden" id="id" value="<{$_GET['id']}>" />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      
+    <tr>
+        <td align="center">编号</td>
+        <td><input type="text" name="cname" id="cname" class="form-control" datatype="*" nullmsg="自动生成" placeholder="自动生成" /></td>
+    </tr>
+    <tr>
+        <td align="center">账号</td>
+        <td><input type="text" name="cuname" id="cuname" class="form-control" placeholder="请输入账号" /></td>
+    </tr>
+	<tr>
+        <td align="center">密码</td>
+        <td><input type="text" name="cutelPhone" id="cutelPhone" class="form-control" placeholder="默认密码为123456" /></td>
+    </tr>
+    <tr>
+		<td align="center">公司名称</td>
+        <td><input type="text" name="cuEmail" id="cuEmail" class="form-control" placeholder="请输入公司名称" /></td>
+    </tr>
+    <tr>
+        <td align="center">负责人姓名</td>
+        <td><input type="text" name="cuEmail" id="cuEmail" class="form-control" placeholder="请输入负责人姓名" /></td>
+    </tr>
+    <tr>
+        <td align="center">联系方式</td>
+        <td><input type="text" name="cuEmail" id="cuEmail" class="form-control" placeholder="可添加五组电话信息" /></td>
+    </tr>
+    <tr>
+        <td align="center">所在地区</td>
+        <td><input type="text" name="cuEmail" id="cuEmail" class="form-control" placeholder="请选择所在地区" /></td>
+    </tr>
+    <tr>
+        <td align="center">详细地址</td>
+        <td><input type="text" name="cuEmail" id="cuEmail" class="form-control" placeholder="请输入详细地址" /></td>
+    </tr>
+    
+    <tr>
+        <td align="center">截止时间</td>
+        <td><input type="text" name="signUpDate" id="signUpDate" class="form-control jcDate" datatype="*" nullmsg="请选择截止日期" placeholder="请选择截止日期" /></td>
+    </tr>
+
+    <tr>
+        <td align="center">最终账号数量</td>
+        <td><input type="text" name="cuEmail" id="cuEmail" class="form-control" placeholder="请输入最终账号数量" /></td>
+    </tr>
+      
+    <tr>
+    <td align="center">备注</td>
+    <td colspan="3"><textarea name="content" id="content" cols="45" rows="5" class="form-control" style="width:100%;height:300px; margin:10px 0px;"></textarea></td>
+    </tr>
+    
+    <tr>
+    <td>&nbsp;</td>
+    <td colspan="3">
+    <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i> 添加</button>
+    <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 取消</button>
+    </td>
+    </tr>
+    </tbody>
+  </table>
+</form>  
+</div>
+
+</body>
+</html>

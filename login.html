@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>新创动力 | 后台管理系统 V3.0</title>
+    
+    #include "common.html" 
+
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+
+<body>
+    <div class="loginBox">
+        <div class="loginTitle"></div>
+        <div class="userInput"><label>用　户</label><input type="text" name="username" id="username" datatype="*" nullmsg="请输入用户名！"
+                errormsg="用户名不能为空！" autocomplete="off"></div>
+        <div class="userInput passInput"><label>密　码</label><input type="password" name="password" id="password"
+                datatype="*" nullmsg="密码不能为空！"></div>
+        <div class="userInput codeInput"><label>验证码</label><input type="text" name="VerCode" id="VerCode" datatype="*"
+                nullmsg="验证码不能为空！" autocomplete="off">
+            <div class="codeImg"><img src="__URL__/verCode" style="cursor:pointer" title="点击刷新验证码" /></div>
+        </div>
+        <div class="buttonDiv"><input type="submit" class="login_button" value="登陆" /></div>
+    </div>
+
+</body>
+
+</html>

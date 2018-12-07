@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="/js/load.js"></script>
+<link rel="stylesheet" href="/css/rightCommon.css">
+</head>
+
+<body>
+<div class="wel-box">
+<!--快捷菜单 begin-->
+<!--
+<div class="wel-fastMenuBox">
+<a href="javascript:void(0)"><i class="wel-house"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-task"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-mess"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-calculate"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-maps"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-huod"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-youhui"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-1"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-2"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-3"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-4"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-5"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-6"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-7"></i><span class="wel-fmTitle">未定义</span></a>
+<a href="javascript:void(0)"><i class="wel-undefind-8"></i><span class="wel-fmTitle">未定义</span></a>
+</div>
+-->
+<!--快捷菜单 end-->
+
+<!--信息汇总 begin-->
+<div class="wel-welDiv">
+
+<div class="wel-infoDiv" id="zhichu"></div>
+<div class="wel-infoDiv" id="yueSr" style="margin-right:0px;"></div>
+<div class="wel-infoDiv" id="shouru"></div>
+<div class="wel-infoDiv" id="zongzc" style="margin-right:0px;"></div>
+<div class="wel-infoDiv" id="zongsr"></div>
+
+</div>
+<!--信息汇总 end-->
+
+</div>
+
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script type="text/javascript">
+// 基于准备好的dom，初始化echarts实例
+var zhichu = echarts.init(document.getElementById('zhichu'));
+var shouru = echarts.init(document.getElementById('shouru'));
+var zongzc = echarts.init(document.getElementById('zongzc'));
+var zongsr = echarts.init(document.getElementById('zongsr'));
+var yueSr = echarts.init(document.getElementById('yueSr'));
+var myDate = new Date();
+var yearVal = myDate.getFullYear();
+var monthVal = myDate.getMonth();
+if(monthVal == 0){
+	monthVal = 12;
+}
+if(monthVal.toString().length <= 1){
+	monthVal = '0'+monthVal;
+}
+$(function() {
+	$.post('__URL__/getCountData', {monthID:yearVal+monthVal, startDate:yearVal+'-'+monthVal+'-01', endDate:yearVal+'-'+monthVal+'-31'}, function(data) {
+		//console.log(JSON.stringify(data.lastMonthSignUp));
+		var houseCost = 8000;//固定房租成本
+		var otherCost = 2000;//水电宽带等其他成本
+		option = {
+			title: {
+				text: yearVal+'年'+monthVal+'月支出统计',
+				subtext: '上月费用支出总计：￥'+parseFloat(data.zcCount + houseCost + otherCost),
+				x: 'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				orient: 'vertical',
+				left: 'left',
+				data: ['工资支出', '报销支出', '社保支出', '房租支出', '水电宽带支出']
+			},
+			series: [{
+				name: '支出项目',
+				type: 'pie',
+				radius: '55%',
+				center: ['50%', '60%'],
+				data: [{
+					value: data.lastMothGz,
+					name: '工资支出'
+				}, {
+					value: data.lastMothBx,
+					name: '报销支出'
+				}, {
+					value: data.lastMonthSb,
+					name: '社保支出'
+				}, {
+					value: houseCost,
+					name: '房租支出'
+				}, {
+					value: otherCost,
+					name: '水电宽带支出'
+				}],
+				itemStyle: {
+					emphasis: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					}
+				}
+			}]
+		};
+		zhichu.setOption(option);
+
+		option2 = {
+			title: {
+				text: '未回款项目统计',
+				subtext: '未回款总金额为：￥' + data.cost,
+				x: 'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				orient: 'vertical',
+				left: 'left',
+				data: data.name
+			},
+			series: [{
+				name: '项目名称',
+				type: 'pie',
+				radius: '55%',
+				center: ['50%', '60%'],
+				data: data.list,
+				itemStyle: {
+					emphasis: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					}
+				}
+			}]
+		};
+		shouru.setOption(option2);
+
+		option3 = {
+			title: {
+				text: '近年来公司营收统计',
+				subtext: '总营收金额为：￥' + data.allCost,
+				x: 'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				x: 'left',
+				data: data.allName
+			},
+			series: [{
+				name: '项目名称',
+				type: 'pie',
+				radius: ['50%', '70%'],
+				avoidLabelOverlap: false,
+				label: {
+					normal: {
+						show: false,
+						position: 'center'
+					},
+					emphasis: {
+						show: true,
+						textStyle: {
+							fontSize: '30',
+							fontWeight: 'bold'
+						}
+					}
+				},
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: data.all
+			}]
+		};
+		zongsr.setOption(option3);
+
+
+
+		option4 = {
+			title: {
+				text: '近年来公司支出统计',
+				subtext: '支出总金额为：￥' + data.allGz,
+				x: 'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			legend: {
+				orient: 'vertical',
+				x: 'left',
+				data: ['工资社保支出', '报销支出']
+			},
+			series: [{
+				name: '支出项目',
+				type: 'pie',
+				radius: ['50%', '70%'],
+				avoidLabelOverlap: false,
+				label: {
+					normal: {
+						show: false,
+						position: 'center'
+					},
+					emphasis: {
+						show: true,
+						textStyle: {
+							fontSize: '30',
+							fontWeight: 'bold'
+						}
+					}
+				},
+				labelLine: {
+					normal: {
+						show: false
+					}
+				},
+				data: [{
+					value: data.allGongZi,
+					name: '工资社保支出'
+				}, {
+					value: data.allBaoxiao,
+					name: '报销支出'
+				}]
+			}]
+		};
+		zongzc.setOption(option4);
+
+
+		option5 = {
+			title: {
+				text: yearVal+'年'+monthVal+'月收入统计',
+				subtext: '上月收入金额总计：￥'+data.lastMonthSignUpCost,
+				x: 'center'
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				orient: 'vertical',
+				left: 'left',
+				data: data.lastMonthSignUpName
+			},
+			series: [{
+				name: '支出项目',
+				type: 'pie',
+				radius: '55%',
+				center: ['50%', '60%'],
+				data: data.lastMonthSignUp,
+				itemStyle: {
+					emphasis: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					}
+				}
+			}]
+		};
+		yueSr.setOption(option5);
+
+
+
+
+
+	});
+})
+</script>
+</body>
+</html>

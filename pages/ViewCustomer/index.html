@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>查看客户信息</title>
+	<script src="/js/load.js"></script>
+	<link rel="stylesheet" href="/css/rightCommon.css">
+	<style>
+		label{ padding:0 10px; margin:0; height:50px; line-height:50px; cursor:pointer;}
+.gtImg{
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+	border: 2px solid #fff;
+	margin: 10px 5px;
+}
+</style>
+	<script>
+		//双击编辑字段
+function ShowElement(element,id,title){
+var oldhtml = element.innerHTML;
+var newobj = document.createElement('input');
+//创建新的input元素
+newobj.type = 'text';
+newobj.className = 'form-control';
+newobj.setAttribute("placeholder","请输入"+title);
+//为新增元素添加类型
+newobj.onblur = function(){
+element.innerHTML = this.value.replace(/(^\s*)|(\s*$)/g, "") ? this.value : oldhtml;
+//当触发时判断新增元素值是否为空，为空则不修改，并返回原有值 
+	if(this.value.replace(/(^\s*)|(\s*$)/g, "").length > 0){
+		//保存修改字段
+		var descText = '<{$Think.session.reName}>将'+title+'由“'+oldhtml+'”修改为“'+this.value+'”';
+		$.showLoading('保存中……');
+		var saveData = {
+			staffID : '<{$Think.session.staffID}>',
+			customerID : '<{$_GET["id"]}>',
+			desc : descText,
+			field : id,
+			value : this.value
+		};
+		$.post('__URL__/saveCustomer',saveData,function(){
+			$.closeLoading(function(){
+				location.reload();
+			});
+			
+		});
+	}
+	
+}
+element.innerHTML = '';
+element.appendChild(newobj);
+newobj.focus();
+}
+
+
+$(function(){
+	$('select#source').find('option[value=<{$data.source}>]').attr('selected','selected');
+	$('select#status').find('option[value=<{$data.status}>]').attr('selected','selected');
+	
+	$('select#source').change(function(){
+		var thisVal = $(this).find('option:selected').val();
+		var thisText = $(this).find('option:selected').text();
+		var descText = '<{$Think.session.reName}>将客户来源设置为“'+thisText+'”';
+		$.showLoading('保存中……');
+		var saveData = {
+			staffID : '<{$Think.session.staffID}>',
+			customerID : '<{$_GET["id"]}>',
+			desc : descText,
+			field : 'source',
+			value : thisVal
+		};
+		$.post('__URL__/saveCustomer',saveData,function(){
+			$.closeLoading(function(){
+				location.reload();
+			});
+			
+		});
+	});
+	
+	
+	$('select#status').change(function(){
+		var thisVal = $(this).find('option:selected').val();
+		var thisText = $(this).find('option:selected').text();
+		var descText = '<{$Think.session.reName}>将客户状态设置为“'+thisText+'”';
+		$.showLoading('保存中……');
+		var saveData = {
+			staffID : '<{$Think.session.staffID}>',
+			customerID : '<{$_GET["id"]}>',
+			desc : descText,
+			field : 'status',
+			value : thisVal
+		};
+		$.post('__URL__/saveCustomer',saveData,function(){
+			$.closeLoading(function(){
+				location.reload();
+			});
+			
+		});
+	});
+	
+	
+	
+	
+})
+</script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> 查看客户信息</a>
+		</div>
+		<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button>
+	</nav>
+	<div class="add-box">
+		<form class="addForm" id="form1" name="form1" method="post" action="__URL__/saveCustomerrecord">
+			<input name="id" type="hidden" id="id" value="<{$_GET['id']}>" />
+			<input name="staffID" type="hidden" id="staffID" value="<{$Think.session.staffID}>" />
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+
+					<tr>
+						<td align="center">ID</td>
+						<td ondblclick="ShowElement(this, 'reName', 'ID')" width="38%">
+							< {$data.reName}>
+						</td>
+						<td align="center">名片照片</td>
+						<td ondblclick="ShowElement(this, 'telPhone', '名片照片')">
+							< {$data.telPhone}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">姓名</td>
+						<td ondblclick="ShowElement(this, 'telPhone2', '姓名')">
+							< {$data.telPhone2}>
+						</td>
+						<td align="center">性别</td>
+						<td ondblclick="ShowElement(this, 'email', '性别')">
+							< {$data.email}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">职位</td>
+						<td ondblclick="ShowElement(this, 'companyName', '职位')">
+							< {$data.companyName}>
+						</td>
+						<td align="center">公司</td>
+						<td>
+							< {$data.industry}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">计划成单日期</td>
+						<td>
+							< {$data.regMoney}>
+						</td>
+						<td align="center">邮箱</td>
+						<td>
+							< {$data.regDate}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">联系方式</td>
+						<td ondblclick="ShowElement(this, 'address', '联系方式')">
+							< {$data.address}>
+						</td>
+						<td align="center">地址</td>
+						<td ondblclick="ShowElement(this, 'address', '联系方式')">
+							< {$data.address}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">网址</td>
+						<td ondblclick="ShowElement(this, 'address', '概述')">
+							< {$data.address}>
+						</td>
+						<td align="center">微信</td>
+						<td>
+							< {$data.address}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">分组名称</td>
+						<td>
+							< {$data.note}>
+						</td>
+						<td align="center">标签</td>
+						<td>
+							<select name="status" id="status" class="form-control">
+								<option value="4">名称</option>
+								<option value="3">标签总数</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">相关讨论组</td>
+						<td>
+							<select name="status" id="status" class="form-control">
+								<option value="4">名称</option>
+								<option value="3">组内人数</option>
+								<option value="3">成员</option>
+							</select>
+						</td>
+						<td align="center">相关商机</td>
+						<td>
+							< {$data.note}>
+						</td>
+					</tr>
+
+					<tr>
+						<td align="center">信息来源</td>
+						<td colspan="3"><textarea name="desc" id="desc" cols="45" rows="5" class="form-control" datatype="*" nullmsg="请填写沟通记录"
+							 style="width:100%;height:200px; margin:10px 0px;" placeholder="请填写信息来源"></textarea></td>
+					</tr>
+
+					<!-- <tr>
+						<td></td>
+						<td colspan="3">
+							<button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i>
+								添加记录</button>
+							<button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-arrow-alt-circle-right"></i> 下一条</button>
+							<button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-arrow-alt-circle-left"></i> 上一条</button>
+							<button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i>
+								发送邮件</button>
+							<button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i>
+								设置提醒</button>
+						</td>
+					</tr> -->
+
+					<tr>
+						<td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;">
+							< {$vo.staffName}><br>
+								<font>
+									< {$vo.addTime}>
+								</font>
+						</td>
+						<td colspan="3" style="padding: 15px;line-height: 28px;">
+							< {$vo.desc}>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</form>
+		
+	</div>
+
+</body>
+
+</html>

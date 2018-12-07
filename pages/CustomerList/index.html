@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="/js/load.js"></script>
+<link rel="stylesheet" href="/css/rightCommon.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+<div class="navbar-header">
+<a class="navbar-brand" href="#">客户信息管理</a>
+</div>
+<div>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button>
+<button type="button" class="btn btn-info navbar-btn listButton" onclick="javascript:window.location.href='__URL__/importCustomer'"><i class="fa fa-sign-in" aria-hidden="true"></i> 查看</button>
+<!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addCustomer')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
+<form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
+<div class="form-group">
+<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
+</div>
+<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+</form>    
+</div>
+</nav>
+
+<div class="list-box">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+<th>序号</th>
+<th>ID</th>
+<th>名片照片</th>
+<th>姓名</th>
+<th>性别</th>
+<th>职位</th>
+<th>公司</th>
+<th>计划成单日期</th>
+<th>联系方式</th>
+<th>信息来源</th>
+<th>添加时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
+<td><{$vo.id}></td>
+<td><{$vo.reName}></td>
+<td><a href="__URL__/viewCustomer/id/<{$vo.id}>">查看电话</a></td>
+<td><{$vo.staffName}></td>
+<td>
+<!-- <switch name="vo.status">
+	<case value="0"><font color="#d9534f">无效客户</font></case>
+	<case value="1"><font color="#428bca">未沟通</font></case>
+	<case value="2"><font color="#5cb85c">跟进中</font></case>
+	<case value="3"><font color="#5bc0de">潜在客户</font></case>
+	<case value="4"><font color="#000000">已签约</font></case>
+</switch>	 -->
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td width="30%" title="<{$vo['beizhu'][0]['desc']}>" style="cursor: pointer;"><{$vo['beizhu'][0]['desc']|msubstr=0,20}></td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+
+
+
+<ul class="pagination">
+<{$page}>
+</ul>
+
+</body>
+</html>
