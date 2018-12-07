@@ -1,3 +1,4 @@
+APP_URL = 'http://hande.icpnt.com';
 var options = {
   type: "POST", //请求方式：get或post
   dataType: "json", //数据返回类型：xml、json、script
