@@ -19,6 +19,26 @@
 <!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addCustomer')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
 <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
 <div class="form-group">
+	<select class="form-control" name="moduleType">
+		<option value="" selected="">日期</option>
+		<option value="=0">1</option>
+	</select>
+	<select class="form-control" name="moduleType">
+		<option value="" selected="">ID</option>
+		<option value="=0">1</option>
+	</select>
+	<select class="form-control" name="moduleType">
+		<option value="" selected="">姓名</option>
+		<option value="=0">1</option>
+	</select>
+	<select class="form-control" name="moduleType">
+		<option value="" selected="">公司</option>
+		<option value="=0">1</option>
+	</select>
+	<select class="form-control" name="moduleType">
+		<option value="" selected="">职位</option>
+		<option value="=0">1</option>
+	</select>
 <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
 </div>
 <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
@@ -75,7 +95,14 @@
 
 
 <ul class="pagination">
-<{$page}>
+	<li class="active"><a href="#">1</a></li>
+	<li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
+	<li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
+	<li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
+	<li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
+	<li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
+	<li><a>共44条记录</a></li>
+	<li><a>第1页/共5页</a></li>
 </ul>
 
 </body>

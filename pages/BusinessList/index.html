@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>管理员操作</title>
+<title>商机列表</title>
 <script src="/js/load.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
 </head>
@@ -11,12 +11,12 @@
 
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="#">权限规则管理</a>
+<a class="navbar-brand" href="#">查看商机列表</a>
 </div>
 <div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Rule')"><i class="fas fa-trash-alt"></i> 删除</button>
-<button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addRule')"><i class="fas fa-edit"></i> 修改</button>
-<button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addRule')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('News')"><i class="fas fa-trash-alt"></i> 删除</button>
+<button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addNews')"><i class="fas fa-edit"></i> 修改</button>
+<!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addNews')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
 <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
 <div class="form-group">
 <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
@@ -31,11 +31,16 @@
 <thead>
 <tr>
 <th>选择</th>
-<th>编号</th>
-<th>规则标识</th>
-<th>规则名称</th>
-<th>规则状态</th>
-<th>规则表达式</th>
+<th>序号</th>
+<th>ID</th>
+<th>公司名称</th>
+<th>金额</th>
+<th>城市</th>
+<th>日期</th>
+<th>阶段</th>
+<th>分组名称</th>
+<th>信息来源</th>
+<th>操作</th>
 </tr>
 </thead>
 <tbody>
@@ -43,10 +48,15 @@
 <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
 <td><{$vo.id}></td>
-<td><{$vo.name}></td>
 <td><{$vo.title}></td>
-<td><if condition="$vo.status eq 1 "><font color="#069800">正常</font><else/><font color="#B70003">禁用</font></if></td>
-<td><{$vo.condition}></td>
+<td><{$vo.typeName}></td>
+<td><{$vo.label}></td>
+<td><{$vo.source}></td>
+<td><{$vo.addTime}></td>
+<td><{$vo.addTime}></td>
+<td><{$vo.addTime}></td>
+<td><{$vo.addTime}></td>
+<td><a class="btn btn-success navbar-btn" href="/manage.php/Order/getAllOrder?order_id=1490&amp;order_producttype=1"> 查看详情</a></td>
 </tr>
 </volist>
 </tbody>

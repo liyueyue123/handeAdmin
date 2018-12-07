@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>管理员操作</title>
+<title>无标题文档</title>
 <script src="/js/load.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
 </head>
@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="#">权限规则管理</a>
+<a class="navbar-brand" href="#"></a>
 </div>
 <div>
 <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Rule')"><i class="fas fa-trash-alt"></i> 删除</button>
@@ -31,11 +31,10 @@
 <thead>
 <tr>
 <th>选择</th>
-<th>编号</th>
-<th>规则标识</th>
-<th>规则名称</th>
-<th>规则状态</th>
-<th>规则表达式</th>
+<th>序号</th>
+<th>名称</th>
+<th>创建时间</th>
+<th>当前使用此角色的人数</th>
 </tr>
 </thead>
 <tbody>
@@ -45,16 +44,13 @@
 <td><{$vo.id}></td>
 <td><{$vo.name}></td>
 <td><{$vo.title}></td>
-<td><if condition="$vo.status eq 1 "><font color="#069800">正常</font><else/><font color="#B70003">禁用</font></if></td>
-<td><{$vo.condition}></td>
+<td><{$vo.title}></td>
 </tr>
 </volist>
 </tbody>
 </table>
 
 </div>
-
-
 
 
 <ul class="pagination">

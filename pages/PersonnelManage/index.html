@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>管理员操作</title>
+<title>人员管理</title>
 <script src="/js/load.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
 </head>
@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="#">权限规则管理</a>
+<a class="navbar-brand" href="#">人员管理</a>
 </div>
 <div>
 <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Rule')"><i class="fas fa-trash-alt"></i> 删除</button>
@@ -31,11 +31,14 @@
 <thead>
 <tr>
 <th>选择</th>
-<th>编号</th>
-<th>规则标识</th>
-<th>规则名称</th>
-<th>规则状态</th>
-<th>规则表达式</th>
+<th>序号</th>
+<th>姓名</th>
+<th>头像</th>
+<th>账号</th>
+<th>密码</th>
+<th>创建时间</th>
+<th>最后登录时间</th>
+<th>操作</th>
 </tr>
 </thead>
 <tbody>
@@ -44,9 +47,12 @@
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
 <td><{$vo.id}></td>
 <td><{$vo.name}></td>
-<td><{$vo.title}></td>
-<td><if condition="$vo.status eq 1 "><font color="#069800">正常</font><else/><font color="#B70003">禁用</font></if></td>
+<td><img src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJXKbibRu5tzzQf1nYtapmFwbhsXtZUava5fRSq1IaIDWbxbY4QyW7Yodpb9Mv3ibgQC4z2yCDwtHKQ/132" width="70px" height="70px" alt="暂无用户头像"></td>
+<td></td>
 <td><{$vo.condition}></td>
+<td><{$vo.condition}></td>
+<td><{$vo.condition}></td>
+<td><a class="btn btn-danger" data-table="user" data-id="59" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);">禁用</a></td>
 </tr>
 </volist>
 </tbody>

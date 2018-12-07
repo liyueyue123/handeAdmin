@@ -24,8 +24,6 @@ document.write(resoures);
 
 
 // $(document).ready(function(e) {
-    
-
 //     $('.jcDate').datetimepicker({
 //         weekStart: 1, //设置从周一开始，默认值为0周末开始
 //         todayBtn: 1, //显示今日按钮
@@ -37,7 +35,6 @@ document.write(resoures);
 //         language: 'zh-CN', //设置语言为中文
 //         format: 'yyyy-mm-dd' //设置日期格式：年-月-日*/
 //     });
-
 //     $('.jbDate').datetimepicker({
 //         weekStart: 1, //设置从周一开始，默认值为0周末开始
 //         todayBtn: 1, //显示今日按钮
@@ -49,5 +46,4 @@ document.write(resoures);
 //         language: 'zh-CN', //设置语言为中文
 //         format: 'yyyy/mm/dd hh:ii:ss' //设置日期格式：年-月-日*/
 //     });
-
 // });

@@ -1,79 +1,133 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
-<script src="/js/load.js"></script>
-<link rel="stylesheet" href="/css/rightCommon.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>公司列表</title>
+    <script src="/js/load.js"></script>
+    <link rel="stylesheet" href="/css/rightCommon.css">
 </head>
 
 <body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">公司管理</a>
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Case')"><i class="fas fa-trash-alt"></i>
+                删除</button>
+            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('add')"><i class="fas fa-edit"></i>
+                修改</button>
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('add')"><i class="fa fa-plus"
+                    aria-hidden="true"></i> 添加</button>
+            <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
+                <div class="form-group">
+                    <select class="form-control" name="moduleType">
+                        <option value="" selected="">所在地区</option>
+                        <option value="=0">地区一</option>
+                        <option value="<>0">地区二</option>
+                    </select>
+                    <select class="form-control" name="parent_id">
+                        <option value="61">开户时间</option>
+                        <option value="70">个人中心</option>
+                        <option value="79">退款管理</option>
+                    </select>
+                    <select class="form-control" name="parent_id">
+                        <option value="61">截止时间</option>
+                        <option value="70">个人中心</option>
+                        <option value="79">退款管理</option>
+                    </select>
+                    <select class="form-control" name="parent_id">
+                        <option value="61">状态</option>
+                        <option value="70">个人中心</option>
+                        <option value="79">退款管理</option>
+                    </select>
+                    <!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入编号搜索"> -->
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+            </form>
+        </div>
+    </nav>
 
-<nav class="navbar navbar-default" role="navigation">
-<div class="navbar-header">
-<a class="navbar-brand" href="#">公司管理</a>
-</div>
-<div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Case')"><i class="fas fa-trash-alt"></i> 删除</button>
-<button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('add')"><i class="fas fa-edit"></i> 修改</button>
-<button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('add')"><i class="fa fa-plus" aria-hidden="true"></i> 添加</button>
-<form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
-<div class="form-group">
-<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
-</div>
-<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-</form>    
-</div>
-</nav>
+    <div class="list-box">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>序号</th>
+                    <th>用户编号</th>
+                    <th>状态</th>
+                    <th>所在地区</th>
+                    <th>详细地址</th>
+                    <th>公司名称</th>
+                    <th>负责人姓名</th>
+                    <th>联系电话</th>
+                    <th>开户时间</th>
+                    <th>截止时间</th>
+                    <th>后台账号</th>
+                    <th>账户最近登录时间</th>
+                </tr>
+            </thead>
+            <tbody>
 
-<div class="list-box">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<thead>
-<tr>
-<th>选择</th>
-<th>序号</th>
-<th>用户编号</th>
-<th>状态</th>
-<th>所在地区</th>
-<th>详细地址</th>
-<th>公司名称</th>
-<th>负责人姓名</th>
-<th>联系电话</th>
-<th>开户时间</th>
-<th>截止时间</th>
-<th>后台账号</th>
-<th>账户最近登录时间</th>
-</tr>
-</thead>
-<tbody>
+                <tr>
+                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
+                    <td>
+                        < {$vo.id}>
+                    </td>
+                    <td>
+                        < {$vo.title}>
+                    </td>
+                    <td>
+                        < {$vo.customerName}>
+                    </td>
+                    <td>
+                        < {$vo.caseTypeName}>
+                    </td>
+                    <td>
+                        < {$vo.caseLabel}>
+                    </td>
+                    <td>
+                        < {$vo.addTime}>
+                    </td>
+                    <td class="sortTD" name="Case">
+                        < {$vo.sort}>
+                    </td>
+                    <td>
+                        < {$vo.customerName}>
+                    </td>
+                    <td>
+                        < {$vo.caseTypeName}>
+                    </td>
+                    <td>
+                        < {$vo.caseLabel}>
+                    </td>
+                    <td>
+                        < {$vo.addTime}>
+                    </td>
+                    <td>
+                        < {$vo.addTime}>
+                    </td>
+                </tr>
 
-<tr>
-<td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
-<td><{$vo.id}></td>
-<td><{$vo.title}></td>
-<td><{$vo.customerName}></td>
-<td><{$vo.caseTypeName}></td>
-<td><{$vo.caseLabel}></td>
-<td><{$vo.addTime}></td>
-<td class="sortTD" name="Case"> <{$vo.sort}> </td>
-<td><{$vo.customerName}></td>
-<td><{$vo.caseTypeName}></td>
-<td><{$vo.caseLabel}></td>
-<td><{$vo.addTime}></td>
-<td><{$vo.addTime}></td>
-</tr>
+            </tbody>
+        </table>
 
-</tbody>
-</table>
-
-</div>
+    </div>
 
 
 
 
-<ul class="pagination">
-<{$page}>
-</ul>
+    <ul class="pagination">
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
+        <li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
+        <li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
+        <li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
+        <li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
+        <li><a>共44条记录</a></li>
+        <li><a>第1页/共5页</a></li>
+    </ul>
 
 </body>
+
 </html>
