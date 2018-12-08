@@ -6,8 +6,8 @@ $(document).ready(function(e) {
 			content : '确定要退出系统吗？',
 			isConfirm : true,
 			callback : function(){
-				$.post(APP+'/Common/loginOut','',function(json){
-					window.location.href = APP+'/Login/';
+				$.post(APP_URL +'/console/loginOut','',function(json){
+					window.location.href = "../login.html";
 				});
 			}
 		});
@@ -66,4 +66,19 @@ $(document).ready(function(e) {
 			}
 		});
 	});
+
+	getMenuList();
 });
+
+// 顶部菜单项
+function getMenuList(){
+	// var token = sessionStorage.getItem("token");
+	$.ajax({
+		type: "get",
+		url: APP_URL+"/menuList",
+		dataType: "json",
+		success: function (res) {
+			console.log(res);
+		}
+	});
+}

@@ -6,6 +6,7 @@
     <title>公司列表</title>
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="./companyList.js"></script>
 </head>
 
 <body>
@@ -18,8 +19,8 @@
                 删除</button>
             <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('add')"><i class="fas fa-edit"></i>
                 修改</button>
-            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('add')"><i class="fa fa-plus"
-                    aria-hidden="true"></i> 添加</button>
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i class="fa fa-plus"
+                    aria-hidden="true"></i> 新建</button>
             <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
                 <div class="form-group">
                     <select class="form-control" name="moduleType">
@@ -69,45 +70,21 @@
             </thead>
             <tbody>
 
-                <tr>
+                <!-- <tr>
                     <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
-                    <td>
-                        < {$vo.id}>
-                    </td>
-                    <td>
-                        < {$vo.title}>
-                    </td>
-                    <td>
-                        < {$vo.customerName}>
-                    </td>
-                    <td>
-                        < {$vo.caseTypeName}>
-                    </td>
-                    <td>
-                        < {$vo.caseLabel}>
-                    </td>
-                    <td>
-                        < {$vo.addTime}>
-                    </td>
-                    <td class="sortTD" name="Case">
-                        < {$vo.sort}>
-                    </td>
-                    <td>
-                        < {$vo.customerName}>
-                    </td>
-                    <td>
-                        < {$vo.caseTypeName}>
-                    </td>
-                    <td>
-                        < {$vo.caseLabel}>
-                    </td>
-                    <td>
-                        < {$vo.addTime}>
-                    </td>
-                    <td>
-                        < {$vo.addTime}>
-                    </td>
-                </tr>
+                    <td>< {$vo.id}></td>
+                    <td>< {$vo.title}></td>
+                    <td>< {$vo.customerName}></td>
+                    <td>< {$vo.caseTypeName}></td>
+                    <td>< {$vo.caseLabel}></td>
+                    <td>< {$vo.addTime}></td>
+                    <td class="sortTD" name="Case">< {$vo.sort}></td>
+                    <td>< {$vo.customerName}></td>
+                    <td>< {$vo.caseTypeName}></td>
+                    <td>< {$vo.caseLabel}></td>
+                    <td>< {$vo.addTime}></td>
+                    <td>< {$vo.addTime}></td>
+                </tr> -->
 
             </tbody>
         </table>

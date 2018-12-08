@@ -5,8 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>汉得 | 后台管理系统 V3.0</title>
     <link rel="stylesheet" href="/css/login.css">
-    <!-- <script src="/js/load.js"></script> -->
-    <script src="./js/common/jquery-1.8.2.min.js"></script>
+    <script src="/js/load.js"></script>
 </head>
 
 <body>
@@ -20,32 +19,42 @@
                 nullmsg="验证码不能为空！" autocomplete="off">
             <div class="codeImg"><img src="__URL__/verCode" style="cursor:pointer" title="点击刷新验证码" /></div>
         </div> -->
+        <div class="errorinfo" style="display: block;"></div>
         <div class="buttonDiv"><input type="submit" class="login_button" value="登陆" /></div>
     </div>
 
 </body>
 <script>
     $(function () {
-        $.ajax({
-            type: "POST",
-            url: "http://hande.icpnt.com/console/login",
-            data: {
-                loginname: "admin",
-                passwd: "123456"
-            },
-            dataType: "json",
-            success: function (res) {
-                console.log(res);
-            }
+        $("div.buttonDiv").click(function () {
+            var userName = $("#username").val();
+            var passWord = $("#password").val();
+            // console.log(userName, passWord);
+            $.ajax({
+                type: "GET",
+                url: APP_URL + "/console/login",
+                data: {
+                    loginname: userName,
+                    passwd: passWord
+                },
+                dataType: "json",
+                success: function (res) {
+                    console.log(res);
+                    if (res.code == "success") {
+                        $(window).attr("location", "./pages/index.html");
+                        sessionStorage.setItem("token",res.authToken);
+                        sessionStorage.setItem("isDelete", "isDel");
+                    } else {
+                        $("div.errorinfo").html(res.message);
+                        $("div.errorinfo").show();
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         });
     });
-    // $.get('http://hande.icpnt.com/console/login',{loginname:'admin', passwd:'123456'},function(res){
-    //     console.log(res);
-
-    // });
-    // $.get("http://hande.icpnt.com/console/login", { 'loginname' : 'admin' ,'passwd':'123456'},function(res){
-    //     console.log(res);
-    // });
 </script>
 
 </html>

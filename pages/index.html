@@ -28,18 +28,14 @@
         <div class="com-hederMenu">
             <div class="com-hideIcon" title="展开左侧菜单" data-state="hide"><i class="fa fa-bars"></i></div>
             <ul class="com-hmUl">
-                <!-- <volist name="moList" id="vo">
-                    <if condition="$i eq 1 ">
-                        <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
-                                < {$vo.moduleTypeName}>
-                            </a></li>
-                        <else />
-                        <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i
-                                    class="fa fa-<{$vo.moduleTypeIcon}>"></i>
-                                < {$vo.moduleTypeName}>
-                            </a></li>
-                    </if>
-                </volist> -->
+                <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
+                        < {$vo.moduleTypeName}>
+                    </a></li>
+                <else />
+                <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i
+                            class="fa fa-<{$vo.moduleTypeIcon}>"></i>
+                        < {$vo.moduleTypeName}>
+                    </a></li>
             </ul>
         </div>
     </div>
@@ -49,7 +45,7 @@
     <div class="com-leftBox">
         <div class="com-lbLeftShadow"></div>
         <ul class="com-leftMenu">
-            <!-- <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i></a></li> -->
+            <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i></a></li>
         </ul>
     </div>
     <!--left begin-->
@@ -61,5 +57,8 @@
     <!--right end-->
 
 </body>
+<script>
+
+</script>
 
 </html>
