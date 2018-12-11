@@ -5,7 +5,7 @@ $.extend({
         var loadingHtml = '';
         loadingHtml += '<div class="loadingMask"></div>';
         loadingHtml += '<div class="loadingBox">';
-        loadingHtml += '<img style="float:left;" src="' + PUBLIC + '/js/tools/icpntDialog/images/loading.gif" width="37" height="37">';
+        loadingHtml += '<img style="float:left;" src="../../js/tools/icpntDialog/images/loading.gif" width="37" height="37">';
         loadingHtml += '<span style="margin-left:10px;">' + title + '</span>';
         loadingHtml += '</div>';
         $("body", window.parent.document).append(loadingHtml);

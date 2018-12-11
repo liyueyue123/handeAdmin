@@ -15,9 +15,9 @@
             <a class="navbar-brand" href="#">公司管理</a>
         </div>
         <div>
-            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Case')"><i class="fas fa-trash-alt"></i>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteCompany')"><i class="fas fa-trash-alt"></i>
                 删除</button>
-            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('add')"><i class="fas fa-edit"></i>
+            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../EditCompany/index.html')"><i class="fas fa-edit"></i>
                 修改</button>
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i class="fa fa-plus"
                     aria-hidden="true"></i> 新建</button>
@@ -66,6 +66,7 @@
                     <th>截止时间</th>
                     <th>后台账号</th>
                     <th>账户最近登录时间</th>
+                    <!-- <th>操作</th> -->
                 </tr>
             </thead>
             <tbody>

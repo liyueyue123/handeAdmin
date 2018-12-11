@@ -3,10 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>新增公司管理</title>
+    <title>编辑公司管理</title>
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
-    <script src="./addCompanyt.js"></script>
 </head>
 
 <body>
@@ -23,8 +22,8 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="http://hande.icpnt.com/addCompany">
-            <input name="authToken" type="hidden" id="authToken" value="">
+        <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="http://hande.icpnt.com/editCompany">
+            <input name="id" type="hidden" id="authToken" value="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <!-- <tr>
@@ -33,60 +32,50 @@
                     </tr> -->
                     <tr>
                         <td align="center">账号</td>
-                        <td><input type="text" name="company_tel" id="company_tel" class="form-control" datatype="*"
-                                nullmsg="请输入帐号" placeholder="请输入帐号"></td>
+                        <td><input type="text" name="company_tel" id="company_tel" class="form-control" datatype="*"  nullmsg="请输入帐号" placeholder="请输入帐号"></td>
                     </tr>
 
                     <tr>
                         <td align="center">密码</td>
-                        <td><input type="password" name="password" id="company_password" class="form-control" datatype="*"
-                                nullmsg="请输入密码" placeholder="请输入密码"></td>
+                        <td><input type="password" name="company_password" id="company_password" class="form-control" datatype="*"  nullmsg="请输入密码" placeholder="请输入密码"></td>
                     </tr>
 
                     <tr>
                         <td align="center">公司名称</td>
-                        <td><input type="text" name="companyname" id="company_name" class="form-control" datatype="*"
-                                nullmsg="请输入公司名称" placeholder="请输入公司名称"></td>
+                        <td><input type="text" name="company_name" id="company_name" class="form-control" datatype="*"  nullmsg="请输入公司名称" placeholder="请输入公司名称"></td>
                     </tr>
 
                     <tr>
                         <td align="center">负责人姓名</td>
-                        <td><input type="text" name="principalName" id="company_user" class="form-control" datatype="*"
-                                nullmsg="请输入负责人姓名" placeholder="请输入负责人姓名"></td>
+                        <td><input type="text" name="company_user" id="company_user" class="form-control" datatype="*"  nullmsg="请输入负责人姓名" placeholder="请输入负责人姓名"></td>
                     </tr>
                     <tr>
                         <td align="center">联系人方式</td>
-                        <td><input type="text" name="company_userTel" id="company_userTel" class="form-control"
-                                datatype="*" nullmsg="请选择联系方式" placeholder="请选择联系方式"></td>
+                        <td><input type="text" name="company_userTel" id="company_userTel" class="form-control" datatype="*"  nullmsg="请选择联系方式" placeholder="请选择联系方式"></td>
                     </tr>
 
                     <tr>
                         <td align="center">所在地区</td>
-                        <td><input type="text" name="provinceid" id="company_city" class="form-control" datatype="*"
-                                nullmsg="请选择地区" placeholder="请选择地区"></td>
+                        <td><input type="text" name="company_city" id="company_city" class="form-control" datatype="*"  nullmsg="请选择地区" placeholder="请选择地区"></td>
                     </tr>
 
                     <tr>
                         <td align="center">详细地址</td>
-                        <td><input type="text" name="address" id="company_address" class="form-control" datatype="*"
-                                nullmsg="请输入详细地址" placeholder="请输入详细地址"></td>
+                        <td><input type="text" name="company_address" id="company_address" class="form-control" datatype="*"  nullmsg="请输入详细地址" placeholder="请输入详细地址"></td>
                     </tr>
                     <tr>
                         <td align="center">截止时间</td>
-                        <td><input type="text" name="deadline" id="taskEndTime" class="form-control jcDate" datatype="*"
-                                nullmsg="请选择截止日期" placeholder="请选择截止日期" /></td>
+                        <td><input type="text" name="taskEndTime" id="taskEndTime" class="form-control jcDate" datatype="*" nullmsg="请选择截止日期" placeholder="请选择截止日期" /></td>
                     </tr>
                     <tr>
                         <td align="center">最终账号数量</td>
-                        <td><input type="text" name="lastAccountCount" id="company_num" class="form-control" datatype="*"
-                                nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"></td>
+                        <td><input type="text" name="company_num" id="company_num" class="form-control" datatype="*"  nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"></td>
                     </tr>
 
                     <tr>
                         <td>&nbsp;</td>
                         <td>
-                            <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check"
-                                    aria-hidden="true"></i> 添加</button>
+                            <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-floppy-o"></i>保存</button>
                             <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times"
                                     aria-hidden="true"></i> 取消</button>
                         </td>
@@ -96,10 +85,7 @@
         </form>
     </div>
 
-    <script>
-        var token = sessionStorage.getItem("token");
-        $("#authToken").val(token);
-    </script>
+
 </body>
 
 

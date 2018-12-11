@@ -6,100 +6,99 @@
 	<title>查看客户信息</title>
 	<script src="/js/load.js"></script>
 	<link rel="stylesheet" href="/css/rightCommon.css">
+	<script src="./customerDetail.js"></script>
 	<style>
 		label{ padding:0 10px; margin:0; height:50px; line-height:50px; cursor:pointer;}
-.gtImg{
-	width: 50px;
-	height: 50px;
-	border-radius: 100px;
-	border: 2px solid #fff;
-	margin: 10px 5px;
-}
-</style>
+		.gtImg{
+			width: 50px;
+			height: 50px;
+			border-radius: 100px;
+			border: 2px solid #fff;
+			margin: 10px 5px;
+		}
+	</style>
 	<script>
 		//双击编辑字段
-function ShowElement(element,id,title){
-var oldhtml = element.innerHTML;
-var newobj = document.createElement('input');
-//创建新的input元素
-newobj.type = 'text';
-newobj.className = 'form-control';
-newobj.setAttribute("placeholder","请输入"+title);
-//为新增元素添加类型
-newobj.onblur = function(){
-element.innerHTML = this.value.replace(/(^\s*)|(\s*$)/g, "") ? this.value : oldhtml;
-//当触发时判断新增元素值是否为空，为空则不修改，并返回原有值 
-	if(this.value.replace(/(^\s*)|(\s*$)/g, "").length > 0){
-		//保存修改字段
-		var descText = '<{$Think.session.reName}>将'+title+'由“'+oldhtml+'”修改为“'+this.value+'”';
-		$.showLoading('保存中……');
-		var saveData = {
-			staffID : '<{$Think.session.staffID}>',
-			customerID : '<{$_GET["id"]}>',
-			desc : descText,
-			field : id,
-			value : this.value
-		};
-		$.post('__URL__/saveCustomer',saveData,function(){
-			$.closeLoading(function(){
-				location.reload();
-			});
+		function ShowElement(element,id,title){
+		var oldhtml = element.innerHTML;
+		var newobj = document.createElement('input');
+		//创建新的input元素
+		newobj.type = 'text';
+		newobj.className = 'form-control';
+		newobj.setAttribute("placeholder","请输入"+title);
+		//为新增元素添加类型
+		newobj.onblur = function(){
+		element.innerHTML = this.value.replace(/(^\s*)|(\s*$)/g, "") ? this.value : oldhtml;
+		//当触发时判断新增元素值是否为空，为空则不修改，并返回原有值 
+			if(this.value.replace(/(^\s*)|(\s*$)/g, "").length > 0){
+				//保存修改字段
+				var descText = '<{$Think.session.reName}>将'+title+'由“'+oldhtml+'”修改为“'+this.value+'”';
+				$.showLoading('保存中……');
+				var saveData = {
+					staffID : '<{$Think.session.staffID}>',
+					customerID : '<{$_GET["id"]}>',
+					desc : descText,
+					field : id,
+					value : this.value
+				};
+				$.post('__URL__/saveCustomer',saveData,function(){
+					$.closeLoading(function(){
+						location.reload();
+					});
+					
+				});
+			}
 			
-		});
-	}
-	
-}
-element.innerHTML = '';
-element.appendChild(newobj);
-newobj.focus();
-}
+		}
+		element.innerHTML = '';
+		element.appendChild(newobj);
+		newobj.focus();
+		}
 
 
-$(function(){
-	$('select#source').find('option[value=<{$data.source}>]').attr('selected','selected');
-	$('select#status').find('option[value=<{$data.status}>]').attr('selected','selected');
-	
-	$('select#source').change(function(){
-		var thisVal = $(this).find('option:selected').val();
-		var thisText = $(this).find('option:selected').text();
-		var descText = '<{$Think.session.reName}>将客户来源设置为“'+thisText+'”';
-		$.showLoading('保存中……');
-		var saveData = {
-			staffID : '<{$Think.session.staffID}>',
-			customerID : '<{$_GET["id"]}>',
-			desc : descText,
-			field : 'source',
-			value : thisVal
-		};
-		$.post('__URL__/saveCustomer',saveData,function(){
-			$.closeLoading(function(){
-				location.reload();
+		$(function(){
+			$('select#source').find('option[value=<{$data.source}>]').attr('selected','selected');
+			$('select#status').find('option[value=<{$data.status}>]').attr('selected','selected');
+			
+			$('select#source').change(function(){
+				var thisVal = $(this).find('option:selected').val();
+				var thisText = $(this).find('option:selected').text();
+				var descText = '<{$Think.session.reName}>将客户来源设置为“'+thisText+'”';
+				$.showLoading('保存中……');
+				var saveData = {
+					staffID : '<{$Think.session.staffID}>',
+					customerID : '<{$_GET["id"]}>',
+					desc : descText,
+					field : 'source',
+					value : thisVal
+				};
+				$.post('__URL__/saveCustomer',saveData,function(){
+					$.closeLoading(function(){
+						location.reload();
+					});
+					
+				});
+			});
+			$('select#status').change(function(){
+				var thisVal = $(this).find('option:selected').val();
+				var thisText = $(this).find('option:selected').text();
+				var descText = '<{$Think.session.reName}>将客户状态设置为“'+thisText+'”';
+				$.showLoading('保存中……');
+				var saveData = {
+					staffID : '<{$Think.session.staffID}>',
+					customerID : '<{$_GET["id"]}>',
+					desc : descText,
+					field : 'status',
+					value : thisVal
+				};
+				$.post('__URL__/saveCustomer',saveData,function(){
+					$.closeLoading(function(){
+						location.reload();
+					});
+					
+				});
 			});
 			
-		});
-	});
-	
-	
-	$('select#status').change(function(){
-		var thisVal = $(this).find('option:selected').val();
-		var thisText = $(this).find('option:selected').text();
-		var descText = '<{$Think.session.reName}>将客户状态设置为“'+thisText+'”';
-		$.showLoading('保存中……');
-		var saveData = {
-			staffID : '<{$Think.session.staffID}>',
-			customerID : '<{$_GET["id"]}>',
-			desc : descText,
-			field : 'status',
-			value : thisVal
-		};
-		$.post('__URL__/saveCustomer',saveData,function(){
-			$.closeLoading(function(){
-				location.reload();
-			});
-			
-		});
-	});
-	
 	
 	
 	
@@ -111,9 +110,9 @@ $(function(){
 
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> 查看客户信息</a>
+			<a class="navbar-brand" href="#"> 查看客户信息</a>
 		</div>
-		<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button>
+		<!-- <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button> -->
 	</nav>
 	<div class="add-box">
 		<form class="addForm" id="form1" name="form1" method="post" action="__URL__/saveCustomerrecord">

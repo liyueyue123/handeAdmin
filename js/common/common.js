@@ -1,20 +1,23 @@
 APP_URL = 'http://hande.icpnt.com';
+var token = sessionStorage.getItem("token");
+console.log(token);
 var options = {
   type: "POST", //请求方式：get或post
   dataType: "json", //数据返回类型：xml、json、script
   beforeSerialize: function() {
     //alert("tttt");
   },
-  //data:{'icpnt':icpnt},//自定义提交的数据
+  // data:{'authToken':token},//自定义提交的数据
   beforeSubmit: function() {
-    if (CONTROLLER_NAME == 'Login') {
-      $.showLoading('正在登陆……');
-    } else {
-      $.showLoading('正在提交……');
-    }
+    $.showLoading('正在提交……');
+    // if (CONTROLLER_NAME == 'Login') {
+    //   $.showLoading('正在登陆……');
+    // } else {
+    //   $.showLoading('正在提交……');
+    // }
   },
   success: function(json) { //表单提交成功回调函数
-    //console.log(JSON.stringify(json));
+    console.log(JSON.stringify(json));
     if (typeof(json.url) != "undefined") {
       if (json.url == '/Index/index') {
         window.location.href = json.url;
@@ -24,7 +27,7 @@ var options = {
         });
       }
     } else {
-      alert(json.info);
+      alert(111,json.info);
       $.closeLoading();
     }
     $(".addForm").resetForm();
@@ -38,6 +41,8 @@ var options = {
     errWin.document.close();
   }
 };
+// console.log(options);
+// $("#saveButton").ajaxForm(options);
 $(document).ready(function(e) {
   $.Tipmsg.r = null;
   $(".addForm").Validform({
@@ -110,7 +115,7 @@ function editData(src) {
   var checkBox = $("input[name=del_listID]:checked");
   var checkBoxVal = checkBox.val();
   if (checkBox.length == 1) {
-    window.location.href = APP + '/' + CONTROLLER_NAME + '/' + src + '/id/' + checkBoxVal;
+    window.location.href = APP_URL + '/' + src + '/id/' + checkBoxVal;
   } else if (checkBox.length > 1) {
     $.show({
       title: '操作提示',
@@ -187,10 +192,12 @@ function getEditData(callback) {
 
 //列表页面点击删除按钮
 function deleteData(table) {
+  // var token = sessionStorage.getItem("token");
   var delID = '';
   $("input[name=del_listID]:checked").each(function() {
     delID += $(this).val() + ",";
   });
+  // console.log(delID)
   if (delID.length <= 0) {
     $.show({
       title: '操作提示',
@@ -204,8 +211,9 @@ function deleteData(table) {
       callback: function() {
         $.post(APP + '/Common/deleteData', {
           delID: delID,
-          table: table
-        }, function() {
+          // authToken: token
+        }, function(res) {
+          console.log(res);
           window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
         });
       }

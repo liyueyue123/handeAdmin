@@ -1,5 +1,6 @@
 $(function () {
-    addCompany()
+    // addCompany()  //新增
+    delCompany()  //删除
 });
 
 function addCompany() {
@@ -12,12 +13,28 @@ function addCompany() {
             address: "长安街",
             cityid: "北京",
             companyname: "北京中国航天",
-            deadline: "hello",
+            deadline: "2018-12-10",
             districtid: "宣武区",
             lastAccountCount: "100",
-            openaccounttime: "hello",
-            principalName: "李xx",
+            openaccounttime: "2018-10-22",
+            principalName: "小花",
             provinceid: "北京"
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+        }
+    });
+}
+
+function delCompany() {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/deleteCompany",
+        data: {
+            authToken: token,
+            companyId: 9
         },
         dataType: "json",
         success: function (res) {
