@@ -2,16 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>用户信息管理</title>
 <script src="/js/load.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
+<script src="./userList.js"></script>
 </head>
 
 <body>
 
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="#">客户信息管理</a>
+<a class="navbar-brand" href="#">用户信息管理</a>
 </div>
 <div>
 <!--<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button>-->
@@ -55,12 +56,11 @@
 <th>讨论组</th>
 <th>分组</th>
 <th>标签</th>
-<th>密码</th>
 <th>企业索索历史</th>
 <th>用户总数</th>
 </tr>
 </thead>
-<tbody>
+<tbody class="userList">
 <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
 <td><{$vo.id}></td>
@@ -69,7 +69,6 @@
 <td><{$vo.staffName}></td>
 <td></td>
 <td width="30%" title="<{$vo['beizhu'][0]['desc']}>" style="cursor: pointer;"><{$vo['beizhu'][0]['desc']|msubstr=0,20}></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>

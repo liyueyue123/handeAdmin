@@ -28,14 +28,17 @@
         <div class="com-hederMenu">
             <div class="com-hideIcon" title="展开左侧菜单" data-state="hide"><i class="fa fa-bars"></i></div>
             <ul class="com-hmUl">
-                <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>"><i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
+                <li>
+                    <a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>">
+                        <i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
                         < {$vo.moduleTypeName}>
-                    </a></li>
-                <else />
-                <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i
+                    </a>
+                </li>
+                <!-- <else /> -->
+                <!-- <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i
                             class="fa fa-<{$vo.moduleTypeIcon}>"></i>
                         < {$vo.moduleTypeName}>
-                    </a></li>
+                    </a></li> -->
             </ul>
         </div>
     </div>
@@ -45,18 +48,71 @@
     <div class="com-leftBox">
         <div class="com-lbLeftShadow"></div>
         <ul class="com-leftMenu">
-            <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i
-                        class="fa fa-<{$vo.moduleTypeIcon}>"></i></a></li>
+            <li>
+                <a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right">
+                    <i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
+                </a>
+            </li>
         </ul>
     </div>
     <!--left begin-->
 
     <!--right begin-->
     <div class="com-rightBox">
-        <iframe name="right" id="icpnt_iframe" frameborder="0" scrolling="auto" width="100%" height="100%" src="welcome.html"></iframe>
+        <iframe name="right" id="icpnt_iframe" frameborder="0" scrolling="auto" width="100%" height="100%" src="/pages/UserList"></iframe>
     </div>
     <!--right end-->
 
 </body>
+<script>
+    $(function () {
+        asideList();
+    });
 
-</html>
+    // 获取侧边栏列表数据
+    function asideList() {
+        var token = sessionStorage.getItem("token");
+        console.log(token)
+        $.ajax({
+            type: "GET",
+            url: APP_URL + "/roleMenu",
+            data: {
+                authToken: token
+            },
+            dataType: "json",
+            success: function (res) {
+                console.log('roleMenu',res);
+                var data = res.data;
+                var str = "";
+                var str2 = "";
+                $.each(data, function (index, val) {
+                    if(val.menuOrder ==1){
+                        str += `
+                            <li>
+                                <a class="com-TopMenu" data-id="${val.id}" href="${val.parentId}">
+                                    <i class="fa"></i>
+                                    ${val.menuName}
+                                </a>
+                            </li>
+                        `;
+                        if(val.childMenus != []){
+                            console.log('111')
+                            $.each(val.childMenus, function (index, val2){
+                                str2 += `
+                                    <li>
+                                        <a class="com-TopMenu" data-id="${val2.id}" href="${val2.actionPath}" target="right">
+                                            <i class="fa>"></i>
+                                            ${val2.menuName}
+                                        </a>
+                                    </li>
+                                `;
+                            });
+                        }
+                    }
+                });
+                $(".com-hmUl").html(str);
+                $(".com-leftMenu").html(str2);
+            }
+        });
+    }
+</script>
