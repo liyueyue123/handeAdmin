@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>新创动力 | 后台管理系统 V3.0</title>
     <script src="/js/load.js"></script>
-    <script src="/js/main.js"></script>
+    <!-- <script src="/js/main.js"></script> -->
 </head>
 
 <body>
@@ -28,17 +28,12 @@
         <div class="com-hederMenu">
             <div class="com-hideIcon" title="展开左侧菜单" data-state="hide"><i class="fa fa-bars"></i></div>
             <ul class="com-hmUl">
-                <li>
+                <!-- <li>
                     <a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>">
                         <i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
                         < {$vo.moduleTypeName}>
                     </a>
-                </li>
-                <!-- <else /> -->
-                <!-- <li><a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right"><i
-                            class="fa fa-<{$vo.moduleTypeIcon}>"></i>
-                        < {$vo.moduleTypeName}>
-                    </a></li> -->
+                </li> -->
             </ul>
         </div>
     </div>
@@ -51,6 +46,7 @@
             <li>
                 <a class="com-TopMenu" data-id="<{$vo.id}>" href="__APP__<{$vo.moduleTypeLink}>" target="right">
                     <i class="fa fa-<{$vo.moduleTypeIcon}>"></i>
+                    123
                 </a>
             </li>
         </ul>
@@ -65,11 +61,7 @@
 
 </body>
 <script>
-    $(function () {
-        asideList();
-    });
-
-    // 获取侧边栏列表数据
+    //获取侧边栏列表数据
     function asideList() {
         var token = sessionStorage.getItem("token");
         console.log(token)
@@ -89,30 +81,33 @@
                     if(val.menuOrder ==1){
                         str += `
                             <li>
-                                <a class="com-TopMenu" data-id="${val.id}" href="${val.parentId}">
+                                <a class="com-TopMenu" data-id="${val.id}" href="javascript:void(0)">
                                     <i class="fa"></i>
                                     ${val.menuName}
                                 </a>
                             </li>
                         `;
-                        if(val.childMenus != []){
-                            console.log('111')
-                            $.each(val.childMenus, function (index, val2){
-                                str2 += `
-                                    <li>
-                                        <a class="com-TopMenu" data-id="${val2.id}" href="${val2.actionPath}" target="right">
-                                            <i class="fa>"></i>
-                                            ${val2.menuName}
-                                        </a>
-                                    </li>
-                                `;
-                            });
-                        }
+                        //${val.parentId}
+                        // if(val.childMenus != []){
+                        //     $.each(val.childMenus, function (index, val2){
+                        //         str2 += `
+                        //             <li>
+                        //                 <a class="com-TopMenu" data-id="${val2.id}" href="${val2.actionPath}" target="right">
+                        //                     <i class="fa>"></i>
+                        //                     ${val2.menuName}
+                        //                 </a>
+                        //             </li>
+                        //         `;
+                        //     });
+                        // }
                     }
                 });
                 $(".com-hmUl").html(str);
-                $(".com-leftMenu").html(str2);
+                // $(".com-leftMenu").html(str2);
             }
         });
     }
+    asideList();
 </script>
+<script src="/js/main.js"></script>
+</html>
