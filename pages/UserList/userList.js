@@ -41,7 +41,7 @@ function userList(){
       $(".userList").html(str);
     }
   });
-}
-function openAddUser(){
-
-}
+};
+$('#btn-search').click(function(){
+  alert('111')
+})
