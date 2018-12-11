@@ -11,8 +11,8 @@ function customerDetail() {
         url: "url",
         data: "data",
         dataType: "dataType",
-        success: function (response) {
-            
+        success: function (res) {
+            console.log(res);
         }
     });
 }

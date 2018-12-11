@@ -49,10 +49,8 @@ $(document).ready(function (e) {
 	});
 
 	//点击主模块获取次模块列表
-	$('.com-hmUl>li').live("click",function () {
-		// console.log($(this));
+	$('.com-hmUl>li').live("click", function () {
 		var thisID = $(this).find(".com-TopMenu").attr('data-id');
-		console.log(thisID)
 		if (thisID != '0') {
 			$(".com-leftBox").animate({
 				width: "230px"
@@ -67,37 +65,40 @@ $(document).ready(function (e) {
 			$(".com-hideIcon").attr("title", "隐藏左侧菜单");
 			$(".com-hideIcon").attr("data-state", "open");
 		}
-		
-		// $.post(APP + '/Common/getLeftMenuList', {
-		// 	moduleTypeID: thisID
-		// }, function (data) {
-		// 	var html = '';
-		// 	if (data != null) {
-		// 		for (var i = 0; i < data.length; i++) {
-		// 			html += '<li><i class="fa fa-' + data[i].moduleIcon + '"></i> <a data-id="' + data[i].id + '" href="' + APP + data[i].moduleLink + '" target="right">' + data[i].moduleName + '</a></li>';
-		// 		}
-		// 		$('.com-leftMenu').html(html);
-		// 		$('.com-leftMenu a').click(function (event) {
-		// 			var thisID = $(this).attr('data-id');
-		// 			if (thisID == '40' || thisID == '36') {
-		// 				$(".com-leftBox").animate({
-		// 					width: "0px"
-		// 				});
-		// 				$(".com-rightBox").animate({
-		// 					marginLeft: "0px"
-		// 				});
-		// 				$(".com-hideIcon").css({
-		// 					"transform": "rotate(0deg)",
-		// 					"top": "17px"
-		// 				});
-		// 				$(".com-hideIcon").attr("title", "展开左侧菜单");
-		// 				$(".com-hideIcon").attr("data-state", "hide");
-		// 			}
-		// 		});
-		// 	} else {
-		// 		$('.com-leftMenu').html('');
-		// 	}
-		// });
+		var $index = $(this).attr("data-res");
+		getChildMenus($index);
 	});
 
 });
+
+function getChildMenus(i) {
+	var token = sessionStorage.getItem("token");
+	// console.log(token)
+	$.ajax({
+		type: "GET",
+		url: APP_URL + "/roleMenu",
+		data: {
+			authToken: token
+		},
+		dataType: "json",
+		success: function (res) {
+			console.log(res);
+			var data = res.data;
+			var str = "";
+			$(".com-rightBox>iframe").attr("src",data[i].childMenus[0].actionPath);
+			$.each(data[i].childMenus, function (index, val) {
+				if (val != []) {
+					str += `
+						<li>
+							<a class="com-TopMenu" data-id="${val.id}" href="${val.actionPath}" target="right">
+								<i class="fa>"></i>
+								${val.menuName}
+							</a>
+						</li>
+					`;
+				}
+			});
+			$(".com-leftBox>.com-leftMenu").html(str);
+		}
+	});
+}
