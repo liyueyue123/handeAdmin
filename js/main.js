@@ -67,18 +67,6 @@ $(document).ready(function(e) {
 		});
 	});
 
-	getMenuList();
 });
 
-// 顶部菜单项
-function getMenuList(){
-	// var token = sessionStorage.getItem("token");
-	$.ajax({
-		type: "get",
-		url: APP_URL+"/menuList",
-		dataType: "json",
-		success: function (res) {
-			console.log(res);
-		}
-	});
-}
+
