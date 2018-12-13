@@ -1,6 +1,9 @@
 $(function () {
+     /* 验证 */
+    // 账号
+    
+
     // addCompany()  //新增
-    delCompany()  //删除
 });
 
 function addCompany() {

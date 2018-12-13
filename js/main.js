@@ -71,9 +71,9 @@ $(document).ready(function (e) {
 
 });
 
+//获取左侧菜单模块
 function getChildMenus(i) {
 	var token = sessionStorage.getItem("token");
-	// console.log(token)
 	$.ajax({
 		type: "GET",
 		url: APP_URL + "/roleMenu",
@@ -85,17 +85,17 @@ function getChildMenus(i) {
 			console.log(res);
 			var data = res.data;
 			var str = "";
-			$(".com-rightBox>iframe").attr("src",data[i].childMenus[0].actionPath);
+			$(".com-rightBox>iframe").attr("src", data[i].childMenus[0].actionPath);
 			$.each(data[i].childMenus, function (index, val) {
 				if (val != []) {
 					str += `
-						<li>
-							<a class="com-TopMenu" data-id="${val.id}" href="${val.actionPath}" target="right">
-								<i class="fa>"></i>
-								${val.menuName}
-							</a>
-						</li>
-					`;
+							<li>
+								<a class="com-TopMenu" data-id="${val.id}" href="${val.actionPath}" target="right">
+									<i class="fa>"></i>
+									${val.menuName}
+								</a>
+							</li>
+						`;
 				}
 			});
 			$(".com-leftBox>.com-leftMenu").html(str);
