@@ -22,29 +22,68 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="/manage.php/Common/addData/controller/Business/backUrl/businessList/table/business">
+        <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="">
             <input name="id" type="hidden" id="id" value="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr>
-                        <td align="center">姓名</td>
-                        <td><input type="text" name="business_name" id="business_name" class="form-control" datatype="*" nullmsg="请输入用户姓名" placeholder="请输入用户姓名"></td>
+                        <td align="center">登录名</td>
+                        <td><input type="text" name="loginname" id="business_login_name" class="form-control" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！" nullmsg="请输入用户登录名" placeholder="请输入用户登录名"></td>
                     </tr>
 
                     <tr>
+                        <td align="center">姓名</td>
+                        <td><input type="text" name="name" id="business_name" class="form-control" datatype="*"  nullmsg="请输入用户姓名" placeholder="请输入用户姓名"></td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">密码</td>
+                        <td><input type="passwd" name="passwd" id="business_passwd" class="form-control" datatype="*6-15" errormsg="密码范围在6~15位之间" nullmsg="请输入密码" placeholder="请输入密码"></td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">性别</td>
+                        <td>
+                            <input type="radio" value="1" name="gender" checked/>男
+                            <input type="radio" value="2" name="gender"/>女
+                        </td>
+                    </tr>
+                    
+                    <tr>
                         <td align="center">手机号</td>
-                        <td><input type="text" name="business_tel" id="business_tel" class="form-control" datatype="*"  nullmsg="请输入手机号" placeholder="请输入手机号"></td>
+                        <td><input type="text" name="phone" id="phone" class="form-control" datatype="m" errormsg="手机号格式不正确！" nullmsg="请输入手机号" placeholder="请输入手机号"></td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">微信</td>
+                        <td><input type="text" name="wechat" id="wechat" class="form-control" datatype="*"  nullmsg="请输入微信号" placeholder="请输入微信号"></td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">头像</td>
+                        <td><input type="text" name="icon" id="icon" class="form-control" datatype="*"  nullmsg="请上传头像" placeholder="请上传头像"></td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">email</td>
+                        <td><input type="email" name="email" id="email" class="form-control" datatype="e" errormsg="邮箱格式不正确！"  nullmsg="请输入邮箱" placeholder="请输入邮箱"></td>
                     </tr>
 
                     <tr>
                         <td align="center">部门</td>
-                        <td><input type="text" name="business_tel" id="business_tel" class="form-control" datatype="*"  nullmsg="请输入部门" placeholder="请输入部门"></td>
+                        <td><input type="text" name="department" id="department" class="form-control" datatype="*"  nullmsg="请选择部门" placeholder="请选择部门"></td>
                     </tr>
 
                     <tr>
                         <td align="center">公司</td>
-                        <td><input type="text" name="business_tel" id="business_tel" class="form-control" datatype="*"  nullmsg="请输入公司名称" placeholder="请输入公司名称"></td>
+                        <td><input type="text" name="company" id="company" class="form-control" datatype="*"  nullmsg="请选择公司名称" placeholder="请选择公司名称"></td>
                     </tr>
+
+                    <tr>
+                        <td align="center">地址</td>
+                        <td><input type="text" name="address" id="address" class="form-control"  placeholder="请输入地址"></td>
+                    </tr>
+                    
 
                     <tr>
                         <td>&nbsp;</td>
@@ -63,4 +102,8 @@
 
 </body>
 
+<!-- 验证 
+!/^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(19[9])|(17[0,1,3,5,6,7,8]))\d{8}$/.test($("#reg-phone").val())
+
+-->
 </html>
