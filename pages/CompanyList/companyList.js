@@ -6,12 +6,10 @@ $(function () {
 function companyList() {
     var token = sessionStorage.getItem("token");
     $.ajax({
-        type: "POST",
-        url: APP_URL + "/companyList",
+        type: "GET",
+        url: APP_URL + "/companySelect",
         data: {
             authToken: token,
-            limit: 10,
-            page: 1
         },
         dataType: "json",
         success: function (res) {
@@ -30,8 +28,8 @@ function companyList() {
                         <td>${val.companyname}</td>
                         <td class="sortTD" name="Case">${val.principalName}</td>
                         <td></td>
-                        <td>${val.openaccounttime}</td>
-                        <td>${val.deadline}</td>
+                        <td>${moment(val.openaccounttime).format("YYYY年MM月DD日")}</td>
+                        <td>${moment(val.deadline).format("YYYY年MM月DD日")}</td>
                         <td>${val.account}</td>
                         <td></td>
                     </tr>
@@ -40,7 +38,7 @@ function companyList() {
             $(".list-box>table>tbody").html(str);
         },
         error:function(err){
-            console.log(err);
+            //console.log(err);
         }
         
     });

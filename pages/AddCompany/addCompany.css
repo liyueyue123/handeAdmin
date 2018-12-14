@@ -1,0 +1,27 @@
+.getPCD {
+    width: 33.03%;
+    float: left;
+    margin-right: 0.3%;
+}
+
+.dataInput {
+    width: 14%;
+    float: left;
+    margin-right: 0.5%;
+}
+
+.pro-section {
+    float: left;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 8px; 
+    margin-right:1%;    
+}
+
+.pro-section div {
+    width: 60%;
+    float: left;
+    padding-right: 2%;
+    margin-top: 8px;
+    border-radius: 5px;
+}
