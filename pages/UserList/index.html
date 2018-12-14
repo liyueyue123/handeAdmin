@@ -21,21 +21,21 @@
 <button type="button" class="btn btn-primary navbar-btn listButton" onclick="javascript:if(confirm('由于数据存在关联查询，导出Exce可能需要1-3分钟的时间，确定要导出吗（确定后请勿刷新页面或关闭浏览器）?'))location='/manage.php/Order/exportExcel?startTime=&amp;endTime=&amp;business_id=&amp;one_category=&amp;two_category='"><i class="fa fa-sign-in" aria-hidden="true"></i> 导出Excel</button>
 <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
 <div class="form-group">
-    <select class="form-control" name="moduleType">
-        <option value="" selected="">手机号</option>
-        <option value="=0">主模块</option>
-    </select>
-    <select class="form-control" name="moduleType">
-        <option value="" selected="">姓名</option>
-        <option value="=0">主模块</option>
-    </select>
-    <select class="form-control" name="moduleType">
-        <option value="" selected="">ID</option>
-        <option value="=0">主模块</option>
-    </select>
+<div class="form-group">
+    手机号:
+    <input name="phone" type="text" class="form-control" id="phone" placeholder="请输入关键词进行搜索">
+</div>
+<div class="form-group">
+    姓名:
+    <input name="name" type="text" class="form-control" id="name" placeholder="请输入关键词进行搜索">
+</div>
+<div class="form-group">
+    Id:
+    <input name="Id" type="text" class="form-control" id="Id" placeholder="请输入关键词进行搜索">
+</div>
     <!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索"> -->
 </div>
-<button type="submit" class="btn btn-primary" id="btn-search"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+<button  class="btn btn-primary" id="btn-search"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
 </form>    
 </div>
 </nav>
