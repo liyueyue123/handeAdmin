@@ -76,6 +76,7 @@
                 var data = res.data;
                 var str = "";
                 var str2 = "";
+                // 主模块
                 $.each(data, function (index, val) {
                     if(val.menuOrder ==1){
                         str += `
@@ -89,6 +90,22 @@
                     }
                 });
                 $(".com-hmUl").html(str);
+                //左侧内容
+                var str1 ="";
+                $.each(data[0].childMenus, function (index, val) { 
+                    if (val != []) {
+					str1 += `
+						<li>
+							<a class="com-TopMenu" data-id="${val.id}" href="${val.actionPath}" target="right">
+								<i class="fa>"></i>
+								${val.menuName}
+							</a>
+						</li>
+                    `;
+				} 
+                });
+                $(".com-leftBox>.com-leftMenu").html(str1);
+                $(".com-rightBox>iframe").attr("src", data[0].childMenus[0].actionPath);
             }
         });
     }
