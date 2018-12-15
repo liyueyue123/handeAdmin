@@ -21,8 +21,7 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm ajax-fadein" id="form1" name="form1" method="GET" action="http://hande.icpnt.com//permission/addStage">
-            <input name="authToken " type="hidden" id="token" value="">
+        <form class="addForm ajax-fadein" id="form1" name="form1">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr>
@@ -48,8 +47,8 @@
 </body>
 <script>
     $(function () {
+var datas = $('.addForm').formSerialize();
         var token = sessionStorage.getItem("token");
-        $("#token").val(token);
         // var typeName = $("#typeName").val();
         // $('#saveBtn').click(function () {
         //     var token = sessionStorage.getItem("token");

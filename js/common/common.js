@@ -1,47 +1,7 @@
 APP_URL = 'http://hande.icpnt.com';
-// var token = sessionStorage.getItem("token");
-// console.log(token);
-var options = {
-  type: "GET", //请求方式：get或post
-  dataType: "json", //数据返回类型：xml、json、script
-  beforeSerialize: function () {
-    // console.log(options);
-  },
-  // data:{'authToken':token},//自定义提交的数据
-  beforeSubmit: function () {
-    $.showLoading('正在提交……');
-    // if (CONTROLLER_NAME == 'Login') {
-    //   $.showLoading('正在登陆……');
-    // } else {
-    //   $.showLoading('正在提交……');
-    // }
-  },
-  success: function (json) { //表单提交成功回调函数
-    console.log(JSON.stringify(json));
-    if (typeof (json.url) != "undefined") {
-      if (json.url == '/Index/index') {
-        window.location.href = json.url;
-      } else {
-        $.closeLoading(function () {
-          window.location.href = APP + '/' + CONTROLLER_NAME + '/' + json.url;
-        });
-      }
-    } else {
-      $.closeLoading();
-    }
-    $(".addForm").resetForm();
-  },
-  error: function (err) {
-    alert("表单提交异常！点击确定显示错误信息！");
-    $.closeLoading();
-    var errHtml = err.responseText;
-    var errWin = window.open('about:blank');
-    // errWin.document.write(errHtml);
-    // errWin.document.close();
-  }
-};
-// console.log(options);
-// $("#saveButton").ajaxForm(options);
+APP_IMAGE_URL = 'http://hdimg.icpnt.com/'
+var token = sessionStorage.getItem("token");
+
 $(document).ready(function (e) {
   $.Tipmsg.r = null;
   $(".addForm").Validform({
@@ -51,7 +11,6 @@ $(document).ready(function (e) {
     },
     tipSweep: true
   });
-  $(".addForm").ajaxForm(options);
 
   //给排序单元格添加功能按钮
   $('td.sortTD').each(function (index, element) {
@@ -93,8 +52,21 @@ $(document).ready(function (e) {
     radioClass: 'iradio_flat-blue'
   });
 
-
 });
+
+function ajax(obj){
+   $.ajax({
+     type: obj.type,
+     url: APP_URL + obj.url,
+     data: obj.data,
+     dataType: "json",
+     success: function (res) {
+       if(typeof(obj.success) == 'function'){
+         obj.success(res);
+       }
+     }
+   });
+}
 
 //打开添加数据页面
 function openAddData(src) {
@@ -192,13 +164,17 @@ function getEditData(callback) {
 //列表页面点击删除按钮
 function deleteData(table, method, id) {
   var token = sessionStorage.getItem("token");
-  var delID = '';
+  var delID = [];
   $("input[name=del_listID]:checked").each(function () {
-    delID += $(this).val() + ",";
+    delID.push($(this).val());
   });
-  var data = {};
-  data.attr(id,delID);
-  data.attr("authToken",token);
+  var data = {};;
+  var a = id;
+  var b = delID.toString();
+  var data = {}
+  data[a] = b;
+  data.authToken = token;
+  
   console.log(data);
   if (delID.length <= 0) {
     $.show({
@@ -211,18 +187,10 @@ function deleteData(table, method, id) {
       content: '确定要删除吗？',
       isConfirm: true,
       callback: function () {
-        // $.post(APP_URL + table, {
-        //   delID: delID,
-        //   authToken: token
-        // }, function(res) {
-        //   console.log(res);
-        //   // window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
-        // });
-        
         $.ajax({
           type: method,
           url: APP_URL + table,
-          data: arr,
+          data: data,
           dataType: "json",
           success: function (res) {
             console.log(res);
