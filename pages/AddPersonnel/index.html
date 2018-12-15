@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>新增人员</title>
+  <script src="/js/load.js"></script>
+  <link rel="stylesheet" href="/css/rightCommon.css">
+  <!--引入CSS-->
+  <link rel="stylesheet" type="text/css" href="/tools/webuploader-0.1.5/dist/webuploader.css">
+  <!--引入JS-->
+  <script type="text/javascript" src="/tools/webuploader-0.1.5/dist/webuploader.js"></script>
+</head>
+
+<body>
+  <!--alert弹窗Start  -->
+  <div id="top-alert" class="fixed alert alert-error" style="display:none;">
+    <button class="close fixed" style="margin-top: 4px;">×</button>
+    <div class="alert-content">这是内容</div>
+  </div>
+  <!--alert弹窗end  -->
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> <span id="changeTitle">添加</span>人员</a>
+    </div>
+  </nav>
+
+  <div class="add-box">
+    <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="http://hande.icpnt.com/register">
+      <input name="authToken" type="hidden" id="authToken" value="">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td align="center">序号</td>
+            <td><input type="text" name="orderNumer" id="orderNumer" class="form-control" datatype="n" nullmsg="请输入人员序号" placeholder="请输入人员序号"></td>
+          </tr>
+
+          <tr>
+            <td align="center">姓名</td>
+            <td><input type="text" name="name" id="name" class="form-control" datatype="*" nullmsg="请输入人员姓名"
+                placeholder="请输入人员姓名"></td>
+          </tr>
+
+
+           <tr>
+            <td align="center" style="padding:30px 30px 30px 20px;">头像</td>
+            <td>
+              <div id="icon-image" style="margin:10px 0;width:180px;height:180px;overflow: hidden;">
+                <img style=" width:180px;" />
+              </div>
+              <span>图片大小180*180</span>
+              <input type="hidden" name="file_base64" id="file_base64">
+              <input type="file" name="icon" id="icon" nullmsg="请上传头像" placeholder="请上传头像" accept="image/jpeg,image/png,image/jpg,image/gif"
+                width="30%" style="margin-bottom:10px;">
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center">角色</td>
+            <td>
+              <select class="form-control" name="role" id="role" datatype="*" nullmsg="请选择角色" placeholder="请选择角色">
+                <option value="" selected>---请选择角色---</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center">账号</td>
+            <td><input type="text" name="account" id="account" class="form-control" value="12345" readonly ></td>
+          </tr>
+
+          <tr>
+            <td align="center">密码</td>
+            <td><input type="password" name="passwd" id="business_passwd" class="form-control" datatype="*6-15"
+                errormsg="密码范围在6~15位之间" nullmsg="请输入密码" placeholder="请输入密码"></td>
+          </tr>
+
+          <tr>
+            <td align="center">创建时间</td>
+            <td><input type="text" name="openaccounttime" value="2018-12-14 10:00" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择开户日期" placeholder="请选择开户日期" style="width:33.03%"/></td>
+          </tr>
+
+          <tr>
+            <td align="center">最后登录时间</td>
+            <td><input type="text" name="deadline" value="2018-12-15 10:00" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择截止日期" placeholder="请选择截止日期" style="width:33.03%"/></td>
+          </tr>
+          
+          <tr>
+            <td>&nbsp;</td>
+            <td>
+              <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i>
+                添加</button>
+              <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i>
+                取消</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+
+</body>
+<script type="text/javascript" src="./addUser.js"></script>
+
+</html>

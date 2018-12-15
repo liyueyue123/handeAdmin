@@ -11,7 +11,7 @@ function userList(){
       authToken: token,
       limit: 10,
       page: 1,
-      search:"admin"
+      search:'admin'
     },
     dataType: "json",
     success: function (res) {
