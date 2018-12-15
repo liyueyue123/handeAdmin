@@ -1,57 +1,13 @@
 APP_URL = 'http://hande.icpnt.com';
-// var token = sessionStorage.getItem("token");
-// console.log(token);
-var options = {
-  type: "GET", //请求方式：get或post
-  dataType: "json", //数据返回类型：xml、json、script
-  beforeSerialize: function () {
-    // console.log(options);
-  },
-  // data:{'authToken':token},//自定义提交的数据
-  beforeSubmit: function () {
-    $.showLoading('正在提交……');
-    // if (CONTROLLER_NAME == 'Login') {
-    //   $.showLoading('正在登陆……');
-    // } else {
-    //   $.showLoading('正在提交……');
-    // }
-  },
-  success: function (json) { //表单提交成功回调函数
-    console.log(JSON.stringify(json));
-    if (typeof (json.url) != "undefined") {
-      if (json.url == '/Index/index') {
-        window.location.href = json.url;
-      } else {
-        $.closeLoading(function () {
-          window.location.href = APP + '/' + CONTROLLER_NAME + '/' + json.url;
-        });
-      }
-    } else {
-      $.closeLoading();
-    }
-    $(".addForm").resetForm();
-  },
-  error: function (err) {
-    alert("表单提交异常！点击确定显示错误信息！");
-    $.closeLoading();
-    var errHtml = err.responseText;
-    var errWin = window.open('about:blank');
-    // errWin.document.write(errHtml);
-    // errWin.document.close();
-  }
-};
-// console.log(options);
-// $("#saveButton").ajaxForm(options);
+var token = sessionStorage.getItem("token");
 $(document).ready(function (e) {
   $.Tipmsg.r = null;
   $(".addForm").Validform({
     tiptype: function (msg) {
-      //$.loginTip(msg);
       alert(msg);
     },
-    tipSweep: true
+    tipSweep: true,
   });
-  $(".addForm").ajaxForm(options);
 
   //给排序单元格添加功能按钮
   $('td.sortTD').each(function (index, element) {
@@ -196,10 +152,7 @@ function deleteData(table, method, id) {
   $("input[name=del_listID]:checked").each(function () {
     delID += $(this).val() + ",";
   });
-  var data = {};
-  data.attr(id,delID);
-  data.attr("authToken",token);
-  console.log(data);
+  console.log(delID);
   if (delID.length <= 0) {
     $.show({
       title: '操作提示',
@@ -218,11 +171,14 @@ function deleteData(table, method, id) {
         //   console.log(res);
         //   // window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
         // });
-        
+
         $.ajax({
           type: method,
           url: APP_URL + table,
-          data: arr,
+          data: {
+            authToken: token,
+            companyId: delID
+          },
           dataType: "json",
           success: function (res) {
             console.log(res);

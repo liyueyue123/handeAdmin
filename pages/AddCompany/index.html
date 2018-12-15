@@ -24,7 +24,7 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="http://hande.icpnt.com/addCompany"></form>
+        <form class="addForm ajax-fadein" id="form1" name="form1">
             <input name="authToken" type="hidden" id="authToken" value="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
@@ -41,9 +41,7 @@
                     <tr>
                         <td align="center">公司名称</td>
                         <td>
-                            <select class="form-control getPCD" id="allCompany" name="companyname" >
-                                <!-- <option value=""></option> -->
-                            </select>
+                                <input type="password" name="text" id="company_password" value="新增公司" class="form-control" datatype="*1-50" errormsg="最多填写50个字符串" nullmsg="请输入公司名称" placeholder="请输入密码">
                         </td>
                     </tr>
 
