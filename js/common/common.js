@@ -1,6 +1,6 @@
 APP_URL = 'http://hande.icpnt.com';
-var token = sessionStorage.getItem("token");
-console.log(token);
+// var token = sessionStorage.getItem("token");
+// console.log(token);
 var options = {
   type: "POST", //请求方式：get或post
   dataType: "json", //数据返回类型：xml、json、script
@@ -27,7 +27,6 @@ var options = {
         });
       }
     } else {
-      alert(111,json.info);
       $.closeLoading();
     }
     $(".addForm").resetForm();
@@ -37,8 +36,8 @@ var options = {
     $.closeLoading();
     var errHtml = err.responseText;
     var errWin = window.open('about:blank');
-    errWin.document.write(errHtml);
-    errWin.document.close();
+    // errWin.document.write(errHtml);
+    // errWin.document.close();
   }
 };
 // console.log(options);

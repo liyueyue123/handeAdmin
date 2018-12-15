@@ -27,10 +27,10 @@ function getCustomerList() {
                     <td>${val.gender}</td>
                     <td>${val.position}</td>
                     <td>${val.company}</td>
-                    <td>${val.planfinishtime}</td>
+                    <td>${moment(val.planfinishtime).format("YYYY年MM月DD日")}</td>
                     <td>${val.email}</td>
                     <td>${val.messagesource}</td>
-                    <td>${val.createtime}</td>
+                    <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
                     <td><a class="btn btn-success navbar-btn" href="../CustomerDetail/index.html?id=${val.id}">详情</a></td>
                  </tr>
                  `;

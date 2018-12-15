@@ -7,6 +7,7 @@
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
     <script src="./companyList.js"></script>
+    <script src="/js/moment.js"></script>
 </head>
 
 <body>
@@ -107,5 +108,12 @@
     </ul>
 
 </body>
-
+<!-- <script>
+$(function () { 
+    var token = sessionStorage.getItem("token");
+    $.get(APP_URL+'/companySelect',{authToken:token},function (res) { 
+        console.log(JSON.stringify(res));
+     });
+ })
+</script> -->
 </html>
