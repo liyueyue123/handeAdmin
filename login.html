@@ -43,7 +43,8 @@
                     if (res.code == "success") {
                         $(window).attr("location", "./pages/index.html");
                         sessionStorage.setItem("token",res.authToken);
-                        sessionStorage.setItem("isDelete", "isDel");
+                        // sessionStorage.setItem("isDelete", "isDel");
+                        sessionStorage.setItem("name",res.data.name);
                     } else {
                         $("div.errorinfo").html(res.message);
                         $("div.errorinfo").show();

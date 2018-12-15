@@ -6,6 +6,7 @@
     <title>阶段管理</title>
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="./stageMange.js"></script>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
         <div>
             <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Case')"><i class="fas fa-trash-alt"></i>删除</button>
             <!-- <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('add')"><i class="fas fa-edit"></i>修改</button> -->
-            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('add')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddStageManage/index.html')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
             <!-- <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
                     <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入编号搜索">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
@@ -36,12 +37,12 @@
             </thead>
             <tbody>
 
-                <tr>
+                <!-- <tr>
                     <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
                     <td>< {$vo.id}></td>
                     <td>< {$vo.title}></td>
                     <td><a class="btn btn-danger" data-table="user" data-id="59" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);">禁用</a></td>
-                </tr>
+                </tr> -->
 
             </tbody>
         </table>

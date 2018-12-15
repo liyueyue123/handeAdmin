@@ -14,13 +14,9 @@
         <div class="com-headerTop com-bg">
             <div class="com-logo">汉得·管理系统</div>
             <div class="com-htRight">
-                <div class="com-userHea" style="background:url(http://www.icpnt.com) center no-repeat;background-size: cover;"></div>
                 <div class="com-userName"><i class="fa fa-sort-desc downArrow"></i></div>
                 <ul class="com-heaMenu">
-                    <li><a href="javascript:void(0)"><i class="fa fa-home"></i> 首页</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-flag"></i> 皮肤</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-cog"></i> 设置</a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-question-circle"></i> 帮助</a></li>
+                    <li style="color:white;">欢迎<span id="username"></span></li>
                     <li><a class="topLogOut" href="javascript:void(0)"><i class="fa fa-power-off"></i> 退出</a></li>
                 </ul>
             </div>
@@ -60,6 +56,8 @@
 
 </body>
 <script>
+    var name = sessionStorage.getItem("name");
+    $("#username").html(name);
     //获取侧边栏列表数据
     function asideList() {
         var token = sessionStorage.getItem("token");
