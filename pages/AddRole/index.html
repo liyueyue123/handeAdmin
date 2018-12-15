@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>新增角色</title>
+    <script src="/js/load.js"></script>
+    <link rel="stylesheet" href="/css/rightCommon.css">
+</head>
+
+<body>
+    <div id="top-alert" class="fixed alert alert-error" style="display:none;">
+        <button class="close fixed" style="margin-top: -18px;margin-right: 7px;">×</button>
+        <div class="alert-content">这是内容</div>
+    </div>
+    <!--alert弹窗end  -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> <span id="changeTitle">添加</span>角色</a>
+        </div>
+    </nav>
+
+    <div class="add-box">
+        <form class="addForm ajax-fadein" id="form1" name="form1" method="GET" action="">
+            <input name="authToken " type="hidden" id="token" value="">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td align="center">角色名称</td>
+                        <td>
+                            <select class="form-control" id="roleList" name="">
+                                <option value="" selected="">---请选择角色---</option>
+                                <option value="">超级管理员</option>
+                                <option value="">一级管理员</option>
+                                <option value="">二级管理员</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">请选择角色权限</td>
+                        <td>
+                            <label style="margin-right:1%"><input type="checkbox" value="公司管理"/>公司管理</label>
+                            <label style="margin-right:1%"><input type="checkbox" value="客户管理"/>客户管理</label>
+                            <label style="margin-right:1%"><input type="checkbox" value="用户管理"/>用户管理</label>
+                            <label style="margin-right:1%"><input type="checkbox" value="人员管理"/>人员管理</label>
+                            <label style="margin-right:1%"><input type="checkbox" value="角色管理"/>角色管理</label>
+                            <label style="margin-right:1%"><input type="checkbox" value="权限管理"/>权限管理</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check"
+                                    aria-hidden="true"></i>
+                                添加</button>
+                            <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times"
+                                    aria-hidden="true"></i> 取消</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</body>
+<script>
+    $(function () {
+        var token = sessionStorage.getItem("token");
+        $("#token").val(token);
+        // var typeName = $("#typeName").val();
+        // $('#saveBtn').click(function () {
+        //     var token = sessionStorage.getItem("token");
+        //     var typeName = $("#typeName").val();
+        //     if (typeName) {
+        //         $.ajax({
+        //             type: "GET",
+        //             url: "http://hande.icpnt.com//permission/addStage",
+        //             data: {
+        //                 authToken: token,
+        //                 stageName: typeName
+        //             },
+        //             dataType: "json",
+        //             success: function (res) {
+        //                 console.log(res);
+        //             }
+        //         });
+        //     } else {
+        //         alert("请输入阶段名称");
+        //     }
+        // });
+    });
+</script>
+
+</html>

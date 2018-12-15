@@ -1,5 +1,6 @@
 $(function () {
-    companyList();
+    companyList(); //公司列表
+    // delCompany();
 });
 
 // 获取公司列表
@@ -7,9 +8,11 @@ function companyList() {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
-        url: APP_URL + "/companySelect",
+        url: APP_URL + "/companyList",
         data: {
             authToken: token,
+            limit:10,
+            page:1
         },
         dataType: "json",
         success: function (res) {
@@ -38,8 +41,25 @@ function companyList() {
             $(".list-box>table>tbody").html(str);
         },
         error:function(err){
-            //console.log(err);
+            console.log(err);
         }
         
     });
 }
+
+// // 删除公司
+// function delCompany(){
+//     var token = sessionStorage.getItem("token");
+//     $.ajax({
+//         type: "GET",
+//         url: APP_URL+"/deleteCompany",
+//         data: {
+//             authToken: token,
+//             companyId :7
+//         },
+//         dataType: "json",
+//         success: function (res) {
+//            console.log(res); 
+//         }
+//     });
+// }

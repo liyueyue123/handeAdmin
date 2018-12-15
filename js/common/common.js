@@ -2,13 +2,13 @@ APP_URL = 'http://hande.icpnt.com';
 // var token = sessionStorage.getItem("token");
 // console.log(token);
 var options = {
-  type: "POST", //请求方式：get或post
+  type: "GET", //请求方式：get或post
   dataType: "json", //数据返回类型：xml、json、script
-  beforeSerialize: function() {
-    //alert("tttt");
+  beforeSerialize: function () {
+    // console.log(options);
   },
   // data:{'authToken':token},//自定义提交的数据
-  beforeSubmit: function() {
+  beforeSubmit: function () {
     $.showLoading('正在提交……');
     // if (CONTROLLER_NAME == 'Login') {
     //   $.showLoading('正在登陆……');
@@ -16,13 +16,13 @@ var options = {
     //   $.showLoading('正在提交……');
     // }
   },
-  success: function(json) { //表单提交成功回调函数
+  success: function (json) { //表单提交成功回调函数
     console.log(JSON.stringify(json));
-    if (typeof(json.url) != "undefined") {
+    if (typeof (json.url) != "undefined") {
       if (json.url == '/Index/index') {
         window.location.href = json.url;
       } else {
-        $.closeLoading(function() {
+        $.closeLoading(function () {
           window.location.href = APP + '/' + CONTROLLER_NAME + '/' + json.url;
         });
       }
@@ -31,7 +31,7 @@ var options = {
     }
     $(".addForm").resetForm();
   },
-  error: function(err) {
+  error: function (err) {
     alert("表单提交异常！点击确定显示错误信息！");
     $.closeLoading();
     var errHtml = err.responseText;
@@ -42,10 +42,10 @@ var options = {
 };
 // console.log(options);
 // $("#saveButton").ajaxForm(options);
-$(document).ready(function(e) {
+$(document).ready(function (e) {
   $.Tipmsg.r = null;
   $(".addForm").Validform({
-    tiptype: function(msg) {
+    tiptype: function (msg) {
       //$.loginTip(msg);
       alert(msg);
     },
@@ -54,12 +54,12 @@ $(document).ready(function(e) {
   $(".addForm").ajaxForm(options);
 
   //给排序单元格添加功能按钮
-  $('td.sortTD').each(function(index, element) {
+  $('td.sortTD').each(function (index, element) {
     var sortHtml = $(this).html();
     $(this).html('<i class="fa fa-arrow-circle-up faSort" aria-hidden="true" title="升序"></i> ' + sortHtml + ' <i class="fa fa-arrow-circle-down faSort" aria-hidden="true" title="降序"></i>');
   });
   //升降序操作
-  $('i.faSort').click(function() {
+  $('i.faSort').click(function () {
     if ($(this).hasClass('fa-arrow-circle-up')) {
       var action = 'dataAsc';
     } else {
@@ -67,12 +67,12 @@ $(document).ready(function(e) {
     }
     var table = $(this).parent('td.sortTD').attr('name');
     var dataID = $(this).parents('tr').find('input#del_listID').val();
-    if (typeof(table) != "undefined") {
+    if (typeof (table) != "undefined") {
       $.post(APP + '/Common/dataSort', {
         table: table,
         dataID: dataID,
         action: action
-      }, function() {
+      }, function () {
         window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
       });
     } else {
@@ -83,7 +83,7 @@ $(document).ready(function(e) {
     }
   });
   //添加数据页面取消按钮
-  $("button#cancelButton").click(function() {
+  $("button#cancelButton").click(function () {
     window.history.back(-1);
   });
 
@@ -91,14 +91,14 @@ $(document).ready(function(e) {
   $('input[data-name=multi-select]').iCheck({
     checkboxClass: 'icheckbox_flat-blue',
     radioClass: 'iradio_flat-blue'
-});
+  });
 
 
 });
 
 //打开添加数据页面
 function openAddData(src) {
-  if (typeof(src) != "undefined") {
+  if (typeof (src) != "undefined") {
     window.location.href = src;
   } else {
     $.show({
@@ -135,11 +135,11 @@ function getEditData(callback) {
   var isD = $('form.addForm').attr('data-d');
   var editID = $("input#id").val();
   if (editID != '') {
-    if (typeof(table) == 'undefined') {
+    if (typeof (table) == 'undefined') {
       $.show({
         title: '错误提示',
         content: '缺少必要的id或表名，请检查form表单是否设置了自定属性data-table',
-        closeCallback: function() {
+        closeCallback: function () {
           window.history.back();
         }
       });
@@ -157,9 +157,9 @@ function getEditData(callback) {
           isD: isD
         }
       })
-      .done(function(data) {
+      .done(function (data) {
         var jdata = data[0];
-        $("form.addForm input[type!=checkbox],textarea,select").each(function(index, element) {
+        $("form.addForm input[type!=checkbox],textarea,select").each(function (index, element) {
           var thisIdName = $(this).attr("id");
           $("#" + thisIdName).val(eval("jdata." + thisIdName));
         });
@@ -168,12 +168,12 @@ function getEditData(callback) {
           callback(jdata);
         }
       })
-      .fail(function(err) {
+      .fail(function (err) {
         $.closeLoading();
         $.show({
           title: '错误提示',
           content: '程序发生了不可预见的错误，点击关闭显示详细错误信息',
-          closeCallback: function() {
+          closeCallback: function () {
             window.history.back();
             var errHtml = err.responseText;
             var errWin = window.open('about:blank');
@@ -182,7 +182,7 @@ function getEditData(callback) {
           }
         });
       })
-      .always(function() {
+      .always(function () {
         //console.log("complete");
       });
   }
@@ -190,13 +190,16 @@ function getEditData(callback) {
 }
 
 //列表页面点击删除按钮
-function deleteData(table) {
-  // var token = sessionStorage.getItem("token");
+function deleteData(table, method, id) {
+  var token = sessionStorage.getItem("token");
   var delID = '';
-  $("input[name=del_listID]:checked").each(function() {
+  $("input[name=del_listID]:checked").each(function () {
     delID += $(this).val() + ",";
   });
-  // console.log(delID)
+  var data = {};
+  data.attr(id,delID);
+  data.attr("authToken",token);
+  console.log(data);
   if (delID.length <= 0) {
     $.show({
       title: '操作提示',
@@ -207,14 +210,28 @@ function deleteData(table) {
       title: '删除数据',
       content: '确定要删除吗？',
       isConfirm: true,
-      callback: function() {
-        $.post(APP + '/Common/deleteData', {
-          delID: delID,
-          // authToken: token
-        }, function(res) {
-          console.log(res);
-          window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
+      callback: function () {
+        // $.post(APP_URL + table, {
+        //   delID: delID,
+        //   authToken: token
+        // }, function(res) {
+        //   console.log(res);
+        //   // window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
+        // });
+        
+        $.ajax({
+          type: method,
+          url: APP_URL + table,
+          data: arr,
+          dataType: "json",
+          success: function (res) {
+            console.log(res);
+          },
+          error: function (err) {
+            console.log(err);
+          }
         });
+
       }
     });
   }
@@ -228,10 +245,10 @@ function delImg(that) {
     title: '删除图片',
     content: '确定要删除吗？',
     isConfirm: true,
-    callback: function() {
+    callback: function () {
       $.post(APP + '/Common/deleteUploadImg', {
         imgUrl: url
-      }, function() {
+      }, function () {
         parent.remove();
         $('input[value="' + url + '"]').val('');
       });
