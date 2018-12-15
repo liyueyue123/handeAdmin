@@ -1,5 +1,7 @@
 APP_URL = 'http://hande.icpnt.com';
+APP_IMAGE_URL = 'http://hdimg.icpnt.com/'
 var token = sessionStorage.getItem("token");
+
 $(document).ready(function (e) {
   $.Tipmsg.r = null;
   $(".addForm").Validform({
@@ -49,8 +51,21 @@ $(document).ready(function (e) {
     radioClass: 'iradio_flat-blue'
   });
 
-
 });
+
+function ajax(obj){
+   $.ajax({
+     type: obj.type,
+     url: APP_URL + obj.url,
+     data: obj.data,
+     dataType: "json",
+     success: function (res) {
+       if(typeof(obj.success) == 'function'){
+         obj.success(res);
+       }
+     }
+   });
+}
 
 //打开添加数据页面
 function openAddData(src) {
@@ -148,11 +163,18 @@ function getEditData(callback) {
 //列表页面点击删除按钮
 function deleteData(table, method, id) {
   var token = sessionStorage.getItem("token");
-  var delID = '';
+  var delID = [];
   $("input[name=del_listID]:checked").each(function () {
-    delID += $(this).val() + ",";
+    delID.push($(this).val());
   });
-  console.log(delID);
+  var data = {};;
+  var a = id;
+  var b = delID.toString();
+  var data = {}
+  data[a] = b;
+  data.authToken = token;
+  
+  console.log(data);
   if (delID.length <= 0) {
     $.show({
       title: '操作提示',
@@ -164,21 +186,10 @@ function deleteData(table, method, id) {
       content: '确定要删除吗？',
       isConfirm: true,
       callback: function () {
-        // $.post(APP_URL + table, {
-        //   delID: delID,
-        //   authToken: token
-        // }, function(res) {
-        //   console.log(res);
-        //   // window.location.href = APP + '/' + CONTROLLER_NAME + '/' + ACTION_NAME;
-        // });
-
         $.ajax({
           type: method,
           url: APP_URL + table,
-          data: {
-            authToken: token,
-            companyId: delID
-          },
+          data: data,
           dataType: "json",
           success: function (res) {
             console.log(res);

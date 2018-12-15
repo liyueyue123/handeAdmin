@@ -64,19 +64,10 @@ function uploadImg(tag) {
     success: function (res) {
       console.log(res)
       $("#icon-image").find("img").attr({
-        "src": APP_URL+'/'+res.data
+        "src": APP_IMAGE_URL + res.data
       });
     }
   });
-
-  // var reader = new FileReader();
-  // reader.readAsDataURL(file);
-  // reader.onload = function () {
-  //   imgSrc = this.result;
-  //   $("#icon-image").find("img").attr({
-  //     "src": imgSrc
-  //   });
-  // };
   // 显示头像
   $('#icon-image').show();
 }
