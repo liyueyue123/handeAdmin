@@ -29,7 +29,6 @@
         $("div.buttonDiv").click(function () {
             var userName = $("#username").val();
             var passWord = $("#password").val();
-            // console.log(userName, passWord);
             $.ajax({
                 type: "GET",
                 url: APP_URL + "/console/login",
@@ -43,7 +42,6 @@
                     if (res.code == "success") {
                         $(window).attr("location", "./pages/index.html");
                         sessionStorage.setItem("token",res.authToken);
-                        // sessionStorage.setItem("isDelete", "isDel");
                         sessionStorage.setItem("name",res.data.name);
                     } else {
                         $("div.errorinfo").html(res.message);

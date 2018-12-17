@@ -44,28 +44,16 @@
                 </tr>
             </thead>
             <tbody>
-                <volist name="list" id="vo">
-                    <tr>
-                        <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
-                        <td>
-                            < {$vo.id}>
-                        </td>
-                        <td>
-                            < {$vo.title}>
-                        </td>
-                        <td>
-                            < {$vo.typeName}>
-                        </td>
-                        <td>
-                            < {$vo.label}>
-                        </td>
-                        <td>
-                            < {$vo.source}>
-                        </td>
-                        <td><a class="btn btn-success navbar-btn" href="/manage.php/Order/getAllOrder?order_id=1490&amp;order_producttype=1">
-                                查看详情</a></td>
-                    </tr>
-                </volist>
+                <tr>
+                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a class="btn btn-success navbar-btn" href="/manage.php/Order/getAllOrder?order_id=1490&amp;order_producttype=1">
+                            查看详情</a></td>
+                </tr>
             </tbody>
         </table>
 

@@ -1,9 +1,4 @@
 $(function () {
-    getCompany(); //获取公司
-    getAllProvinces(); //获取省份
-    getCity(); //获取市
-    getArea(); //获取所在区
-
     //添加电话
     $("#addphone").click(function () {
         var phoneList = $("#addTelText li").length;
@@ -12,7 +7,7 @@ $(function () {
             str += `
             <li class="pro-section">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="phones[]" id="attrPhone" placeholder="请输入电话号码">
+                    <input type="text" class="form-control formPhone" id="attrPhone" placeholder="请输入电话号码">
                 </div> 
                 <button type="button" class="btn btn-danger pro-removeSection"><i class="fa fa-minus" aria-hidden="true"></i> 移除电话</button>
             </li> 
@@ -24,7 +19,22 @@ $(function () {
     $("#addTelText .pro-removeSection").live("click", function () {
         $(this).parent(".pro-section").remove();
     });
-    addCompany() //新增
+    getAllProvinces(); //获取省份
+    getCity(); //获取市
+    getArea(); //获取所在区
+    showDetails(7);
+    var url = window.location.href;
+    if (url.indexOf("=") == -1) {
+        $(".addForm").attr("action", APP_URL + "/addCompany");
+        $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");
+        addCompany(); //新增公司
+    } else {
+        var id = url.split("=")[1];
+        showDetails(id); //显示公司详情
+        // getEditData('/editCompany',id,);  //编辑公司详情
+    }
+
+
 });
 
 // 获取所有省份
@@ -122,73 +132,33 @@ function getArea() {
     $("#allArea").html(str2);
 }
 
-// 获取公司
-function getCompany() {
-    var token = sessionStorage.getItem("token");
-    var str3 = "";
-    str3 += `<option value="" selected="">---请选择公司---</option>`;
-    $.ajax({
-        type: "GET",
-        url: APP_URL + "/companySelect",
-        data: {
-            authToken: token,
-        },
-        dataType: "json",
+// 添加公司
+function addCompany() {
+    ajax({
+        type: "POST",
         success: function (res) {
-            console.log(res);
-            var data = res.data;
-            $.each(data, function (index, val) {
-                str3 += `
-                    <option value="${val.id}">${val.companyname}</option>
-                `;
-            });
-            $("#allCompany").html(str3);
-        },
-        error: function (err) {
-            console.log(err);
+            // console.log(JSON.stringify(res));
+            window.location.href = '../CompanyList/index.html';
         }
     });
 }
 
-// 添加公司
-function addCompany() {
-    $("#saveButton").click(function () {
-        var companyAccount = $('#company_account').val(); //账号
-        var company_password = $('#company_password').val(); //密码
-        var company_name = $('#company_name').val(); //公司名称
-        var company_user = $('#company_user').val(); //负责人姓名
-        var phones = '13245671234';
-        var allProvinces = $('#allProvinces').val();
-        var allCity = $('#allCity').val();
-        var allArea = $('#allArea').val();
-        var company_address = $('#company_address').val();
-        var startTime = $('#startTime').val();
-        var overTime = $('#overTime').val();
-        var company_num = $('#company_num').val();
-        var token = sessionStorage.getItem("token");
-        $.ajax({
-            type: "POST",
-            url: APP_URL + "/addCompany",
-            data: {
-                authToken: token,
-                account: companyAccount,
-                password: company_password,
-                companyname: 7,
-                address: company_address,
-                cityid: allCity,
-                deadline: overTime,
-                districtid: allArea,
-                lastAccountCount: company_num,
-                openaccounttime: startTime,
-                principalName: company_user,
-                provinceid: allProvinces,
-                phones: phones
-            },
-            dataType: "json",
-            success: function (res) {
-                console.log(res);
-            }
-        });
-
+// 获取公司详情
+function showDetails(id) {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/showDetails",
+        data: {
+            authToken: token,
+            companyId: id
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+        },
+        error:function(err){
+            console.log(err);
+        }
     });
 }

@@ -46,20 +46,3 @@ function companyList() {
         
     });
 }
-
-// // 删除公司
-// function delCompany(){
-//     var token = sessionStorage.getItem("token");
-//     $.ajax({
-//         type: "GET",
-//         url: APP_URL+"/deleteCompany",
-//         data: {
-//             authToken: token,
-//             companyId :7
-//         },
-//         dataType: "json",
-//         success: function (res) {
-//            console.log(res); 
-//         }
-//     });
-// }

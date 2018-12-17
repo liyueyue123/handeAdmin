@@ -5,6 +5,8 @@
 <title>角色管理</title>
 <script src="/js/load.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
+<script src="/js/moment.js"></script>
+<script src="./roleManage.js"></script>
 </head>
 
 <body>
@@ -14,15 +16,10 @@
 <a class="navbar-brand" href="#">角色管理</a>
 </div>
 <div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Rule')"><i class="fas fa-trash-alt"></i> 删除</button>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRole','POST','roleId')"><i class="fas fa-trash-alt"></i> 删除</button>
 <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addRule')"><i class="fas fa-edit"></i> 修改</button>
 <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddRole/index.html')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
-<form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
-<div class="form-group">
-<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
-</div>
-<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-</form>    
+   
 </div>
 </nav>
 
@@ -38,15 +35,14 @@
 </tr>
 </thead>
 <tbody>
-<volist name="list" id="vo">
-<tr>
-<td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
-<td><{$vo.id}></td>
-<td><{$vo.name}></td>
-<td><{$vo.title}></td>
-<td><{$vo.title}></td>
-</tr>
-</volist>
+
+<!-- <tr>
+<td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value=""/></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr> -->
 </tbody>
 </table>
 
@@ -55,11 +51,11 @@
 
 <ul class="pagination">
     <li class="active"><a href="#">1</a></li>
-    <li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
-    <li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
-    <li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
-    <li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
-    <li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">下一页</a></li>
     <li><a>共44条记录</a></li>
     <li><a>第1页/共5页</a></li>
 </ul>
