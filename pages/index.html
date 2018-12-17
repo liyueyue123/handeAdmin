@@ -61,7 +61,7 @@
     //获取侧边栏列表数据
     function asideList() {
         var token = sessionStorage.getItem("token");
-        // console.log(token)
+        console.log(token)
         $.ajax({
             type: "GET",
             url: APP_URL + "/roleMenu",

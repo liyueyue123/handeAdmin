@@ -44,14 +44,13 @@ $('#icon').change(function (e) {
   }
 });
 
-
 //上传图片时调用的接口
 function uploadImg(tag) {
   var file = tag.files[0];
   // var imgSrc;
   var token = sessionStorage.getItem("token");
+  console.log("file",file)
   var form = new FormData();
-  // console.log("file",file)
   form.append('file', file)
   form.append('authToken', token)
   $.ajax({
@@ -127,28 +126,25 @@ $("#company").change(function () {
 })
 
 
-//点击添加用户,提交表单 
-// $("#saveButton").click(function(){
-//     alert('baocun')
-//     // $.ajax({
-//     //     type: "GET",
-//     //     url: APP_URL + "/register",
-//     //     data: {
-//     //     authToken: token,
-//     //     company:
-//     //     },
-//     //     dataType: "json",
-//     //     success: function (res) {
-//     //         console.log('departmentList',res);
-//     //         var data = res.data;
-//     //         var str = "<option value='' selected>---请选择部门---</option>";
-//     //     $.each(data, function (index, val) {
-//     //         str += `
-//     //             <option value="${val.id}">${val.departname}</option>
-//     //         `;
-//     //         });
-//     //         // console.log('str',str)
-//     //         $("#department").html(str);
-//     //     }
-//     // });
-// })
+// 点击添加用户,提交表单 
+$("#saveButton").click(function(){
+    alert('baocun')
+    $.ajax({
+        type: "post",
+        url: APP_URL + "/register",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log('departmentList',res);
+            var data = res.data;
+            var str = "<option value='' selected>---请选择部门---</option>";
+        $.each(data, function (index, val) {
+            str += `
+                <option value="${val.id}">${val.departname}</option>
+            `;
+            });
+            // console.log('str',str)
+            $("#department").html(str);
+        }
+    });
+})

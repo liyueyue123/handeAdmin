@@ -1,7 +1,7 @@
 APP_URL = 'http://hande.icpnt.com';
 APP_IMAGE_URL = 'http://hdimg.icpnt.com/'
 var token = sessionStorage.getItem("token");
-
+console.log(token);
 $(document).ready(function (e) {
   $.Tipmsg.r = null;
   $(".addForm").Validform({

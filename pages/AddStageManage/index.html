@@ -32,7 +32,7 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td>
-                            <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check"
+                            <button type="button" class="btn btn-success" id="saveBtn"><i class="fa fa-check"
                                     aria-hidden="true"></i>
                                 添加</button>
                             <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times"
@@ -47,29 +47,28 @@
 </body>
 <script>
     $(function () {
-var datas = $('.addForm').formSerialize();
         var token = sessionStorage.getItem("token");
-        // var typeName = $("#typeName").val();
-        // $('#saveBtn').click(function () {
-        //     var token = sessionStorage.getItem("token");
-        //     var typeName = $("#typeName").val();
-        //     if (typeName) {
-        //         $.ajax({
-        //             type: "GET",
-        //             url: "http://hande.icpnt.com//permission/addStage",
-        //             data: {
-        //                 authToken: token,
-        //                 stageName: typeName
-        //             },
-        //             dataType: "json",
-        //             success: function (res) {
-        //                 console.log(res);
-        //             }
-        //         });
-        //     } else {
-        //         alert("请输入阶段名称");
-        //     }
-        // });
+        var typeName = $("#typeName").val();
+        $('#saveBtn').click(function () {
+            var token = sessionStorage.getItem("token");
+            var typeName = $("#typeName").val();
+            if (typeName) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://hande.icpnt.com//permission/addStage",
+                    data: {
+                        authToken: token,
+                        stageName: typeName
+                    },
+                    dataType: "json",
+                    success: function (res) {
+                        window.history.go(-1)
+                    }
+                });
+            } else {
+                alert("请输入阶段名称");
+            }
+        });
     });
 </script>
 
