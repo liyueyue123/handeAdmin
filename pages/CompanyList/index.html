@@ -18,7 +18,7 @@
         <div>
             <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteCompany','GET','companyId')"><i class="fas fa-trash-alt"></i>
                 删除</button>
-            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../EditCompany/index.html')"><i class="fas fa-edit"></i>
+            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('/AddCompany/index.html')"><i class="fas fa-edit"></i>
                 修改</button>
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i class="fa fa-plus"
                     aria-hidden="true"></i> 新建</button>
@@ -108,12 +108,5 @@
     </ul>
 
 </body>
-<!-- <script>
-$(function () { 
-    var token = sessionStorage.getItem("token");
-    $.get(APP_URL+'/companySelect',{authToken:token},function (res) { 
-        console.log(JSON.stringify(res));
-     });
- })
-</script> -->
+
 </html>
