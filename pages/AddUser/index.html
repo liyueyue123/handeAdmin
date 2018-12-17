@@ -13,12 +13,6 @@
 </head>
 
 <body>
-    <!--alert弹窗Start  -->
-    <div id="top-alert" class="fixed alert alert-error" style="display:none;">
-        <button class="close fixed" style="margin-top: 4px;">×</button>
-        <div class="alert-content">这是内容</div>
-    </div>
-    <!--alert弹窗end  -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
             <a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> <span id="changeTitle">添加</span>用户</a>
@@ -26,13 +20,12 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm ajax-fadein" id="form1" name="form1" >
-            <input name="authToken" type="hidden" id="authToken" value="">
+        <form class="addForm" id="form1" name="form1" action="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr>
                         <td align="center">登录名</td>
-                        <td><input type="text" name="loginname" id="business_login_name" class="form-control" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！" nullmsg="请输入用户登录名" placeholder="请输入用户登录名"></td>
+                        <td><input type="text" name="loginname" id="business_login_name" class="form-control" axjaurl="" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！" nullmsg="请输入用户登录名" placeholder="请输入用户登录名"></td>
                     </tr>
 
                     <tr>
@@ -70,8 +63,8 @@
                                 <img style=" width:180px;" />
                             </div>
                             <span>图片大小180*180</span>
-                            <input type="hidden" name="file_base64" id="file_base64">
-                            <input type="file" name="icon" id="icon" nullmsg="请上传头像" placeholder="请上传头像" accept="image/jpeg,image/png,image/jpg,image/gif" width="30%" style="margin-bottom:10px;">
+                            <input type="text" name="icon" id="icon" hidden>
+                            <input type="file" name="iconfile" id="iconfile" nullmsg="请上传头像" placeholder="请上传头像" accept="image/jpeg,image/png,image/jpg,image/gif" width="30%" style="margin-bottom:10px;">
                         </td>
                     </tr>
 
@@ -106,8 +99,7 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td>
-                            <button type="button" class="btn btn-success" id="saveButton"><i class="fa fa-check"
-                                    aria-hidden="true"></i> 添加</button>
+                            <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i> 添加</button>
                             <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times"
                                     aria-hidden="true"></i> 取消</button>
                         </td>

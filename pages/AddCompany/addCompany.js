@@ -3,10 +3,11 @@ $(function () {
     getAllProvinces(); //获取省份
     getCity(); //获取市
     getArea(); //获取所在区
+
     //添加电话
-    $("#addphone").click(function(){
+    $("#addphone").click(function () {
         var phoneList = $("#addTelText li").length;
-        if(phoneList<5){
+        if (phoneList < 5) {
             var str = "";
             str += `
             <li class="pro-section">
@@ -20,10 +21,10 @@ $(function () {
         }
     });
     // 删除电话
-    $("#addTelText .pro-removeSection").live("click",function(){
+    $("#addTelText .pro-removeSection").live("click", function () {
         $(this).parent(".pro-section").remove();
     });
-    // addCompany()  //新增
+    addCompany() //新增
 });
 
 // 获取所有省份
@@ -122,7 +123,7 @@ function getArea() {
 }
 
 // 获取公司
-function getCompany(){
+function getCompany() {
     var token = sessionStorage.getItem("token");
     var str3 = "";
     str3 += `<option value="" selected="">---请选择公司---</option>`;
@@ -130,16 +131,16 @@ function getCompany(){
         type: "GET",
         url: APP_URL + "/companySelect",
         data: {
-            authToken: token, 
+            authToken: token,
         },
         dataType: "json",
         success: function (res) {
             console.log(res);
-            var data= res.data;
-            $.each(data, function (index, val) { 
+            var data = res.data;
+            $.each(data, function (index, val) {
                 str3 += `
                     <option value="${val.id}">${val.companyname}</option>
-                `; 
+                `;
             });
             $("#allCompany").html(str3);
         },
@@ -149,46 +150,45 @@ function getCompany(){
     });
 }
 
+// 添加公司
+function addCompany() {
+    $("#saveButton").click(function () {
+        var companyAccount = $('#company_account').val(); //账号
+        var company_password = $('#company_password').val(); //密码
+        var company_name = $('#company_name').val(); //公司名称
+        var company_user = $('#company_user').val(); //负责人姓名
+        var phones = '13245671234';
+        var allProvinces = $('#allProvinces').val();
+        var allCity = $('#allCity').val();
+        var allArea = $('#allArea').val();
+        var company_address = $('#company_address').val();
+        var startTime = $('#startTime').val();
+        var overTime = $('#overTime').val();
+        var company_num = $('#company_num').val();
+        var token = sessionStorage.getItem("token");
+        $.ajax({
+            type: "POST",
+            url: APP_URL + "/addCompany",
+            data: {
+                authToken: token,
+                account: companyAccount,
+                password: company_password,
+                companyname: 7,
+                address: company_address,
+                cityid: allCity,
+                deadline: overTime,
+                districtid: allArea,
+                lastAccountCount: company_num,
+                openaccounttime: startTime,
+                principalName: company_user,
+                provinceid: allProvinces,
+                phones: phones
+            },
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+            }
+        });
 
-
-
-
-// function addCompany() {
-//     var token = sessionStorage.getItem("token");
-//     $.ajax({
-//         type: "POST",
-//         url: APP_URL + "/addCompany",
-//         data: {
-//             authToken: token,
-//             address: "长安街",
-//             cityid: "北京",
-//             companyname: "北京中国航天",
-//             deadline: "2018-12-10",
-//             districtid: "宣武区",
-//             lastAccountCount: "100",
-//             openaccounttime: "2018-10-22",
-//             principalName: "小花",
-//             provinceid: "北京"
-//         },
-//         dataType: "json",
-//         success: function (res) {
-//             console.log(res);
-//         }
-//     });
-// }
-
-// function delCompany() {
-//     var token = sessionStorage.getItem("token");
-//     $.ajax({
-//         type: "GET",
-//         url: APP_URL + "/deleteCompany",
-//         data: {
-//             authToken: token,
-//             companyId: 9
-//         },
-//         dataType: "json",
-//         success: function (res) {
-//             console.log(res);
-//         }
-//     });
-// }
+    });
+}

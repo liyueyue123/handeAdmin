@@ -34,6 +34,7 @@
 <th>序号</th>
 <th>姓名</th>
 <th>头像</th>
+<th>角色</th>
 <th>账号</th>
 <th>密码</th>
 <th>创建时间</th>
@@ -41,13 +42,14 @@
 <th>操作</th>
 </tr>
 </thead>
-<tbody>
+<tbody class="personnelList">
 <volist name="list" id="vo">
 <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
 <td><{$vo.id}></td>
 <td><{$vo.name}></td>
 <td><img src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJXKbibRu5tzzQf1nYtapmFwbhsXtZUava5fRSq1IaIDWbxbY4QyW7Yodpb9Mv3ibgQC4z2yCDwtHKQ/132" width="70px" height="70px" alt="暂无用户头像"></td>
+<td></td>
 <td></td>
 <td><{$vo.condition}></td>
 <td><{$vo.condition}></td>
@@ -75,4 +77,5 @@
 </ul>
 
 </body>
+<script type="text/javascript" src="./personnelManage.js"></script>
 </html>

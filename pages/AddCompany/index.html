@@ -24,32 +24,30 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm ajax-fadein" id="form1" name="form1" method="post" action="http://hande.icpnt.com/addCompany"></form>
+        <form class="addForm ajax-fadein" id="form1" name="form1">
             <input name="authToken" type="hidden" id="authToken" value="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr>
                         <td align="center">账号</td>
-                        <td><input type="text" name="account" id="company_tel" value="gsgsgsgs" class="form-control" datatype="*" nullmsg="请输入帐号" placeholder="请输入帐号"></td>
+                        <td><input type="text" name="account" id="company_account" value="" class="form-control" datatype="*" nullmsg="请输入帐号" placeholder="请输入帐号"></td>
                     </tr>
 
                     <tr>
                         <td align="center">密码</td>
-                        <td><input type="password" name="password" id="company_password" value="123456" class="form-control" datatype="*6-15" errormsg="密码范围在6~15位之间！" nullmsg="请输入密码" placeholder="请输入密码"></td>
+                        <td><input type="password" name="password" id="company_password" value="" class="form-control" datatype="*6-15" errormsg="密码范围在6~15位之间！" nullmsg="请输入密码" placeholder="请输入密码"></td>
                     </tr>
 
                     <tr>
                         <td align="center">公司名称</td>
                         <td>
-                            <select class="form-control getPCD" id="allCompany" name="companyname" >
-                                <!-- <option value=""></option> -->
-                            </select>
+                                <input type="text" name="companyname " id="company_name" value="" class="form-control" datatype="*1-50" errormsg="最多填写50个字符串" nullmsg="请输入公司名称" placeholder="请输入公司名称">
                         </td>
                     </tr>
 
                     <tr>
                         <td align="center">负责人姓名</td>
-                        <td><input type="text" name="principalName" id="company_user" value="kakaka" class="form-control" datatype="*" nullmsg="请输入负责人姓名" placeholder="请输入负责人姓名"></td>
+                        <td><input type="text" name="principalName" id="company_user" value="" class="form-control" datatype="*" nullmsg="请输入负责人姓名" placeholder="请输入负责人姓名"></td>
                     </tr>
                     <tr>
                         <td align="center">联系人方式</td>
@@ -57,7 +55,7 @@
                             <ul>
                                 <li class="pro-section">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="phones[]" value="159878210231" id="attrPhone" placeholder="请输入电话号码">
+                                        <input type="text" class="form-control" name="phones[]" value="" id="attrPhone" placeholder="请输入电话号码">
                                     </div> 
                                     <button type="button" class="btn btn-primary" id="addphone"><i class="fa fa-plus" aria-hidden="true"></i> 添加电话</button>
                                 </li>
@@ -90,30 +88,30 @@
 
                     <tr>
                         <td align="center">详细地址</td>
-                        <td><input type="text" name="address" id="company_address" class="form-control" value="汤立路" datatype="*" nullmsg="请输入详细地址" placeholder="请输入详细地址"></td>
+                        <td><input type="text" name="address" id="company_address" class="form-control" value="" datatype="*" nullmsg="请输入详细地址" placeholder="请输入详细地址"></td>
                     </tr>
                     <tr>
                         <td align="center">开户时间</td>
                         <td>
-                            <input type="text" name="openaccounttime" value="2018-12-14 10:00" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择开户日期" placeholder="请选择开户日期" style="width:33.03%"/>
+                            <input type="text" name="openaccounttime" id="startTime" value="" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择开户日期" placeholder="请选择开户日期" style="width:33.03%"/>
                         </td>
                         
                     </tr>
                     <tr>
                         <td align="center">截止时间</td>
                         <td>
-                            <input type="text" name="deadline" value="2018-12-15 10:00" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择截止日期" placeholder="请选择截止日期" style="width:33.03%"/>
+                            <input type="text" name="deadline" value="" id="overTime" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择截止日期" placeholder="请选择截止日期" style="width:33.03%"/>
                         </td>
                     </tr>
                     <tr>
                         <td align="center">最终账号数量</td>
-                        <td><input type="number" name="lastAccountCount" id="company_num" value="10" class="form-control" datatype="*" nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"/></td>
+                        <td><input type="number" name="lastAccountCount" id="company_num" value="" class="form-control" datatype="*" nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"/></td>
                     </tr>
 
                     <tr>
                         <td>&nbsp;</td>
                         <td>
-                            <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i> 添加</button>
+                            <button type="button" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i> 添加</button>
                             <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 取消</button>
                         </td>
                     </tr>
@@ -125,8 +123,8 @@
 
 </body>
 <script>
-    var token = sessionStorage.getItem("token");
-    $("#authToken").val(token);
+    // var token = sessionStorage.getItem("token");
+    // $("#authToken").val(token);
     $(".form_datetime").datetimepicker({
         format: 'yyyy-mm-dd hh:ii',//显示格式
         todayHighlight: 1,//今天高亮

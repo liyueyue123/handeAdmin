@@ -1,4 +1,5 @@
 $(function () {
+  $('.addForm').attr('action', APP_URL + "/register");
   //获取token
   getToken();
   //获取公司的下拉选框
@@ -18,7 +19,7 @@ $('#icon-image').hide();
 
 
 // 上传头像
-$('#icon').change(function (e) {
+$('#iconfile').change(function (e) {
   var path = $(this).val(),
     extStart = path.lastIndexOf('.'),
     ext = path.substring(extStart, path.length).toUpperCase();
@@ -64,6 +65,9 @@ function uploadImg(tag) {
       console.log(res)
       $("#icon-image").find("img").attr({
         "src": APP_IMAGE_URL + res.data
+      });
+      $("#icon").attr({
+        'value': res.data
       });
     }
   });
@@ -126,25 +130,11 @@ $("#company").change(function () {
 })
 
 
-// 点击添加用户,提交表单 
-$("#saveButton").click(function(){
-    alert('baocun')
-    $.ajax({
-        type: "post",
-        url: APP_URL + "/register",
-        data: data,
-        dataType: "json",
-        success: function (res) {
-            console.log('departmentList',res);
-            var data = res.data;
-            var str = "<option value='' selected>---请选择部门---</option>";
-        $.each(data, function (index, val) {
-            str += `
-                <option value="${val.id}">${val.departname}</option>
-            `;
-            });
-            // console.log('str',str)
-            $("#department").html(str);
-        }
-    });
+//提交表单
+ajax({
+  type: 'POST',
+  success: function (res) {
+    console.log('success', JSON.stringify(res));
+    window.location.href = '../UserList/index.html'
+  }
 })

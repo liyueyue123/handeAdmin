@@ -26,7 +26,7 @@ function userList(){
             <td>${val.name}</td>
             <td><a href="javascript:;">${val.phone}</a></td>
             <td>${val.departname}</td>
-            <td></td>
+            <td><img style="width:60px;margin:10px;" src="${val.icon}"/></td>
             <td></td>
             <td></td>
             <td>${val.companyname}</td>
@@ -42,6 +42,3 @@ function userList(){
     }
   });
 };
-$('#btn-search').click(function(){
-  console.log('search');
-})

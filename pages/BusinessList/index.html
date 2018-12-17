@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>商机列表</title>
 <script src="/js/load.js"></script>
+<script src="/js/moment.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
 </head>
 
@@ -32,7 +33,6 @@
 <tr>
 <th>选择</th>
 <th>序号</th>
-<th>ID</th>
 <th>公司名称</th>
 <th>金额</th>
 <th>城市</th>
@@ -43,7 +43,11 @@
 <th>操作</th>
 </tr>
 </thead>
-<tbody>
+
+<tbody class="businessList">
+</tbody>
+
+<!-- <tbody>
 <volist name="list" id="vo">
 <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
@@ -59,7 +63,9 @@
 <td><a class="btn btn-success navbar-btn" href="/manage.php/Order/getAllOrder?order_id=1490&amp;order_producttype=1"> 查看详情</a></td>
 </tr>
 </volist>
-</tbody>
+</tbody> -->
+
+
 </table>
 
 </div>
@@ -79,4 +85,5 @@
 </ul>
 
 </body>
+<script src="./businessList.js"></script>
 </html>
