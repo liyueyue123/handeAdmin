@@ -40,10 +40,21 @@ function ajax(obj) {
         var arr = [];
         $.each($(".formPhone"), function () {
           arr.push($(this).val());
-          var phones = arr.toString();
-          $("#formPhones").val(phones);
           // console.log($("#formPhones").val());
         });
+        var phones = arr.toString();
+        $("#formPhones").val(phones);
+      }
+      if ($(".menuCheckBox")) {
+        var menuCheckBox = [];
+        $.each($(".menuCheckBox"), function (index,val) {
+          if(val.checked){
+            menuCheckBox.push(val.value);
+          }
+        });
+        var menuIds = menuCheckBox.toString();
+        console.log(menuIds);
+        $("#formMenuIds").val(menuIds);
       }
 
       $.showLoading('正在提交……');

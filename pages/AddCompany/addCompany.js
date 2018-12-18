@@ -22,7 +22,7 @@ $(function () {
     getAllProvinces(); //获取省份
     getCity(); //获取市
     getArea(); //获取所在区
-    showDetails(7);
+    showDetails(13);
     var url = window.location.href;
     if (url.indexOf("=") == -1) {
         $(".addForm").attr("action", APP_URL + "/addCompany");
@@ -156,6 +156,9 @@ function showDetails(id) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if(res.code==0){
+                // $("#changeTitle").html("编辑");
+            }
         },
         error:function(err){
             console.log(err);
