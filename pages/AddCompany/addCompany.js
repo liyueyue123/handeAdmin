@@ -26,7 +26,7 @@ $(function () {
     var url = window.location.href;
     if (url.indexOf("=") == -1) {
         $(".addForm").attr("action", APP_URL + "/addCompany");
-        $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");
+        // $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");  //验证账号是否重复
         addCompany(); //新增公司
     } else {
         var id = url.split("=")[1];
@@ -157,7 +157,9 @@ function showDetails(id) {
         success: function (res) {
             console.log(res);
             if(res.code==0){
-                // $("#changeTitle").html("编辑");
+                $("#changeTitle").html("编辑");
+                $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
+                
             }
         },
         error:function(err){
