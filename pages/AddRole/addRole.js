@@ -21,7 +21,7 @@ function allMenu() {
             var str = "";
             $.each(data, function (index, val) {
                 str += `
-                 <label style="margin-right:1%"><input type="checkbox" name="menuIds[]" value="${val.id}"/>${val.menuName}</label>
+                 <label style="margin-right:1%"><input type="checkbox" class="menuCheckBox" value="${val.id}"/>${val.menuName}</label>
                 `;
             });
             $("#menuList").html(str);

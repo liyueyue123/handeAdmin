@@ -22,7 +22,7 @@ function stageList() {
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
                         <td>${index+1}</td>
                         <td>${val.stagename}</td>
-                        <td><a class="btn ${val.enable==0?'btn-success':'btn-danger'}" data-table="user" data-id="59" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);" onclick="ebableStage(${val.enable==0?'1':'0'},'${val.id}')">${val.enable==0?'启用':'禁用'}</a></td>
+                        <td><a class="btn ${val.enable==1?'btn-success':'btn-danger'}" data-table="user" data-id="59" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);" onclick="ebableStage(${val.enable==1?'0':'1'},'${val.id}')">${val.enable==1?'启用':'禁用'}</a></td>
                     </tr>
                  `;
             });
