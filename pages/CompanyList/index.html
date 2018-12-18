@@ -16,26 +16,29 @@
             <a class="navbar-brand" href="#">公司管理</a>
         </div>
         <div>
-            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteCompany','GET','companyId')"><i class="fas fa-trash-alt"></i>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteCompany','GET','companyId')"><i
+                    class="fas fa-trash-alt"></i>
                 删除</button>
-            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('/AddCompany/index.html')"><i class="fas fa-edit"></i>
+            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddCompany/index.html')"><i
+                    class="fas fa-edit"></i>
                 修改</button>
-            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i class="fa fa-plus"
-                    aria-hidden="true"></i> 新建</button>
-            <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i
+                    class="fa fa-plus" aria-hidden="true"></i> 新建</button>
+            <form class="navbar-form navbar-right listSearch" role="search" method="get" action="">
+
                 <div class="form-group">
                     <select class="form-control" name="moduleType">
-                        <option value="" selected="">所在地区</option>
+                        <option value="" selected="">---请选择所在地区---</option>
                         <option value="=0">地区一</option>
                         <option value="<>0">地区二</option>
                     </select>
                     <select class="form-control" name="parent_id">
-                        <option value="61">开户时间</option>
+                        <option value="61">---请选择开户时间---</option>
                         <option value="70">个人中心</option>
                         <option value="79">退款管理</option>
                     </select>
                     <select class="form-control" name="parent_id">
-                        <option value="61">截止时间</option>
+                        <option value="61">---请选择截止时间---</option>
                         <option value="70">个人中心</option>
                         <option value="79">退款管理</option>
                     </select>
@@ -44,8 +47,9 @@
                         <option value="70">个人中心</option>
                         <option value="79">退款管理</option>
                     </select>
-                    <!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入编号搜索"> -->
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+                </div>
+                <!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入编号搜索"> -->
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
             </form>
         </div>
     </nav>

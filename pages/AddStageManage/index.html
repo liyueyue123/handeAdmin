@@ -16,7 +16,7 @@
     </nav>
 
     <div class="add-box">
-        <form class="addForm" id="form1" name="form1" action="http://hande.icpnt.com/permission/addStage">
+        <form class="addForm" id="form1" name="form1" action="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr>
@@ -28,7 +28,7 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td>
-                            <button type="button" class="btn btn-success" id="saveBtn"><i class="fa fa-check"
+                            <button type="submit" class="btn btn-success" id="saveBtn"><i class="fa fa-check"
                                     aria-hidden="true"></i>
                                 添加</button>
                             <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times"
@@ -43,10 +43,11 @@
 </body>
 <script>
     $(function () {
+        $(".addForm").attr("action",APP_URL+"/permission/addStage");
         ajax({
             type: "GET",
             success: function (res) {
-                //console.log(JSON.stringify(res));
+                console.log(JSON.stringify(res));
                 window.location.href = '../StageManage/index.html';
             }
         });

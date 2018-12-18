@@ -25,6 +25,7 @@ function allMenu() {
                 `;
             });
             $("#menuList").html(str);
+            $("#menuList").append("<input type='hidden' name='menuIds' id='formMenuIds' value=''/>");
         },
         error: function (err) {
             console.log(err);
@@ -36,7 +37,7 @@ function addRole() {
     ajax({
         type: "POST",
         success: function (res) {
-            // console.log(JSON.stringify(res));
+            console.log(JSON.stringify(res));
             window.location.href = '../RoleManage/index.html';
         }
     });
