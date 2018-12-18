@@ -36,27 +36,27 @@ function ajax(obj) {
       token: token
     }, //自定义提交的数据
     beforeSubmit: function () {
-      if ($(".formPhone")) {
+      // 新增公司处理多组电话
+      if ($(".formPhone").length != "") {
         var arr = [];
         $.each($(".formPhone"), function () {
           arr.push($(this).val());
-          // console.log($("#formPhones").val());
         });
         var phones = arr.toString();
         $("#formPhones").val(phones);
       }
-      if ($(".menuCheckBox")) {
-        var menuCheckBox = [];
-        $.each($(".menuCheckBox"), function (index,val) {
-          if(val.checked){
-            menuCheckBox.push(val.value);
+      //新增角色，处理多选菜单项
+      if ($(".menuCheckBox").length != "") {
+        var menuCheck = [];
+        $.each($(".menuCheckBox"), function (index, val) {
+          if (val.checked) {
+          menuCheck.push(val.value);
           }
         });
-        var menuIds = menuCheckBox.toString();
-        console.log(menuIds);
+        var menuIds = menuCheck.join(',');
         $("#formMenuIds").val(menuIds);
+        console.log($("#formMenuIds").val());
       }
-
       $.showLoading('正在提交……');
     },
     success: function (res) { //表单提交成功回调函数

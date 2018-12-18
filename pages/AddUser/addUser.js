@@ -1,26 +1,51 @@
 $(function () {
-  $('.addForm').attr('action', APP_URL + "/register");
-  //获取token
-  getToken();
   //获取公司的下拉选框
-  getCompanySelect()
+  getCompanySelect();
   var url = window.location.href; //首先获取到你的URL地址;
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
-  if(id == undefined){
-    
+  if(id != undefined){
+    $('.addForm').attr('action', APP_URL + "/editUser");
+    $('#changeTitle').text('修改')
+    getUserInfo(id) 
   }else{
-
+    $('.addForm').attr('action', APP_URL + "/register");
   }
-
 });
-
-
-// 获取token
-function getToken() {
+function getUserInfo(id){
   var token = sessionStorage.getItem("token");
-  $('#authToken').val(token);
+  $.ajax({
+    type: "GET",
+    url: APP_URL + "/getUser",
+    data: {
+      authToken: token,
+      userId:id
+    },
+    dataType: "json",
+    success: function (res) {
+      console.log('uerInfo',res)
+      var data = res.data;
+      $("#user_loginname").val(data.loginname);
+      $("#user_name").val(data.name);
+      // $("#user_passwd").val(data.passwd);
+      // $("#user_passwd").attr({
+      //   "disabled" : true
+      // });
+      $(".gender").val(data.gender);
+      $("#user_phone").val(data.phone);
+      $("#user_wechat").val(data.wechat);
+      // $("#icon-image").attr({
+        //   'src':
+        // });
+      $("#user_email").val(data.email);
+      $("#company").find("option[value=" + data.company + "]").attr("selected", true);
+      //获取部门的下拉选框
+      getDepartmentSelect(data.department);
+      $("#user_address").val(data.address);
+    }
+  });
 }
+
 
 
 // 隐藏空白头像
@@ -110,33 +135,42 @@ function getCompanySelect(){
   });
 }
 
+//当公司的下拉选框发生改变时
+$("#company").change(function () {
+  getDepartmentSelect();
+})
 
 // 获取部门
-$("#company").change(function () {
-  var companyId = $('#company option:selected').val();
-  var token = sessionStorage.getItem("token");
-  $.ajax({
-    type: "GET",
-    url: APP_URL + "/departmentSelect",
-    data: {
-      authToken: token,
-      companyId: companyId
-    },
-    dataType: "json",
-    success: function (res) {
-      console.log('departmentList', res);
-      var data = res.data;
-      var str = "<option value='' selected>---请选择部门---</option>";
-      $.each(data, function (index, val) {
-        str += `
-                <option value="${val.id}">${val.departname}</option>
-            `;
-      });
-      // console.log('str',str)
-      $("#department").html(str);
-    }
-  });
-})
+function getDepartmentSelect(d){
+var companyId = $('#company option:selected').val();
+  if ($('#company option:selected').val() != '') {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+      type: "GET",
+      url: APP_URL + "/departmentSelect",
+      data: {
+        authToken: token,
+        companyId: companyId
+      },
+      dataType: "json",
+      success: function (res) {
+        console.log('departmentList', res);
+        var data = res.data;
+        var str = "<option value='' selected>---请选择部门---</option>";
+        $.each(data, function (index, val) {
+          str += `
+                    <option value="${val.id}">${val.departname}</option>
+                `;
+        });
+        // console.log('str',str)
+        $("#department").html(str);
+        if(d){
+          $("#department").find("option[value=" + d + "]").attr("selected", true);
+        }
+      }
+    });
+  }
+}
 
 
 //提交表单

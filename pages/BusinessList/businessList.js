@@ -1,4 +1,7 @@
 $(function () {
+  $('#search_form').attr({
+    'action': APP_URL + ""
+  })
   businessList();
 });
 

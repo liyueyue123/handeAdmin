@@ -66,7 +66,9 @@ function uploadImg(tag) {
       type: "GET",
       url: APP_URL + "/role/list",
       data: {
-          authToken: token
+          authToken: token,
+          limit:10,
+          page:1
       },
       dataType: "json",
       success: function (res) {
@@ -92,6 +94,7 @@ function uploadImg(tag) {
     type:'POST',
     success:function(res){
       console.log('success',JSON.stringify(res));
+      window.location.href = '../PersonnelManage/index.html'
     }
   })
 })
