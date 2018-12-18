@@ -4,6 +4,15 @@ $(function () {
   getToken();
   //获取公司的下拉选框
   getCompanySelect()
+  var url = window.location.href; //首先获取到你的URL地址;
+  var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
+  var id = arr[1];
+  if(id == undefined){
+    
+  }else{
+
+  }
+
 });
 
 
