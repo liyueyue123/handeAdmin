@@ -1,7 +1,4 @@
 $(function () {
-  $('#search_form').attr({
-    'action': APP_URL + ""
-  })
   businessList();
 });
 
@@ -28,12 +25,12 @@ function businessList() {
                 <td>${index+1}</td>
                 <td>${val.companyname}</td>
                 <td>${val.price}</td>
-                <td>${val.cityid}</td>
+                <td>${val.provinesName}-${val.cityName}-${val.areaName}</td>
                 <td>${moment(val.time).format('YYYY年MM月DD日')}</td>
                 <td>${val.stage}</td>
-                <td>${val.remark}</td>
+                <td>${val.groupid}</td>
                 <td>${val.source}</td>
-                <td><a class="btn btn-success navbar-btn" href="/manage.php/Order/getAllOrder?order_id=1490&amp;order_producttype=1"> 查看详情</a></td>
+                <td><a class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${index+1}"> 查看详情</a></td>
                 </tr>
               `;
       });
@@ -42,6 +39,13 @@ function businessList() {
     error: function (err) {
       //console.log(err);
     }
-
   });
 }
+
+//点击查看详情
+$('#search_details').live('click',function(e){
+  // console.log('id',e.target.dataset.id)
+  var id = e.target.dataset.id;
+  var index = e.target.dataset.index;
+  openAddData('../BusinessDetail/index.html?id='+id+'&index='+index)
+})

@@ -6,12 +6,11 @@ function userList(){
   console.log(token)
   $.ajax({
     type: "GET",
-    url: APP_URL + "/searchUserList",
+    url: APP_URL + "/user/all",
     data: {
       authToken: token,
       limit: 10,
-      page: 1,
-      search:'admin'
+      page: 1
     },
     dataType: "json",
     success: function (res) {

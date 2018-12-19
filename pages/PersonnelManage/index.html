@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>人员管理</title>
 <script src="/js/load.js"></script>
+<script src="/js/moment.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
 </head>
 
@@ -14,8 +15,8 @@
 <a class="navbar-brand" href="#">人员管理</a>
 </div>
 <div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Rule')"><i class="fas fa-trash-alt"></i> 删除</button>
-<button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addRule')"><i class="fas fa-edit"></i> 修改</button>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteUser','GET','userId')"><i class="fas fa-trash-alt"></i> 删除</button>
+<button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddPersonnel/index.html')"><i class="fas fa-edit"></i> 修改</button>
 <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddPersonnel/index.html')"><iclass="fa fa-plus" aria-hidden="true"></i> 新建</button>
 <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
 <div class="form-group">
