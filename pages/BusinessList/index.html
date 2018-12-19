@@ -6,6 +6,13 @@
 <script src="/js/load.js"></script>
 <script src="/js/moment.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
+<style>
+.files{width:26%;height:34.5px;}
+.files>input{
+  margin-top:-22px;
+  margin-left:-5px;
+}
+</style>
 </head>
 
 <body>
@@ -18,12 +25,25 @@
 <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('News')"><i class="fas fa-trash-alt"></i> 删除</button>
 <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addNews')"><i class="fas fa-edit"></i> 修改</button>
 <!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addNews')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
-<form class="navbar-form navbar-right listSearch" id="search_form" action="">
+<div class="navbar-form navbar-right listSearch">
 <div class="form-group">
-<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
+  <span style="vertical-align: middle;">公司名称:</span>
+  <input name="phone" type="text" class="form-control" id="search_companyName" placeholder="请输入关键词进行搜索">
 </div>
-<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-</form>    
+<div class="form-group">
+  <span style="vertical-align: middle;">联系人:</span>
+  <input name="Id" type="text" class="form-control" id="search_linkMan" placeholder="请输入关键词进行搜索">
+</div>
+<div class="form-group">
+  <span style="vertical-align: middle;">负责人:</span>
+  <input name="name" type="text" class="form-control" id="search_responsible" placeholder="请输入关键词进行搜索">
+</div>
+<div class="form-group">
+  <span style="vertical-align: middle;">id:</span>
+  <input name="Id" type="text" class="form-control" id="search_id" placeholder="请输入关键词进行搜索">
+</div>
+<button class="btn btn-primary" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+</div>    
 </div>
 </nav>
 

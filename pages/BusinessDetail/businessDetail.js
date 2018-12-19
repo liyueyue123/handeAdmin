@@ -53,11 +53,11 @@ function businessDetail(id , index){
                 </tr>
                 <tr>
                     <td align="center">联系人</td>
-                    <td>${data.links[0].name}</td>
+                    <td>李明</td>
                 </tr>
                 <tr>
                     <td align="center">负责人</td>
-                    <td>${data.principals[0].name}</td>
+                    <td>李华</td>
                 </tr>
                 <tr>
                     <td align="center">标签</td>

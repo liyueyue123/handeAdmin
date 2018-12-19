@@ -2,7 +2,7 @@ $(function () {
   userList(1);
 });
 
-function userList(pageNum){
+function userList(pageNum,phone,name,Id){
   var token = sessionStorage.getItem("token");
   // console.log(token)
   $.ajax({
@@ -11,7 +11,10 @@ function userList(pageNum){
     data: {
       authToken: token,
       limit: 10,
-      page: pageNum
+      page: pageNum,
+      phone: phone,
+      name: name,
+      Id:Id
     },
     dataType: "json",
     success: function (res) {
@@ -37,7 +40,7 @@ function userList(pageNum){
             <td></td>
             <td></td>
             <td></td>
-            <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id})">${val.isLock == 0 ?"禁用":"启用"}</a></td>
+            <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id},${pageNum})">${val.isLock == 0 ?"禁用":"启用"}</a></td>
           </tr>
         `;
       });
@@ -50,9 +53,32 @@ function userList(pageNum){
   });
 };
 
-
 // 禁用
-function operate(isLock,userId){
+function operate(isLock,userId,pageNum){
+  console.log(pageNum)
+  var token = sessionStorage.getItem("token");
+  if (isLock == 0) {
+    var url = APP_URL + "/stopUser";
+  } else {
+    var url = APP_URL + "/unRelieveUser";
+  }
+  $.ajax({
+    type: "GET",
+    url: url,
+    data: {
+      authToken: token,
+      userId: userId
+    },
+    dataType: "json",
+    success: function (res) {
+      if (res.code == 0) {
+        userList(pageNum);
+      }
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
   var token = sessionStorage.getItem("token");
   if (isLock == 0){
     var url = APP_URL + "/stopUser";
@@ -68,8 +94,8 @@ function operate(isLock,userId){
         },
         dataType: "json",
         success: function (res) {
-          if(res.code==0){
-                userList();
+          if(res.code == 0){
+              userList(pageNum);
             }
         },
         error: function (err) {
@@ -77,3 +103,10 @@ function operate(isLock,userId){
         }
     });
 }
+//点击搜索按钮
+$('#search_btn').live('click',function () {
+  var phone = $('#search_phone').val();
+  var name = $('#search_name').val();
+  var Id = $('#search_Id').val();
+  userList(1,phone,name,Id);
+})

@@ -15,15 +15,16 @@
 <a class="navbar-brand" href="#">人员管理</a>
 </div>
 <div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteUser','GET','userId')"><i class="fas fa-trash-alt"></i> 删除</button>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/console/userDelete','GET','id')"><i class="fas fa-trash-alt"></i> 删除</button>
 <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddPersonnel/index.html')"><i class="fas fa-edit"></i> 修改</button>
 <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddPersonnel/index.html')"><iclass="fa fa-plus" aria-hidden="true"></i> 新建</button>
-<form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
+<div class="navbar-form navbar-right listSearch">
 <div class="form-group">
-<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
+<span style="vertical-align: middle;">角色名称:</span>
+<input name="keyWord" type="text" class="form-control" id="search_roleName" placeholder="请输入关键词进行搜索">
 </div>
-<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-</form>    
+<button id="search_btn" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+</div>    
 </div>
 </nav>
 

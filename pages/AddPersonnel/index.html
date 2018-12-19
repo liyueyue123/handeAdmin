@@ -23,6 +23,7 @@
     <form class="addForm" id="form1" name="form1" action="" enctype="multipart/form-data">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tbody>
+          <input type="text" hidden id='id'>
           <tr>
             <td align="center">姓名</td>
             <td><input type="text" name="name" id="name" class="form-control" datatype="*" nullmsg="请输入人员姓名"
@@ -67,7 +68,7 @@
             <td>&nbsp;</td>
             <td>
               <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-check" aria-hidden="true"></i>
-                添加</button>
+                <span id="changeTxt">添加</span></button>
               <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i>
                 取消</button>
             </td>
