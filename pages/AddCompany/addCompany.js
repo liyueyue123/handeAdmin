@@ -164,6 +164,10 @@ function showDetails(id) {
                 $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
                 $("#company_account").val(data.account); //账号
                 $("#company_password").val(data.password); //密码
+                // 点击密码时值为空
+                $("#company_password").focus(function () {
+                    $(this).val("");
+                });
                 $("#company_name").val(data.companyname); //公司名称
                 $("#company_user").val(data.principalName); //负责人姓名
                 if (data.dreTelephone.length > 0) {
@@ -188,7 +192,7 @@ function showDetails(id) {
                 cityList(data.provinceid, data.cityid); //获取城市 
                 districtList(data.cityid, data.districtid); //获取地区
                 $("#company_address").val(data.address); //详细地址
-                // $("#overTime").val(moment(data.deadline).format("YYYY年MM月DD日"));  //截止时间
+                $("#overTime").val(moment(data.deadline).format("YYYY/MM/DD HH:mm")); //截止时间
                 $("#company_num").val(data.lastAccountCount); //最终账号数量
                 editCompany(); //编辑公司
             }

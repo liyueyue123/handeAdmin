@@ -1,18 +1,37 @@
 $(function () {
     companyList(1); //公司列表
+    $("#searchBtn").click(function () {
+        companyList(1);
+    });
 });
 
 // 获取公司列表
 function companyList(pageNum) {
     var token = sessionStorage.getItem("token");
+    var city = $("#citySearch").val(); //地区
+    var openTime = $("#openTime").val(); //开户时间
+    var overTime = $("#overTime").val(); //截止时间
+    var status = $("#status option:selected").val(); //状态
+    var data = {};
+    data.authToken = token;
+    data.limit = 10;
+    data.page = pageNum;
+    if (city) {
+        data.address = city;
+    }
+    if (openTime) {
+        data.opentimeStart = openTime;
+    }
+    if(overTime){
+        data.deadlineStart=overTime;
+    }
+    if(status){
+        data.status=status;
+    }
     $.ajax({
         type: "GET",
         url: APP_URL + "/companyList",
-        data: {
-            authToken: token,
-            limit: 10,
-            page: pageNum
-        },
+        data: data,
         dataType: "json",
         success: function (res) {
             console.log(res);
@@ -26,7 +45,7 @@ function companyList(pageNum) {
                         <td>${pages+(index+1)}</td>
                         <td>${val.id}</td>
                         <td>${val.status==1?'使用中':val.status==2?'已到期':val.status==3?'已冻结':''}</td>
-                        <td>${val.province}</td>
+                        <td>${val.province}${val.city}${val.area}</td>
                         <td>${val.address}</td>
                         <td>${val.companyname}</td>
                         <td class="sortTD" name="Case">${val.principalName}</td>

@@ -27,32 +27,21 @@
                 修改</button>
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i
                     class="fa fa-plus" aria-hidden="true"></i> 新建</button>
-            <form class="navbar-form navbar-right listSearch" role="search" method="get" action="">
+            <form class="navbar-form navbar-right listSearch" role="search">
 
                 <div class="form-group">
-                    <select class="form-control" name="moduleType">
-                        <option value="" selected="">---请选择所在地区---</option>
-                        <option value="=0">地区一</option>
-                        <option value="<>0">地区二</option>
-                    </select>
-                    <select class="form-control" name="parent_id">
-                        <option value="61">---请选择开户时间---</option>
-                        <option value="70">个人中心</option>
-                        <option value="79">退款管理</option>
-                    </select>
-                    <select class="form-control" name="parent_id">
-                        <option value="61">---请选择截止时间---</option>
-                        <option value="70">个人中心</option>
-                        <option value="79">退款管理</option>
-                    </select>
-                    <select class="form-control" name="parent_id">
-                        <option value="61">状态</option>
-                        <option value="70">个人中心</option>
-                        <option value="79">退款管理</option>
+                    <input id="citySearch" type="text" class="form-control" placeholder="输入所在地区进行搜索">
+                    <input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间进行搜索" />
+                    <input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="选择截止时间进行搜索" />
+                    <select class="form-control" name="parent_id" id="status">
+                        <option value="">选择状态进行搜索</option>
+                        <option value="1">使用中</option>
+                        <option value="2">已到期</option>
+                        <option value="3">已冻结</option>
                     </select>
                 </div>
                 <!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入编号搜索"> -->
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+                <button type="button" class="btn btn-primary" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
             </form>
         </div>
     </nav>
@@ -80,19 +69,19 @@
             <tbody>
 
                 <!-- <tr>
-                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
-                    <td>< {$vo.id}></td>
-                    <td>< {$vo.title}></td>
-                    <td>< {$vo.customerName}></td>
-                    <td>< {$vo.caseTypeName}></td>
-                    <td>< {$vo.caseLabel}></td>
-                    <td>< {$vo.addTime}></td>
-                    <td class="sortTD" name="Case">< {$vo.sort}></td>
-                    <td>< {$vo.customerName}></td>
-                    <td>< {$vo.caseTypeName}></td>
-                    <td>< {$vo.caseLabel}></td>
-                    <td>< {$vo.addTime}></td>
-                    <td>< {$vo.addTime}></td>
+                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr> -->
 
             </tbody>
@@ -111,5 +100,17 @@
     </ul>
 
 </body>
+<script>
+    $(".form_datetime").datetimepicker({
+        format: 'yyyy/mm/dd hh:ii', //显示格式
+        todayHighlight: 1, //今天高亮
+        minTime: '10',
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        autoclose: 1 //选择后自动关闭
+    });
+</script>
+
 
 </html>

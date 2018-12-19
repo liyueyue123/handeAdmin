@@ -45,22 +45,7 @@ function ajax(obj) {
         var phones = arr.toString();
         $("#formPhones").val(phones);
       }
-      //新增角色，处理多选菜单项
-      // var checkBox = $("input[name=menuIds]:checked");
-      // $.each(checkBox, function () { 
-      //    console.log($(this).val());
-      // });
-      // if ($(".menuCheckBox").length != "") {
-      //   var menuCheck = [];
-      //   $.each($(".menuCheckBox"), function (index, val) {
-      //     if (val.checked) {
-      //       menuCheck.push(val.value);
-      //     }
-      //   });
-      //   var menuIds = menuCheck.join(",");
-      //   $("#formMenuIds").val(menuIds);
-      //   console.log($("#formMenuIds").val());
-      // }
+      $("#roles").val();
       $.showLoading('正在提交……');
     },
     success: function (res) { //表单提交成功回调函数
@@ -129,7 +114,7 @@ function deleteData(table, method, id) {
   $("input[name=del_listID]:checked").each(function () {
     delID.push($(this).val());
   });
-  var data = {};;
+  var data = {};
   var a = id;
   var b = delID.toString();
   var data = {}
@@ -192,7 +177,7 @@ function getPage(count, list, pageNum) {
     num++;
     if (num <= sum) {
       test(list, num);
-    }else{
+    } else {
       return;
     }
   });

@@ -7,15 +7,15 @@ function businessList() {
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
-    url: APP_URL + "/opportunityList",
+    url: APP_URL + "/console/opportunityList",
     data: {
-      token: token,
-      limit:10,
-      page:1
+      authToken: token,
+      limit: 10,
+      page: 1
     },
     dataType: "json",
     success: function (res) {
-      console.log('businessList',res);
+      console.log('businessList', res);
       var data = res.data;
       var str = '';
       $.each(data, function (index, val) {
@@ -43,9 +43,9 @@ function businessList() {
 }
 
 //点击查看详情
-$('#search_details').live('click',function(e){
+$('#search_details').live('click', function (e) {
   // console.log('id',e.target.dataset.id)
   var id = e.target.dataset.id;
   var index = e.target.dataset.index;
-  openAddData('../BusinessDetail/index.html?id='+id+'&index='+index)
+  openAddData('../BusinessDetail/index.html?id=' + id + '&index=' + index)
 })

@@ -1,19 +1,39 @@
 $(function () {
     getCustomerList(1); //获取客户列表
     companyList(); //获取公司列表
+    // 关键字搜索
+    $("#searchBtn").click(function () {
+        getCustomerList(1);
+    });
 });
 
 //获取客户列表
 function getCustomerList(pageNum) {
     var token = sessionStorage.getItem("token");
+    // var id = $("#IdKeyWord").val(); //id
+    var name = $("#NameKeyWord").val(); //客户名称
+    var company = $("#companySelect option:selected").val(); //公司名称
+    var position = $("#PositonKeyWord").val(); //职位
+    var data = {};
+    data.authToken = token;
+    data.limit = 10;
+    data.page = pageNum;
+    if (position) {
+        data.position = position;
+    }
+    if (company) {
+        data.company = company;
+    }
+    // if (id) {
+    //     data.id = id;
+    // }
+    if (name) {
+        data.customerName = name
+    }
     $.ajax({
         type: "POST",
         url: APP_URL + "/customerList",
-        data: {
-            authToken: token,
-            limit: 10,
-            page: pageNum
-        },
+        data: data,
         dataType: "json",
         success: function (res) {
             console.log(res);
@@ -62,9 +82,9 @@ function companyList() {
             console.log(res);
             var data = res.data;
             var str = "";
-            str += `<option value="" selected="">输入公司进行搜索</option>`;
+            str += `<option value="" selected="">选择公司进行搜索</option>`;
             $.each(data, function (index, val) {
-                str += `<option value="${val.id}">${val.companyname}</option>`;
+                str += `<option value="${val.companyname}">${val.companyname}</option>`;
             });
             $("#companySelect").html(str);
         },

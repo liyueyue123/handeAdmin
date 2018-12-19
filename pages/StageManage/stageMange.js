@@ -3,7 +3,7 @@ $(function () {
 });
 
 // 阶段管理  
-function stageList(pageNum) {
+function stageList() {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -28,6 +28,12 @@ function stageList(pageNum) {
                  `;
             });
             $(".list-box tbody").html(str);
+            var pages = "";
+            pages += ` 
+                <li><a>共${data.length}条记录</a></li>
+                <li><a>第1页/共1页</a></li>
+            `;
+            $(".pagination").html(pages);
         }
     });
 }

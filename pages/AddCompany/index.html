@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/rightCommon.css">
     <link rel="stylesheet" href="./addCompany.css">
     <script src="./addCompany.js"></script>
+    <script src="/js/moment.js"></script>
 </head>
 
 <body>
@@ -89,12 +90,12 @@
                             <input type="text" name="openaccounttime" id="startTime" value="" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择开户日期" placeholder="请选择开户日期" style="width:33.03%"/>
                         </td>
                     </tr> -->
-                    <!-- <tr>
+                    <tr>
                         <td align="center">截止时间</td>
                         <td>
                             <input type="text" name="deadline" value="" id="overTime" class="form-control jcDate form_datetime dataInput" datatype="*" nullmsg="请选择截止日期" placeholder="请选择截止日期" style="width:33.03%"/>
                         </td>
-                    </tr> -->
+                    </tr>
                     <tr>
                         <td align="center">最终账号数量</td>
                         <td><input type="number" name="lastAccountCount" id="company_num" value="" class="form-control" datatype="*" nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"/></td>
@@ -116,7 +117,7 @@
 </body>
 <script>
     $(".form_datetime").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',//显示格式
+        format: 'yyyy/mm/dd hh:ii',//显示格式
         todayHighlight: 1,//今天高亮
         startDate:new Date(), //设置开始时间
         minTime: '10',

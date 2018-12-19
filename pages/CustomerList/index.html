@@ -1,72 +1,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>用户管理</title>
-<script src="/js/load.js"></script>
-<link rel="stylesheet" href="/css/rightCommon.css">
-<script src="./customerList.js"></script>
-<script src="/js/moment.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>用户管理</title>
+	<script src="/js/load.js"></script>
+	<link rel="stylesheet" href="/css/rightCommon.css">
+	<script src="./customerList.js"></script>
+	<script src="/js/moment.js"></script>
 </head>
 
 <body>
 
-<nav class="navbar navbar-default" role="navigation">
-<div class="navbar-header">
-<a class="navbar-brand" href="#">客户信息管理</a>
-</div>
-<div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/customerDel','GET','Id')"><i class="fas fa-trash-alt"></i> 删除</button>
-<!-- <button type="button" class="btn btn-info navbar-btn listButton" onclick="javascript:window.location.href='__URL__/importCustomer'"><i class="fa fa-sign-in" aria-hidden="true"></i> 查看</button> -->
-<!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addCustomer')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
-<form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
-<div class="form-group">
-	<!-- <select class="form-control" name="moduleType">
-		<option value="" selected="">日期</option>
-		<option value="=0">1</option>
-	</select>
-	<select class="form-control" name="moduleType">
-		<option value="" selected="">ID</option>
-		<option value="=0">1</option>
-	</select> -->
-	<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入姓名进行搜索"/>
-	<select class="form-control" name="moduleType" id="companySelect">
-		<option value="" selected="">输入公司进行搜索</option>
-		<option value="">1</option>
-	</select>
-	<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入职位进行搜索"/>
-	<!-- <select class="form-control" name="moduleType">
-		<option value="" selected="">职位</option>
-		<option value="">1</option>
-	</select> -->
-<!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索"> -->
-</div>
-<button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-</form>    
-</div>
-</nav>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">客户信息管理</a>
+		</div>
+		<div>
+			<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/customerDel','GET','Id')"><i
+				 class="fas fa-trash-alt"></i> 删除</button>
+			<form class="navbar-form navbar-right listSearch" role="search">
+				<div class="form-group">
+					<!-- <input type="text" class="form-control" id="IdKeyWord" placeholder="可输入ID进行搜索" /> -->
+					<input type="text" class="form-control" id="NameKeyWord" placeholder="输入姓名进行搜索" />
+					<select class="form-control" name="moduleType" id="companySelect">
+						<option value="" selected="">选择公司进行搜索</option>
+						<option value="">1</option>
+					</select>
+					<input type="text" class="form-control" id="PositonKeyWord" placeholder="输入职位进行搜索" />
+				</div>
+				<button type="button" id="searchBtn" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+			</form>
+		</div>
+	</nav>
 
-<div class="list-box">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<thead>
-<tr>
-<th>选择</th>
-<th>序号</th>
-<th>ID</th>
-<th>名片照片</th>
-<th>姓名</th>
-<th>性别</th>
-<th>职位</th>
-<th>公司</th>
-<th>计划成单日期</th>
-<th>联系方式</th>
-<th>信息来源</th>
-<th>添加时间</th>
-<th>操作</th>
-</tr>
-</thead>
-<tbody>
-<!-- <tr>
+	<div class="list-box">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>选择</th>
+					<th>序号</th>
+					<th>ID</th>
+					<th>名片照片</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>职位</th>
+					<th>公司</th>
+					<th>计划成单日期</th>
+					<th>联系方式</th>
+					<th>信息来源</th>
+					<th>添加时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
 <td></td>
 <td></td>
@@ -81,13 +69,13 @@
 <td><a class="btn btn-success navbar-btn" href="#">详情</a></td>
 </tr> -->
 
-</tbody>
-</table>
+			</tbody>
+		</table>
 
-</div>
+	</div>
 
-<ul class="pagination">
-	<!-- <li class="active"><a href="#">1</a></li>
+	<ul class="pagination">
+		<!-- <li class="active"><a href="#">1</a></li>
 	<li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
 	<li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
 	<li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
@@ -95,7 +83,8 @@
 	<li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
 	<li><a>共44条记录</a></li>
 	<li><a>第1页/共5页</a></li> -->
-</ul>
+	</ul>
 
 </body>
+
 </html>
