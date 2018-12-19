@@ -16,9 +16,6 @@ function companyList(pageNum) {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            // if (e) {
-            //     $(e).addClass("active").siblings("li").removeClass("active");
-            // }
             var data = res.data;
             var str = "";
             $.each(data, function (index, val) {

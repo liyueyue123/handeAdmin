@@ -4,7 +4,7 @@ $(function () {
 });
 
 //获取客户列表
-function getCustomerList(pageNum, e) {
+function getCustomerList(pageNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "POST",
@@ -17,9 +17,6 @@ function getCustomerList(pageNum, e) {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            if (e) {
-                $(e).addClass("active").siblings("li").removeClass("active");
-            }
             var data = res.data;
             var str = "";
             $.each(data, function (index, val) {
