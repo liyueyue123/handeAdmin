@@ -40,7 +40,7 @@ function getCustomerList(pageNum) {
                  `;
             });
             $(".list-box>table>tbody").html(str);
-            getPage(res.count, 'getCustomerList',pageNum); //分页
+            getPage(res.count, 'getCustomerList', pageNum); //分页
         },
         error: function (err) {
             console.log(err);
