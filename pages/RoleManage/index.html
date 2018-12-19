@@ -1,64 +1,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>角色管理</title>
-<script src="/js/load.js"></script>
-<link rel="stylesheet" href="/css/rightCommon.css">
-<script src="/js/moment.js"></script>
-<script src="./roleManage.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>角色管理</title>
+    <script src="/js/load.js"></script>
+    <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="/js/moment.js"></script>
+    <script src="./roleManage.js"></script>
+    <script>
+        $.closeLoading();
+    </script>
 </head>
 
 <body>
 
-<nav class="navbar navbar-default" role="navigation">
-<div class="navbar-header">
-<a class="navbar-brand" href="#">角色管理</a>
-</div>
-<div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRole','POST','roleId')"><i class="fas fa-trash-alt"></i> 删除</button>
-<button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddRole/index.html')"><i class="fas fa-edit"></i> 修改</button>
-<button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddRole/index.html')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
-   
-</div>
-</nav>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">角色管理</a>
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRole','POST','roleId')"><i
+                    class="fas fa-trash-alt"></i> 删除</button>
+            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddRole/index.html')"><i
+                    class="fas fa-edit"></i> 修改</button>
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddRole/index.html')"><i
+                    class="fa fa-plus" aria-hidden="true"></i> 新建</button>
 
-<div class="list-box">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<thead>
-<tr>
-<th>选择</th>
-<th>序号</th>
-<th>名称</th>
-<th>创建时间</th>
-<th>当前使用此角色的人数</th>
-</tr>
-</thead>
-<tbody>
+        </div>
+    </nav>
 
-<!-- <tr>
+    <div class="list-box">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>序号</th>
+                    <th>名称</th>
+                    <th>创建时间</th>
+                    <th>当前使用此角色的人数</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value=""/></td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr> -->
-</tbody>
-</table>
+            </tbody>
+        </table>
 
-</div>
+    </div>
 
 
-<ul class="pagination">
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">下一页</a></li>
-    <li><a>共44条记录</a></li>
-    <li><a>第1页/共5页</a></li>
-</ul>
+    <ul class="pagination">
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">下一页</a></li>
+        <li><a>共44条记录</a></li>
+        <li><a>第1页/共5页</a></li>
+    </ul>
 
 </body>
+
 </html>

@@ -46,17 +46,21 @@ function ajax(obj) {
         $("#formPhones").val(phones);
       }
       //新增角色，处理多选菜单项
-      if ($(".menuCheckBox").length != "") {
-        var menuCheck = [];
-        $.each($(".menuCheckBox"), function (index, val) {
-          if (val.checked) {
-          menuCheck.push(val.value);
-          }
-        });
-        var menuIds = menuCheck.join(',');
-        $("#formMenuIds").val(menuIds);
-        console.log($("#formMenuIds").val());
-      }
+      // var checkBox = $("input[name=menuIds]:checked");
+      // $.each(checkBox, function () { 
+      //    console.log($(this).val());
+      // });
+      // if ($(".menuCheckBox").length != "") {
+      //   var menuCheck = [];
+      //   $.each($(".menuCheckBox"), function (index, val) {
+      //     if (val.checked) {
+      //       menuCheck.push(val.value);
+      //     }
+      //   });
+      //   var menuIds = menuCheck.join(",");
+      //   $("#formMenuIds").val(menuIds);
+      //   console.log($("#formMenuIds").val());
+      // }
       $.showLoading('正在提交……');
     },
     success: function (res) { //表单提交成功回调函数
@@ -101,7 +105,7 @@ function openAddData(src) {
 function editData(src) {
   var checkBox = $("input[name=del_listID]:checked");
   var checkBoxVal = checkBox.val();
-  
+
   if (checkBox.length == 1) {
     window.location.href = src + '?id=' + checkBoxVal;
   } else if (checkBox.length > 1) {
@@ -115,66 +119,6 @@ function editData(src) {
       content: '请至少选中一条数据！'
     });
   }
-}
-
-//编辑数据页面加载数据
-function getEditData(callback) {
-  // var table = $('form.addForm').attr('data-table');
-  // var isD = $('form.addForm').attr('data-d');
-  // var editID = $("input#id").val();
-  // if (editID != '') {
-  //   if (typeof (table) == 'undefined') {
-  //     $.show({
-  //       title: '错误提示',
-  //       content: '缺少必要的id或表名，请检查form表单是否设置了自定属性data-table',
-  //       closeCallback: function () {
-  //         window.history.back();
-  //       }
-  //     });
-  //     return false;
-  //   }
-  //   $.showLoading('正在加载……');
-  //   $("#changeTitle").html('编辑');
-  //   $("#saveButton").html('<i class="fa fa-floppy-o"></i> 保存');
-  //   $.ajax({
-  //       url: APP + '/Common/getEditDate',
-  //       type: 'POST',
-  //       data: {
-  //         table: table,
-  //         id: editID,
-  //         isD: isD
-  //       }
-  //     })
-  //     .done(function (data) {
-  //       var jdata = data[0];
-  //       $("form.addForm input[type!=checkbox],textarea,select").each(function (index, element) {
-  //         var thisIdName = $(this).attr("id");
-  //         $("#" + thisIdName).val(eval("jdata." + thisIdName));
-  //       });
-  //       $.closeLoading();
-  //       if (typeof callback === "function") {
-  //         callback(jdata);
-  //       }
-  //     })
-  //     .fail(function (err) {
-  //       $.closeLoading();
-  //       $.show({
-  //         title: '错误提示',
-  //         content: '程序发生了不可预见的错误，点击关闭显示详细错误信息',
-  //         closeCallback: function () {
-  //           window.history.back();
-  //           var errHtml = err.responseText;
-  //           var errWin = window.open('about:blank');
-  //           errWin.document.write(errHtml);
-  //           errWin.document.close();
-  //         }
-  //       });
-  //     })
-  //     .always(function () {
-  //       //console.log("complete");
-  //     });
-  // }
-  //opt.callback();
 }
 
 
