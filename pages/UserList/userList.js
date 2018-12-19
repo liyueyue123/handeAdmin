@@ -1,27 +1,29 @@
 $(function () {
-  userList();
+  userList(1);
 });
-function userList(){
+
+function userList(pageNum){
   var token = sessionStorage.getItem("token");
-  console.log(token)
+  // console.log(token)
   $.ajax({
     type: "GET",
     url: APP_URL + "/user/all",
     data: {
       authToken: token,
       limit: 10,
-      page: 1
+      page: pageNum
     },
     dataType: "json",
     success: function (res) {
       console.log('userList',res);
       var data = res.data;
       var str = "";
+      var pages = 10 * (pageNum - 1);
       $.each(data, function (index, val) {
         str += `
           <tr>
             <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
-            <td>${index+1}</td>
+            <td>${pages+(index+1)}</td>
             <td>${val.id}</td>
             <td>${val.name}</td>
             <td><a href="javascript:;">${val.phone}</a></td>
@@ -40,6 +42,10 @@ function userList(){
         `;
       });
       $(".userList").html(str);
+      getPage(res.count, 'userList', pageNum); //分页
+    },
+    error:function(err){
+      console.log(err);
     }
   });
 };

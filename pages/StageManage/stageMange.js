@@ -1,9 +1,9 @@
 $(function () {
-    stageList(); //阶段列表
+    stageList(1); //阶段列表
 });
 
 // 阶段管理  
-function stageList() {
+function stageList(pageNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -14,6 +14,7 @@ function stageList() {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            // var pages = 10 * (pageNum - 1);
             var str = "";
             var data = res.data;
             $.each(data, function (index, val) {
