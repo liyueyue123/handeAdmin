@@ -23,6 +23,7 @@
         <form class="addForm" id="form1" name="form1" action="">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
+                    <input type="text" hidden name='id' id='user_id' value=''>
                     <tr>
                         <td align="center">登录名</td>
                         <td><input type="text" name="loginname" id="user_loginname" class="form-control" axjaurl="" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！" nullmsg="请输入用户登录名" placeholder="请输入用户登录名"></td>
@@ -41,8 +42,8 @@
                     <tr>
                         <td align="center">性别</td>
                         <td>
-                            <input type="radio" value="男" name="gender" class='gender' checked/>男
-                            <input type="radio" value="女" name="gender" class='gender'/>女
+                            <input type="radio" value="男" name="gender" id='man' checked/>男
+                            <input type="radio" value="女" name="gender" id='woman'/>女
                         </td>
                     </tr>
                     

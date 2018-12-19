@@ -9,7 +9,7 @@ function businessList() {
     type: "GET",
     url: APP_URL + "/opportunityList",
     data: {
-      authToken: token,
+      token: token,
       limit:10,
       page:1
     },

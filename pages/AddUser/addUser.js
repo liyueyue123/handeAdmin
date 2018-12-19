@@ -25,18 +25,25 @@ function getUserInfo(id){
     success: function (res) {
       console.log('uerInfo',res)
       var data = res.data;
+      $('#user_id').val(data.id)
       $("#user_loginname").val(data.loginname);
       $("#user_name").val(data.name);
-      // $("#user_passwd").val(data.passwd);
-      // $("#user_passwd").attr({
-      //   "disabled" : true
-      // });
-      $(".gender").val(data.gender);
+      $("#user_passwd").val(data.passwd);
+      if(data.gender == '女'){
+        var gender = 'woman'
+      }else{
+        var gender = 'man'
+      }
+      $("#"+gender).attr('checked',true);
       $("#user_phone").val(data.phone);
       $("#user_wechat").val(data.wechat);
-      // $("#icon-image").attr({
-        //   'src':
-        // });
+      $("#icon-image").find("img").attr({
+        "src": data.icon
+      })
+      // 显示头像
+      $('#icon-image').show();
+      $('#icon').val(data.icon.slice(23, data.icon.length));
+      // console.log(data.icon.slice(23, data.icon.length))
       $("#user_email").val(data.email);
       $("#company").find("option[value=" + data.company + "]").attr("selected", true);
       //获取部门的下拉选框
@@ -46,7 +53,10 @@ function getUserInfo(id){
   });
 }
 
-
+//当点击密码框的时候清空
+$('#user_passwd').focus(function(){
+  this.value=''
+})
 
 // 隐藏空白头像
 $('#icon-image').hide();
