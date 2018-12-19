@@ -6,8 +6,10 @@ $(function () {
   var id = arr[1];
   if(id != undefined){
     $('.addForm').attr('action', APP_URL + "/editUser");
-    $('#changeTitle').text('修改')
-    $('#changeTxt').text('修改')
+    $('#changeTitle').text('修改');
+    $('#changeTxt').text('修改');
+    $('#changeTxt').prev().removeClass("fa-check");
+    $('#changeTxt').prev().addClass("fa-save");
     getUserInfo(id) 
   }else{
     $('.addForm').attr('action', APP_URL + "/register");
@@ -38,13 +40,15 @@ function getUserInfo(id){
       $("#"+gender).attr('checked',true);
       $("#user_phone").val(data.phone);
       $("#user_wechat").val(data.wechat);
-      $("#icon-image").find("img").attr({
-        "src": data.icon
-      })
-      // 显示头像
-      $('#icon-image').show();
-      $('#icon').val(data.icon.slice(23, data.icon.length));
-      // console.log(data.icon.slice(23, data.icon.length))
+      if (data.icon.length>30){
+        $("#icon-image").find("img").attr({
+          "src": data.icon
+        })
+        // 显示头像
+        $('#icon-image').show();
+        $('#icon').val(data.icon.slice(23, data.icon.length));
+        // console.log(data.icon.slice(23, data.icon.length))
+      }
       $("#user_email").val(data.email);
       $("#company").find("option[value=" + data.company + "]").attr("selected", true);
       //获取部门的下拉选框

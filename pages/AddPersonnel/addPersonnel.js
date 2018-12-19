@@ -1,5 +1,59 @@
 $(function () {
-$('.addForm').attr('action', APP_URL + "/console/addConsoleUser");
+  var url = window.location.href; //首先获取到你的URL地址;
+  var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
+  var id = arr[1];
+  console.log(id)
+  if (id != undefined) {
+    $('.addForm').attr('action', APP_URL + "/console/addConsoleUser");
+    $('#changeTitle').text('修改')
+    $('#changeTxt').text('修改')
+    $('#changeTxt').prev().removeClass("fa-check");
+    $('#changeTxt').prev().addClass("fa-save");
+    getPersonnelInfo(id)
+  } else {
+    $('.addForm').attr('action', APP_URL + "/console/update");
+  }
+})
+
+function getPersonnelInfo(id) {
+  var token = sessionStorage.getItem("token");
+  $.ajax({
+    type: "GET",
+    url: APP_URL + "/console/userDetails",
+    data: {
+      authToken: token,
+      id: id
+    },
+    dataType: "json",
+    success: function (res) {
+      console.log('personnelInfo', res)
+      var data = res.data;
+      $('#id').val(data.id) //注意
+      $("#name").val(data.name);
+      $("#roleid").find("option[value=" + data.roleid+ "]").attr("selected", true);
+      $("#account").val(data.account);
+      $("#business_passwd").val(data.password);
+      if (data.iconurl.length != 0){
+        $("#icon-image").find("img").attr({
+          "src": APP_IMAGE_URL + data.iconurl
+        })
+        // 显示头像
+        $('#icon-image').show();
+        $('#icon-image').val(data.iconurl);
+        // console.log(data.icon.slice(23, data.icon.length))
+      }
+      $("#account").attr({'name':''});
+      $("#account").attr({'disabled':'disabled'});
+    }
+  });
+}
+
+
+//当点击密码框的时候清空
+$('#business_passwd').focus(function(){
+  this.value=''
+})
+
 
 // 隐藏空白头像
 $('#icon-image').hide();
@@ -97,4 +151,3 @@ function uploadImg(tag) {
       window.location.href = '../PersonnelManage/index.html'
     }
   })
-})

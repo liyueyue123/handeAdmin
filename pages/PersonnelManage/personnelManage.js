@@ -2,7 +2,7 @@ $(function () {
   personnelManageList(1);
 });
 
-function personnelManageList(pageNum) {
+function personnelManageList(pageNum, roleName) {
   $.ajax({
     type: "GET",
     url: APP_URL + "/console/user/all",
@@ -10,6 +10,7 @@ function personnelManageList(pageNum) {
       authToken: token,
       limit: 10,
       page: pageNum,
+      roleName: roleName
     },
     dataType: "json",
     success: function (res) {
@@ -39,7 +40,7 @@ function personnelManageList(pageNum) {
             <td>${val.password}</td>
             <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
             <td>${lasrlogintime}</td>
-            <td><a class="btn ${val.status==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.status},${val.id})">${val.status == 0 ?"禁用":"启用"}</a></td>
+            <td><a class="btn ${val.status==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.status},${val.id},${pageNum})">${val.status == 0 ?"禁用":"启用"}</a></td>
             </tr>
           `;
       });
@@ -50,25 +51,24 @@ function personnelManageList(pageNum) {
 }
 
 //停用用户
-function operate(status, userId) {
+function operate(status, userId, pageNum) {
   var token = sessionStorage.getItem("token");
   if (status == 0) {
-    console.log(status)
     var url = APP_URL + "/console/stopUser";
   } else {
-    // var url = APP_URL + "/unRelieveUser";
+    var url = APP_URL + "/console/useUser";
   }
   $.ajax({
     type: "GET",
     url: url,
     data: {
       authToken: token,
-      userId: userId
+      id: userId
     },
     dataType: "json",
     success: function (res) {
       if (res.code == 0) {
-        personnelManageList();
+        personnelManageList(pageNum);
       }
     },
     error: function (err) {
@@ -76,3 +76,9 @@ function operate(status, userId) {
     }
   });
 }
+
+//点击搜索按钮
+$('#search_btn').live('click', function () {
+  var roleName = $('#search_roleName').val();
+  personnelManageList(1, roleName);
+})
