@@ -1,7 +1,9 @@
 $(function () {
-    getCustomerList();
+    getCustomerList(); //获取客户列表
+    companyList(); //获取公司列表
 });
 
+//获取客户列表
 function getCustomerList() {
     var token = sessionStorage.getItem("token");
     $.ajax({
@@ -17,10 +19,10 @@ function getCustomerList() {
             console.log(res);
             var data = res.data;
             var str = "";
-            $.each(data, function (index, val) { 
-                 str +=`
+            $.each(data, function (index, val) {
+                str += `
                  <tr>
-                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" /></td>
+                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
                     <td>${val.id}</td>
                     <td></td>
                     <td>${val.customerName}</td>
@@ -37,7 +39,33 @@ function getCustomerList() {
             });
             $(".list-box>table>tbody").html(str);
         },
-        error:function(err){
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+// 获取公司列表
+function companyList() {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/companySelect",
+        data: {
+            authToken: token
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            var data = res.data;
+            var str = "";
+            str += `<option value="" selected="">输入公司进行搜索</option>`;
+            $.each(data, function (index, val) {
+                str +=`<option value="${val.id}">${val.companyname}</option>`;
+            });
+            $("#companySelect").html(str);
+        },
+        error: function (err) {
             console.log(err);
         }
     });

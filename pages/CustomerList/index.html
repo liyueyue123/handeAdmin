@@ -16,32 +16,30 @@
 <a class="navbar-brand" href="#">客户信息管理</a>
 </div>
 <div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/customerDel','GET','Id')"><i class="fas fa-trash-alt"></i> 删除</button>
 <!-- <button type="button" class="btn btn-info navbar-btn listButton" onclick="javascript:window.location.href='__URL__/importCustomer'"><i class="fa fa-sign-in" aria-hidden="true"></i> 查看</button> -->
 <!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addCustomer')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
 <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
 <div class="form-group">
-	<select class="form-control" name="moduleType">
+	<!-- <select class="form-control" name="moduleType">
 		<option value="" selected="">日期</option>
 		<option value="=0">1</option>
 	</select>
 	<select class="form-control" name="moduleType">
 		<option value="" selected="">ID</option>
 		<option value="=0">1</option>
+	</select> -->
+	<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入姓名进行搜索"/>
+	<select class="form-control" name="moduleType" id="companySelect">
+		<option value="" selected="">输入公司进行搜索</option>
+		<option value="">1</option>
 	</select>
-	<select class="form-control" name="moduleType">
-		<option value="" selected="">姓名</option>
-		<option value="=0">1</option>
-	</select>
-	<select class="form-control" name="moduleType">
-		<option value="" selected="">公司</option>
-		<option value="=0">1</option>
-	</select>
-	<select class="form-control" name="moduleType">
+	<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入职位进行搜索"/>
+	<!-- <select class="form-control" name="moduleType">
 		<option value="" selected="">职位</option>
-		<option value="=0">1</option>
-	</select>
-<input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
+		<option value="">1</option>
+	</select> -->
+<!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索"> -->
 </div>
 <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
 </form>    
@@ -70,34 +68,23 @@
 <tbody>
 <!-- <tr>
 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="<{$vo.id}>" /></td>
-<td><{$vo.id}></td>
-<td><{$vo.reName}></td>
-<td><a href="__URL__/viewCustomer/id/<{$vo.id}>">查看电话</a></td>
-<td><{$vo.staffName}></td>
-<td>
-<switch name="vo.status">
-	<case value="0"><font color="#d9534f">无效客户</font></case>
-	<case value="1"><font color="#428bca">未沟通</font></case>
-	<case value="2"><font color="#5cb85c">跟进中</font></case>
-	<case value="3"><font color="#5bc0de">潜在客户</font></case>
-	<case value="4"><font color="#000000">已签约</font></case>
-</switch>	
-</td>
+<td></td>
+<td></td>
+<td><a href="#">查看电话</a></td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
-<td width="30%" title="<{$vo['beizhu'][0]['desc']}>" style="cursor: pointer;"><{$vo['beizhu'][0]['desc']|msubstr=0,20}></td>
-<td><a class="btn btn-success navbar-btn" href="/manage.php/Album/albumDetail?album_id=2362">详情</a></td>
+<td></td>
+<td></td>
+<td width="30%" style="cursor: pointer;"></td>
+<td><a class="btn btn-success navbar-btn" href="#">详情</a></td>
 </tr> -->
 
 </tbody>
 </table>
 
 </div>
-
-
-
 
 <ul class="pagination">
 	<li class="active"><a href="#">1</a></li>

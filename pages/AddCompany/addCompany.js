@@ -7,7 +7,7 @@ $(function () {
             str += `
             <li class="pro-section">
                 <div class="input-group">
-                    <input type="text" class="form-control formPhone" id="attrPhone" placeholder="请输入电话号码">
+                    <input type="text" class="form-control formPhone" placeholder="请输入电话号码">
                 </div> 
                 <button type="button" class="btn btn-danger pro-removeSection"><i class="fa fa-minus" aria-hidden="true"></i> 移除电话</button>
             </li> 
@@ -22,16 +22,15 @@ $(function () {
     getAllProvinces(); //获取省份
     getCity(); //获取市
     getArea(); //获取所在区
-    showDetails(13);
     var url = window.location.href;
     if (url.indexOf("=") == -1) {
         $(".addForm").attr("action", APP_URL + "/addCompany");
+        $("#companyId").val("");
         // $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");  //验证账号是否重复
         addCompany(); //新增公司
     } else {
         var id = url.split("=")[1];
         showDetails(id); //显示公司详情
-        // getEditData('/editCompany',id,);  //编辑公司详情
     }
 
 
@@ -97,6 +96,7 @@ function getCity() {
     $("#allCity").html(str1);
 }
 
+
 // 获取所在区
 function getArea() {
     var token = sessionStorage.getItem("token");
@@ -156,14 +156,113 @@ function showDetails(id) {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            if(res.code==0){
+            var data = res.data;
+            if (res.code == 0) {
+                $("#companyId").val(id);
+                $(".addForm").attr("action", APP_URL + "/editCompany");
                 $("#changeTitle").html("编辑");
                 $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
-                
+                $("#company_account").val(data.account); //账号
+                $("#company_password").val(data.password); //密码
+                $("#company_name").val(data.companyname); //公司名称
+                $("#company_user").val(data.principalName); //负责人姓名
+                if (data.dreTelephone.length > 0) {
+                    $("#attrPhone").val(data.dreTelephone[0].phone); //电话
+                    // 多组电话
+                    if (data.dreTelephone.length > 1) {
+                        var phones = "";
+                        for (var i = 1; i < data.dreTelephone.length; i++) {
+                            phones += `
+                            <li class="pro-section">
+                                <div class="input-group">
+                                    <input type="text" class="form-control formPhone" placeholder="请输入电话号码" value="${data.dreTelephone[i].phone}">
+                                </div> 
+                                <button type="button" class="btn btn-danger pro-removeSection"><i class="fa fa-minus" aria-hidden="true"></i> 移除电话</button>
+                            </li>
+                        `;
+                        }
+                        $("#addTelText").append(phones);
+                    }
+                }
+                $("#allProvinces").find("option[value=" + data.provinceid + "]").attr("selected", true); //省
+                cityList(data.provinceid, data.cityid); //获取城市 
+                districtList(data.cityid, data.districtid); //获取地区
+                $("#company_address").val(data.address); //详细地址
+                // $("#overTime").val(moment(data.deadline).format("YYYY年MM月DD日"));  //截止时间
+                $("#company_num").val(data.lastAccountCount); //最终账号数量
+                editCompany(); //编辑公司
             }
         },
-        error:function(err){
+        error: function (err) {
             console.log(err);
+        }
+    });
+}
+
+
+//获取市列表
+function cityList(provinceId, cityId) {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/findCityById",
+        data: {
+            authToken: token,
+            provincesId: provinceId
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            var data = res.data;
+            var city = "";
+            city += `<option value="" selected="">---请选择市---</option>`;
+            $.each(data, function (index, val) {
+                city += `
+                    <option value="${val.cityid}" selected="${val.cityid==cityId?'selected':''}">${val.city}</option>
+                 `;
+            });
+            $("#allCity").html(city);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+// 获取地区列表
+function districtList(cityId, districtId) {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/findAreaByCityId",
+        data: {
+            authToken: token,
+            cityId: cityId
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            var data = res.data;
+            var area = "";
+            area += `<option value="" selected="">---请选择区---</option>`;
+            $.each(data, function (index, val) {
+                area += `
+                    <option value="${val.areaid}" selected="${val.cityid==districtId?selected:''}">${val.area}</option>
+                 `;
+            });
+            $("#allArea").html(area);
+        }
+    });
+
+}
+
+// 编辑公司
+function editCompany() {
+    ajax({
+        type: "GET",
+        success: function (res) {
+            // console.log(JSON.stringify(res));
+            window.location.href = '../CompanyList/index.html';
         }
     });
 }
