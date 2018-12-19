@@ -190,13 +190,17 @@ function getPage(count, list, pageNum) {
   $("#nextPages").click(function () {
     var num = $("#nowPages").html();
     num++;
-    test(list,num);
+    if (num <= sum) {
+      test(list, num);
+    }else{
+      return;
+    }
   });
 }
 // 调用传过来的函数
-function test(list,num) {
+function test(list, num) {
   if (typeof (eval(list)) == "function") {
-    eval(list + "("+num+");");
+    eval(list + "(" + num + ");");
   } else {
     // 函数不存在
   }
