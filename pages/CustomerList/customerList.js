@@ -18,11 +18,13 @@ function getCustomerList(pageNum) {
         success: function (res) {
             console.log(res);
             var data = res.data;
+            var pages = 10 * (pageNum - 1);
             var str = "";
             $.each(data, function (index, val) {
                 str += `
                  <tr>
                     <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
+                    <td>${pages+(index+1)}</td>
                     <td>${val.id}</td>
                     <td></td>
                     <td>${val.customerName}</td>

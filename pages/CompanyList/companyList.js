@@ -17,12 +17,13 @@ function companyList(pageNum) {
         success: function (res) {
             console.log(res);
             var data = res.data;
+            var pages = 10 * (pageNum - 1);
             var str = "";
             $.each(data, function (index, val) {
                 str += `
                     <tr>
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
-                        <td>${index+1}</td>
+                        <td>${pages+(index+1)}</td>
                         <td>${val.id}</td>
                         <td>${val.status==1?'使用中':val.status==2?'已到期':val.status==3?'已冻结':''}</td>
                         <td>${val.province}</td>

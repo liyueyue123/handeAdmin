@@ -1,35 +1,37 @@
 $(function () {
-  personnelManageList();
+  personnelManageList(1);
 });
-function personnelManageList(){
+
+function personnelManageList(pageNum) {
   $.ajax({
     type: "GET",
-      url: APP_URL + "/console/user/all",
-      data: {
-        authToken: token,
-        limit:10,
-        page:1,
-      },
-      dataType: "json",
-      success: function (res) {
-        console.log('personnelList', res);
-        var data = res.data;
-        var str = "";
-        $.each(data, function (index, val) {
-          if(val.lastlogintime == ""){
-            var lasrlogintime = val.lastlogintime;
-          }else{
-            var lasrlogintime = moment(val.lastlogintime).format("YYYY年MM月DD日");
-          }
-          if (val.iconurl == ''){
-            var src = ''
-          }else{
-            var src = "src="+val.iconurl
-          }
-          str += `
+    url: APP_URL + "/console/user/all",
+    data: {
+      authToken: token,
+      limit: 10,
+      page: pageNum,
+    },
+    dataType: "json",
+    success: function (res) {
+      console.log('personnelList', res);
+      var data = res.data;
+      var str = "";
+      var pages = 10 * (pageNum - 1);
+      $.each(data, function (index, val) {
+        if (val.lastlogintime == "") {
+          var lasrlogintime = val.lastlogintime;
+        } else {
+          var lasrlogintime = moment(val.lastlogintime).format("YYYY年MM月DD日");
+        }
+        if (val.iconurl == '') {
+          var src = ''
+        } else {
+          var src = "src=" + val.iconurl
+        }
+        str += `
              <tr>
             <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
-            <td>${index}</td>
+            <td>${pages+(index+1)}</td>
             <td>${val.name}</td>
             <td><img ${src} width="70px" height="70px" alt="暂无用户头像"></td>
             <td>${val.roleName}</td>
@@ -40,10 +42,11 @@ function personnelManageList(){
             <td><a class="btn ${val.status==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.status},${val.id})">${val.status == 0 ?"禁用":"启用"}</a></td>
             </tr>
           `;
-        });
-        $(".personnelList").html(str);
-      }
-    });
+      });
+      $(".personnelList").html(str);
+      getPage(res.count, 'personnelManageList', pageNum); //分页
+    }
+  });
 }
 
 //停用用户

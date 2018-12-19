@@ -1,9 +1,9 @@
 $(function () {
-    getRole() //获取角色列表
+    getRole(1) //获取角色列表
 });
 
 //获取角色
-function getRole() {
+function getRole(pageNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -11,19 +11,20 @@ function getRole() {
         data: {
             authToken: token,
             limit: 10,
-            page: 1
+            page: pageNum
         },
         dataType: "json",
         success: function (res) {
             console.log(res);
             var data = res.data;
+            var pages = 10 * (pageNum - 1);
             var str = '';
             if (res.code == 0) {
                 $.each(data, function (index, val) {
                     str += `
                     <tr>
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
-                        <td>${index+1}</td>
+                        <td>${pages+(index+1)}</td>
                         <td>${val.rolename}</td>
                         <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
                         <td>${val.isSysinner}</td>
@@ -31,6 +32,7 @@ function getRole() {
                     `;
                 });
                 $(".list-box tbody").html(str);
+                getPage(res.count, 'getRole', pageNum); //分页
             }
         },
         error: function (err) {
