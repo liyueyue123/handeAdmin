@@ -1,10 +1,10 @@
 $(function () {
-    getCustomerList(); //获取客户列表
+    getCustomerList(1); //获取客户列表
     companyList(); //获取公司列表
 });
 
 //获取客户列表
-function getCustomerList() {
+function getCustomerList(pageNum, e) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "POST",
@@ -12,11 +12,14 @@ function getCustomerList() {
         data: {
             authToken: token,
             limit: 10,
-            page: 1
+            page: pageNum
         },
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (e) {
+                $(e).addClass("active").siblings("li").removeClass("active");
+            }
             var data = res.data;
             var str = "";
             $.each(data, function (index, val) {
@@ -38,6 +41,26 @@ function getCustomerList() {
                  `;
             });
             $(".list-box>table>tbody").html(str);
+            getPage(res.count, 'getCustomerList',1); //分页
+            // var sum = Math.ceil(res.count / 10);
+            // var pages = "";
+            // for (var i = 0; i < sum; i++) {
+            //     pages += `<li class="${(i+1)==1?'active':''}" onclick="getCustomerList('${i+1}','this')"><a>${i+1}</a></li>`;
+            // }
+            // pages += `
+            //     ${sum>1?`<li id="nextPages"><a>下一页</a></li>`:''}
+            //     <li><a>共${res.count}条记录</a></li>
+            //     <li><a>第<span id="nowPages">1</span>页/共${sum}页</a></li>
+            // `;
+            // $(".pagination").html(pages);
+            // var nowNum = $(".pagination").find(".active>a").html();
+            // $("#nowPages").html(nowNum);
+            // // 下一页
+            // $("#nextPages").click(function () {
+            //     var num = $("#nowPages").html();
+            //     num++;
+            //     getCustomerList(num);
+            // });
         },
         error: function (err) {
             console.log(err);
@@ -61,7 +84,7 @@ function companyList() {
             var str = "";
             str += `<option value="" selected="">输入公司进行搜索</option>`;
             $.each(data, function (index, val) {
-                str +=`<option value="${val.id}">${val.companyname}</option>`;
+                str += `<option value="${val.id}">${val.companyname}</option>`;
             });
             $("#companySelect").html(str);
         },
