@@ -7,6 +7,7 @@ $(function () {
   if(id != undefined){
     $('.addForm').attr('action', APP_URL + "/editUser");
     $('#changeTitle').text('修改')
+    $('#changeTxt').text('修改')
     getUserInfo(id) 
   }else{
     $('.addForm').attr('action', APP_URL + "/register");
