@@ -6,6 +6,8 @@ $(function () {
         addRole(); //新增角色
     } else {
         $("#form1").attr("action", APP_URL + "/permission/editPowerRoles");
+        $("#changeTitle").html("修改");
+        $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
         var roleId = url.split("=")[1];
         roleDetail(roleId); //角色详情
     }
@@ -41,7 +43,7 @@ function allMenu() {
     });
 }
 
-//新增角色
+//新增、编辑角色
 function addRole() {
     ajax({
         type: "GET",
@@ -65,6 +67,16 @@ function roleDetail(id) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == 0) {
+                var data = res.data;
+                $("#roleName").val(data.rolename);
+                $("#roleId").val(data.id);
+                addRole(); //编辑角色
+            }
+
+        },
+        error: function (err) {
+            console.log(err);
         }
     });
 }

@@ -167,3 +167,41 @@ function deleteData(table, method, id) {
     });
   }
 }
+
+
+//分页
+function getPage(count, list, pageNum) {
+  var sum = Math.ceil(count / 10);
+  var pages = "";
+  if (sum > 1) {
+    for (var i = 0; i < sum; i++) {
+      pages += `<li class="${(i+1)==pageNum?'active':''}" onclick="${list}('${i+1}')"><a>${i+1}</a></li>`;
+    }
+  }
+  pages += `
+        ${sum>1?`<li id="nextPages"><a>下一页</a></li>`:''}
+        <li><a>共${count}条记录</a></li>
+        <li><a>第<span id="nowPages">${sum==1?'1':''}</span>页/共${sum}页</a></li>
+    `;
+  $(".pagination").html(pages);
+  var nowNum = $(".pagination>.active>a").html();
+  $("#nowPages").html(nowNum);
+  // 下一页
+  $("#nextPages").click(function () {
+    var num = $("#nowPages").html();
+    num++;
+    if (num <= sum) {
+      test(list, num);
+    }else{
+      return;
+    }
+  });
+}
+// 调用传过来的函数
+function test(list, num) {
+  if (typeof (eval(list)) == "function") {
+    eval(list + "(" + num + ");");
+  } else {
+    // 函数不存在
+  }
+}

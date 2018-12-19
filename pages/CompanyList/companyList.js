@@ -1,25 +1,24 @@
 $(function () {
-    companyList(); //公司列表
-    // delCompany();
+    companyList(1); //公司列表
 });
 
 // 获取公司列表
-function companyList() {
+function companyList(pageNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
         url: APP_URL + "/companyList",
         data: {
             authToken: token,
-            limit:10,
-            page:1
+            limit: 10,
+            page: pageNum
         },
         dataType: "json",
         success: function (res) {
             console.log(res);
             var data = res.data;
             var str = "";
-            $.each(data, function (index, val) { 
+            $.each(data, function (index, val) {
                 str += `
                     <tr>
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
@@ -39,10 +38,11 @@ function companyList() {
                 `;
             });
             $(".list-box>table>tbody").html(str);
+            getPage(res.count, 'companyList', pageNum); //分页
         },
-        error:function(err){
+        error: function (err) {
             console.log(err);
         }
-        
+
     });
 }

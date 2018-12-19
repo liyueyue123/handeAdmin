@@ -1,10 +1,10 @@
 $(function () {
-    getCustomerList(); //获取客户列表
+    getCustomerList(1); //获取客户列表
     companyList(); //获取公司列表
 });
 
 //获取客户列表
-function getCustomerList() {
+function getCustomerList(pageNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "POST",
@@ -12,7 +12,7 @@ function getCustomerList() {
         data: {
             authToken: token,
             limit: 10,
-            page: 1
+            page: pageNum
         },
         dataType: "json",
         success: function (res) {
@@ -38,6 +38,7 @@ function getCustomerList() {
                  `;
             });
             $(".list-box>table>tbody").html(str);
+            getPage(res.count, 'getCustomerList',pageNum); //分页
         },
         error: function (err) {
             console.log(err);
@@ -61,7 +62,7 @@ function companyList() {
             var str = "";
             str += `<option value="" selected="">输入公司进行搜索</option>`;
             $.each(data, function (index, val) {
-                str +=`<option value="${val.id}">${val.companyname}</option>`;
+                str += `<option value="${val.id}">${val.companyname}</option>`;
             });
             $("#companySelect").html(str);
         },
