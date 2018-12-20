@@ -3,7 +3,7 @@ $(function () {
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
   console.log(id)
-  if (id != undefined) {
+  if (url.indexOf('=') != -1) {
     $('#form1').attr('action', APP_URL + "/console/update");
     $('#changeTitle').text('编辑')
     $('#changeTxt').text('保存')
@@ -20,6 +20,7 @@ $(function () {
     })
   } else {
     $('.addForm').attr('action', APP_URL + "/console/addConsoleUser");
+    $('#person_id').removeAttr('name');
     //提交表单
     ajax({
       type: 'post',
@@ -57,7 +58,7 @@ function getPersonnelInfo(id) {
         // 显示头像
         $('#icon-image').show();
         $('#iconurl').val(data.iconurl);
-        // console.log('123', $('#iconurl').val())
+        console.log('123', $('#iconurl').val())
         // console.log(data.icon.slice(23, data.icon.length))
       }
       $("#account").removeAttr('name');
@@ -82,7 +83,7 @@ $('#icon').change(function (e) {
   var path = $(this).val(),
     extStart = path.lastIndexOf('.'),
     ext = path.substring(extStart, path.length).toUpperCase();
-  console.log(path);
+    console.log(path);
   if (ext !== null) {
     //判断图片格式
     if (ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF') {
@@ -125,8 +126,8 @@ function uploadImg(tag) {
       $("#icon-image").find("img").attr({
         "src": APP_IMAGE_URL + res.data
       });
-      $('#iconurl').val(APP_IMAGE_URL + res.data);
-      console.log($('#iconurl').val())
+      $('#iconurl').val(res.data);
+      console.log('222',$('#iconurl').val())
     }
   });
   // 显示头像

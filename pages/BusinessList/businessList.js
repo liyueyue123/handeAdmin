@@ -36,10 +36,11 @@ function businessList(pageNum, companyName, linkMan, responsible, id) {
                 <td>${val.groupid}</td>
                 <td>${val.source}</td>
                 <td width="300">
-                <a class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${index+1}"> 查看详情</a>
-                <a class="btn btn-warning files" id="search_file" style="margin-left:20px;" data-id="${val.id}" data-index="${index+1}">
-                   <span>上传附件</span><input style="opacity:0;width:120%;" type="file" id='uploadFile' multiple="multiple"/>
-                </a>
+                <div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${index+1}"> 查看详情</div>
+                <div class="btn btn-info navbar-btn" style="position:relative;" id="search_file" style="margin-left:20px;" data-id="${val.id}" data-index="${index+1}">
+                   <div>上传附件<div>
+                   <div style="position:absolute;left:0;top:0;opacity:0;"><input type='file' height='34.5'></div>
+                </div>
                 </td>
                 </tr>
               `;

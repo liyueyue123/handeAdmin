@@ -17,12 +17,16 @@ function businessDetail(id , index){
     },
     dataType: "json",
     success: function (res) {
-      console.log(res);
+      console.log('businessInfo',res);
       var data = res.data;
-      var str = `<tr>
-                    <td align="center">序号</td>
-                    <td>${index}</td>
-                </tr>
+      
+      var principals = '';
+    //   $.each(data.principals,function(index,val){
+    //      principals +=`
+         
+    //      `;
+    //   })
+      var str = `
                 <tr>
                     <td align="center">公司名称</td>
                     <td>${data.companyName}</td>
@@ -44,44 +48,20 @@ function businessDetail(id , index){
                     <td>${data.stage}</td>
                 </tr>
                 <tr>
-                    <td align="center">分组名称</td>
-                    <td>${data.group.groupName}</td>
-                </tr>
-                <tr>
                     <td align="center">概述</td>
                     <td>${data.companyName}</td>
                 </tr>
                 <tr>
                     <td align="center">联系人</td>
-                    <td>李明</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td align="center">负责人</td>
                     <td>李华</td>
                 </tr>
                 <tr>
-                    <td align="center">标签</td>
-                    <td>${data.tags}</td>
-                </tr>
-                <tr>
-                    <td align="center">讨论组</td>
-                    <td>${data.companyName}</td>
-                </tr>
-                <tr>
-                    <td align="center">弹性字段</td>
-                    <td>${data.companyName}</td>
-                </tr>
-                <tr>
-                    <td align="center">操作历史</td>
-                    <td>${data.histories}</td>
-                </tr>
-                <tr>
                     <td align="center">附件</td>
                     <td>${data.files}</td>
-                </tr>
-                <tr>
-                    <td align="center">信息来源</td>
-                    <td>${data.companyName}</td>
                 </tr>
         `;
       $(".businessDetail").html(str);
