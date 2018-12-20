@@ -4,16 +4,21 @@ $(function () {
   var url = window.location.href; //首先获取到你的URL地址;
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
-  if(id != undefined){
+  console.log(id)
+  if (url.indexOf('=') != -1) {
     $('.addForm').attr('action', APP_URL + "/editUser");
     $('#changeTitle').text('修改');
     $('#changeTxt').text('修改');
     $('#changeTxt').prev().removeClass("fa-check");
     $('#changeTxt').prev().addClass("fa-save");
+    $('.wechat').attr({
+      'hidden':'hidden'
+    })
     getUserInfo(id) 
   }else{
     $('.addForm').attr('action', APP_URL + "/register");
   }
+  submit()
 });
 function getUserInfo(id){
   var token = sessionStorage.getItem("token");
@@ -46,8 +51,11 @@ function getUserInfo(id){
         })
         // 显示头像
         $('#icon-image').show();
-        $('#icon').val(data.icon.slice(23, data.icon.length));
-        // console.log(data.icon.slice(23, data.icon.length))
+        var iconval = data.icon.slice(23, data.icon.length);
+        $("#icon").attr({
+          'value': iconval
+        });
+        console.log($('#icon').val())
       }
       $("#user_email").val(data.email);
       $("#company").find("option[value=" + data.company + "]").attr("selected", true);
@@ -97,7 +105,6 @@ $('#iconfile').change(function (e) {
     }
     var imgBox = e.target;
     uploadImg(imgBox)
-    submit()
   }
 });
 
@@ -125,6 +132,7 @@ function uploadImg(tag) {
       $("#icon").attr({
         'value': res.data
       });
+      console.log($('#icon').val())
     }
   });
   // 显示头像
@@ -198,7 +206,7 @@ var companyId = $('#company option:selected').val();
 //提交表单
 function submit(){
   ajax({
-    type: 'POST',
+    type: 'post',
     success: function (res) {
       console.log('success', JSON.stringify(res));
       window.location.href = '../UserList/index.html'
