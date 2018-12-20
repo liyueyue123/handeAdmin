@@ -21,7 +21,7 @@
 				 class="fas fa-trash-alt"></i> 删除</button>
 			<form class="navbar-form navbar-right listSearch" role="search">
 				<div class="form-group">
-					<!-- <input type="text" class="form-control" id="IdKeyWord" placeholder="可输入ID进行搜索" /> -->
+					<!-- <input type="text" class="form-control" id="IdKeyWord" placeholder="输入ID进行搜索" /> -->
 					<input type="text" class="form-control" id="NameKeyWord" placeholder="输入姓名进行搜索" />
 					<select class="form-control" name="moduleType" id="companySelect">
 						<option value="" selected="">选择公司进行搜索</option>
@@ -30,6 +30,14 @@
 					<input type="text" class="form-control" id="PositonKeyWord" placeholder="输入职位进行搜索" />
 				</div>
 				<button type="button" id="searchBtn" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+			</form>
+			<form class="navbar-form navbar-right listSearch" role="search">
+				<div class="form-group">
+					<input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间筛选" />
+					<input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="选择截止时间筛选" />
+				</div>
+				<button type="button" id="selectBtn" class="btn btn-primary"><i class="fa fa-calendar-check" aria-hidden="true"></i>
+					筛选</button>
 			</form>
 		</div>
 	</nav>
@@ -86,5 +94,16 @@
 	</ul>
 
 </body>
+<script>
+	$(".form_datetime").datetimepicker({
+		format: 'yyyy/mm/dd hh:ii', //显示格式
+		todayHighlight: 1, //今天高亮
+		minTime: '10',
+		startView: 2,
+		forceParse: 0,
+		showMeridian: 1,
+		autoclose: 1 //选择后自动关闭
+	});
+</script>
 
 </html>

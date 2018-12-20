@@ -19,21 +19,21 @@ function customerDetail(customerId) {
             console.log(res);
             var data = res.data;
             var arr1 = [];
-            $.each(data.phones, function (index,val) {
+            $.each(data.phones, function (index, val) {
                 arr1.push(val.phone);
             });
             var tels = arr1.toString();
             var arr2 = [];
-            $.each(data.dreTags, function (index, val) { 
-                 arr2.push(val.tagName);
+            $.each(data.dreTags, function (index, val) {
+                arr2.push(val.tagName);
             });
             var tags = arr2.toString();
             var str = "";
             str += `
-                <tr>
-                    <td align="center">名片照片</td><td><img src="${data.dreCustomer.cardcasephoto}"/></td>
-                    <td align="center">信息来源</td><td></td>
-                </tr>
+            <tr>
+                <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
+                <td align="center">名片照片</td><td><img src="${data.dreCustomer.cardcasephoto}"/></td>
+            </tr>
                 <tr>
                     <td align="center">姓名</td><td>${data.dreCustomer.customerName}</td>
                     <td align="center">性别</td><td>${data.dreCustomer.gender}</td>
@@ -59,8 +59,11 @@ function customerDetail(customerId) {
                     <td align="center">标签</td><td>${tags}</td>
                 </tr>
                 <tr>
+                    <td align="center">信息来源</td><td>${data.dreCustomer.messagesource}</td>
                     <td align="center">相关讨论组</td><td>${data.group.customers}</td>
-                    <td align="center">相关商机</td><td>${data.opportunity}</td>
+                </tr>
+                <tr>
+                    <td align="center">相关商机</td><td colspan="3">${data.opportunity}</td>
                 </tr>
                 <tr>
                     <td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;"></td>
