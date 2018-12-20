@@ -5,7 +5,9 @@
 <title>用户信息管理</title>
 <script src="/js/load.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
-<script src="./userList.js"></script>
+<script>
+    $.closeLoading();
+</script>
 </head>
 
 <body>
@@ -21,16 +23,13 @@
 <button type="button" class="btn btn-primary navbar-btn listButton" onclick="javascript:if(confirm('由于数据存在关联查询，导出Exce可能需要1-3分钟的时间，确定要导出吗（确定后请勿刷新页面或关闭浏览器）?'))location='/manage.php/Order/exportExcel?startTime=&amp;endTime=&amp;business_id=&amp;one_category=&amp;two_category='"><i class="fa fa-sign-in" aria-hidden="true"></i> 导出Excel</button>
 <div class="navbar-form navbar-right listSearch">
 <div class="form-group">
-    <span style="vertical-align: middle;">手机号:</span>
-    <input name="phone" type="text" class="form-control" id="search_phone" placeholder="请输入关键词进行搜索">
+    <input name="phone" type="text" class="form-control" style="width:160px;" id="search_phone" placeholder="输入手机号进行搜索">
 </div>
 <div class="form-group">
-    <span style="vertical-align: middle;">姓名:</span>
-    <input name="name" type="text" class="form-control" id="search_name" placeholder="请输入关键词进行搜索">
+    <input name="name" type="text" class="form-control" style="width:150px;" id="search_name" placeholder="输入姓名进行搜索">
 </div>
 <div class="form-group">
-    <span style="vertical-align: middle;">Id:</span>
-    <input name="Id" type="text" class="form-control" id="search_Id" placeholder="请输入关键词进行搜索">
+    <input name="Id" type="text" class="form-control" style="width:130px;" id="search_Id" placeholder="输入Id进行搜索">
 </div>
 <button class="btn btn-primary" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
 </div>    
@@ -85,18 +84,17 @@
 
 
 <ul class="pagination">
-    <li class="active"><a href="#">1</a></li>
+    <!-- <li class="active"><a href="#">1</a></li>
     <li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
     <li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
     <li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
     <li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
     <li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
     <li><a>共44条记录</a></li>
-    <li><a>第1页/共5页</a></li>
+    <li><a>第1页/共5页</a></li> -->
 </ul>
 
 </body>
-<script>
-    $.closeLoading();
-</script>
+
+<script src="./userList.js"></script>
 </html>

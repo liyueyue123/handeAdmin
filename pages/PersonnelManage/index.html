@@ -6,6 +6,9 @@
 <script src="/js/load.js"></script>
 <script src="/js/moment.js"></script>
 <link rel="stylesheet" href="/css/rightCommon.css">
+<script>
+    $.closeLoading();
+</script>
 </head>
 
 <body>
@@ -17,11 +20,10 @@
 <div>
 <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/console/userDelete','GET','id')"><i class="fas fa-trash-alt"></i> 删除</button>
 <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddPersonnel/index.html')"><i class="fas fa-edit"></i> 修改</button>
-<button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddPersonnel/index.html')"><iclass="fa fa-plus" aria-hidden="true"></i> 新建</button>
+<button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddPersonnel/index.html')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
 <div class="navbar-form navbar-right listSearch">
 <div class="form-group">
-<span style="vertical-align: middle;">角色名称:</span>
-<input name="keyWord" type="text" class="form-control" id="search_roleName" placeholder="请输入关键词进行搜索">
+<input name="keyWord" type="text" class="form-control" style="width:170px;" id="search_roleName" placeholder="输入角色名称进行搜索">
 </div>
 <button id="search_btn" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
 </div>    
@@ -68,14 +70,14 @@
 
 
 <ul class="pagination">
-    <li class="active"><a href="#">1</a></li>
+    <!-- <li class="active"><a href="#">1</a></li>
     <li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
     <li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
     <li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
     <li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
     <li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
     <li><a>共44条记录</a></li>
-    <li><a>第1页/共5页</a></li>
+    <li><a>第1页/共5页</a></li> -->
 </ul>
 
 </body>

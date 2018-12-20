@@ -12,10 +12,10 @@ function businessList(pageNum, companyName, linkMan, responsible, id) {
       authToken: token,
       limit: 10,
       page: pageNum,
-      // companyName: companyName,
-      // linkMan: linkMan,
-      // responsible: responsible,
-      // id:id
+      companyName: companyName,
+      linkMan: linkMan,
+      responsible: responsible,
+      id:id
     },
     dataType: "json",
     success: function (res) {
@@ -35,7 +35,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id) {
                 <td>${val.stage}</td>
                 <td>${val.groupid}</td>
                 <td>${val.source}</td>
-                <td width="20%">
+                <td width="300">
                 <a class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${index+1}"> 查看详情</a>
                 <a class="btn btn-warning files" id="search_file" style="margin-left:20px;" data-id="${val.id}" data-index="${index+1}">
                    <span>上传附件</span><input style="opacity:0;width:120%;" type="file" id='uploadFile' multiple="multiple"/>
@@ -80,10 +80,6 @@ $('#search_details').live('click', function (e) {
   // console.log('id',e.target.dataset.id)
   var id = e.target.dataset.id;
   var index = e.target.dataset.index;
-<<<<<<< HEAD
-  openAddData('../BusinessDetail/index.html?id=' + id + '&index=' + index)
-})
-=======
   openAddData('../BusinessDetail/index.html?id='+id+'&index='+index)
 })
 
@@ -93,6 +89,6 @@ $('#search_btn').live('click', function () {
   var linkMan = $('#search_linkMan').val();
   var responsible = $('#search_responsible').val();
   var id = $('#search_id').val();
+  console.log(id);
   businessList(1, companyName, linkMan, responsible, id);
 })
->>>>>>> ea43908435cd4ae4590c050235c71b2048433bfb

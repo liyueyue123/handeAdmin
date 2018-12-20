@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="/tools/webuploader-0.1.5/dist/webuploader.css">
   <!--引入JS-->
   <script type="text/javascript" src="/tools/webuploader-0.1.5/dist/webuploader.js"></script>
+  
 </head>
 
 <body>
@@ -23,7 +24,7 @@
     <form class="addForm" id="form1" name="form1" action="" enctype="multipart/form-data">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tbody>
-          <input type="text" hidden id='id'>
+          <input type="text" hidden name='id' id='person_id'>
           <tr>
             <td align="center">姓名</td>
             <td><input type="text" name="name" id="name" class="form-control" datatype="*" nullmsg="请输入人员姓名"
@@ -47,7 +48,7 @@
             <td align="center">角色</td>
             <td>
               <!-- <input type="text" name="roleid" id="roleid" value="1" hidden> -->
-              <select class="form-control" name="roleid" id="roleid"  placeholder="请选择角色" value='1'>
+              <select class="form-control" name="roleid" id="roleid"  placeholder="请选择角色" value=''>
                 <option value="" selected>---请选择角色---</option>
               </select>
             </td>

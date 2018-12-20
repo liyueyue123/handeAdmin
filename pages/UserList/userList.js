@@ -45,7 +45,7 @@ function userList(pageNum,phone,name,Id){
         `;
       });
       $(".userList").html(str);
-      getPage(res.count, 'userList', pageNum); //分页
+      getPage(res.count, 'userList', pageNum);  //分页
     },
     error:function(err){
       console.log(err);

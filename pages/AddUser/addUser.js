@@ -58,6 +58,12 @@ function getUserInfo(id){
   });
 }
 
+//当点击手机号的时候，loginname赋值
+$('#user_phone').blur(function(){
+  var value = $(this).val();
+  $('#user_loginname').val(value);
+})
+
 //当点击密码框的时候清空
 $('#user_passwd').focus(function(){
   this.value=''
@@ -91,6 +97,7 @@ $('#iconfile').change(function (e) {
     }
     var imgBox = e.target;
     uploadImg(imgBox)
+    submit()
   }
 });
 
@@ -189,10 +196,12 @@ var companyId = $('#company option:selected').val();
 
 
 //提交表单
-ajax({
-  type: 'POST',
-  success: function (res) {
-    console.log('success', JSON.stringify(res));
-    window.location.href = '../UserList/index.html'
-  }
-})
+function submit(){
+  ajax({
+    type: 'POST',
+    success: function (res) {
+      console.log('success', JSON.stringify(res));
+      window.location.href = '../UserList/index.html'
+    }
+  })
+}

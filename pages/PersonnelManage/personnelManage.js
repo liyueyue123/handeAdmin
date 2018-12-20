@@ -28,6 +28,9 @@ function personnelManageList(pageNum, roleName) {
           var src = ''
         } else {
           var src = "src=" + val.iconurl
+          if(val.iconurl.length>30){
+            var src = "src=" + val.iconurl.slice(23,val.iconurl.length);
+          }
         }
         str += `
              <tr>
