@@ -19,13 +19,54 @@ function businessDetail(id , index){
     success: function (res) {
       console.log('businessInfo',res);
       var data = res.data;
-      
+      //联系人
+      var links_key = '';
+      var links = '';
+      $.each(data.links, function (index, val) {
+          if(val.iskey == 1){
+            links_key +=`
+                <div>
+                    <span style='margin-left:20px;'>姓名:${val.name}</span>
+                    <span style='margin-left:20px;'>公司:${val.companyName}</span> 
+                    <span style='margin-left:20px;'>职位:${val.position}</span> 
+                </div>
+            `;
+          }else{
+              links +=`
+                <div>
+                    <span style='margin-left:20px;'>姓名:${val.name}</span>
+                    <span style='margin-left:20px;'>公司:${val.companyName}</span> 
+                    <span style='margin-left:20px;'>职位:${val.position}</span> 
+                </div>
+              `;
+          }
+          principals += `
+            <div>
+                <span>头像:</span>
+                <div style="display:inline-block;width:60px;height:60px;">
+                    <img src="${val.icon}" alt="" width='60' height='60'>
+                </div>
+                <span style='margin-left:20px;'>姓名:${val.name}</span>
+                <span style='margin-left:20px;'>部门:${val.departMent}</span> 
+                <span style='margin-left:20px;'>手机号:${val.phone}</span> 
+            </div>
+         `;
+      })
+      //负责人
       var principals = '';
-    //   $.each(data.principals,function(index,val){
-    //      principals +=`
-         
-    //      `;
-    //   })
+      $.each(data.principals,function(index,val){
+         principals +=`
+            <div>
+                <span>头像:</span>
+                <div style="display:inline-block;width:60px;height:60px;">
+                    <img src="${val.icon}" alt="" width='60' height='60'>
+                </div>
+                <span style='margin-left:20px;'>姓名:${val.name}</span>
+                <span style='margin-left:20px;'>部门:${val.departMent}</span> 
+                <span style='margin-left:20px;'>手机号:${val.phone}</span> 
+            </div>
+         `;
+      })
       var str = `
                 <tr>
                     <td align="center">公司名称</td>
@@ -53,11 +94,18 @@ function businessDetail(id , index){
                 </tr>
                 <tr>
                     <td align="center">联系人</td>
-                    <td></td>
+                    <td>
+                        <div style='border-bottom:1px solid #e6e6e6;'>
+                            <div><span>关键联系人</span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links_key}</div></div>
+                        </div>
+                        <div>
+                            <div><span>其他联系人<span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links}</div></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td align="center">负责人</td>
-                    <td>李华</td>
+                    <td>${principals}</td>
                 </tr>
                 <tr>
                     <td align="center">附件</td>

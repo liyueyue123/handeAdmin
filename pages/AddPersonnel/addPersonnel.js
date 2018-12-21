@@ -53,12 +53,12 @@ function getPersonnelInfo(id) {
       $("#business_passwd").val(data.password);
       if (data.iconurl.length != 0) {
         $("#icon-image").find("img").attr({
-          "src": data.iconurl
+          "src": APP_IMAGE_URL+data.iconurl
         })
         // 显示头像
         $('#icon-image').show();
         $('#iconurl').val(data.iconurl);
-        console.log('123', $('#iconurl').val())
+        // console.log('123', $('#iconurl').val())
         // console.log(data.icon.slice(23, data.icon.length))
       }
       $("#account").removeAttr('name');
@@ -127,7 +127,7 @@ function uploadImg(tag) {
         "src": APP_IMAGE_URL + res.data
       });
       $('#iconurl').val(res.data);
-      console.log('222',$('#iconurl').val())
+      // console.log('222',$('#iconurl').val())
     }
   });
   // 显示头像
