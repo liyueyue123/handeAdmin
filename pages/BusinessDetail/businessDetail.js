@@ -21,7 +21,7 @@ function businessDetail(id , index){
       var data = res.data;
       //联系人
       var links_key = '';
-      var links = '';
+      var links_other = '';
       $.each(data.links, function (index, val) {
           if(val.iskey == 1){
             links_key +=`
@@ -32,7 +32,7 @@ function businessDetail(id , index){
                 </div>
             `;
           }else{
-              links +=`
+              links_other +=`
                 <div>
                     <span style='margin-left:20px;'>姓名:${val.name}</span>
                     <span style='margin-left:20px;'>公司:${val.companyName}</span> 
@@ -99,7 +99,7 @@ function businessDetail(id , index){
                             <div><span>关键联系人</span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links_key}</div></div>
                         </div>
                         <div>
-                            <div><span>其他联系人<span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links}</div></div>
+                            <div><span>其他联系人<span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links_other}</div></div>
                         </div>
                     </td>
                 </tr>

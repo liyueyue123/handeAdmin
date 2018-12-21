@@ -11,10 +11,7 @@ $(function () {
     $('#changeTxt').text('修改');
     $('#changeTxt').prev().removeClass("fa-check");
     $('#changeTxt').prev().addClass("fa-save");
-    $('.wechat').attr({
-      'hidden':'hidden'
-    })
-    getUserInfo(id) 
+    getUserInfo(id)
   }else{
     $('.addForm').attr('action', APP_URL + "/register");
   }
