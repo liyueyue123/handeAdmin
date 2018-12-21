@@ -7,7 +7,7 @@ $(function () {
             str += `
             <li class="pro-section">
                 <div class="input-group">
-                    <input type="text" class="form-control formPhone" placeholder="请输入电话号码">
+                    <input type="text" class="form-control formPhone" placeholder="请输入电话号码" datatype="/^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(19[9])|(17[0,1,3,5,6,7,8]))\d{8}$/" errormsg="输入电话号码格式不正确" nullmsg="请输入电话号码"/>
                 </div> 
                 <button type="button" class="btn btn-danger pro-removeSection"><i class="fa fa-minus" aria-hidden="true"></i> 移除电话</button>
             </li> 
@@ -32,8 +32,6 @@ $(function () {
         var id = url.split("=")[1];
         showDetails(id); //显示公司详情
     }
-
-
 });
 
 // 获取所有省份
@@ -163,11 +161,13 @@ function showDetails(id) {
                 $("#changeTitle").html("编辑");
                 $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
                 $("#company_account").val(data.account); //账号
+                $("#company_account").attr("readonly",true);  //账号不可修改
                 $("#company_password").val(data.password); //密码
-                // 点击密码时值为空
-                $("#company_password").focus(function () {
-                    $(this).val("");
-                });
+                $("#company_password").attr("readonly",true); //密码不可修改
+                // // 点击密码时值为空
+                // $("#company_password").focus(function () {
+                //     $(this).val("");
+                // });
                 $("#company_name").val(data.companyname); //公司名称
                 $("#company_user").val(data.principalName); //负责人姓名
                 if (data.dreTelephone.length > 0) {

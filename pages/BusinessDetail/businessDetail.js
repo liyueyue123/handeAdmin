@@ -1,73 +1,30 @@
-$(function(){
-  var url = window.location.href;
-  var id = url.split("=")[1].slice(0,1);
-  var index = url.split("=")[2]
-  // console.log(id , index)
-  businessDetail(id, index);
+$(function () {
+    var url = window.location.href;
+    var id = url.split("=")[1].slice(0, 1);
+    var $index = url.split("=")[2]
+    // console.log(id , index)
+    businessDetail(id, $index);
 });
 
-function businessDetail(id , index){
-  var token = sessionStorage.getItem("token");
-  $.ajax({
-    type: "GET",
-    url: APP_URL + "/getOpportunityDetails",
-    data: {
-      authToken: token,
-      opportunityId:id
-    },
-    dataType: "json",
-    success: function (res) {
-      console.log('businessInfo',res);
-      var data = res.data;
-      //联系人
-      var links_key = '';
-      var links_other = '';
-      $.each(data.links, function (index, val) {
-          if(val.iskey == 1){
-            links_key +=`
-                <div>
-                    <span style='margin-left:20px;'>姓名:${val.name}</span>
-                    <span style='margin-left:20px;'>公司:${val.companyName}</span> 
-                    <span style='margin-left:20px;'>职位:${val.position}</span> 
-                </div>
-            `;
-          }else{
-              links_other +=`
-                <div>
-                    <span style='margin-left:20px;'>姓名:${val.name}</span>
-                    <span style='margin-left:20px;'>公司:${val.companyName}</span> 
-                    <span style='margin-left:20px;'>职位:${val.position}</span> 
-                </div>
-              `;
-          }
-          principals += `
-            <div>
-                <span>头像:</span>
-                <div style="display:inline-block;width:60px;height:60px;">
-                    <img src="${val.icon}" alt="" width='60' height='60'>
-                </div>
-                <span style='margin-left:20px;'>姓名:${val.name}</span>
-                <span style='margin-left:20px;'>部门:${val.departMent}</span> 
-                <span style='margin-left:20px;'>手机号:${val.phone}</span> 
-            </div>
-         `;
-      })
-      //负责人
-      var principals = '';
-      $.each(data.principals,function(index,val){
-         principals +=`
-            <div>
-                <span>头像:</span>
-                <div style="display:inline-block;width:60px;height:60px;">
-                    <img src="${val.icon}" alt="" width='60' height='60'>
-                </div>
-                <span style='margin-left:20px;'>姓名:${val.name}</span>
-                <span style='margin-left:20px;'>部门:${val.departMent}</span> 
-                <span style='margin-left:20px;'>手机号:${val.phone}</span> 
-            </div>
-         `;
-      })
-      var str = `
+function businessDetail(id, $index) {
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/getOpportunityDetails",
+        data: {
+            authToken: token,
+            opportunityId: id
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log('businessInfo', res);
+            var data = res.data;
+            var str = "";
+            str = `
+                <tr>
+                    <td align="center">序号</td>
+                    <td>${$index}</td>
+                </tr>
                 <tr>
                     <td align="center">公司名称</td>
                     <td>${data.companyName}</td>
@@ -94,28 +51,78 @@ function businessDetail(id , index){
                 </tr>
                 <tr>
                     <td align="center">联系人</td>
-                    <td>
-                        <div style='border-bottom:1px solid #e6e6e6;'>
-                            <div><span>关键联系人</span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links_key}</div></div>
-                        </div>
-                        <div>
-                            <div><span>其他联系人<span><div style='border-top:1px solid #e6e6e6;background:#e6e6e6;'>${links_other}</div></div>
-                        </div>
+                    <td class="tabTd">
+                        <table class="innerTab">
+                            <tr>
+                                <td width="7%">关键联系人</td>
+                                <td class="contactTd">
+                `;
+            if (data.links != '') {
+                $.each(data.links, function (index, val) {
+                    str += `
+                                ${val.isKey==1?` <div class="contact">${val.companyName} ${val.position} ${val.name}</div>`:''}
+                             `;
+                });
+            }
+            str += `
+                                </td>
+                                </tr>
+                            <tr>
+                                <td width="7%">其他联系人</td>
+                                <td class="contactTd">
+                `;
+            if (data.links != '') {
+                $.each(data.links, function (i, v) {
+                    str += `
+                            ${v.isKey==0?`<div class="contact">${v.companyName} ${v.position} ${v.name}</div>`:''}
+                        `;
+                });
+            }
+            str += `
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>
                     <td align="center">负责人</td>
-                    <td>${principals}</td>
+                    <td class="contactTd"
+                    >
+                `;
+            if (data.principals != '') {
+                $.each(data.principals, function (il, vl) {
+                    str += `<div class="contact"><img style="width:2%;" src="${vl.icon}"/>${vl.departMent} ${vl.name} : ${vl.phone}</div>`;
+                });
+            }
+            str += `
+                    </td>
                 </tr>
                 <tr>
                     <td align="center">附件</td>
-                    <td>${data.files}</td>
+                    <td>
+                `;
+            if (data.files != "") {
+                $.each(data.files, function (dex, va) { 
+                    str += `<a style="text-decoration:underline;color: #428bca;" target="_blank" href="${va.filename}">附件${dex+1}</a>  `;
+                });
+            }
+            str += `
+                    </td>
                 </tr>
-        `;
-      $(".businessDetail").html(str);
-    },
-    error: function (err) {
-      console.log(err);
-    }
-  });
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 取消</button>
+                    </td>
+                </tr>
+            `;
+            $(".businessDetail").html(str);
+            $("#cancelButton").click(function () {
+                window.history.back(-1);
+            });
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 }

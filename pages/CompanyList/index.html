@@ -28,20 +28,25 @@
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i
                     class="fa fa-plus" aria-hidden="true"></i> 新建</button>
             <form class="navbar-form navbar-right listSearch" role="search">
-
+                <input name="keyWord" type="text" class="form-control" id="IdkeyWord" placeholder="请输入编号搜索">
+                <button type="button" class="btn btn-primary" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i>
+                    搜索</button>
+            </form>
+            <form class="navbar-form navbar-right listSearch" role="search">
                 <div class="form-group">
-                    <input id="citySearch" type="text" class="form-control" placeholder="输入所在地区进行搜索">
-                    <input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间进行搜索" />
-                    <input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="选择截止时间进行搜索" />
+                    <input id="citySearch" type="text" class="form-control" placeholder="输入所在地区">
+                    <input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间" />
+                    <input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="选择截止时间" />
                     <select class="form-control" name="parent_id" id="status">
-                        <option value="">选择状态进行搜索</option>
+                        <option value="">选择状态进行</option>
                         <option value="1">使用中</option>
                         <option value="2">已到期</option>
                         <option value="3">已冻结</option>
                     </select>
                 </div>
-                <!-- <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入编号搜索"> -->
-                <button type="button" class="btn btn-primary" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+                <button type="button" id="selectBtn" class="btn btn-primary"><i class="fa fa-calendar-check"
+                        aria-hidden="true"></i>
+                    筛选</button>
             </form>
         </div>
     </nav>
@@ -58,12 +63,12 @@
                     <th>详细地址</th>
                     <th>公司名称</th>
                     <th>负责人姓名</th>
-                    <th>联系电话</th>
+                    <!-- <th>联系电话</th> -->
                     <th>开户时间</th>
                     <th>截止时间</th>
                     <th>后台账号</th>
                     <th>账户最近登录时间</th>
-                    <!-- <th>操作</th> -->
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>

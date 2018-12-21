@@ -30,7 +30,7 @@
 
                     <tr>
                         <td align="center">密码</td>
-                        <td><input type="password" name="password" id="company_password" value="" class="form-control" datatype="*" nullmsg="请输入密码" placeholder="请输入密码"></td>
+                        <td><input type="password" name="password" id="company_password" value="" class="form-control" placeholder="请输入密码"></td>
                     </tr>
 
                     <tr>
@@ -49,7 +49,7 @@
                             <ul id="phoneList">
                                 <li class="pro-section">
                                     <div class="input-group">
-                                        <input type="text" class="form-control formPhone" value="" id="attrPhone" placeholder="请输入电话号码">
+                                        <input type="text" class="form-control formPhone" value="" id="attrPhone" placeholder="请输入电话号码" datatype="/^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(19[9])|(17[0,1,3,5,6,7,8]))\d{8}$/" errormsg="输入电话号码格式不正确" nullmsg="请输入电话号码"/>
                                     </div> 
                                     <button type="button" class="btn btn-primary" id="addphone"><i class="fa fa-plus" aria-hidden="true"></i> 添加电话</button>
                                 </li>
@@ -68,13 +68,13 @@
                     <tr>
                         <td align="center">所在地区</td>
                         <td colspan="3">
-                            <select class="form-control getPCD" id="allProvinces" name="provinceid" >
+                            <select class="form-control getPCD" id="allProvinces" name="provinceid" datatype="*" nullmsg="请输入所在省份">
                                 <!-- <option value="110000"></option> -->
                             </select>
-                            <select class="form-control getPCD" id="allCity" name="cityid" >
+                            <select class="form-control getPCD" id="allCity" name="cityid" datatype="*" nullmsg="请输入所在城市">
                                 <!-- <option value="120100"></option> -->
                             </select>
-                            <select class="form-control getPCD" id="allArea" name="districtid" >
+                            <select class="form-control getPCD" id="allArea" name="districtid" datatype="*" nullmsg="请输入所在地区" >
                                 <!-- <option value="120101"></option> -->
                             </select>
                         </td>

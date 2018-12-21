@@ -7,6 +7,30 @@
     <script src="/js/load.js"></script>
     <script src="/js/moment.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <style>
+        .contact {
+            margin: 0;
+            width: 100%;
+            /* border: 1px solid #e6e6e6; */
+            padding-left: 0.5%;
+        }
+
+        .tabTd {
+            padding: 0 !important;
+            border-bottom: 0 !important;
+        }
+
+        .innerTab {
+            border: 0 !important;
+            width: 100%;
+            margin: 0;
+        }
+
+        .contactTd {
+            margin: 0;
+            padding: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,10 +46,10 @@
         </div>
     </nav>
 
-    <div class="list-box">
+    <div class="add-box">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody class="businessDetail">
-                <tr>
+                <!-- <tr>
                     <td align="center">序号</td>
                     <td>01</td>
                 </tr>
@@ -54,12 +78,32 @@
                     <td>分组名称</td>
                 </tr>
                 <tr>
-                    <td align="center">概述</td>
-                    <td>联系人</td>
+                    <td align="center">联系人</td>
+                    <td class="tabTd">
+                        <table class="innerTab">
+                            <tr>
+                                <td width="7%">关键联系人</td>
+                                <td class="contactTd">
+                                    <div class="contact">fdhfjkshfjh</div>
+                                    <div class="contact">fdhfjkshfjh</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="7%">其他联系人</td>
+                                <td class="contactTd">
+                                    <div class="contact">fdhfjkshfjh</div>
+                                    <div class="contact">fdhfjkshfjh</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
                 <tr>
                     <td align="center">负责人</td>
-                    <td>负责人</td>
+                    <td class="contactTd">
+                        <div class="contact">fdhfjkshfjh</div>
+                        <div class="contact">fdhfjkshfjh</div>
+                    </td>
                 </tr>
                 <tr>
                     <td align="center">标签</td>
@@ -84,10 +128,11 @@
                 <tr>
                     <td align="center">信息来源</td>
                     <td>信息来源</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
 </body>
 <script src="./businessDetail.js"></script>
+
 </html>

@@ -30,10 +30,10 @@ function customerDetail(customerId) {
             var tags = arr2.toString();
             var str = "";
             str += `
-            <tr>
-                <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
-                <td align="center">名片照片</td><td><img src="${data.dreCustomer.cardcasephoto}"/></td>
-            </tr>
+                <tr>
+                    <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
+                    <td align="center">名片照片</td><td><img src="${data.dreCustomer.cardcasephoto}"/></td>
+                </tr>
                 <tr>
                     <td align="center">姓名</td><td>${data.dreCustomer.customerName}</td>
                     <td align="center">性别</td><td>${data.dreCustomer.gender}</td>
@@ -67,10 +67,15 @@ function customerDetail(customerId) {
                 </tr>
                 <tr>
                     <td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;"></td>
-                    <td colspan="3" style="padding: 15px;line-height: 28px;"></td>
+                    <td colspan="3" style="padding: 15px;line-height: 28px;">
+                         <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 取消</button>
+                    </td>
                 </tr>
             `;
             $(".add-box tbody").html(str);
+            $("#cancelButton").click(function () {
+                window.history.back(-1);
+            });
         },
         error: function (err) {
             console.log(err);

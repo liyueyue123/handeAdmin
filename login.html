@@ -20,40 +20,52 @@
             <div class="codeImg"><img src="__URL__/verCode" style="cursor:pointer" title="点击刷新验证码" /></div>
         </div> -->
         <div class="errorinfo" style="display: block;"></div>
-        <div class="buttonDiv"><input type="submit" class="login_button" value="登陆" /></div>
+        <div class="buttonDiv"><input type="submit" class="login_button" value="登录" /></div>
     </div>
 
 </body>
 <script>
     $(function () {
+        // 登录按钮
         $("div.buttonDiv").click(function () {
-            var userName = $("#username").val();
-            var passWord = $("#password").val();
-            $.ajax({
-                type: "GET",
-                url: APP_URL + "/console/login",
-                data: {
-                    loginname: userName,
-                    passwd: passWord
-                },
-                dataType: "json",
-                success: function (res) {
-                    console.log(res);
-                    if (res.code == "success") {
-                        $(window).attr("location", "./pages/index.html");
-                        sessionStorage.setItem("token",res.authToken);
-                        sessionStorage.setItem("name",res.data.name);
-                    } else {
-                        $("div.errorinfo").html(res.message);
-                        $("div.errorinfo").show();
-                    }
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
+            login();
         });
+        // enter登录
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                login();
+            }
+        });
+
     });
+
+    function login() {
+        var userName = $("#username").val();
+        var passWord = $("#password").val();
+        $.ajax({
+            type: "GET",
+            url: APP_URL + "/console/login",
+            data: {
+                loginname: userName,
+                passwd: passWord
+            },
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                if (res.code == "success") {
+                    $(window).attr("location", "./pages/index.html");
+                    sessionStorage.setItem("token", res.authToken);
+                    sessionStorage.setItem("name", res.data.name);
+                } else {
+                    $("div.errorinfo").html(res.message);
+                    $("div.errorinfo").show();
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 </script>
 
 </html>

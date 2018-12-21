@@ -1,6 +1,11 @@
 $(function () {
     companyList(1); //公司列表
+    // 搜索
     $("#searchBtn").click(function () {
+        companyList(1);
+    });
+    // 筛选
+    $("#selectBtn").click(function () {
         companyList(1);
     });
 });
@@ -12,21 +17,25 @@ function companyList(pageNum) {
     var openTime = $("#openTime").val(); //开户时间
     var overTime = $("#overTime").val(); //截止时间
     var status = $("#status option:selected").val(); //状态
+    var id = $("#IdkeyWord").val(); //编号
     var data = {};
     data.authToken = token;
     data.limit = 10;
     data.page = pageNum;
-    if (city) {
+    if (city != '') {
         data.address = city;
     }
-    if (openTime) {
+    if (openTime != '') {
         data.opentimeStart = openTime;
     }
-    if(overTime){
-        data.deadlineStart=overTime;
+    if (overTime != '') {
+        data.deadlineStart = overTime;
     }
-    if(status){
-        data.status=status;
+    if (status != '') {
+        data.status = status;
+    }
+    if (id != '') {
+        data.search = id;
     }
     $.ajax({
         type: "GET",
@@ -48,12 +57,15 @@ function companyList(pageNum) {
                         <td>${val.province}${val.city}${val.area}</td>
                         <td>${val.address}</td>
                         <td>${val.companyname}</td>
-                        <td class="sortTD" name="Case">${val.principalName}</td>
-                        <td></td>
+                        <td>${val.principalName}</td>
                         <td>${moment(val.openaccounttime).format("YYYY年MM月DD日")}</td>
                         <td>${moment(val.deadline).format("YYYY年MM月DD日")}</td>
                         <td>${val.account}</td>
                         <td></td>
+                        <td>
+                            <a class="btn btn-success" data-table="user" data-id="3"  href="javascript:void(0);">冻结</a>
+                            <a class="btn btn-danger" data-table="user" data-id="3"  href="javascript:void(0);">解冻</a>
+                        </td>
                     </tr>
                 `;
             });
