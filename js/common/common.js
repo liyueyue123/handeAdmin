@@ -37,7 +37,7 @@ function ajax(obj) {
     }, //自定义提交的数据
     beforeSubmit: function () {
       // 新增公司处理多组电话
-      if ($(".formPhone").length != "") {
+      if ($(".formPhone").length != 0) {
         var arr = [];
         $.each($(".formPhone"), function () {
           arr.push($(this).val());
@@ -45,7 +45,6 @@ function ajax(obj) {
         var phones = arr.toString();
         $("#formPhones").val(phones);
       }
-      $("#roles").val();
       $.showLoading('正在提交……');
     },
     success: function (res) { //表单提交成功回调函数
