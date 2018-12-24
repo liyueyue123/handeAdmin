@@ -36,16 +36,16 @@
 
                     <tr>
                         <td align="center">密码</td>
-                        <td><input type="password" name="passwd" id="user_passwd" class="form-control" datatype="*6-15" errormsg="密码范围在6~15位之间" nullmsg="请输入密码" placeholder="请输入密码"></td>
+                        <td><input type="password" name="passwd" id="user_passwd" class="form-control" datatype="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/" errormsg="密码由6~16位之间数字或字母组成" nullmsg="请输入密码" placeholder="请输入密码"></td>
                     </tr>
 
-                    <tr>
+                    <!-- <tr>
                         <td align="center">性别</td>
                         <td>
                             <input type="radio" value="男" name="gender" id='man' checked/>男
                             <input type="radio" value="女" name="gender" id='woman'/>女
                         </td>
-                    </tr>
+                    </tr> -->
                     
                     <tr>
                         <td align="center">手机号</td>
@@ -64,10 +64,10 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <!-- <tr>
                         <td align="center">email</td>
                         <td><input type="email" name="email" id="user_email" class="form-control" datatype="e" errormsg="邮箱格式不正确！"  nullmsg="请输入邮箱" placeholder="请输入邮箱"></td>
-                    </tr>
+                    </tr> -->
 
                     <tr>
                         <td align="center">公司</td>
@@ -87,10 +87,10 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <!-- <tr>
                         <td align="center">地址</td>
                         <td><input type="text" name="address" id="user_address" class="form-control"  placeholder="请输入地址"></td>
-                    </tr>
+                    </tr> -->
                     
                     <tr>
                         <td>&nbsp;</td>

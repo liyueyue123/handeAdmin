@@ -34,14 +34,14 @@ function getUserInfo(id){
       $("#user_loginname").val(data.loginname);
       $("#user_name").val(data.name);
       $("#user_passwd").val(data.passwd);
-      if(data.gender == '女'){
-        var gender = 'woman'
-      }else{
-        var gender = 'man'
-      }
-      $("#"+gender).attr('checked',true);
+      // if(data.gender == '女'){
+      //   var gender = 'woman'
+      // }else{
+      //   var gender = 'man'
+      // }
+      // $("#"+gender).attr('checked',true);
       $("#user_phone").val(data.phone);
-      $("#user_wechat").val(data.wechat);
+      // $("#user_wechat").val(data.wechat);
       if (data.icon.length>30){
         $("#icon-image").find("img").attr({
           "src": data.icon
@@ -58,7 +58,7 @@ function getUserInfo(id){
       $("#company").find("option[value=" + data.company + "]").attr("selected", true);
       //获取部门的下拉选框
       getDepartmentSelect(data.department);
-      $("#user_address").val(data.address);
+      // $("#user_address").val(data.address);
     }
   });
 }
