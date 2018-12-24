@@ -40,6 +40,7 @@ function ajax(obj) {
       if ($(".formPhone").length != 0) {
         var arr = [];
         $.each($(".formPhone"), function () {
+          console.log($(this).val());
           arr.push($(this).val());
         });
         var phones = arr.toString();
