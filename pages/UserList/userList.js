@@ -2,9 +2,8 @@ $(function () {
   userList(1);
 });
 
-function userList(pageNum,phone,name,Id){
+function userList(pageNum, phone, name, Id, department) {
   var token = sessionStorage.getItem("token");
-  // console.log(token)
   $.ajax({
     type: "GET",
     url: APP_URL + "/user/all",
@@ -14,7 +13,8 @@ function userList(pageNum,phone,name,Id){
       page: pageNum,
       phone: phone,
       name: name,
-      Id:Id
+      Id:Id,
+      department: department
     },
     dataType: "json",
     success: function (res) {
@@ -104,10 +104,54 @@ function operate(isLock,userId,pageNum){
         }
     });
 }
-//点击搜索按钮
-$('#search_btn').live('click',function () {
+//点击搜索或者筛选按钮
+$('#search_btn').live('click', function () {
   var phone = $('#search_phone').val();
   var name = $('#search_name').val();
   var Id = $('#search_Id').val();
   userList(1,phone,name,Id);
 })
+$('#filter_btn').live('click', function () {
+  var phone = '';
+  var name = '';
+  var Id = '';
+  var department = $('#filter_department').val();
+  userList(1, phone, name, Id, department);
+})
+
+//点击导出按钮
+$('#export').live('click', function () {
+  var p = confirm("由于数据存在关联查询， 导出Exce可能需要1 - 3 分钟的时间， 确定要导出吗（ 确定后请勿刷新页面或关闭浏览器） ?" )
+  if(p == true){
+    var token = sessionStorage.getItem("token");
+    // var url = APP_URL + "/export";
+    // $.ajax({
+    //   type: "get",
+    //   url: url,
+    //   data: {
+    //     authToken: token
+    //   },
+    //   dataType: "text",
+    //   success: function (res) {
+    //     console.log(res)
+    //     window.location.href = res;
+    //   },
+    //   error: function (err) {
+    //     console.log(err);
+    //     alert(err);
+    //   }
+    // });
+    window.location.href = 'http://hande.icpnt.com/export?token=' +token;
+  }
+})
+
+//点击全选按钮
+$('#allChecked').live('click',function(){
+  allchecked();
+})
+//全选
+function allchecked(){
+  $("input[name=del_listID]").attr({
+    'checked': true
+  })
+}
