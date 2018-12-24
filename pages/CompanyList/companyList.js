@@ -34,8 +34,8 @@ function companyList(pageNum) {
     if (status != '') {
         data.status = status;
     }
-    if (id != '') {
-        data.search = id;
+    if (id != '') { 
+        data.id = id;
     }
     $.ajax({
         type: "GET",

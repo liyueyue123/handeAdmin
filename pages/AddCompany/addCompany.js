@@ -7,12 +7,12 @@ $(function () {
             str += `
             <li class="pro-section">
                 <div class="input-group">
-                    <input type="text" class="form-control formPhone" placeholder="请输入电话号码" datatype="/^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(19[9])|(17[0,1,3,5,6,7,8]))\d{8}$/" errormsg="输入电话号码格式不正确" nullmsg="请输入电话号码"/>
+                    <input type="text" class="form-control formPhone" placeholder="请输入电话号码" datatype="/^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(19[9])|(17[0,1,3,5,6,7,8]))[0-9]{8}$/" errormsg="输入电话号码格式不正确" nullmsg="请输入电话号码"/>
                 </div> 
                 <button type="button" class="btn btn-danger pro-removeSection"><i class="fa fa-minus" aria-hidden="true"></i> 移除电话</button>
             </li> 
             `;
-            $("#addTelText").append(str);
+            $("#phoneList").append(str);
         }
     });
     // 删除电话
