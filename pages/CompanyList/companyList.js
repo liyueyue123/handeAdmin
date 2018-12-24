@@ -34,7 +34,7 @@ function companyList(pageNum) {
     if (status != '') {
         data.status = status;
     }
-    if (id != '') { 
+    if (id != '') {
         data.id = id;
     }
     $.ajax({
@@ -61,10 +61,9 @@ function companyList(pageNum) {
                         <td>${moment(val.openaccounttime).format("YYYY年MM月DD日")}</td>
                         <td>${moment(val.deadline).format("YYYY年MM月DD日")}</td>
                         <td>${val.account}</td>
-                        <td></td>
+                        <td>${moment(val.lastlogintime).format("YYYY年MM月DD日")}</td>
                         <td>
-                            <a class="btn btn-success" data-table="user" data-id="3"  href="javascript:void(0);">冻结</a>
-                            <a class="btn btn-danger" data-table="user" data-id="3"  href="javascript:void(0);">解冻</a>
+                            <a class="btn ${val.status=='3'?'btn-success':'btn-danger'}"  onclick="${val.status=='3'?'unfreeze('+val.id+')':'freeze('+val.id+')'}" href="javascript:void(0);">${val.status=='3'?'解冻':'冻结'}</a>
                         </td>
                     </tr>
                 `;
@@ -76,5 +75,53 @@ function companyList(pageNum) {
             console.log(err);
         }
 
+    });
+}
+
+//冻结
+function freeze(id) {
+    console.log(id);
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/freeze",
+        data: {
+            authToken: token,
+            id: id
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.code == 0) {
+                window.location.reload();
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+//解冻
+function unfreeze(id) {
+    console.log(id);
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/unfreeze",
+        data: {
+            authToken: token,
+            id: id
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.code == 0) {
+                window.location.reload();
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
     });
 }

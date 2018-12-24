@@ -6,7 +6,7 @@ $(function () {
         getCustomerList(1);
     });
     //筛选
-    $("#selectBtn").click(function(){
+    $("#selectBtn").click(function () {
         getCustomerList(1);
     });
 
@@ -15,25 +15,33 @@ $(function () {
 //获取客户列表
 function getCustomerList(pageNum) {
     var token = sessionStorage.getItem("token");
-    var id = $("#IdKeyWord").val(); //id
+    var id = parseInt($("#IdKeyWord").val()); //id
     var name = $("#NameKeyWord").val(); //客户名称
     var company = $("#companySelect option:selected").val(); //公司名称
     var position = $("#PositonKeyWord").val(); //职位
+    var startTime = $("#openTime").val(); //开户时间
+    var overTime = $("#overTime").val(); //结束时间
     var data = {};
     data.authToken = token;
     data.limit = 10;
     data.page = pageNum;
-    if (position !="") {
+    if (position != "") {
         data.position = position;
     }
-    if (company !="") {
+    if (company != "") {
         data.company = company;
     }
-    if (id !="") {
+    if (id) {
         data.id = id;
     }
-    if (name !="") {
-        data.customerName = name
+    if (name != "") {
+        data.customerName = name;
+    }
+    if (startTime != "") {
+        data.startTime = startTime;
+    }
+    if (overTime != "") {
+        data.endTime = overTime;
     }
     $.ajax({
         type: "POST",
