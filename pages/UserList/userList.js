@@ -32,12 +32,13 @@ function userList(pageNum,phone,name,Id){
             <td><a href="javascript:;">${val.phone}</a></td>
             <td>${val.departname}</td>
             <td><img style="width:60px;height:60px;margin:10px;" src="${val.icon}"/></td>
-            <td></td>
-            <td></td>
+            <td>${val.customerCount}</td>
+            <td>${val.opportunityCount}</td>
             <td>${val.companyname}</td>
             <td></td>
             <td></td>
             <td></td>
+            <td>${val.passwd}</td>
             <td></td>
             <td></td>
             <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id},${pageNum})">${val.isLock == 0 ?"禁用":"启用"}</a></td>

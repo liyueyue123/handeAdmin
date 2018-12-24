@@ -28,6 +28,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id) {
                 <tr>
                 <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
                 <td>${pages+index+1}</td>
+                <td>${val.id}</td>
                 <td>${val.companyname}</td>
                 <td>${val.price}</td>
                 <td>${val.provinesName}${val.cityName}${val.areaName}</td>

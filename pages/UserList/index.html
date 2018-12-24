@@ -17,10 +17,11 @@
 <a class="navbar-brand" href="#">用户信息管理</a>
 </div>
 <div>
-<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteUser','GET','userId')"><i class="fas fa-trash-alt"></i>删除</button>
+<button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteUser','GET','userId')"><i class="fas fa-trash-alt"></i> 删除</button>
 <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddUser/index.html')"><i class="fas fa-edit"></i>修改</button>
 <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddUser/index.html')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
 <button type="button" class="btn btn-primary navbar-btn listButton" onclick="javascript:if(confirm('由于数据存在关联查询，导出Exce可能需要1-3分钟的时间，确定要导出吗（确定后请勿刷新页面或关闭浏览器）?'))location='/manage.php/Order/exportExcel?startTime=&amp;endTime=&amp;business_id=&amp;one_category=&amp;two_category='"><i class="fa fa-sign-in" aria-hidden="true"></i> 导出Excel</button>
+<button type="button" class="btn btn-primary navbar-btn listButton"><i class="fa fa-sellcast" aria-hidden="true"></i> 全选</button>
 <div class="navbar-form navbar-right listSearch">
 <div class="form-group">
     <input name="phone" type="text" class="form-control" style="width:160px;" id="search_phone" placeholder="输入手机号进行搜索">
@@ -53,6 +54,7 @@
 <th>讨论组</th>
 <th>分组</th>
 <th>标签</th>
+<th>密码</th>
 <th>企业索索历史</th>
 <th>用户总数</th>
 <th>操作</th>
