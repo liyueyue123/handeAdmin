@@ -143,13 +143,16 @@ function addCompany() {
 
 // 获取公司详情
 function showDetails(id) {
+    var $id = parseInt(id);
+    // ssdebugger;
+    console.log($id,typeof($id));
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
         url: APP_URL + "/showDetails",
         data: {
-            authToken: token,
-            companyId: id
+            "authToken": token,
+            "companyId": $id
         },
         dataType: "json",
         success: function (res) {
@@ -185,7 +188,7 @@ function showDetails(id) {
                             </li>
                         `;
                         }
-                        $("#addTelText").append(phones);
+                        $("#phoneList").append(phones);
                     }
                 }
                 $("#allProvinces").find("option[value=" + data.provinceid + "]").attr("selected", true); //省
