@@ -46,8 +46,12 @@ function businessDetail(id, $index) {
                     <td>${data.stage}</td>
                 </tr>
                 <tr>
+                    <td align="center">分组名称</td>
+                    <td>${data.group}</td>
+                </tr>
+                <tr>
                     <td align="center">概述</td>
-                    <td>${data.companyName}</td>
+                    <td>${data.remark}</td>
                 </tr>
                 <tr>
                     <td align="center">联系人</td>
@@ -98,6 +102,45 @@ function businessDetail(id, $index) {
                     </td>
                 </tr>
                 <tr>
+                    <td align="center">标签</td>
+                    <td>
+                `;
+            if (data.tags != '') {
+                data.tags = [{
+                    name: 'mingcheng',
+                    num: '1'
+                }, {
+                    name: 'mingcheng',
+                    num: '1'
+                }, {
+                    name: 'mingcheng',
+                    num: '1'
+                }, {
+                    name: 'mingcheng',
+                    num: '1'
+                }, {
+                    name: 'mingcheng',
+                    num: '1'
+                }, ]
+                $.each(data.tags, function (til, tvl) {
+                    str += `<div class="contact">标签名称:${tvl.name},标签数量:${tvl.num}</div>`;
+                });
+            } 
+            str += `
+                </tr>
+                <tr>
+                    <td align="center">讨论组</td>
+                    <td>${data.stage}</td>
+                </tr>
+                <tr>
+                    <td align="center">弹性域字段</td>
+                    <td>${data.stage}</td>
+                </tr>
+                <tr>
+                    <td align="center">操作历史</td>
+                    <td>${data.stage}</td>
+                </tr>
+                <tr>
                     <td align="center">附件</td>
                     <td>
                 `;
@@ -108,6 +151,10 @@ function businessDetail(id, $index) {
             }
             str += `
                     </td>
+                </tr>
+                <tr>
+                    <td align="center">信息来源</td>
+                    <td>${data.stage}</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>

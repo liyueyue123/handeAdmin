@@ -30,7 +30,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
       $.each(data, function (index, val) {
         str += `
                 <tr>
-                <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
+                <td><input type="checkbox" name="del_listID" id="del_listID" data-index="${pages+index+1}"data-name="multi-select" value="${val.id}" /></td>
                 <td>${pages+index+1}</td>
                 <td>${val.id}</td>
                 <td>${val.companyname}</td>
@@ -41,8 +41,8 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
                 <td>${val.groupid}</td>
                 <td>${val.source}</td>
                 <td width="300">
-                <div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${index+1}"> 查看详情</div>
-                <div class="btn btn-info navbar-btn" style="position:relative;" id="upload_file" style="margin-left:20px;" data-id="${val.id}" data-index="${index+1}">
+                <div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${pages+index+1}"> 查看详情</div>
+                <div class="btn btn-info navbar-btn" style="position:relative;" id="upload_file" style="margin-left:20px;" data-id="${val.id}" data-index="${pages+index+1}">
                    <div>上传附件<div>
                    <div style="position:absolute;left:0;top:0;opacity:0;"><input type='file' height='34.5' multiple="multiple"></div>
                 </div>
@@ -126,7 +126,7 @@ $('#search_btn').live('click', function () {
 $('#filter_btn').live('click', function () {
   var companyName = '';
   var linkMan = '';
-  var responsible = '';
+  var responsible = $('#filter_responsible').val();
   var id = '';
   var price = $('#filter_price').val();
   var stage = $('#filter_stage').val();

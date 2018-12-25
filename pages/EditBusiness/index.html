@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>商机列表</title>
+  <script src="/js/load.js"></script>
+  <script src="/js/moment.js"></script>
+  <link rel="stylesheet" href="/css/rightCommon.css">
+  <style>
+    .contact {
+      margin: 0;
+      width: 100%;
+      /* border: 1px solid #e6e6e6; */
+      padding-left: 0.5%;
+    }
+
+    .tabTd {
+      padding: 0 !important;
+      border-bottom: 0 !important;
+    }
+
+    .innerTab {
+      border: 0 !important;
+      width: 100%;
+      margin: 0;
+    }
+
+    .contactTd {
+      margin: 0;
+      padding: 0 !important;
+    }
+    .form-control{
+      width:33%;
+    }
+    .getPCD {
+    width: 33.03%;
+    float: left;
+    margin-right: 0.3%;
+}
+
+.dataInput {
+    width: 14%;
+    float: left;
+    margin-right: 0.5%;
+}
+
+.pro-section {
+    float: left;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 8px; 
+    margin-right:1%;    
+}
+
+.pro-section div {
+    width: 60%;
+    float: left;
+    padding-right: 2%;
+    margin-top: 8px;
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+  <!--alert弹窗Start  -->
+  <div id="top-alert" class="fixed alert alert-error" style="display:none;">
+    <button class="close fixed" style="margin-top: 4px;">×</button>
+    <div class="alert-content">这是内容</div>
+  </div>
+  <!--alert弹窗end  -->
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">修改商机</a>
+    </div>
+  </nav>
+
+  <div class="add-box">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody class="businessDetail">
+        <tr>
+            <td align="center">公司名称</td>
+            <td><input type="text" id='companyName'  class="form-control" value=""></td>
+        </tr>
+        <tr>
+            <td align="center">金额</td>
+            <td><input type="text" id="price"  class="form-control" value=""></td>
+        </tr>
+        <tr>
+            <td align="center">城市</td>
+            <td>
+                <td colspan="3">
+                    <select class="form-control getPCD" id="allProvinces" name="provinceid" datatype="*" nullmsg="请输入所在省份">
+                        <!-- <option value="110000"></option> -->
+                    </select>
+                    <select class="form-control getPCD" id="allCity" name="cityid" datatype="*" nullmsg="请输入所在城市">
+                        <!-- <option value="120100"></option> -->
+                    </select>
+                    <select class="form-control getPCD" id="allArea" name="districtid" datatype="*" nullmsg="请输入所在地区" >
+                        <!-- <option value="120101"></option> -->
+                    </select>
+                </td>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">日期</td>
+            <td><input type="text" name="time" value="" id="time" class="form-control jcDate form_datetime dataInput" datatype="*"  placeholder="请选择日期" style="width:33.03%"/></td>
+        </tr>
+        <tr>
+            <td align="center">阶段</td>
+            <td><input type="text"  class="form-control" id="stage"></td>
+        </tr>
+        <tr>
+            <td align="center">分组名称</td>
+            <td><input type="text"  class="form-control" id="group"></td>
+        </tr>
+        <tr>
+            <td align="center">概述</td>
+            <td><input type="text"  class="form-control" id="remark"></td>
+        </tr>
+        <tr>
+            <td align="center">联系人</td>
+            <td class="tabTd">
+                <table class="innerTab">
+                    <tr>
+                        <td width="7%">关键联系人</td>
+                        <td class="contactTd">
+                            <div class="contact">fdhfjkshfjh</div>
+                            <div class="contact">fdhfjkshfjh</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="7%">其他联系人</td>
+                        <td class="contactTd">
+                            <div class="contact">fdhfjkshfjh</div>
+                            <div class="contact">fdhfjkshfjh</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">负责人</td>
+            <td class="contactTd">
+                <div class="contact">fdhfjkshfjh</div>
+                <div class="contact">fdhfjkshfjh</div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">标签</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">讨论组</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">弹性字段</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">操作历史</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">附件</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">信息来源</td>
+            <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+<script src="./editBusiness.js"></script>
+</html>
