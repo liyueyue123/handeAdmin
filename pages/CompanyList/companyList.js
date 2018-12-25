@@ -58,10 +58,10 @@ function companyList(pageNum) {
                         <td>${val.address}</td>
                         <td>${val.companyname}</td>
                         <td>${val.principalName}</td>
-                        <td>${moment(val.openaccounttime).format("YYYY年MM月DD日")}</td>
-                        <td>${moment(val.deadline).format("YYYY年MM月DD日")}</td>
+                        <td>${val.openaccounttime=''?'':moment(val.openaccounttime).format("YYYY年MM月DD日")}</td>
+                        <td>${val.deadline=''?'':moment(val.deadline).format("YYYY年MM月DD日")}</td>
                         <td>${val.account}</td>
-                        <td>${moment(val.lastlogintime).format("YYYY年MM月DD日")}</td>
+                        <td>${val.lastlogintime=''?'':moment(val.lastlogintime).format("YYYY年MM月DD日")}</td>
                         <td>
                             <a class="btn ${val.status=='3'?'btn-success':'btn-danger'}"  onclick="${val.status=='3'?'unfreeze('+val.id+')':'freeze('+val.id+')'}" href="javascript:void(0);">${val.status=='3'?'解冻':'冻结'}</a>
                         </td>
@@ -80,7 +80,6 @@ function companyList(pageNum) {
 
 //冻结
 function freeze(id) {
-    console.log(id);
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -93,7 +92,7 @@ function freeze(id) {
         success: function (res) {
             console.log(res);
             if (res.code == 0) {
-                window.location.reload();
+                companyList(1);
             }
         },
         error: function (err) {
@@ -117,7 +116,7 @@ function unfreeze(id) {
         success: function (res) {
             console.log(res);
             if (res.code == 0) {
-                window.location.reload();
+                companyList(1);
             }
         },
         error: function (err) {
