@@ -145,13 +145,29 @@ $('#export').live('click', function () {
   }
 })
 
+
+var isAll = true;
 //点击全选按钮
 $('#allChecked').live('click',function(){
-  allchecked();
+  if (isAll == true){
+    allchecked();
+    $('#changeTxt').text('取消全选');
+    isAll = false;
+  }else{
+    nochecked();
+    isAll = true;
+    $('#changeTxt').text('全选');
+  }
 })
 //全选
 function allchecked(){
   $("input[name=del_listID]").attr({
     'checked': true
+  })
+}
+//全不选
+function nochecked(){
+  $("input[name=del_listID]").attr({
+    'checked': false
   })
 }

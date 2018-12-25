@@ -27,19 +27,35 @@
 <!-- <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('addNews')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button> -->
 <div class="navbar-form navbar-right listSearch">
 <div class="form-group">
-  <input name="phone" type="text" class="form-control" style="width:170px;" id="search_companyName" placeholder="输入公司名称进行搜索">
+  <input name="phone" type="text" class="form-control" style="width:100px;" id="search_companyName" placeholder="公司名称">
 </div>
 <div class="form-group">
-  <input name="Id" type="text" class="form-control" style="width:160px;" id="search_linkMan" placeholder="输入联系人进行搜索">
+  <input name="Id" type="text" class="form-control" style="width:75px;" id="search_linkMan" placeholder="联系人">
 </div>
 <div class="form-group">
-  <input name="name" type="text" class="form-control" style="width:160px;" id="search_responsible" placeholder="输入负责人进行搜索">
+  <input name="name" type="text" class="form-control" style="width:75px;" id="search_responsible" placeholder="负责人">
 </div>
 <div class="form-group">
-  <input name="Id" type="text" class="form-control" style="width:130px;" id="search_id" placeholder="输入id进行搜索">
+  <input name="Id" type="text" class="form-control" style="width:50px;" id="search_id" placeholder="id">
 </div>
 <button class="btn btn-primary" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-</div>    
+</div>
+<div class="navbar-form navbar-right listSearch">
+  <div class="form-group">
+    <input name="price" type="text" class="form-control" style="width:100px;" id="filter_price" placeholder="金额">
+  </div>
+  <div class="form-group">
+    <input name="stage" type="text" class="form-control" style="width:100px;" id="filter_stage" placeholder="阶段">
+  </div>
+  <div class="form-group">
+    <input name="startTime"  type="text" id="filter_startTime" class="form-control jcDate form_datetime" placeholder="日期" />
+  </div>
+  <div class="form-group">
+    <input name="city" type="text" class="form-control" style="width:100px;" id="filter_city" placeholder="城市">
+  </div>
+  <button type="button" class="btn btn-primary" id="filter_btn"><i class="fa fa-calendar-check" aria-hidden="true"></i>
+    筛选</button>
+</div>
 </div>
 </nav>
 
@@ -103,4 +119,16 @@
 
 </body>
 <script src="./businessList.js"></script>
+<script>
+  $(".form_datetime").datetimepicker({
+    format: 'yyyy/mm/dd hh:ii', //显示格式
+    todayHighlight: 1, //今天高亮
+    minTime: '10',
+    language: 'zh-CN',
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1,
+    autoclose: 1 //选择后自动关闭
+  });
+</script>
 </html>
