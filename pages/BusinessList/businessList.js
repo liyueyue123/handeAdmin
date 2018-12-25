@@ -3,7 +3,7 @@ $(function () {
 });
 
 // 获取商机列表
-function businessList(pageNum, companyName, linkMan, responsible, id) {
+function businessList(pageNum, companyName, linkMan, responsible, id, price, stage, startTime, city) {
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
@@ -15,7 +15,11 @@ function businessList(pageNum, companyName, linkMan, responsible, id) {
       companyName: companyName,
       linkMan: linkMan,
       responsible: responsible,
-      id:id
+      id:id,
+      price: price,
+      stage: stage,
+      startTime: startTime,
+      city: city
     },
     dataType: "json",
     success: function (res) {
@@ -115,6 +119,18 @@ $('#search_btn').live('click', function () {
   var linkMan = $('#search_linkMan').val();
   var responsible = $('#search_responsible').val();
   var id = $('#search_id').val();
-  console.log(id);
+  // console.log(id);
   businessList(1, companyName, linkMan, responsible, id);
+})
+//点击筛选按钮
+$('#filter_btn').live('click', function () {
+  var companyName = '';
+  var linkMan = '';
+  var responsible = '';
+  var id = '';
+  var price = $('#filter_price').val();
+  var stage = $('#filter_stage').val();
+  var startTime = $('#filter_startTime').val();
+  var city = $('#filter_city').val();
+  businessList(1, companyName, linkMan, responsible, id, price, stage, startTime, city);
 })
