@@ -116,11 +116,16 @@
 
 </body>
 <script>
+    var data = new Date();
+    var time = data.getMinutes();
+    var newTime = data.setMinutes(time+10);
+    // console.log(newTime);
     $(".form_datetime").datetimepicker({
-        format: 'yyyy/mm/dd hh:ii',//显示格式
+        format: 'yyyy/mm/dd hh:ii:ss',//显示格式
         todayHighlight: 1,//今天高亮
-        startDate:new Date(), //设置开始时间
-        minDate:0,
+        startDate:new Date(newTime), //设置开始时间
+        minView: 0,
+        minuteStep:1,
         language: 'zh-CN',
         startView:2,
         forceParse: 0,
