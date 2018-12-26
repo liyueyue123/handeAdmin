@@ -107,7 +107,7 @@ $('#upload_file').live("change", function (e) {
 
 //点击查看详情
 $('#search_details').live('click', function (e) {
-  // console.log('id',e.target.dataset.id)
+  console.log('id',e.target.dataset.id)
   var id = e.target.dataset.id;
   var index = e.target.dataset.index;
   openAddData('../BusinessDetail/index.html?id='+id+'&index='+index)

@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>商机列表</title>
+  <script src="/js/load.js"></script>
+  <script src="/js/moment.js"></script>
+  <link rel="stylesheet" href="/css/rightCommon.css">
+  <style>
+    .contact {
+      margin: 0;
+      width: 100%;
+      /* border: 1px solid #e6e6e6; */
+      padding-left: 0.5%;
+    }
+
+    .tabTd {
+      padding: 0 !important;
+      border-bottom: 0 !important;
+    }
+
+    .innerTab {
+      border: 0 !important;
+      width: 100%;
+      margin: 0;
+    }
+
+    .contactTd {
+      margin: 0;
+      padding: 0 !important;
+    }
+
+    .form-control {
+      width: 33%;
+    }
+
+    .getPCD {
+      width: 33.03%;
+      float: left;
+      margin-right: 0.3%;
+    }
+
+    .dataInput {
+      width: 14%;
+      float: left;
+      margin-right: 0.5%;
+    }
+
+    .pro-section {
+      float: left;
+      height: auto;
+      overflow: hidden;
+      padding-bottom: 8px;
+      margin-right: 1%;
+    }
+
+    .pro-section div {
+      width: 60%;
+      float: left;
+      padding-right: 2%;
+      margin-top: 8px;
+      border-radius: 5px;
+    }
+    label{ padding:0 10px; margin:0; height:50px; line-height:50px; cursor:pointer;}
+	.departureDiv{display: none;}
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+    <a class="navbar-brand" href="#"><i class="fa fa-plus" aria-hidden="true"></i> 修改商机</a>
+    </div>
+  </nav>
+
+  <div class="add-box">
+    <form class="addForm" id="form1" name="form1" action="">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td colspan="4" align="center"> 商机基本信息 </td>
+          </tr>
+          <input type="text" name="opportunityId" id="opportunityId" value="" hidden>
+          <tr>
+            <td align="center">公司名称</td>
+            <td><input type="text" name="companyName" id='companyName' value="" class="form-control" datatype="*" nullmsg="请输入公司名称" placeholder="请输入公司名称" /></td>
+            <td align="center">金额</td>
+            <td><input type="text" name="price" id="price" value="" class="form-control" datatype="*" nullmsg="请输入金额" placeholder="请输入金额" /></td>
+          </tr>
+
+          <tr>
+            <td align="center">城市</td>
+            <td width="40%">
+                <div id="citylist"></div>
+                <select class="form-control getPCD" id="allProvinces" name="provinceId" value="" datatype="*" nullmsg="请输入所在省份">
+                </select>
+                <select class="form-control getPCD" id="allCity" name="cityId" value="" datatype="*" nullmsg="请输入所在城市">
+                </select>
+                <select class="form-control getPCD" id="allArea" name="areaId" value="" datatype="*" nullmsg="请输入所在地区" >
+                </select>
+            </td>
+            <td align="center">日期</td>
+            <td><input name="time"  type="text" id="time" value="" class="form-control jcDate form_datetime" placeholder="日期" /></td>
+          </tr>
+          <tr>
+            <td align="center">阶段</td>
+            <td><input type="text" id="stage" value="" class="form-control" ></td>
+          </tr>
+          <tr>
+            <td colspan="4" align="center">
+              <button type="submit" class="btn btn-success" id="saveButton" style="margin-left:-5%;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+            </td>
+          </tr>
+    </form>
+          <tr>
+            <td colspan="4"></td>
+          </tr>
+          <tr>
+            <td colspan="4" align="center">商机其他信息</td>
+          </tr>
+          <tr>
+            <td align="center">概述</td>
+            <td colspan="3">
+              <input type="text" id="remark"  class="form-control" value="${data.remark}" style="display:inline-block;">
+              <button type="submit" class="btn btn-success" id="saveButton" style="display:inline-block;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+            </td>
+          </tr>
+
+
+          <tr>
+            <td align="center">
+              联系人
+            </td>
+          <td class="tabTd" colspan="3">
+            <table class="innerTab">
+              <tr>
+                <td width="7%">关键联系人</td>
+                <td class="contactTd">
+                  <div class="contact">fdhfjkshfjh</div>
+                  <div class="contact">fdhfjkshfjh</div>
+                </td>
+              </tr>
+              <tr>
+                <td width="7%">其他联系人</td>
+                <td class="contactTd">
+                  <div class="contact">fdhfjkshfjh</div>
+                  <div class="contact">fdhfjkshfjh</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          </tr>
+          <tr>
+          </tr>
+           <tr>
+            <td colspan="4" align="center">
+              <button type="submit" class="btn btn-success" id="saveButton" style="margin-left:-5%;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">负责人</td>
+            <td class="contactTd" colspan="3">
+              <div class="contact">fdhfjkshfjh</div>
+              <div class="contact">fdhfjkshfjh</div>
+            </td>
+          </tr>
+           <tr>
+            <td colspan="4" align="center">
+              <button type="submit" class="btn btn-success" id="saveButton" style="margin-left:-5%;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center">附件</td>
+            <td colspan="3">
+              <div class="btn btn-info navbar-btn" style="position:relative;" id="upload_file" style="margin-left:20px;" data-id="${val.id}" data-index="${pages+index+1}">
+                   <div>上传附件<div>
+                   <div style="position:absolute;left:0;top:0;opacity:0;"><input type='file' height='34.5' multiple="multiple"></div>
+              </div>
+              <button class="btn btn-success" id="fujian" style="display:inline-block;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+            </td>
+          </tr>
+      
+
+          <tr>
+            <td>&nbsp;</td>
+            <td colspan="3">
+              <button type="submit" class="btn btn-info" id="saveButton"><i class="fa fa-back" aria-hidden="true"></i>
+                返回</button>
+              <!-- <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i>
+                取消</button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+
+</body>
+<script src="./1.js"></script>
+<script>
+  $(".form_datetime").datetimepicker({
+    format: 'yyyy/mm/dd hh:ii', //显示格式
+    todayHighlight: 1, //今天高亮
+    minTime: '10',
+    language: 'zh-CN',
+    startView: 2,
+    forceParse: 0,
+    showMeridian: 1,
+    autoclose: 1 //选择后自动关闭
+  });
+  $('#upload_file').live("change", function (e) {
+  //上传单个文件
+  if (e.target.files.length <= 1) {
+    var file = e.target.files[0];
+    var token = sessionStorage.getItem("token");
+    // console.log("file",file)
+    var form = new FormData();
+    form.append('file', file);
+    form.append('authToken', token);
+    $.ajax({
+      processData: false, //告诉jquery不要去处理发送的数据
+      contentType: false, //告诉jquery不要去设置Content-Type请求头
+      type: "POST",
+      url: APP_URL + "/uploadOne",
+      data: form,
+      dataType: "json",
+      success: function (res) {
+        console.log(res)
+        if(res.code==0){
+          alert('附件上传成功!')
+        }
+      }
+    });
+  }else{
+    var form = new FormData();
+    for (var i = 0; i < e.target.files.length;i++){
+      form.append('files', e.target.files[i]);
+    }
+    var token = sessionStorage.getItem("token");
+    form.append('authToken', token);
+    $.ajax({
+      processData: false, //告诉jquery不要去处理发送的数据
+      contentType: false, //告诉jquery不要去设置Content-Type请求头
+      type: "POST",
+      url: APP_URL + "/upload",
+      data: form,
+      dataType: "json",
+      success: function (res) {
+        console.log(res)
+        if (res.code == 0) {
+          alert('附件上传成功!')
+        }
+      }
+    });
+  }
+});
+</script>
+</html>

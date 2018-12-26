@@ -1,8 +1,11 @@
 $(function () {
     var url = window.location.href;
-    var id = url.split("=")[1].slice(0, 1);
-    var $index = url.split("=")[2]
-    // console.log(id , index)
+    var a = url.split('&')[0];
+    var b = url.split('&')[1];
+    // console.log(a,b)
+    var id = a.split('=')[1];
+    var $index = b.split('=')[1];
+    // console.log(id , $index)
     businessDetail(id, $index);
 });
 
@@ -19,6 +22,9 @@ function businessDetail(id, $index) {
         success: function (res) {
             console.log('businessInfo', res);
             var data = res.data;
+            // if (data.group != ''){
+
+            // }
             var str = "";
             str = `
                 <tr>
@@ -106,39 +112,23 @@ function businessDetail(id, $index) {
                     <td>
                 `;
             if (data.tags != '') {
-                data.tags = [{
-                    name: 'mingcheng',
-                    num: '1'
-                }, {
-                    name: 'mingcheng',
-                    num: '1'
-                }, {
-                    name: 'mingcheng',
-                    num: '1'
-                }, {
-                    name: 'mingcheng',
-                    num: '1'
-                }, {
-                    name: 'mingcheng',
-                    num: '1'
-                }, ]
                 $.each(data.tags, function (til, tvl) {
-                    str += `<div class="contact">标签名称:${tvl.name},标签数量:${tvl.num}</div>`;
+                    str += `<div class="contact"><span style="font-weight: bold;">标签名称: </span>${tvl.tagName},   <span style="font-weight: bold;">标签数量: </span>${tvl.count}</div>`;
                 });
             } 
             str += `
                 </tr>
                 <tr>
                     <td align="center">讨论组</td>
-                    <td>${data.stage}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td align="center">弹性域字段</td>
-                    <td>${data.stage}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td align="center">操作历史</td>
-                    <td>${data.stage}</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td align="center">附件</td>
@@ -154,7 +144,7 @@ function businessDetail(id, $index) {
                 </tr>
                 <tr>
                     <td align="center">信息来源</td>
-                    <td>${data.stage}</td>
+                    <td>创建用户Id: ${data.createUserId},  创建用户名称:${data.createUserName}</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>

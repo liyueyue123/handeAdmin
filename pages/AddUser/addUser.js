@@ -167,6 +167,38 @@ $("#company").change(function () {
   getDepartmentSelect();
 })
 
+$('#addDepartment-btn').live('click',function(){
+  var val = $('#addDepartment').val();
+  if (val){
+    var token = sessionStorage.getItem("token");
+    var companyId = $('#company option:selected').val();
+    if (companyId){
+      $.ajax({
+        type: "post",
+        url: APP_URL + "/addDepartment",
+        data: {
+          authToken: token,
+          companyId: companyId,
+          departname: val
+        },
+        dataType: "json",
+        success: function (res) {
+          console.log(res)
+          $('#addDepartment').val('');
+          alert(res.message)
+          getDepartmentSelect();
+        },
+        fail: function(res){
+          alert(res.message)
+        }
+      });
+    }else{
+      alert('--请选择公司--');
+    }
+  }
+})
+
+
 // 获取部门
 function getDepartmentSelect(d){
 var companyId = $('#company option:selected').val();
