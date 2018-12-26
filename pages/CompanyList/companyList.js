@@ -2,10 +2,15 @@ $(function () {
     companyList(1); //公司列表
     // 搜索
     $("#searchBtn").click(function () {
+        $("#citySearch").val("");
+        $("#openTime").val("");
+        $("#overTime").val("");
+        $("#status option:selected").val("");
         companyList(1);
     });
     // 筛选
     $("#selectBtn").click(function () {
+        $("#IdkeyWord").val("");
         companyList(1);
     });
 });
@@ -58,10 +63,11 @@ function companyList(pageNum) {
                         <td>${val.address}</td>
                         <td>${val.companyname}</td>
                         <td>${val.principalName}</td>
-                        <td>${val.openaccounttime=''?'':moment(val.openaccounttime).format("YYYY年MM月DD日")}</td>
-                        <td>${val.deadline=''?'':moment(val.deadline).format("YYYY年MM月DD日")}</td>
+                        <td width="10%">${val.telPhones}</td>
+                        <td>${val.openaccounttime!=''?moment(val.openaccounttime).format("YYYY年MM月DD日"):''}</td>
+                        <td>${val.deadline!=''?moment(val.deadline).format("YYYY年MM月DD日"):''}</td>
                         <td>${val.account}</td>
-                        <td>${val.lastlogintime=''?'':moment(val.lastlogintime).format("YYYY年MM月DD日")}</td>
+                        <td>${val.lastlogintime!=''?moment(val.lastlogintime).format("YYYY年MM月DD日"):''}</td>
                         <td>
                             <a class="btn ${val.status=='3'?'btn-success':'btn-danger'}"  onclick="${val.status=='3'?'unfreeze('+val.id+')':'freeze('+val.id+')'}" href="javascript:void(0);">${val.status=='3'?'解冻':'冻结'}</a>
                         </td>
