@@ -3,10 +3,16 @@ $(function () {
     companyList(); //获取公司列表
     // 关键字搜索
     $("#searchBtn").click(function () {
+        $("#openTime").val(""); //开户时间
+        $("#overTime").val(""); //结束时间
         getCustomerList(1);
     });
     //筛选
     $("#selectBtn").click(function () {
+        $("#IdKeyWord").val("")
+        $("#NameKeyWord").val("");
+        $("#companySelect option:selected").val(""); //公司名称
+        $("#PositonKeyWord").val(""); //职位
         getCustomerList(1);
     });
 

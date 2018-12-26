@@ -19,6 +19,15 @@ $(function () {
     $("#addTelText .pro-removeSection").live("click", function () {
         $(this).parent(".pro-section").remove();
     });
+    $(".formPhone").live("blur",function () {
+        var arr = [];
+        $.each($(".formPhone"), function () {
+            console.log($(this).val());
+            arr.push($(this).val());
+        });
+        var phones = arr.toString();
+        $("#formPhones").val(phones);
+    });
     getAllProvinces(); //获取省份
     getCity(); //获取市
     getArea(); //获取所在区
@@ -144,8 +153,7 @@ function addCompany() {
 // 获取公司详情
 function showDetails(id) {
     var $id = parseInt(id);
-    // ssdebugger;
-    console.log($id,typeof($id));
+    console.log($id, typeof ($id));
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -164,13 +172,9 @@ function showDetails(id) {
                 $("#changeTitle").html("编辑");
                 $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
                 $("#company_account").val(data.account); //账号
-                $("#company_account").attr("readonly",true);  //账号不可修改
+                $("#company_account").attr("readonly", true); //账号不可修改
                 $("#company_password").val(data.password); //密码
-                $("#company_password").attr("readonly",true); //密码不可修改
-                // // 点击密码时值为空
-                // $("#company_password").focus(function () {
-                //     $(this).val("");
-                // });
+                $("#company_password").attr("readonly", true); //密码不可修改
                 $("#company_name").val(data.companyname); //公司名称
                 $("#company_user").val(data.principalName); //负责人姓名
                 if (data.dreTelephone.length > 0) {
