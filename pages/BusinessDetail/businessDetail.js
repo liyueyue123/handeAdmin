@@ -22,9 +22,16 @@ function businessDetail(id, $index) {
         success: function (res) {
             console.log('businessInfo', res);
             var data = res.data;
-            // if (data.group != ''){
-
-            // }
+            if (data.histories != ''){
+                var histories = '';
+               $.each(data.histories, function (historiesIndex, historiesVal) {
+                    histories += `
+                                <div>时间:  ${moment(historiesVal.time).format("YYYY年MM月DD日")} ,历史信息:  ${historiesVal.message}, 历史商机:  ${historiesVal.opportunitesid} ,操作用户:  ${historiesVal.userName} ,操作用户的id:${historiesVal.userid}</div>
+                             `;
+                });
+            }else{
+                var  histories = '';
+            }
             var str = "";
             str = `
                 <tr>
@@ -53,7 +60,7 @@ function businessDetail(id, $index) {
                 </tr>
                 <tr>
                     <td align="center">分组名称</td>
-                    <td>${data.group}</td>
+                    <td>${data.group.groupName != undefined ? data.group.groupName : ''}</td>
                 </tr>
                 <tr>
                     <td align="center">概述</td>
@@ -128,7 +135,7 @@ function businessDetail(id, $index) {
                 </tr>
                 <tr>
                     <td align="center">操作历史</td>
-                    <td></td>
+                    <td>${histories}</td>
                 </tr>
                 <tr>
                     <td align="center">附件</td>
