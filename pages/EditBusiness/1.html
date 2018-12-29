@@ -32,11 +32,11 @@
     }
 
     .form-control {
-      width: 33%;
+      width: 36.5%;
     }
 
     .getPCD {
-      width: 33.03%;
+      width: 12%;
       float: left;
       margin-right: 0.3%;
     }
@@ -65,6 +65,9 @@
     label{ padding:0 10px; margin:0; height:50px; line-height:50px; cursor:pointer;}
 	.departureDiv{display: none;}
   </style>
+<script>
+  $.closeLoading();
+</script>
 </head>
 
 <body>
@@ -76,45 +79,48 @@
   </nav>
 
   <div class="add-box">
-    <form class="addForm" id="form1" name="form1" action="">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tbody>
-          <tr>
-            <td colspan="4" align="center"> 商机基本信息 </td>
-          </tr>
-          <input type="text" name="opportunityId" id="opportunityId" value="" hidden>
-          <tr>
-            <td align="center">公司名称</td>
-            <td><input type="text" name="companyName" id='companyName' value="" class="form-control" datatype="*" nullmsg="请输入公司名称" placeholder="请输入公司名称" /></td>
-          </tr>
-          <tr>
-            <td align="center">金额</td>
-            <td><input type="text" name="price" id="price" value="" class="form-control" datatype="*" nullmsg="请输入金额" placeholder="请输入金额" /></td>
-          </tr>
-          <tr>
-            <td align="center">城市</td>
-            <td width="40%">
-                <div id="citylist"></div>
-                <select class="form-control getPCD" id="allProvinces" name="provinceId" value="" datatype="*" nullmsg="请输入所在省份">
-                </select>
-                <select class="form-control getPCD" id="allCity" name="cityId" value="" datatype="*" nullmsg="请输入所在城市">
-                </select>
-                <select class="form-control getPCD" id="allArea" name="areaId" value="" datatype="*" nullmsg="请输入所在地区" >
-                </select>
-            </td>
-            <td align="center">日期</td>
-            <td><input name="time"  type="text" id="time" value="" class="form-control jcDate form_datetime" placeholder="日期" /></td>
-          </tr>
-          <tr>
-            <td align="center">阶段</td>
-            <td><input type="text" id="stage" value="" class="form-control" ></td>
-          </tr>
-          <tr>
-            <td colspan="4" align="center">
-              <button type="submit" class="btn btn-success" id="saveButton" style="margin-left:-5%;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
-            </td>
-          </tr>
-    </form>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+          <form class="addForm" id="form1" name="form1" action="">
+            <tr>
+              <td colspan="4" align="center"> 商机基本信息 </td>
+            </tr>
+            <input type="text" name="opportunityId" id="opportunityId" value="" hidden>
+            <tr>
+              <td align="center">公司名称</td>
+              <td colspan="4"><input type="text" name="companyName" id='companyName' value="" class="form-control" datatype="*"  placeholder="请输入公司名称" /></td>
+            </tr>
+            <tr>
+              <td align="center">金额</td>
+              <td colspan="4"><input type="text" name="price" id="price" value="" class="form-control" datatype="*"  placeholder="请输入金额" /></td>
+            </tr>
+            <tr>
+              <td align="center">城市</td>
+              <td colspan="4" width="40%">
+                  <div id="citylist"></div>
+                  <select class="form-control getPCD" id="allProvinces" name="provinceId" value="" datatype="*" >
+                  </select>
+                  <select class="form-control getPCD" id="allCity" name="cityId" value="" datatype="*" >
+                  </select>
+                  <select class="form-control getPCD" id="allArea" name="areaId" value="" datatype="*" >
+                  </select>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">日期</td>
+              <td colspan="4"><input name="time"  type="text" id="time" value="" class="form-control jcDate form_datetime" placeholder="日期" /></td>
+            </tr>
+            <tr>
+              <td align="center">阶段</td>
+              <td><input type="text" name='stage'  id="stage" value="" class="form-control" placeholder="请输入阶段"></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td colspan="3">
+                <button type="submit" class="btn btn-success" id="saveButton"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+              </td>
+            </tr>
+          </form>
           <tr>
             <td colspan="4"></td>
           </tr>
@@ -124,12 +130,10 @@
           <tr>
             <td align="center">概述</td>
             <td colspan="3">
-              <input type="text" id="remark"  class="form-control" value="${data.remark}" style="display:inline-block;">
-              <button type="submit" class="btn btn-success" id="saveButton" style="display:inline-block;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
+              <textarea rows="9" cols="30" id="remark" maxlength="200" class="form-control" value="" style="resize:none;margin-top:10px;"  placeholder="请输入概述(0-200字符之间)" datatype="0-200" errormsg="(请在0-200字符之间)"></textarea>
+              <button type="button" class="btn btn-success" id="saveRemark"  style="margin:10px 0;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
             </td>
           </tr>
-
-
           <tr>
             <td align="center">
               联系人
@@ -138,16 +142,41 @@
             <table class="innerTab">
               <tr>
                 <td width="7%">关键联系人</td>
-                <td class="contactTd">
-                  <div class="contact">fdhfjkshfjh</div>
-                  <div class="contact">fdhfjkshfjh</div>
+                <td class="contactTd" id="linksKey">
+                  <div class="contact"></div>
                 </td>
               </tr>
               <tr>
                 <td width="7%">其他联系人</td>
-                <td class="contactTd">
-                  <div class="contact">fdhfjkshfjh</div>
-                  <div class="contact">fdhfjkshfjh</div>
+                <td class="contactTd" id="linksOther">
+                  <div class="contact"></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="contactTd" colspan="2">
+                  <div style="padding-left: 6px;margin-bottom: -10px;border-top: 1px solid #e6e6e6;">*请选择下列联系人进行修改:</div>
+                  <div style="height:200px;overflow-x:auto;padding: 10px;">
+                    <table width="80%" style="height:200px;overflow-x:auto;" cellspacing="0" cellpadding="0">
+                      <input type="text" id="linksKeyOld" hidden>
+                      <input type="text" id="linksKeyNew" hidden>
+                      <input type="text" id="linksOtherOld" hidden>
+                      <input type="text" id="linksKeyNew" hidden>
+                      <thead>
+                        <tr>
+                          <th>选择</th>
+                          <th>序号</th>
+                          <th>ID</th>
+                          <th>姓名</th>
+                          <th>公司</th>
+                          <th>职位</th>
+                        </tr>
+                      </thead>
+                      <tbody class="customerList">
+                      </tbody>
+                    </table>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="saveLinksKey" style="margin:10px 0 10px 6px;"><i class="fa fa-plus" aria-hidden="true"></i> 增加关键联系人</button>
+                  <button type="button" class="btn btn-primary" id="saveLinksOther" style="margin:10px 0 10px 6px;"><i class="fa fa-plus" aria-hidden="true"></i> 增加其他联系人</button>
                 </td>
               </tr>
             </table>
@@ -155,48 +184,57 @@
           </tr>
           <tr>
           </tr>
-           <tr>
-            <td colspan="4" align="center">
-              <button type="submit" class="btn btn-success" id="saveButton" style="margin-left:-5%;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
-            </td>
-          </tr>
           <tr>
             <td align="center">负责人</td>
-            <td class="contactTd" colspan="3">
-              <div class="contact">fdhfjkshfjh</div>
-              <div class="contact">fdhfjkshfjh</div>
+            <td class="contactTd"  colspan="3">
+              <div id="PrincipalsList">
+                <div class="contact">
+                </div>
+              </div>
+              <div style="padding-left: 6px;margin-bottom: -10px;border-top: 1px solid #e6e6e6;">*请选择下列负责人进行修改:</div>
+              <!-- <div class="form-control getPCD" id="PrincipalsSelect" value="" datatype="*"  style="overflow-x:auto;width:36%;height: 50px; margin-left: 6px;" >
+              </div> -->
+              <div style="height:200px;overflow-x:auto;padding: 10px;">
+                <table width="80%" style="height:200px;overflow-x:auto;" cellspacing="0" cellpadding="0">
+                  <thead>
+                    <tr>
+                      <th>选择</th>
+                      <th>序号</th>
+                      <th>ID</th>
+                      <th>姓名</th>
+                      <th>手机号</th>
+                      <th>部门</th>
+                      <th>头像</th>
+                    </tr>
+                  </thead>
+                  <tbody class="userList">
+                  </tbody>
+                </table>
+              </div>
+              <button type="button" class="btn btn-success" id="savePrincipals" style="margin:10px 0 10px 6px;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>              
             </td>
           </tr>
-           <tr>
-            <td colspan="4" align="center">
-              <button type="submit" class="btn btn-success" id="saveButton" style="margin-left:-5%;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
-            </td>
-          </tr>
-
           <tr>
             <td align="center">附件</td>
             <td colspan="3">
-              <div class="btn btn-info navbar-btn" style="position:relative;" id="upload_file" style="margin-left:20px;" data-id="${val.id}" data-index="${pages+index+1}">
-                   <div>上传附件<div>
-                   <div style="position:absolute;left:0;top:0;opacity:0;"><input type='file' height='34.5' multiple="multiple"></div>
+              <div id="filesList"></div>
+              <div>
+                <input type='file' height='34.5' multiple="multiple" id="upload_file" style="display:inline-block;">
+                <input type="text" id="fileDataOld" hidden>
+                <input type="text" id="fileDataNow" hidden>
+                <button type="button" class="btn btn-primary" id="saveFiles" style="display:inline-block;"><i class="fa fa-plus" aria-hidden="true"></i> 增加</button>
+                <div style="display:inline-block;">(先选择文件然后点击增加)</div>
               </div>
-              <button class="btn btn-success" id="fujian" style="display:inline-block;"><i class="fa fa-save" aria-hidden="true"></i> 修改</button>
             </td>
           </tr>
-      
-
           <tr>
             <td>&nbsp;</td>
             <td colspan="3">
-              <button type="submit" class="btn btn-info" id="saveButton"><i class="fa fa-back" aria-hidden="true"></i>
-                返回</button>
-              <!-- <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i>
-                取消</button> -->
+              <button type="button" class="btn btn-success" id="back"><i class="fa fa-back" aria-hidden="true"></i> 完成</button>
             </td>
           </tr>
         </tbody>
       </table>
-
   </div>
 
 </body>
@@ -212,51 +250,6 @@
     showMeridian: 1,
     autoclose: 1 //选择后自动关闭
   });
-  $('#upload_file').live("change", function (e) {
-  //上传单个文件
-  if (e.target.files.length <= 1) {
-    var file = e.target.files[0];
-    var token = sessionStorage.getItem("token");
-    // console.log("file",file)
-    var form = new FormData();
-    form.append('file', file);
-    form.append('authToken', token);
-    $.ajax({
-      processData: false, //告诉jquery不要去处理发送的数据
-      contentType: false, //告诉jquery不要去设置Content-Type请求头
-      type: "POST",
-      url: APP_URL + "/uploadOne",
-      data: form,
-      dataType: "json",
-      success: function (res) {
-        console.log(res)
-        if(res.code==0){
-          alert('附件上传成功!')
-        }
-      }
-    });
-  }else{
-    var form = new FormData();
-    for (var i = 0; i < e.target.files.length;i++){
-      form.append('files', e.target.files[i]);
-    }
-    var token = sessionStorage.getItem("token");
-    form.append('authToken', token);
-    $.ajax({
-      processData: false, //告诉jquery不要去处理发送的数据
-      contentType: false, //告诉jquery不要去设置Content-Type请求头
-      type: "POST",
-      url: APP_URL + "/upload",
-      data: form,
-      dataType: "json",
-      success: function (res) {
-        console.log(res)
-        if (res.code == 0) {
-          alert('附件上传成功!')
-        }
-      }
-    });
-  }
-});
+  
 </script>
 </html>

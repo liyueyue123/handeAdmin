@@ -135,18 +135,20 @@ function businessDetail(id, $index) {
                 </tr>
                 <tr>
                     <td align="center">操作历史</td>
-                    <td>${histories}</td>
+                    <td><div style="overflow-x:auto;height:200px;">${histories}</div></td>
                 </tr>
                 <tr>
                     <td align="center">附件</td>
                     <td>
+                    <div style="overflow-x:auto;height:150px;">
                 `;
             if (data.files != "") {
                 $.each(data.files, function (dex, va) { 
-                    str += `<a style="text-decoration:underline;color: #428bca;" target="_blank" href="${va.filename}">附件${dex+1}</a>  `;
+                    str += `<a style="text-decoration:underline;color: #428bca;display:block;" target="_blank" href="${va.filename}">附件${dex+1}: ${va.filename}</a>  `;
                 });
             }
             str += `
+                </div>
                     </td>
                 </tr>
                 <tr>
@@ -170,3 +172,8 @@ function businessDetail(id, $index) {
         }
     });
 }
+
+// //查看更多的历史消息
+// $('#seenMore').live("click",function(){
+
+// })

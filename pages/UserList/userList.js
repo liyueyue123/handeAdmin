@@ -124,24 +124,7 @@ $('#export').live('click', function () {
   var p = confirm("由于数据存在关联查询， 导出Exce可能需要1 - 3 分钟的时间， 确定要导出吗（ 确定后请勿刷新页面或关闭浏览器） ?" )
   if(p == true){
     var token = sessionStorage.getItem("token");
-    // var url = APP_URL + "/export";
-    // $.ajax({
-    //   type: "get",
-    //   url: url,
-    //   data: {
-    //     authToken: token
-    //   },
-    //   dataType: "text",
-    //   success: function (res) {
-    //     console.log(res)
-    //     window.location.href = res;
-    //   },
-    //   error: function (err) {
-    //     console.log(err);
-    //     alert(err);
-    //   }
-    // });
-    window.location.href = 'http://hande.icpnt.com/export?token=' +token;
+    window.location.href = 'http://hande.icpnt.com/export?authToken=' +token;
   }
 })
 
