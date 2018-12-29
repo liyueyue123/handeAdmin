@@ -5,7 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>消息管理</title>
     <script src="/js/load.js"></script>
+    <script src="/js/moment.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <script>
+        $.closeLoading();
+    </script>
 </head>
 
 <body>
@@ -15,18 +19,20 @@
             <a class="navbar-brand" href="#">查看消息列表</a>
         </div>
         <div>
-            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('News')"><i class="fas fa-trash-alt"></i>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/message/delMessage','GET','id')"><i class="fas fa-trash-alt"></i>
                 删除</button>
             <!-- <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addNews')"><i class="fas fa-edit"></i> 修改</button> -->
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddMessage/index.html')"><i
                     class="fa fa-plus" aria-hidden="true"></i> 新建</button>
-            <form class="navbar-form navbar-right listSearch" role="search" method="get" action="__ACTION__">
+            <div class="navbar-form navbar-right listSearch">
                 <div class="form-group">
-                    <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="请输入关键词进行搜索">
+                    <input name="title" type="text" class="form-control" style="width:160px;" id="search_title" placeholder="标题">
                 </div>
-                <input name="keyWord" type="text" class="form-control" id="keyWord" placeholder="发布时间">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
-            </form>
+                <div class="form-group">
+                    <input name="startPublishTime"  type="text" id="search_startPublishTime" class="form-control jcDate form_datetime" placeholder="发布时间" />
+                </div>
+                <button class="btn btn-primary" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
+            </div>
         </div>
     </nav>
 
@@ -40,11 +46,10 @@
                     <th>标题</th>
                     <th>内容</th>
                     <th>发布时间</th>
-                    <th>操作</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody class="messageList">
+                <!-- <tr>
                     <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="" /></td>
                     <td></td>
                     <td></td>
@@ -53,22 +58,26 @@
                     <td></td>
                     <td><a class="btn btn-success navbar-btn" href="/manage.php/Order/getAllOrder?order_id=1490&amp;order_producttype=1">
                             查看详情</a></td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
 
     </div>
-    <ul class="pagination">
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
-        <li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
-        <li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
-        <li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
-        <li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li>
-        <li><a>共44条记录</a></li>
-        <li><a>第1页/共5页</a></li>
-    </ul>
+    <!-- 分页 -->
+    <ul class="pagination"></ul>
 
 </body>
-
+<script src="./messageManage.js"></script>
+<script>
+    $(".form_datetime").datetimepicker({
+        format: 'yyyy/mm/dd hh:ii', //显示格式
+        todayHighlight: 1, //今天高亮
+        minTime: '10',
+        language: 'zh-CN',
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        autoclose: 1 //选择后自动关闭
+    });
+</script>
 </html>
