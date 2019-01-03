@@ -6,6 +6,7 @@ $(function () {
     var id = a.split('=')[1];
     var $index = b.split('=')[1];
     // console.log(id , $index)
+    $.showLoading();
     businessDetail(id, $index);
 });
 
@@ -21,6 +22,7 @@ function businessDetail(id, $index) {
         dataType: "json",
         success: function (res) {
             console.log('businessInfo', res);
+            $.closeLoading();            
             var data = res.data;
             if (data.histories != ''){
                 var histories = '';
