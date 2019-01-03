@@ -2,7 +2,6 @@ $(function () {
   $.showLoading('加载中');
   userList(1);
 });
-
 function userList(pageNum, phone, name, Id, department) {
   var token = sessionStorage.getItem("token");
   $.ajax({
@@ -55,7 +54,6 @@ function userList(pageNum, phone, name, Id, department) {
     }
   });
 };
-
 // 禁用
 function operate(isLock,userId,pageNum){
   console.log(pageNum)
@@ -120,7 +118,6 @@ $('#filter_btn').live('click', function () {
   var department = $('#filter_department').val();
   userList(1, phone, name, Id, department);
 })
-
 //点击导出按钮
 $('#export').live('click', function () {
   var p = confirm("由于数据存在关联查询， 导出Exce可能需要1 - 3 分钟的时间， 确定要导出吗（ 确定后请勿刷新页面或关闭浏览器） ?" )
@@ -129,8 +126,6 @@ $('#export').live('click', function () {
     window.location.href = 'http://hande.icpnt.com/export?authToken=' +token;
   }
 })
-
-
 var isAll = true;
 //点击全选按钮
 $('#allChecked').live('click',function(){
