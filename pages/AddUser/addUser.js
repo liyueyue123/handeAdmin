@@ -4,33 +4,45 @@ $(function () {
   var url = window.location.href; //首先获取到你的URL地址;
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
-  // console.log(id)
-  $.showLoading('加载中');
   if (url.indexOf('=') != -1) {
     $('.addForm').attr('action', APP_URL + "/editUser");
     $('#changeTitle').text('修改');
     $('#changeTxt').text('修改');
     $('#changeTxt').prev().removeClass("fa-check");
     $('#changeTxt').prev().addClass("fa-save");
+    // console.log(id)
+    $.showLoading('加载中');
     getUserInfo(id)
-  }else{
+  } else {
     $('.addForm').attr('action', APP_URL + "/register");
   }
   submit()
 });
-function getUserInfo(id){
+
+function getUserInfo(id) {
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
     url: APP_URL + "/getUser",
     data: {
       authToken: token,
-      userId:id
+      userId: id
     },
     dataType: "json",
     success: function (res) {
-      console.log('uerInfo',res)
+      console.log('uerInfo', res)
       $.closeLoading();
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var data = res.data;
       $('#user_id').val(data.id)
       $("#user_loginname").val(data.loginname);
@@ -44,7 +56,7 @@ function getUserInfo(id){
       // $("#"+gender).attr('checked',true);
       $("#user_phone").val(data.phone);
       // $("#user_wechat").val(data.wechat);
-      if (data.icon.length>30){
+      if (data.icon.length > 30) {
         $("#icon-image").find("img").attr({
           "src": data.icon
         })
@@ -66,14 +78,14 @@ function getUserInfo(id){
 }
 
 //当点击手机号的时候，loginname赋值
-$('#user_phone').blur(function(){
+$('#user_phone').blur(function () {
   var value = $(this).val();
   $('#user_loginname').val(value);
 })
 
 //当点击密码框的时候清空
-$('#user_passwd').focus(function(){
-  this.value=''
+$('#user_passwd').focus(function () {
+  this.value = ''
 })
 
 // 隐藏空白头像
@@ -83,8 +95,8 @@ $('#icon-image').hide();
 // 上传头像
 $('#iconfile').change(function (e) {
   var path = $(this).val(),
-  extStart = path.lastIndexOf('.'),
-  ext = path.substring(extStart, path.length).toUpperCase();
+    extStart = path.lastIndexOf('.'),
+    ext = path.substring(extStart, path.length).toUpperCase();
   // console.log(path);
   let url = window.URL || window.webkitURL;
   console.log(url.createObjectURL(this.files[0])); //this.files[0]为选中的文件(索引为0因为是单选一个),这里是图片
@@ -110,8 +122,8 @@ $('#iconfile').change(function (e) {
       //   alert('图片大小不能超过10M');
       //   return false;
       // }
-      console.log(w,h)
-      if(w != h){
+      console.log(w, h)
+      if (w != h) {
         $("#iconfile").val('')
         $("#icon-image").find("img").attr({
           "src": ''
@@ -132,7 +144,8 @@ $('#iconfile').change(function (e) {
     }
   }
 });
-function imgSize(w,h){
+
+function imgSize(w, h) {
 
 }
 //上传图片时调用的接口
@@ -140,7 +153,7 @@ function uploadImg(tag) {
   var file = tag.files[0];
   // var imgSrc;
   var token = sessionStorage.getItem("token");
-  console.log("file",file)
+  console.log("file", file)
   var form = new FormData();
   form.append('file', file)
   form.append('authToken', token)
@@ -153,6 +166,17 @@ function uploadImg(tag) {
     dataType: "json",
     success: function (res) {
       console.log(res)
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       $("#icon-image").find("img").attr({
         "src": APP_IMAGE_URL + res.data
       });
@@ -168,7 +192,7 @@ function uploadImg(tag) {
 
 
 // 获取公司
-function getCompanySelect(){
+function getCompanySelect() {
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
@@ -179,6 +203,17 @@ function getCompanySelect(){
     dataType: "json",
     success: function (res) {
       console.log('companyList', res);
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var data = res.data;
       var str = "<option value='' selected>---请选择公司---</option>";
       $.each(data, function (index, val) {
@@ -197,12 +232,12 @@ $("#company").change(function () {
   getDepartmentSelect();
 })
 
-$('#addDepartment-btn').live('click',function(){
+$('#addDepartment-btn').live('click', function () {
   var val = $('#addDepartment').val();
-  if (val){
+  if (val) {
     var token = sessionStorage.getItem("token");
     var companyId = $('#company option:selected').val();
-    if (companyId){
+    if (companyId) {
       $.ajax({
         type: "post",
         url: APP_URL + "/addDepartment",
@@ -214,15 +249,26 @@ $('#addDepartment-btn').live('click',function(){
         dataType: "json",
         success: function (res) {
           console.log(res)
+          if (res.code == "909090") {
+            $.show({
+              title: '操作提示',
+              content: '您已掉线,请重新登录!',
+              closeCallback: function () {
+                if (window != top) {
+                  top.location.href = "../../login.html";
+                }
+              }
+            });
+          }
           $('#addDepartment').val('');
           alert(res.message)
           getDepartmentSelect();
         },
-        fail: function(res){
+        fail: function (res) {
           alert(res.message)
         }
       });
-    }else{
+    } else {
       alert('--请选择公司--');
     }
   }
@@ -230,8 +276,8 @@ $('#addDepartment-btn').live('click',function(){
 
 
 // 获取部门
-function getDepartmentSelect(d){
-var companyId = $('#company option:selected').val();
+function getDepartmentSelect(d) {
+  var companyId = $('#company option:selected').val();
   if ($('#company option:selected').val() != '') {
     var token = sessionStorage.getItem("token");
     $.ajax({
@@ -244,6 +290,17 @@ var companyId = $('#company option:selected').val();
       dataType: "json",
       success: function (res) {
         console.log('departmentList', res);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
         var data = res.data;
         var str = "<option value='' selected>---请选择部门---</option>";
         $.each(data, function (index, val) {
@@ -253,7 +310,7 @@ var companyId = $('#company option:selected').val();
         });
         // console.log('str',str)
         $("#department").html(str);
-        if(d){
+        if (d) {
           $("#department").find("option[value=" + d + "]").attr("selected", true);
         }
       }
@@ -263,10 +320,21 @@ var companyId = $('#company option:selected').val();
 
 
 //提交表单
-function submit(){
+function submit() {
   ajax({
     type: 'post',
     success: function (res) {
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       console.log('success', JSON.stringify(res));
       window.location.href = '../UserList/index.html'
     }

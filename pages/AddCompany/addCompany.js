@@ -57,6 +57,17 @@ function getAllProvinces() {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             var data = res.data;
             $.each(data, function (index, val) {
                 str += `<option value="${val.provinceid}">${val.province}</option>`;
@@ -86,6 +97,17 @@ function getCity() {
                 dataType: "json",
                 success: function (res) {
                     console.log(res);
+                    if (res.code == "909090") {
+                        $.show({
+                            title: '操作提示',
+                            content: '您已掉线,请重新登录!',
+                            closeCallback: function () {
+                                if (window != top) {
+                                    top.location.href = "../../login.html";
+                                }
+                            }
+                        });
+                    }
                     var data = res.data;
                     $.each(data, function (index, val) {
                         str1 += `
@@ -122,6 +144,17 @@ function getArea() {
                 dataType: "json",
                 success: function (res) {
                     console.log(res);
+                    if (res.code == "909090") {
+                        $.show({
+                            title: '操作提示',
+                            content: '您已掉线,请重新登录!',
+                            closeCallback: function () {
+                                if (window != top) {
+                                    top.location.href = "../../login.html";
+                                }
+                            }
+                        });
+                    }
                     var data = res.data;
                     $.each(data, function (index, val) {
                         str2 += `
@@ -144,6 +177,17 @@ function addCompany() {
     ajax({
         type: "POST",
         success: function (res) {
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             // console.log(JSON.stringify(res));
             window.location.href = '../CompanyList/index.html';
         }
@@ -205,6 +249,17 @@ function showDetails(id) {
                 $("#company_num").val(data.lastAccountCount); //最终账号数量
                 editCompany(); //编辑公司
             }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
         },
         error: function (err) {
             console.log(err);
@@ -226,6 +281,17 @@ function cityList(provinceId, cityId) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             var data = res.data;
             var city = "";
             city += `<option value="" selected="">---请选择市---</option>`;
@@ -255,6 +321,17 @@ function districtList(cityId, districtId) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             var data = res.data;
             var area = "";
             area += `<option value="" selected="">---请选择区---</option>`;
@@ -274,6 +351,17 @@ function editCompany() {
     ajax({
         type: "GET",
         success: function (res) {
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             // console.log(JSON.stringify(res));
             window.location.href = '../CompanyList/index.html';
         }

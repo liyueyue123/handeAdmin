@@ -36,6 +36,17 @@ function getRole(pageNum) {
                 $(".list-box tbody").html(str);
                 getPage(res.count, 'getRole', pageNum); //分页
             }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
         },
         error: function (err) {
             console.log(err);

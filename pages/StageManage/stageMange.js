@@ -16,6 +16,17 @@ function stageList() {
         success: function (res) {
             console.log(res);
             $.closeLoading();
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             // var pages = 10 * (pageNum - 1);
             var str = "";
             var data = res.data;
@@ -56,6 +67,17 @@ function ebableStage(enable,atageid) {
             console.log(res);
             if(res.code==0){
                 stageList();
+            }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
             }
         },
         error: function (err) {

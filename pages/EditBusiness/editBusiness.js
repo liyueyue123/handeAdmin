@@ -24,6 +24,17 @@ $(function () {
       success: function (res) {
         console.log('businessInfo', res);
         $.closeLoading('加载中');
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
         var data = res.data;
         $('#opportunityId').val(data.id);
         $('#companyName').val(data.companyName);
@@ -107,6 +118,17 @@ $(function () {
           content: res.message
         });
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       }
     })
   })
@@ -130,6 +152,17 @@ $(function () {
           content: res.message
         });   
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -166,6 +199,17 @@ $(function () {
           // `;
         });
         // $("#PrincipalsSelect").html(str);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -200,6 +244,17 @@ $(function () {
           content: res.message
         });
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         $.show({
@@ -238,6 +293,17 @@ $(function () {
           content: res.message
         });
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         $.show({
@@ -265,6 +331,17 @@ $(function () {
       success: function (res) {
         alert(res.message)
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -293,6 +370,17 @@ $(function () {
           `;
         });
         $("#PrincipalsSelect").html(str);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -324,6 +412,17 @@ $(function () {
           content: res.message
         });
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -347,6 +446,17 @@ $(function () {
       success: function (res) {
         console.log('删除成功',res);
         getBusinessDetail(id);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -381,6 +491,17 @@ $(function () {
             alert('附件上传成功!')
             getBusinessDetail(id);
           }
+          if (res.code == "909090") {
+            $.show({
+              title: '操作提示',
+              content: '您已掉线,请重新登录!',
+              closeCallback: function () {
+                if (window != top) {
+                  top.location.href = "../../login.html";
+                }
+              }
+            });
+          }
         }
       });
     } else {
@@ -405,6 +526,17 @@ $(function () {
           if (res.code == 0) {
             alert('附件删除成功!')
             getBusinessDetail(id);
+          }
+          if (res.code == "909090") {
+            $.show({
+              title: '操作提示',
+              content: '您已掉线,请重新登录!',
+              closeCallback: function () {
+                if (window != top) {
+                  top.location.href = "../../login.html";
+                }
+              }
+            });
           }
         },
         fail: function(res){
@@ -435,6 +567,17 @@ $(function () {
             // alert('附件上传成功!')
             $('#fileDataNow').val(res.data);
           }
+          if (res.code == "909090") {
+            $.show({
+              title: '操作提示',
+              content: '您已掉线,请重新登录!',
+              closeCallback: function () {
+                if (window != top) {
+                  top.location.href = "../../login.html";
+                }
+              }
+            });
+          }
         }
       });
     } else {
@@ -456,6 +599,17 @@ $(function () {
           if (res.code == 0) {
             // alert('附件选择成功,请按增加按钮!')
             $('#fileDataNow').val(res.data);
+          }
+          if (res.code == "909090") {
+            $.show({
+              title: '操作提示',
+              content: '您已掉线,请重新登录!',
+              closeCallback: function () {
+                if (window != top) {
+                  top.location.href = "../../login.html";
+                }
+              }
+            });
           }
         }
       });
@@ -480,6 +634,17 @@ $(function () {
           str += `<option value="${val.provinceid}">${val.province}</option>`;
         });
         $("#allProvinces").html(str);
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -511,6 +676,17 @@ $(function () {
                           `;
             });
             $("#allCity").html(str1);
+            if (res.code == "909090") {
+              $.show({
+                title: '操作提示',
+                content: '您已掉线,请重新登录!',
+                closeCallback: function () {
+                  if (window != top) {
+                    top.location.href = "../../login.html";
+                  }
+                }
+              });
+            }
           },
           error: function (err) {
             console.log(err);
@@ -545,6 +721,17 @@ $(function () {
                           `;
             });
             $("#allArea").html(str2);
+            if (res.code == "909090") {
+              $.show({
+                title: '操作提示',
+                content: '您已掉线,请重新登录!',
+                closeCallback: function () {
+                  if (window != top) {
+                    top.location.href = "../../login.html";
+                  }
+                }
+              });
+            }
           },
           error: function (err) {
             console.log(err);
@@ -593,6 +780,17 @@ $(function () {
         });
         $(".userList").html(str);
         getPage(res.count, 'userList', pageNum); //分页
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);
@@ -655,6 +853,17 @@ $(function () {
         });
         $(".customerList").html(str);
         getPage(res.count, 'getCustomerList', pageNum); //分页
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       },
       error: function (err) {
         console.log(err);

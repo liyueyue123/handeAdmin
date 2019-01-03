@@ -20,34 +20,47 @@ function personnelManageList(pageNum, roleName) {
       var data = res.data;
       var str = "";
       var pages = 10 * (pageNum - 1);
-      $.each(data, function (index, val) {
-        if (val.lastlogintime == "") {
-          var lasrlogintime = val.lastlogintime;
-        } else {
-          var lasrlogintime = moment(val.lastlogintime).format("YYYY年MM月DD日");
-        }
-        if (val.iconurl == '') {
-          var src = ''
-        } else {
-          var src = "src=" + val.iconurl
-        }
-        str += `
-             <tr>
-            <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
-            <td>${pages+(index+1)}</td>
-            <td>${val.name}</td>
-            <td><img ${src} width="70px" height="70px" alt="暂无用户头像"></td>
-            <td>${val.roleName}</td>
-            <td>${val.account}</td>
-            <td>${val.password}</td>
-            <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
-            <td>${lasrlogintime}</td>
-            <td><a class="btn ${val.status==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.status},${val.id},${pageNum})">${val.status == 0 ?"禁用":"启用"}</a></td>
-            </tr>
-          `;
-      });
-      $(".personnelList").html(str);
-      getPage(res.count, 'personnelManageList', pageNum); //分页
+      if(res.code == 0){
+        $.each(data, function (index, val) {
+          if (val.lastlogintime == "") {
+            var lasrlogintime = val.lastlogintime;
+          } else {
+            var lasrlogintime = moment(val.lastlogintime).format("YYYY年MM月DD日");
+          }
+          if (val.iconurl == '') {
+            var src = ''
+          } else {
+            var src = "src=" + val.iconurl
+          }
+          str += `
+               <tr>
+              <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
+              <td>${pages+(index+1)}</td>
+              <td>${val.name}</td>
+              <td><img ${src} width="70px" height="70px" alt="暂无用户头像"></td>
+              <td>${val.roleName}</td>
+              <td>${val.account}</td>
+              <td>${val.password}</td>
+              <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
+              <td>${lasrlogintime}</td>
+              <td><a class="btn ${val.status==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.status},${val.id},${pageNum})">${val.status == 0 ?"禁用":"启用"}</a></td>
+              </tr>
+            `;
+        });
+        $(".personnelList").html(str);
+        getPage(res.count, 'personnelManageList', pageNum); //分页
+      }
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
     }
   });
 }
@@ -71,6 +84,17 @@ function operate(status, userId, pageNum) {
     success: function (res) {
       if (res.code == 0) {
         personnelManageList(pageNum);
+      }
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
       }
     },
     error: function (err) {

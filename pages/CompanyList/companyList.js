@@ -51,6 +51,17 @@ function companyList(pageNum) {
         success: function (res) {
             $.closeLoading();
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             var data = res.data;
             var pages = 10 * (pageNum - 1);
             var str = "";
@@ -102,6 +113,17 @@ function freeze(id) {
             if (res.code == 0) {
                 companyList(1);
             }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
         },
         error: function (err) {
             console.log(err);
@@ -125,6 +147,17 @@ function unfreeze(id) {
             console.log(res);
             if (res.code == 0) {
                 companyList(1);
+            }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
             }
         },
         error: function (err) {

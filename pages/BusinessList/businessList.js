@@ -26,6 +26,17 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
     success: function (res) {
       console.log('businessList', res);
       $.closeLoading();
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var data = res.data;
       var str = '';
       var pages = 10 * (pageNum - 1);

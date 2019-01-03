@@ -15,6 +15,17 @@ $(function () {
     ajax({
       type: 'get',
       success: function (res) {
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
         console.log('success', JSON.stringify(res));
         window.location.href = '../PersonnelManage/index.html'
       }
@@ -26,6 +37,17 @@ $(function () {
     ajax({
       type: 'post',
       success: function (res) {
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
         console.log('success', JSON.stringify(res));
         window.location.href = '../PersonnelManage/index.html'
       }
@@ -45,8 +67,19 @@ function getPersonnelInfo(id) {
     },
     dataType: "json",
     success: function (res) {
-      console.log('personnelInfo', res)
+      console.log('personnelInfo', res);
       $.closeLoading();
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var data = res.data;
       $('#person_id').val(data.id) //注意
       $("#name").val(data.name);
@@ -125,7 +158,18 @@ function uploadImg(tag) {
     data: form,
     dataType: "json",
     success: function (res) {
-      console.log(res)
+      console.log(res);
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       $("#icon-image").find("img").attr({
         "src": APP_IMAGE_URL + res.data
       });
@@ -148,6 +192,17 @@ $.ajax({
   dataType: "json",
   success: function (res) {
     console.log('roleId', res);
+    if (res.code == "909090") {
+      $.show({
+        title: '操作提示',
+        content: '您已掉线,请重新登录!',
+        closeCallback: function () {
+          if (window != top) {
+            top.location.href = "../../login.html";
+          }
+        }
+      });
+    }
     var data = res.data;
     var str = '<option value="" selected>---请选择角色---</option>';
     $.each(data, function (index, val) {

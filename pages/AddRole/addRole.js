@@ -14,6 +14,17 @@ function allMenu() {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             var data = res.data;
             var str = "";
             // if(roleList){}
@@ -109,6 +120,17 @@ function addRole() {
     ajax({
         type: "GET",
         success: function (res) {
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             console.log(JSON.stringify(res));
             window.location.href = '../RoleManage/index.html';
         }
@@ -152,6 +174,17 @@ function roleDetail(id) {
                     }
                 });
                 addRole(); //编辑角色
+            }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
             }
         },
         error: function (err) {

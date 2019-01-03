@@ -17,6 +17,17 @@ function isAdmin(ue) {
     success: function (res) {
       console.log(res);
       $.closeLoading();
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var str = "";
       str += `
         ${res.isAdmin==true?`
@@ -58,6 +69,17 @@ function userList(pageNum) {
     dataType: "json",
     success: function (res) {
       console.log('userList', res);
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var data = res.data;
       var str = "";
       str += `
@@ -120,6 +142,17 @@ function companyList() {
     dataType: "json",
     success: function (res) {
       console.log(res);
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
       var data = res.data;
       var str = "";
       str += `
@@ -182,6 +215,17 @@ function addMessage(ue) {
         if (res.code == 0) {
           alert('消息添加成功');
           window.location.href = '../MessageManage/index.html'
+        }
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
         }
       },
       error: function (err) {

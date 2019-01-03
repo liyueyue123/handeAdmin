@@ -84,6 +84,15 @@ function getChildMenus(i) {
 		dataType: "json",
 		success: function (res) {
 			console.log(res);
+			if (res.code == "909090") {
+				$.show({
+					title: '操作提示',
+					content: '您已掉线,请重新登录!',
+					closeCallback: function () {
+						window.location.href = "../login.html";
+					}
+				});
+			}
 			var data = res.data;
 			var str = "";
 			$(".com-rightBox>iframe").attr("src", data[i].childMenus[0].actionPath);

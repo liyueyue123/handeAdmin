@@ -57,8 +57,8 @@ function getCustomerList(pageNum) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            $.closeLoading();
             if (res.code == 0) {
-                $.closeLoading();
                 var data = res.data;
                 var pages = 10 * (pageNum - 1);
                 var str = "";
@@ -84,6 +84,17 @@ function getCustomerList(pageNum) {
                 $(".list-box>table>tbody").html(str);
                 getPage(res.count, 'getCustomerList', pageNum); //分页
             }
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
         },
         error: function (err) {
             console.log(err);
@@ -103,6 +114,17 @@ function companyList() {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             var data = res.data;
             var str = "";
             str += `<option value="" selected="">选择公司进行搜索</option>`;

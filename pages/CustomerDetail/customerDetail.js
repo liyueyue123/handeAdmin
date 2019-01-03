@@ -17,6 +17,17 @@ function customerDetail(customerId) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            if (res.code == "909090") {
+                $.show({
+                    title: '操作提示',
+                    content: '您已掉线,请重新登录!',
+                    closeCallback: function () {
+                        if (window != top) {
+                            top.location.href = "../../login.html";
+                        }
+                    }
+                });
+            }
             $.closeLoading();
             var data = res.data;
             var arr1 = [];

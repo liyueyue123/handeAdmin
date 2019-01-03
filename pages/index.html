@@ -109,6 +109,15 @@
                 } else if (res.code == "0") {
                     alert("该账号没有访问权限");
                 }
+                if (res.code == "909090") {
+                    $.show({
+                        title: '操作提示',
+                        content: '您已掉线,请重新登录!',
+                        closeCallback: function () {
+                            window.location.href = "../login.html";
+                        }
+                    });
+                }
             }
         });
     }
