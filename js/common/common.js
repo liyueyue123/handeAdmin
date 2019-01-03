@@ -12,12 +12,10 @@ $(document).ready(function (e) {
     },
     tipSweep: true
   });
-
   //添加数据页面取消按钮
   $("button#cancelButton").click(function () {
     window.history.back(-1);
   });
-
   //全站复选框美化
   $('input[data-name=multi-select]').iCheck({
     checkboxClass: 'icheckbox_flat-blue',

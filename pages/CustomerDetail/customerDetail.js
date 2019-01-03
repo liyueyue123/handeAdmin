@@ -1,7 +1,7 @@
 $(function () {
     var url = window.location.href;
     var id = url.split("=")[1];
-    // console.log(url);
+    $.showLoading('加载中');
     customerDetail(id);
 });
 
@@ -17,6 +17,7 @@ function customerDetail(customerId) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            $.closeLoading();
             var data = res.data;
             var arr1 = [];
             $.each(data.phones, function (index, val) {

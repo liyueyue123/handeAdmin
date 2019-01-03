@@ -4,7 +4,8 @@ $(function () {
   var url = window.location.href; //首先获取到你的URL地址;
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
-  console.log(id)
+  // console.log(id)
+  $.showLoading('加载中');
   if (url.indexOf('=') != -1) {
     $('.addForm').attr('action', APP_URL + "/editUser");
     $('#changeTitle').text('修改');
@@ -29,6 +30,7 @@ function getUserInfo(id){
     dataType: "json",
     success: function (res) {
       console.log('uerInfo',res)
+      $.closeLoading();
       var data = res.data;
       $('#user_id').val(data.id)
       $("#user_loginname").val(data.loginname);

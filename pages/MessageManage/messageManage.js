@@ -1,4 +1,5 @@
 $(function () {
+  $.showLoading('加载中');
   messageList(1);
   messageDetail();
 });
@@ -18,6 +19,7 @@ function messageList(pageNum, startPublishTime, title) {
     dataType: "json",
     success: function (res) {
       console.log('messageList', res);
+      $.closeLoading();
       var data = res.data;
       var str = "";
       var pages = 10 * (pageNum - 1);

@@ -8,6 +8,7 @@ $(document).ready(function (e) {
 			callback: function () {
 				$.post(APP_URL + '/console/loginOut', '', function (json) {
 					window.location.href = "../login.html";
+					sessionStorage.clear();
 				});
 			}
 		});

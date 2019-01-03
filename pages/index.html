@@ -71,7 +71,7 @@
             success: function (res) {
                 console.log(res);
                 var data = res.data;
-                if (data.length) {
+                if (data.length && res.code == "0") {
                     var str = "";
                     var str2 = "";
                     // 主模块
@@ -106,7 +106,7 @@
                     });
                     $(".com-leftBox>.com-leftMenu").html(str1);
                     $(".com-rightBox>iframe").attr("src", data[0].childMenus[0].actionPath);
-                } else {
+                } else if (res.code == "0") {
                     alert("该账号没有访问权限");
                 }
             }
