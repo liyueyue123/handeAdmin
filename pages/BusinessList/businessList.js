@@ -1,4 +1,5 @@
 $(function () {
+  $.showLoading('加载中');
   businessList(1);
 });
 
@@ -24,6 +25,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
     dataType: "json",
     success: function (res) {
       console.log('businessList', res);
+      $.closeLoading();
       var data = res.data;
       var str = '';
       var pages = 10 * (pageNum - 1);

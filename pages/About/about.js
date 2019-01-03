@@ -1,4 +1,5 @@
 $(function () {
+    $.showLoading('加载中');
     var ue = UE.getEditor('help_content');
     // 获取关于我们详情
     var token = sessionStorage.getItem("token");
@@ -12,6 +13,7 @@ $(function () {
         success: function (res) {
             console.log(res);
             if (res.code == 0) {
+                $.closeLoading();
                 ue.ready(function () { //编辑器初始化完成再赋值  
                     ue.setContent(res.data.message); //赋值给UEditor  
                     $("#saveButton").click(function () {

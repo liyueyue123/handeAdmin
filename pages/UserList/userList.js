@@ -1,4 +1,5 @@
 $(function () {
+  $.showLoading('加载中');
   userList(1);
 });
 
@@ -19,6 +20,7 @@ function userList(pageNum, phone, name, Id, department) {
     dataType: "json",
     success: function (res) {
       console.log('userList',res);
+      $.closeLoading();
       var data = res.data;
       var str = "";
       var pages = 10 * (pageNum - 1);

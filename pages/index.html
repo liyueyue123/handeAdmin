@@ -50,7 +50,7 @@
 
     <!--right begin-->
     <div class="com-rightBox">
-        <iframe name="right" id="icpnt_iframe" frameborder="0" scrolling="auto" width="100%" height="100%" src="/pages/UserList"></iframe>
+        <iframe name="right" id="icpnt_iframe" frameborder="0" scrolling="auto" width="100%" height="100%" src=""></iframe>
     </div>
     <!--right end-->
 </body>
@@ -69,14 +69,16 @@
             },
             dataType: "json",
             success: function (res) {
-                console.log('roleMenu',res);
+                console.log(res);
                 var data = res.data;
-                var str = "";
-                var str2 = "";
-                // 主模块
-                $.each(data, function (index, val) {
-                    if(val.menuOrder ==1){
-                        str += `
+                if (data.length) {
+                    var str = "";
+                    var str2 = "";
+                    // 主模块
+                    $.each(data, function (index, val) {
+                        if (val.menuOrder == 1) {
+                            str +=
+                                `
                             <li data-res="${index}">
                                 <a class="com-TopMenu" data-id="${val.id}" href="javascript:void(0)">
                                     <i class="fa"></i>
@@ -84,14 +86,15 @@
                                 </a>
                             </li>
                         `;
-                    }
-                });
-                $(".com-hmUl").html(str);
-                //左侧内容
-                var str1 ="";
-                $.each(data[0].childMenus, function (index, val) { 
-                    if (val != []) {
-					str1 += `
+                        }
+                    });
+                    $(".com-hmUl").html(str);
+                    //左侧内容
+                    var str1 = "";
+                    $.each(data[0].childMenus, function (index, val) {
+                        if (val != []) {
+                            str1 +=
+                                `
 						<li>
 							<a class="com-TopMenu" data-id="${val.id}" href="${val.actionPath}" target="right">
 								<i class="fa>"></i>
@@ -99,14 +102,18 @@
 							</a>
 						</li>
                     `;
-				} 
-                });
-                $(".com-leftBox>.com-leftMenu").html(str1);
-                $(".com-rightBox>iframe").attr("src", data[0].childMenus[0].actionPath);
+                        }
+                    });
+                    $(".com-leftBox>.com-leftMenu").html(str1);
+                    $(".com-rightBox>iframe").attr("src", data[0].childMenus[0].actionPath);
+                } else {
+                    alert("该账号没有访问权限");
+                }
             }
         });
     }
     asideList();
 </script>
 <script src="/js/main.js"></script>
+
 </html>

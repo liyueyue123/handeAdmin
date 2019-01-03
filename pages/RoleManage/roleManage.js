@@ -1,4 +1,5 @@
 $(function () {
+    $.showLoading('加载中');
     getRole(1) //获取角色列表
 });
 
@@ -16,6 +17,7 @@ function getRole(pageNum) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            $.closeLoading();
             var data = res.data;
             var pages = 10 * (pageNum - 1);
             var str = '';

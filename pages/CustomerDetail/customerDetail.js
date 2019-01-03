@@ -20,19 +20,23 @@ function customerDetail(customerId) {
             var data = res.data;
             var arr1 = [];
             $.each(data.phones, function (index, val) {
-                arr1.push(val.phone);
+                if (val.phone != "") {
+                    arr1.push(val.phone);
+                }
             });
             var tels = arr1.toString();
             var arr2 = [];
             $.each(data.dreTags, function (index, val) {
-                arr2.push(val.tagName);
+                if (val.tagName != "") {
+                    arr2.push(val.tagName);
+                }
             });
             var tags = arr2.toString();
             var str = "";
             str += `
                 <tr>
                     <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
-                    <td align="center">名片照片</td><td><img src="${data.dreCustomer.cardcasephoto}"/></td>
+                    <td align="center">名片照片</td><td><img src="${APP_IMAGE_URL+ data.dreCustomer.cardcasephoto}" style="width:60px;height:60px;"/></td>
                 </tr>
                 <tr>
                     <td align="center">姓名</td><td>${data.dreCustomer.customerName}</td>
@@ -43,7 +47,7 @@ function customerDetail(customerId) {
                     <td align="center">公司</td><td>${data.dreCustomer.company}</td>
                 </tr>
                 <tr>
-                    <td align="center">计划成单日期</td><td>${moment(data.dreCustomer.planfinishtime).format("YYYY年MM月DD日")}</td>
+                    <td align="center">计划成单日期</td><td>${data.dreCustomer.planfinishtime !=""?moment(data.dreCustomer.planfinishtime).format("YYYY年MM月DD日"):''}</td>
                     <td align="center">邮箱</td><td>${data.dreCustomer.email}</td>
                 </tr>
                 <tr>
@@ -68,7 +72,7 @@ function customerDetail(customerId) {
                 <tr>
                     <td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;"></td>
                     <td colspan="3" style="padding: 15px;line-height: 28px;">
-                         <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 取消</button>
+                         <button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 返回</button>
                     </td>
                 </tr>
             `;

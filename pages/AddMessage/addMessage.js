@@ -1,5 +1,6 @@
 $(function () {
   var ue = UE.getEditor('message_content');
+  $.showLoading('加载中');
   isAdmin(ue); //是否是超级管理员
 });
 
@@ -15,6 +16,7 @@ function isAdmin(ue) {
     dataType: "json",
     success: function (res) {
       console.log(res);
+      $.closeLoading();
       var str = "";
       str += `
         ${res.isAdmin==true?`

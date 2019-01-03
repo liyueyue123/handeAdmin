@@ -99,6 +99,7 @@ function isAdd() {
         $("#changeTitle").html("修改");
         $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
         var roleId = url.split("=")[1];
+        $.showLoading('加载中');
         roleDetail(roleId); //角色详情
     }
 }
@@ -128,6 +129,7 @@ function roleDetail(id) {
         success: function (res) {
             console.log(res);
             if (res.code == 0) {
+                $.closeLoading();
                 var data = res.data;
                 $("#roleName").val(data.rolename); //阶段名称
                 $("#roleId").val(data.id); //阶段ID

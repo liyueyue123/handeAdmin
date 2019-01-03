@@ -152,6 +152,7 @@ function addCompany() {
 
 // 获取公司详情
 function showDetails(id) {
+    $.showLoading('加载中');
     var $id = parseInt(id);
     console.log($id, typeof ($id));
     var token = sessionStorage.getItem("token");
@@ -167,6 +168,7 @@ function showDetails(id) {
             console.log(res);
             var data = res.data;
             if (res.code == 0) {
+                $.closeLoading();
                 $("#companyId").val(id);
                 $(".addForm").attr("action", APP_URL + "/editCompany");
                 $("#changeTitle").html("编辑");

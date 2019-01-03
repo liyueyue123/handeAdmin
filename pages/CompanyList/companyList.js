@@ -42,12 +42,14 @@ function companyList(pageNum) {
     if (id != '') {
         data.id = id;
     }
+    $.showLoading('加载中');
     $.ajax({
         type: "GET",
         url: APP_URL + "/companyList",
         data: data,
         dataType: "json",
         success: function (res) {
+            $.closeLoading();
             console.log(res);
             var data = res.data;
             var pages = 10 * (pageNum - 1);

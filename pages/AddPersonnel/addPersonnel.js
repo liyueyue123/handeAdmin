@@ -2,13 +2,14 @@ $(function () {
   var url = window.location.href; //首先获取到你的URL地址;
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
-  console.log(id)
+  // console.log(id)
   if (url.indexOf('=') != -1) {
     $('#form1').attr('action', APP_URL + "/console/update");
     $('#changeTitle').text('编辑')
     $('#changeTxt').text('保存')
     $('#changeTxt').prev().removeClass("fa-check");
     $('#changeTxt').prev().addClass("fa-save");
+    $.showLoading('加载中');
     getPersonnelInfo(id);
     //提交表单
     ajax({
@@ -32,6 +33,7 @@ $(function () {
   }
 })
 
+// 获取详情
 function getPersonnelInfo(id) {
   var token = sessionStorage.getItem("token");
   $.ajax({
@@ -44,11 +46,12 @@ function getPersonnelInfo(id) {
     dataType: "json",
     success: function (res) {
       console.log('personnelInfo', res)
+      $.closeLoading();
       var data = res.data;
       $('#person_id').val(data.id) //注意
       $("#name").val(data.name);
       $("#roleid").find("option[value=" + data.roleid + "]").attr("selected", true);
-      console.log(data.roleid)
+      // console.log(data.roleid)
       $("#account").val(data.account);
       $("#business_passwd").val(data.password);
       if (data.iconurl.length != 0) {

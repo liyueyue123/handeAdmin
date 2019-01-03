@@ -57,7 +57,7 @@ function messageDetail() {
     url: APP_URL + "/message/showMessageDetails",
     data: {
       authToken: token,
-      id: 5,
+      id: 26,
       limit: 10,
       page: 1
     },

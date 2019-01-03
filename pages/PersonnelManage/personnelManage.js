@@ -1,4 +1,5 @@
 $(function () {
+  $.showLoading('加载中');
   personnelManageList(1);
 });
 
@@ -15,6 +16,7 @@ function personnelManageList(pageNum, roleName) {
     dataType: "json",
     success: function (res) {
       console.log('personnelList', res);
+      $.closeLoading();
       var data = res.data;
       var str = "";
       var pages = 10 * (pageNum - 1);
