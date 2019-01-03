@@ -14,7 +14,7 @@ $(function () {
     var token = sessionStorage.getItem("token");
     $.ajax({
       type: "GET",
-      url: APP_URL + "/getOpportunityDetails",
+      url: APP_URL + "/console/getOpportunityDetails",
       data: {
         authToken: token,
         opportunityId: id
@@ -181,7 +181,7 @@ $(function () {
     console.log(linkIds)
     $.ajax({
       type: "post",
-      url: APP_URL + "/console/updateLinkInfo",
+      url: APP_URL + "/console/saveLinkInfo",
       data: {
         authToken: token,
         opportunityId: id,
@@ -219,7 +219,7 @@ $(function () {
     console.log(linkIds)
     $.ajax({
       type: "post",
-      url: APP_URL + "/console/updateLinkInfo",
+      url: APP_URL + "/console/saveLinkInfo",
       data: {
         authToken: token,
         opportunityId: id,

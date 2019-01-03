@@ -81,30 +81,58 @@ $('#icon-image').hide();
 // 上传头像
 $('#iconfile').change(function (e) {
   var path = $(this).val(),
-    extStart = path.lastIndexOf('.'),
-    ext = path.substring(extStart, path.length).toUpperCase();
-  console.log(path);
-  if (ext !== null) {
-    //判断图片格式
-    if (ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF') {
-      alert('请上传正确格式的图片');
-      $('#icon-image').hide();
-      $("#icon-image").find("img").attr({
-        "src": ''
-      })
-      return false;
+  extStart = path.lastIndexOf('.'),
+  ext = path.substring(extStart, path.length).toUpperCase();
+  // console.log(path);
+  let url = window.URL || window.webkitURL;
+  console.log(url.createObjectURL(this.files[0])); //this.files[0]为选中的文件(索引为0因为是单选一个),这里是图片
+  let img = new Image(); //手动创建一个Image对象
+  img.src = url.createObjectURL(this.files[0]); //创建Image的对象的url
+  img.onload = function () {
+    console.log('height:' + this.height + '----width:' + this.width)
+    var w = this.width;
+    var h = this.height;
+    if (ext !== null) {
+      //判断图片格式
+      if (ext !== '.PNG' && ext !== '.JPG' && ext !== '.JPEG' && ext !== '.GIF') {
+        alert('请上传正确格式的图片');
+        $('#icon-image').hide();
+        $("#icon-image").find("img").attr({
+          "src": ''
+        })
+        return false;
+      }
+      // //获取图片大小，注意使用this，而不是$(this)
+      // var size = this.files[0].size / 1024;
+      // if (size > 10240) {
+      //   alert('图片大小不能超过10M');
+      //   return false;
+      // }
+      console.log(w,h)
+      if(w != h){
+        $("#iconfile").val('')
+        $("#icon-image").find("img").attr({
+          "src": ''
+        })
+        alert('请选择宽高相等的图片作为头像');
+        return false;
+      }
+      if (w < 200 || h < 200) {
+        $("#iconfile").val('')
+        $("#icon-image").find("img").attr({
+          "src": ''
+        })
+        alert('请选择宽高大于200px的图片作为头像');
+        return false;
+      }
+      var imgBox = e.target;
+      uploadImg(imgBox)
     }
-    //获取图片大小，注意使用this，而不是$(this)
-    var size = this.files[0].size / 1024;
-    if (size > 10240) {
-      alert('图片大小不能超过10M');
-      return false;
-    }
-    var imgBox = e.target;
-    uploadImg(imgBox)
   }
 });
+function imgSize(w,h){
 
+}
 //上传图片时调用的接口
 function uploadImg(tag) {
   var file = tag.files[0];
