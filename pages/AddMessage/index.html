@@ -9,6 +9,38 @@
     <script src="/tools/ueditor1_4_3-utf8-php/ueditor.all.min.js"></script>
     <script src="/tools/ueditor1_4_3-utf8-php/lang/zh-cn/zh-cn.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <style>
+        .tabTd {
+            padding: 0 !important;
+        }
+        .contactTd {
+            margin: 0;
+            padding: 0 !important;
+        }
+        .addbox div td{
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #e6e6e6;
+            border-right: 1px solid #e6e6e6;
+            padding: 0 0.5%;
+        }
+        .innerTab {
+            border: 0 !important;
+            width: 100%;
+            margin: 0;
+            text-align: center;
+        }
+        .innerTab thead {
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .thStyle{
+            border-right: 1px solid #e6e6e6;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $.closeLoading();
+    </script>
 </head>
 
 <body>
@@ -21,7 +53,7 @@
     <div class="add-box">
         <form class="addForm ajax-fadein" id="form1" name="form1">
             <input name="id" type="hidden" id="id" value="">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <table width="100%" border="0">
                 <tbody>
                     <tr>
                         <td align="center">消息标题</td>
@@ -35,14 +67,55 @@
                     </tr>
 
                     <tr>
-                        <td align="center">选择接收用户</td>
-                        <td colspan="3">
-                            <select class="form-control" name="moduleType">
-                                <option value="" selected="">平台用户</option>
-                                <option value="=0">公司名称</option>
-                            </select>
+                        <td align="center" style="border-bottom:0;">选择接收用户</td>
+                        <td id="acceptMan">
+                            <!-- <select class="form-control">
+                                <option value="" selected="">---请选择接收用户---</option>
+                                <option value="=0">平台用户</option>
+                                <option value="=0">平台用户</option>
+                            </select> -->
                         </td>
                     </tr>
+                    <tr id="acceptManList">
+                        <!-- <td align="center">&nbsp;</td> -->
+                        <!-- <td class="tabTd">
+                            <div style="height:200px;overflow-x:auto;">
+                                <table class="innerTab">
+                                    <thead>
+                                        <tr>
+                                            <th class="thStyle">选择</th>
+                                            <th class="thStyle">序号</th>
+                                            <th class="thStyle">ID</th>
+                                            <th class="thStyle">姓名</th>
+                                            <th class="thStyle">手机号</th>
+                                            <th class="thStyle">部门</th>
+                                            <th class="thStyle">头像</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="userList">
+                                        <tr>
+                                            <td><input type="checkbox" name="links_ID" id="del_listID" data-name="multi-select"
+                                                    value="32"></td>
+                                            <td>1</td>
+                                            <td>32</td>
+                                            <td>张京</td>
+                                            <td>北京云族佳科技有限公司合</td>
+                                            <td>经理</td>
+                                            <td>经理</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td> -->
+                        <!-- <td>
+                            <select class="form-control">
+                                <option value="" selected="">---请选择公司名称---</option>
+                                <option value="=0">公司名称1</option>
+                            </select>
+                        </td> -->
+
+                    </tr>
+
 
                     <tr>
                         <td>&nbsp;</td>
@@ -59,4 +132,5 @@
     </div>
 </body>
 <script src="./addMessage.js"></script>
+
 </html>

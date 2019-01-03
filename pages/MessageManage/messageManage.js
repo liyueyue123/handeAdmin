@@ -1,5 +1,6 @@
 $(function () {
   messageList(1);
+  messageDetail();
 });
 
 function messageList(pageNum, startPublishTime, title) {
@@ -47,3 +48,25 @@ $('#search_btn').live('click', function () {
   var startPublishTime = $('#search_startPublishTime').val();
   messageList(1, startPublishTime, title);
 })
+
+// 详情
+function messageDetail() {
+  var token = sessionStorage.getItem("token");
+  $.ajax({
+    type: "GET",
+    url: APP_URL + "/message/showMessageDetails",
+    data: {
+      authToken: token,
+      id: 5,
+      limit: 10,
+      page: 1
+    },
+    dataType: "json",
+    success: function (res) {
+      console.log(res);
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+}
