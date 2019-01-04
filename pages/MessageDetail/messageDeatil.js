@@ -1,6 +1,7 @@
 $(function () {
     var url = window.location.href;
     var id = url.split("=")[1];
+    $.showLoading('加载中');
     messageDetail(1, id);
 });
 
@@ -19,6 +20,7 @@ function messageDetail(pageNum, id) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            $.closeLoading();
             var data = res.data;
             var pages = 10 * (pageNum - 1);
             var str = "";

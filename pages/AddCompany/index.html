@@ -98,7 +98,7 @@
                     </tr>
                     <tr>
                         <td align="center">最终账号数量</td>
-                        <td><input type="number" name="lastAccountCount" id="company_num" value="" class="form-control" datatype="*" nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"/></td>
+                        <td><input type="text" name="lastAccountCount" id="company_num" value="" class="form-control" datatype="/^[0-9]*$/" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" nullmsg="请输入最终账号数量" placeholder="请输入最终账号数量"/></td>
                     </tr>
 
                     <tr>
