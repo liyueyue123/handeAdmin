@@ -56,6 +56,7 @@
                     $(window).attr("location", "./pages/index.html");
                     sessionStorage.setItem("token", res.authToken);
                     sessionStorage.setItem("name", res.data.name);
+                    sessionStorage.setItem("userId",res.data.id);
                 } else {
                     $("div.errorinfo").html(res.message);
                     $("div.errorinfo").show();

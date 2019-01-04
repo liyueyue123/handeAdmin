@@ -31,24 +31,32 @@ function customerDetail(customerId) {
             $.closeLoading();
             var data = res.data;
             var arr1 = [];
-            $.each(data.phones, function (index, val) {
-                if (val.phone != "") {
-                    arr1.push(val.phone);
-                }
-            });
-            var tels = arr1.toString();
+            if (data.phones != "") {
+                $.each(data.phones, function (index, val) {
+                    if (val.phone != "") {
+                        arr1.push(val.phone);
+                    }
+                });
+                var tels = arr1.toString();
+            } else {
+                var tels = "";
+            }
             var arr2 = [];
-            $.each(data.dreTags, function (index, val) {
-                if (val.tagName != "") {
-                    arr2.push(val.tagName);
-                }
-            });
-            var tags = arr2.toString();
+            if (data.dreTags != "") {
+                $.each(data.dreTags, function (index, val) {
+                    if (val.tagName != "") {
+                        arr2.push(val.tagName);
+                    }
+                });
+                var tags = arr2.toString();
+            } else {
+                var tags = "";
+            }
             var str = "";
             str += `
                 <tr>
                     <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
-                    <td align="center">名片照片</td><td><img src="${APP_IMAGE_URL+ data.dreCustomer.cardcasephoto}" style="width:60px;height:60px;"/></td>
+                    <td align="center">名片照片</td><td><img src="${APP_IMAGE_URL+ data.dreCustomer.cardcasephoto}" style="width:60px;height:60px;margin:10px;"/></td>
                 </tr>
                 <tr>
                     <td align="center">姓名</td><td>${data.dreCustomer.customerName}</td>
@@ -71,12 +79,12 @@ function customerDetail(customerId) {
                     <td align="center">微信</td><td>${data.dreCustomer.wechat}</td>
                 </tr>
                 <tr>
-                    <td align="center">分组名称</td><td>${data.group.groupName}</td>
+                    <td align="center">分组名称</td><td>${data.group!=""?data.group.groupName:""}</td>
                     <td align="center">标签</td><td>${tags}</td>
                 </tr>
                 <tr>
                     <td align="center">信息来源</td><td>${data.dreCustomer.messagesource}</td>
-                    <td align="center">相关讨论组</td><td>${data.group.customers}</td>
+                    <td align="center">相关讨论组</td><td>${data.group!=""?data.group.customers:""}</td>
                 </tr>
                 <tr>
                     <td align="center">相关商机</td><td colspan="3">${data.opportunity}</td>
