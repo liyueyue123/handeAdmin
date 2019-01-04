@@ -144,6 +144,10 @@ $('#search_btn').live('click', function () {
   var name = $('#search_name').val();
   var Id = $('#search_Id').val();
   userList(1, phone, name, Id);
+  $('#export_department').val('');
+  $('#export_phone').val(phone);
+  $('#export_name').val(name);
+  $('#export_Id').val(Id);
 })
 $('#filter_btn').live('click', function () {
   var phone = '';
@@ -151,13 +155,23 @@ $('#filter_btn').live('click', function () {
   var Id = '';
   var department = $('#filter_department').val();
   userList(1, phone, name, Id, department);
+  $('#export_phone').val('');
+  $('#export_name').val('');
+  $('#export_Id').val('');
+  $('#export_department').val(department);
 })
+//点击过搜索或者筛选按钮赋值
 //点击导出按钮
 $('#export').live('click', function () {
   var p = confirm("由于数据存在关联查询， 导出Exce可能需要1 - 3 分钟的时间， 确定要导出吗（ 确定后请勿刷新页面或关闭浏览器） ?")
   if (p == true) {
     var token = sessionStorage.getItem("token");
-    window.location.href = 'http://hande.icpnt.com/export?authToken=' + token;
+    var phone = $('#export_phone').val();
+    console.log(phone)
+    var name = $('#export_name').val();
+    var Id = $('#export_Id').val();
+    var department = $('#export_department').val();
+    window.location.href = 'http://hande.icpnt.com/export?authToken=' + token + "&phone=" + phone + '&name=' + name + '&department=' + department;
   }
 })
 var isAll = true;
