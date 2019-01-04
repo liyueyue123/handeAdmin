@@ -48,12 +48,12 @@ function userList(pageNum, phone, name, Id, department) {
             <td>${val.customerCount}</td>
             <td>${val.opportunityCount}</td>
             <td>${val.companyname}</td>
-            <td  style="display:none;"></td>
-            <td  style="display:none;"></td>
-            <td  style="display:none;"></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>${val.passwd}</td>
             <td></td>
-            <td style="display:none;">${val.customerCount}</td>
+            <td>${val.customerCount}</td>
             <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id},${pageNum})">${val.isLock == 0 ?"禁用":"启用"}</a></td>
           </tr>
         `;
