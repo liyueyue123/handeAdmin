@@ -1,7 +1,6 @@
 $(function () {
   $.showLoading('加载中');
   messageList(1);
-  messageDetail();
 });
 
 function messageList(pageNum, startPublishTime, title) {
@@ -33,6 +32,7 @@ function messageList(pageNum, startPublishTime, title) {
               <td>${val.title}</td>
               <td>${val.context}</td>
               <td>${moment(val.publishtime).format('YYYY年MM月DD日 hh:mm:ss')}</td>
+              <td><a class="btn btn-success navbar-btn" href="../MessageDetail/index.html?id=${val.id}">查看推送详情</a></td>
             </tr>
           `;
         });
@@ -63,36 +63,3 @@ $('#search_btn').live('click', function () {
   var startPublishTime = $('#search_startPublishTime').val();
   messageList(1, startPublishTime, title);
 })
-
-// 详情
-function messageDetail() {
-  var token = sessionStorage.getItem("token");
-  $.ajax({
-    type: "GET",
-    url: APP_URL + "/message/showMessageDetails",
-    data: {
-      authToken: token,
-      id: 26,
-      limit: 10,
-      page: 1
-    },
-    dataType: "json",
-    success: function (res) {
-      console.log(res);
-      if (res.code == "909090") {
-        $.show({
-          title: '操作提示',
-          content: '您已掉线,请重新登录!',
-          closeCallback: function () {
-            if (window != top) {
-              top.location.href = "../../login.html";
-            }
-          }
-        });
-      }
-    },
-    error: function (err) {
-      console.log(err);
-    }
-  });
-}

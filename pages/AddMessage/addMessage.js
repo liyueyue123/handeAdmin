@@ -177,7 +177,6 @@ function companyList() {
   });
 }
 
-
 function addMessage(ue) {
   // 添加消息
   $("#saveButton").click(function () {
@@ -204,7 +203,7 @@ function addMessage(ue) {
       data.companyId = company;
       data.userIds = "";
     }
-    console.log(data);
+    // console.log(data);
     $.ajax({
       type: "GET",
       url: APP_URL + "/message/pushMessage",
