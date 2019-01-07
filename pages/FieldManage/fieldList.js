@@ -57,7 +57,7 @@ function fieldList(pageNum) {
 
 // 禁用弹性字段
 function fieldDisable(id,state) {
-    console.log(state);
+    // console.log(state);
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
