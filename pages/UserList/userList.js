@@ -2,7 +2,7 @@ $(function () {
   $.showLoading('加载中');
   userList(1);
 });
-
+//用户列表
 function userList(pageNum, phone, name, Id, department) {
   var token = sessionStorage.getItem("token");
   $.ajax({
@@ -48,9 +48,9 @@ function userList(pageNum, phone, name, Id, department) {
             <td>${val.customerCount}</td>
             <td>${val.opportunityCount}</td>
             <td>${val.companyname}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td style="display:none;"></td>
+            <td style="display:none;"></td>
+            <td style="display:none;"></td>
             <td>${val.passwd}</td>
             <td></td>
             <td>${val.customerCount}</td>
