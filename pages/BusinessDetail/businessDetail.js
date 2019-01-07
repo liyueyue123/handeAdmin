@@ -7,10 +7,27 @@ $(function () {
     var $index = b.split('=')[1];
     // console.log(id , $index)
     $.showLoading();
-    businessDetail(id, $index);
+    isAdmin(id, $index);
 });
-
-function businessDetail(id, $index) {
+//判断是超级管理员
+function isAdmin(id, $index) {
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/message/isAdmin",
+        data: {
+            authToken: token,
+        },
+        dataType: 'json',
+        success: function (res) {
+            if (res.code == 0) {
+                var isAdmin = true;
+                businessDetail(id, $index, isAdmin);
+            }
+        }
+    })
+}
+//获取商机详情
+function businessDetail(id, $index, isAdmin) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -22,7 +39,7 @@ function businessDetail(id, $index) {
         dataType: "json",
         success: function (res) {
             console.log('businessInfo', res);
-            $.closeLoading();   
+            $.closeLoading();
             if (res.code == "909090") {
                 $.show({
                     title: '操作提示',
@@ -35,15 +52,15 @@ function businessDetail(id, $index) {
                 });
             }
             var data = res.data;
-            if (data.histories != ''){
+            if (data.histories != '') {
                 var histories = '';
-               $.each(data.histories, function (historiesIndex, historiesVal) {
+                $.each(data.histories, function (historiesIndex, historiesVal) {
                     histories += `
                                 <div>时间:  ${moment(historiesVal.time).format("YYYY年MM月DD日")} ,历史信息:  ${historiesVal.message}, 历史商机:  ${historiesVal.opportunitesid} ,操作用户:  ${historiesVal.userName} ,操作用户的id:${historiesVal.userid}</div>
                              `;
                 });
-            }else{
-                var  histories = '';
+            } else {
+                var histories = '';
             }
             var str = "";
             str = `
@@ -135,19 +152,21 @@ function businessDetail(id, $index) {
                 $.each(data.tags, function (til, tvl) {
                     str += `<div class="contact"><span style="font-weight: bold;">标签名称: </span>${tvl.tagName},   <span style="font-weight: bold;">标签数量: </span>${tvl.count}</div>`;
                 });
-            } 
+            }
             str += `
                 </tr>
                 <tr>
                     <td align="center">讨论组</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td align="center">弹性域字段</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td align="center">操作历史</td>
+                </tr>`;
+            if (isAdmin != true){
+                str +=   `<tr>
+                        <td align="center">弹性域字段</td>
+                        <td></td>
+                    </tr>
+                    <tr>`;
+            }
+            str +=        `<td align="center">操作历史</td>
                     <td><div style="overflow-x:auto;height:200px;">${histories}</div></td>
                 </tr>
                 <tr>
@@ -156,7 +175,7 @@ function businessDetail(id, $index) {
                     <div style="overflow-x:auto;height:150px;">
                 `;
             if (data.files != "") {
-                $.each(data.files, function (dex, va) { 
+                $.each(data.files, function (dex, va) {
                     str += `<a style="text-decoration:underline;color: #428bca;display:block;" target="_blank" href="${va.filename}">附件${dex+1}: ${va.filename}</a>  `;
                 });
             }
