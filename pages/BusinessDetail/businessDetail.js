@@ -200,4 +200,8 @@ function businessDetail(id, $index, isAdmin) {
             console.log(err);
         }
     });
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6d540e955abc59436d97e3cfe2df0aa79336cd62

@@ -21,29 +21,3 @@ var resoures = `
     <script src="/js/common/common.js"></script>
 `;
 document.write(resoures);
-
-
-// $(document).ready(function(e) {
-//     $('.jcDate').datetimepicker({
-//         weekStart: 1, //设置从周一开始，默认值为0周末开始
-//         todayBtn: 1, //显示今日按钮
-//         autoclose: 1, //选定日期后立即关闭时间选择器
-//         todayHighlight: 1, //高亮当前日期
-//         startView: 2, //日期时间选择器打开之后首先显示的视图
-//         minView: 2, //日期时间选择器所能够提供的最精确的时间选择视图。
-//         forceParse: 0, //关闭自动修正
-//         language: 'zh-CN', //设置语言为中文
-//         format: 'yyyy-mm-dd' //设置日期格式：年-月-日*/
-//     });
-//     $('.jbDate').datetimepicker({
-//         weekStart: 1, //设置从周一开始，默认值为0周末开始
-//         todayBtn: 1, //显示今日按钮
-//         autoclose: 1, //选定日期后立即关闭时间选择器
-//         todayHighlight: 1, //高亮当前日期
-//         startView: 2, //日期时间选择器打开之后首先显示的视图
-//         //minView: 2,//日期时间选择器所能够提供的最精确的时间选择视图。
-//         forceParse: 0, //关闭自动修正
-//         language: 'zh-CN', //设置语言为中文
-//         format: 'yyyy/mm/dd hh:ii:ss' //设置日期格式：年-月-日*/
-//     });
-// });

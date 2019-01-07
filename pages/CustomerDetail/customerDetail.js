@@ -55,8 +55,8 @@ function customerDetail(customerId) {
             var str = "";
             str += `
                 <tr>
-                    <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
                     <td align="center">名片照片</td><td><img src="${APP_IMAGE_URL+ data.dreCustomer.cardcasephoto}" style="width:60px;height:60px;margin:10px;"/></td>
+                    <td align="center">ID</td><td width="38%">${data.dreCustomer.id}</td>
                 </tr>
                 <tr>
                     <td align="center">姓名</td><td>${data.dreCustomer.customerName}</td>
@@ -79,15 +79,52 @@ function customerDetail(customerId) {
                     <td align="center">微信</td><td>${data.dreCustomer.wechat}</td>
                 </tr>
                 <tr>
+                    <td align="center">标签名称</td><td>${tags}</td>
+                    <td align="center">标签总数</td><td>${data.dreTags.length}</td>
+                </tr>
+                <tr>
                     <td align="center">分组名称</td><td>${data.group!=""?data.group.groupName:""}</td>
-                    <td align="center">标签</td><td>${tags}</td>
-                </tr>
-                <tr>
-                    <td align="center">信息来源</td><td>${data.dreCustomer.messagesource}</td>
-                    <td align="center">相关讨论组</td><td>${data.group!=""?data.group.customers:""}</td>
-                </tr>
-                <tr>
                     <td align="center">相关商机</td><td colspan="3">${data.opportunity}</td>
+                </tr>
+                <tr>
+                    <td align="center">相关讨论组</td>
+                    <td class="contactTd">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<thead class="thStyle">
+								<tr>
+									<th>名称</th>
+									<th>组内人数</th>
+									<th>成员</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdStyle">${data.dreDiscussion!=""?data.dreDiscussion.discussionName:""}</td>
+									<td class="tdStyle">${data.dreDiscussion!=""?data.dreDiscussion.createUser:""}</td>
+									<td class="tdStyle"></td>
+								</tr>
+							</tbody>
+						</table>
+                    </td>
+                    <td align="center">信息来源</td>
+                    <td class="contactTd">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<thead class="thStyle">
+								<tr>
+									<th>用户名称</th>
+									<th>用户ID</th>
+									<th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdStyle">${data.dreCustomer.messagesource}</td>
+									<td class="tdStyle"></td>
+									<td class="tdStyle"></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
                 </tr>
                 <tr>
                     <td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;"></td>
