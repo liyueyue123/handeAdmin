@@ -3,6 +3,7 @@ $(function () {
   personnelManageList(1);
 });
 
+//人员列表
 function personnelManageList(pageNum, roleName) {
   $.ajax({
     type: "GET",
@@ -20,7 +21,7 @@ function personnelManageList(pageNum, roleName) {
       var data = res.data;
       var str = "";
       var pages = 10 * (pageNum - 1);
-      if(res.code == 0){
+      if (res.code == 0) {
         $.each(data, function (index, val) {
           if (val.lastlogintime == "") {
             var lasrlogintime = val.lastlogintime;
@@ -34,7 +35,7 @@ function personnelManageList(pageNum, roleName) {
           }
           str += `
                <tr>
-              <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
+              <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" data-role="${val.roleid}" /></td>
               <td>${pages+(index+1)}</td>
               <td>${val.name}</td>
               <td><img ${src} width="70px" height="70px" alt="暂无用户头像"></td>
@@ -108,3 +109,52 @@ $('#search_btn').live('click', function () {
   var roleName = $('#search_roleName').val();
   personnelManageList(1, roleName);
 })
+
+//点击修改按钮,判断是否有权限修改
+$("#edit-button").click(function () {
+  var checkBox = $("input[name=del_listID]:checked");
+  // var roleid = checkBox.data('role');
+  if (checkBox.length == 1) {
+    isAdmin();
+  } else if (checkBox.length > 1) {
+    $.show({
+      title: '操作提示',
+      content: '只能同时编辑一条数据！'
+    });
+  } else {
+    $.show({
+      title: '操作提示',
+      content: '请至少选中一条数据！'
+    });
+  }
+})
+
+//判断是超级管理员
+function isAdmin() {
+  $.ajax({
+    type: "GET",
+    url: APP_URL + "/message/isAdmin",
+    data: {
+      authToken: token,
+    },
+    dataType: 'json',
+    success: function (res) {
+      if (res.code == 0) {
+        var isAdmin = res.isAdmin;
+        if (isAdmin == true) {
+          editData('../AddPersonnel/index.html');
+        } else {
+            $.show({
+              title: '操作提示',
+              content: '您没有修改权限,请选择其他人员',
+              closeCallback: function () {
+                $("input[name=del_listID]").attr({
+                  'checked': false
+                })
+              }
+            });
+        }
+      }
+    }
+  })
+}

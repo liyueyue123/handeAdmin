@@ -1,10 +1,7 @@
 $(function () {
     var url = window.location.href;
-    var a = url.split('&')[0];
-    var b = url.split('&')[1];
-    // console.log(a,b)
-    var id = a.split('=')[1];
-    var $index = b.split('=')[1];
+    var id = url.split('&')[0].split('=')[1];
+    var $index = url.split('&')[1].split('=')[1];
     // console.log(id , $index)
     $.showLoading();
     isAdmin(id, $index);
@@ -20,7 +17,7 @@ function isAdmin(id, $index) {
         dataType: 'json',
         success: function (res) {
             if (res.code == 0) {
-                var isAdmin = true;
+                var isAdmin = res.isAdmin;
                 businessDetail(id, $index, isAdmin);
             }
         }
@@ -204,8 +201,3 @@ function businessDetail(id, $index, isAdmin) {
         }
     });
 }
-
-// //查看更多的历史消息
-// $('#seenMore').live("click",function(){
-
-// })

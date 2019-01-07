@@ -19,6 +19,7 @@ function fieldList(pageNum) {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            $.closeLoading();
             if (res.code == "909090") {
                 $.show({
                     title: '操作提示',
@@ -30,7 +31,6 @@ function fieldList(pageNum) {
                     }
                 });
             }
-            $.closeLoading();
             var data = res.data;
             var pages = 10 * (pageNum - 1);
             var str = "";
