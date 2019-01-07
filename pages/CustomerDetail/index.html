@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="/css/rightCommon.css">
 	<script src="./customerDetail.js"></script>
 	<script src="/js/moment.js"></script>
-	
+
 	<style>
 		label{ padding:0 10px; margin:0; height:50px; line-height:50px; cursor:pointer;}
 		.gtImg{
@@ -17,6 +17,32 @@
 			border-radius: 100px;
 			border: 2px solid #fff;
 			margin: 10px 5px;
+		}
+
+        .contactTd {
+			border-bottom: 0 !important;
+    		border-right: 0 !important;
+            margin: 0;
+            padding: 0 !important;
+        }
+		.contactTd table {
+			border-top: 0 !important;
+			border-left: 0 !important;
+		}
+		.thStyle th {
+			text-align: center;
+			border: 1px solid #e6e6e6;
+			border-left: 0;
+			border-top: 0;
+		}
+		.tdStyle {
+			width: 30% !important;
+			text-align: center !important;
+		}
+		.tdStyle>div{
+			width: 100%;
+			margin: 0;
+			border-bottom: 1px solid #e6e6e6;
 		}
 	</style>
 </head>
@@ -27,7 +53,6 @@
 		<div class="navbar-header">
 			<span class="navbar-brand"> 查看客户信息</span>
 		</div>
-		<!-- <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('Oa_customer')"><i class="fas fa-trash-alt"></i> 删除</button> -->
 	</nav>
 	<div class="add-box">
 		<input name="id" type="hidden" id="id" value="" />
@@ -38,7 +63,7 @@
 					<td align="center">ID</td>
 					<td width="38%"></td>
 					<td align="center">名片照片</td>
-					<td></td>
+					<td><img src="" style="width:60px;height:60px;margin:10px;" /></td>
 				</tr>
 				<tr>
 					<td align="center">姓名</td>
@@ -71,36 +96,66 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td align="center">分组名称</td>
+					<td align="center">标签名称</td>
 					<td></td>
-					<td align="center">标签</td>
-					<td>
-						<select name="status" id="status" class="form-control">
-							<option value="4">名称</option>
-							<option value="3">标签总数</option>
-						</select>
-					</td>
+					<td align="center">标签总数</td>
+					<td></td>
 				</tr>
 				<tr>
-					<td align="center">相关讨论组</td>
-					<td>
-						<select name="status" id="status" class="form-control">
-							<option value="4">名称</option>
-							<option value="3">组内人数</option>
-							<option value="3">成员</option>
-						</select>
-					</td>
+					<td align="center">分组名称</td>
+					<td></td>
 					<td align="center">相关商机</td>
 					<td></td>
 				</tr>
 				<tr>
+					<td align="center">相关讨论组</td>
+					<td class="contactTd">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<thead class="thStyle">
+								<tr>
+									<th>名称</th>
+									<th>组内人数</th>
+									<th>成员</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdStyle">1</td>
+									<td class="tdStyle">209</td>
+									<td class="tdStyle">29</td>
+									<td class="tdStyle" style="border-bottom:0;">
+										<div>1111</div>
+										<div>2222</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
 					<td align="center">信息来源</td>
-					<td colspan="3"><textarea name="desc" id="desc" cols="45" rows="5" class="form-control" datatype="*" nullmsg="请填写沟通记录"
-							style="width:100%;height:200px; margin:10px 0px;" placeholder="请填写信息来源"></textarea></td>
+					<td class="contactTd">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<thead class="thStyle">
+								<tr>
+									<th>用户名称</th>
+									<th>用户ID</th>
+									<th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="tdStyle">1</td>
+									<td class="tdStyle">209</td>
+									<td class="tdStyle">李晨</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;"></td>
-					<td colspan="3" style="padding: 15px;line-height: 28px;"></td>
+					<td colspan="3" style="padding: 15px;line-height: 28px;">
+						<button type="button" class="btn btn-default" id="cancelButton"><i class="fa fa-times" aria-hidden="true"></i> 返回</button>
+					</td>
 				</tr> -->
 			</tbody>
 		</table>

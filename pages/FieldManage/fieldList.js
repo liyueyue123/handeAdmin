@@ -41,12 +41,37 @@ function fieldList(pageNum) {
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
                         <td>${pages+index+1}</td>
                         <td>${val.fieldname}</td>
-                        <td><a class="btn ${val.state==0?'btn-danger':'btn-success'}" href="javascript:void(0);">${val.state==0?'禁用':'启用'}</a></td>
+                        <td><a class="btn ${val.state==0?'btn-danger':'btn-success'}" onclick="fieldDisable('${val.id}',${val.state==0?'1':'0'})">${val.state==0?'禁用':'启用'}</a></td>
                     </tr>
                      `;
                 });
                 $("#fieldList").html(str);
                 getPage(res.count, 'fieldList', pageNum); //分页
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+// 禁用弹性字段
+function fieldDisable(id,state) {
+    console.log(state);
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/fieldNameEdit",
+        data: {
+            authToken: token,
+            id:id,
+            state:state
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if(res.code==0){
+                fieldList(1);
             }
         },
         error: function (err) {

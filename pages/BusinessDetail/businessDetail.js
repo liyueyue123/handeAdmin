@@ -185,8 +185,3 @@ function businessDetail(id, $index) {
         }
     });
 }
-
-// //查看更多的历史消息
-// $('#seenMore').live("click",function(){
-
-// })
