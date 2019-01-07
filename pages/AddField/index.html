@@ -6,6 +6,7 @@
     <title>新增弹性域字段管理</title>
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="./addField.js"></script>
 </head>
 
 <body>
@@ -17,12 +18,13 @@
 
     <div class="add-box">
         <form class="addForm" id="form1" name="form1" action="">
+            <input type="hidden" name="comid" value="" id="companyId">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <tr>
                         <td align="center">字段名称</td>
-                        <td><input type="text" class="form-control" name="" id="" placeholder="请输入字段名称"
-                                datatype="*" nullmsg="请输入字段名称"></td>
+                        <td><input type="text" class="form-control" name="fieldname" placeholder="请输入字段名称" datatype="*"
+                                nullmsg="请输入字段名称"></td>
                     </tr>
 
                     <tr>

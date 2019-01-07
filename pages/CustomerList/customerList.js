@@ -68,7 +68,7 @@ function getCustomerList(pageNum) {
                     <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
                     <td>${pages+(index+1)}</td>
                     <td>${val.id}</td>
-                    <td><img src='${APP_IMAGE_URL+val.cardcasephoto}' style="width:60px;height:60px;"/></td>
+                    <td><img src='${APP_IMAGE_URL+val.cardcasephoto}' style="width:60px;height:60px;margin:10px;"/></td>
                     <td>${val.customerName}</td>
                     <td>${val.gender}</td>
                     <td>${val.position}</td>

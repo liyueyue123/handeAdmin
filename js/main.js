@@ -69,7 +69,7 @@ $(document).ready(function (e) {
 		var $index = $(this).attr("data-res");
 		getChildMenus($index);
 	});
-
+	getComId() ; //获取公司id
 });
 
 //获取左侧菜单模块
@@ -111,4 +111,28 @@ function getChildMenus(i) {
 			$(".com-leftBox>.com-leftMenu").html(str);
 		}
 	});
+}
+
+// 获取comId
+function getComId() {
+    var token = sessionStorage.getItem("token");
+    var userId = sessionStorage.getItem("userId");
+    $.ajax({
+        type: "GET",
+        url: APP_URL + "/getComIdByUserId",
+        data: {
+            authToken: token,
+            userId: userId
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.code == 0) {
+                sessionStorage.setItem("companyId",res.data);
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 }

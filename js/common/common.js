@@ -1,4 +1,5 @@
-var APP_URL = 'http://hande.icpnt.com';
+// var APP_URL = 'http://hande.icpnt.com';
+var APP_URL = "http://192.168.0.176:8080";
 var APP_IMAGE_URL = 'http://hdimg.icpnt.com/';
 var token = sessionStorage.getItem("token");
 $(document).ready(function (e) {
@@ -94,9 +95,8 @@ function editData(src) {
   }
 }
 
-
 //列表页面点击删除按钮
-function deleteData(table, method, id) {
+function deleteData(table, method, id, isDel) {
   var token = sessionStorage.getItem("token");
   var delID = [];
   $("input[name=del_listID]:checked").each(function () {
@@ -108,6 +108,9 @@ function deleteData(table, method, id) {
   var data = {}
   data[a] = b;
   data.authToken = token;
+  if (isDel) {
+    data.isdel = isDel;
+  }
   // console.log(data);
   if (delID.length <= 0) {
     $.show({

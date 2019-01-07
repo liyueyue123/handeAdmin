@@ -6,6 +6,7 @@
     <title>弹性域字段管理</title>
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="./fieldList.js"></script>
 </head>
 
 <body>
@@ -14,9 +15,13 @@
             <span class="navbar-brand">弹性域字段管理</span>
         </div>
         <div>
-            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('')"><i class="fas fa-trash-alt"></i>删除</button>
-            <!-- <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('add')"><i class="fas fa-edit"></i>修改</button> -->
-            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddField/index.html')"><i class="fa fa-plus" aria-hidden="true"></i> 新建</button>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/fieldNameEdit','GET','id','1')"><i
+                    class="fas fa-trash-alt"></i>删除</button>
+            <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddField/index.html')"><i
+                    class="fas fa-edit"></i>
+                修改</button>
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddField/index.html')"><i
+                    class="fa fa-plus" aria-hidden="true"></i> 新建</button>
         </div>
     </nav>
 
@@ -30,33 +35,20 @@
                     <th>是否启用</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="fieldList">
 
-                <tr>
+                <!-- <tr>
                     <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="1" /></td>
                     <td></td>
                     <td></td>
                     <td><a class="btn btn-danger" data-table="user" data-id="59" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);">禁用</a></td>
-                </tr>
+                </tr> -->
 
             </tbody>
         </table>
 
     </div>
-
-
-
-
-    <ul class="pagination">
-        <!-- <li class="active"><a href="#">1</a></li>
-        <li><a href="/manage.php/Order/orderList/p/2.html">2</a></li>
-        <li><a href="/manage.php/Order/orderList/p/3.html">3</a></li>
-        <li><a href="/manage.php/Order/orderList/p/4.html">4</a></li>
-        <li><a href="/manage.php/Order/orderList/p/5.html">5</a></li>
-        <li><a href="/manage.php/Order/orderList/p/2.html">下一页</a></li> -->
-        <li><a>共44条记录</a></li>
-        <li><a>第1页/共5页</a></li>
-    </ul>
+    <ul class="pagination"></ul>
 
 </body>
 
