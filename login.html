@@ -36,27 +36,30 @@
                 login();
             }
         });
-
     });
 
     function login() {
         var userName = $("#username").val();
         var passWord = $("#password").val();
+        console.log(userName,passWord);
         $.ajax({
             type: "GET",
-            url: APP_URL + "/console/login",
+            url: APP_URL + "/login",
             data: {
-                loginname: userName,
-                passwd: passWord
+                share:1,
+                loginname:userName,
+                passwd:passWord,
+                state:1,
             },
             dataType: "json",
             success: function (res) {
                 console.log(res);
-                if (res.code == "success") {
+                if (res.code == 200) {
                     $(window).attr("location", "./pages/index.html");
-                    sessionStorage.setItem("token", res.authToken);
+                    sessionStorage.setItem("token", res.data.authToken);
                     sessionStorage.setItem("name", res.data.name);
-                    sessionStorage.setItem("userId",res.data.id);
+                    sessionStorage.setItem("userId", res.data.id);
+                    sessionStorage.setItem("companyId",res.data.company);
                 } else {
                     $("div.errorinfo").html(res.message);
                     $("div.errorinfo").show();

@@ -27,10 +27,12 @@ function getCustomerList(pageNum) {
     var position = $("#PositonKeyWord").val(); //职位
     var startTime = $("#openTime").val(); //开户时间
     var overTime = $("#overTime").val(); //结束时间
+    var userId = sessionStorage.getItem("userId");
     var data = {};
     data.authToken = token;
     data.limit = 10;
     data.page = pageNum;
+    data.userId = userId;
     if (position != "") {
         data.position = position;
     }

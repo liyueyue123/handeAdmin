@@ -79,7 +79,7 @@ function companyList(pageNum) {
                         <td width="10%">${val.telPhones}</td>
                         <td>${val.openaccounttime!=''?moment(val.openaccounttime).format("YYYY年MM月DD日"):''}</td>
                         <td>${val.deadline!=''?moment(val.deadline).format("YYYY年MM月DD日"):''}</td>
-                        <td>${val.account}</td>
+                        <!-- <td>${val.account}</td> -->
                         <td>${val.lastlogintime!=''?moment(val.lastlogintime).format("YYYY年MM月DD日"):''}</td>
                         <td>
                             <a class="btn ${val.status=='3'?'btn-success':'btn-danger'}"  onclick="${val.status=='3'?'unfreeze('+val.id+')':'freeze('+val.id+')'}" href="javascript:void(0);">${val.status=='3'?'解冻':'冻结'}</a>

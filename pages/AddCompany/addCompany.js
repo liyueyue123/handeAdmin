@@ -198,7 +198,7 @@ function addCompany() {
 function showDetails(id) {
     $.showLoading('加载中');
     var $id = parseInt(id);
-    console.log($id, typeof ($id));
+    // console.log($id, typeof ($id));
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -241,6 +241,11 @@ function showDetails(id) {
                         $("#phoneList").append(phones);
                     }
                 }
+                var arr = [];
+                $.each(data.dreTelephone, function (index,val) { 
+                     arr.push(val.phone);
+                });
+                $("#formPhones").val(arr.toString());
                 $("#allProvinces").find("option[value=" + data.provinceid + "]").attr("selected", true); //省
                 cityList(data.provinceid, data.cityid); //获取城市 
                 districtList(data.cityid, data.districtid); //获取地区

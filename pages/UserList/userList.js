@@ -10,6 +10,7 @@ function userList(pageNum, phone, name, Id, department) {
     url: APP_URL + "/user/all",
     data: {
       authToken: token,
+      authTokn: token,
       limit: 10,
       page: pageNum,
       phone: phone,

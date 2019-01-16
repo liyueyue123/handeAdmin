@@ -52,6 +52,17 @@ function customerDetail(customerId) {
             } else {
                 var tags = "";
             }
+            var arr3 = [];
+            if (data.disUsers != "") {
+                $.each(data.disUsers, function (index, val) {
+                    if (val.name != "") {
+                        arr3.push(val.name);
+                    }
+                });
+                var disUser = arr3.toString();
+            } else {
+                var disUser =""; 
+            }
             var str = "";
             str += `
                 <tr>
@@ -82,49 +93,50 @@ function customerDetail(customerId) {
                     <td align="center">标签名称</td><td>${tags}</td>
                     <td align="center">标签总数</td><td>${data.dreTags.length}</td>
                 </tr>
-                <tr>
+                <tr >
                     <td align="center">分组名称</td><td>${data.group!=""?data.group.groupName:""}</td>
-                    <td align="center">相关商机</td><td colspan="3">${data.opportunity}</td>
+                    <td align="center">信息来源</td>
+                    <td style="padding:0;">
+                        <div class="box1">
+                            <div class="inlineDiv">用户名称</div>
+                            <div class="divContent">${data.user.name}</div>
+                        </div>
+                        <div class="box2">
+                            <div class="inlineDiv">用户ID</div>
+                            <div class="divContent">${data.user.id}</div>
+                        </div>
+                   </td>
                 </tr>
                 <tr>
                     <td align="center">相关讨论组</td>
-                    <td class="contactTd">
+                    ${data.disUsers.length==0?'<td></td>':
+                    `<td class="contactTd">
 						<table width="100%" cellspacing="0" cellpadding="0">
-							<thead class="thStyle">
-								<tr>
-									<th>名称</th>
-									<th>组内人数</th>
-									<th>成员</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
+                            <tbody>
+                                <tr>
+									<td class="tdStyle1" >名称</td>
 									<td class="tdStyle">${data.dreDiscussion!=""?data.dreDiscussion.discussionName:""}</td>
-									<td class="tdStyle">${data.dreDiscussion!=""?data.dreDiscussion.createUser:""}</td>
-									<td class="tdStyle"></td>
+								</tr>
+								<tr>
+									<td class="tdStyle1">组内人数</td>
+									<td class="tdStyle">${data.disUsers.length}</td>
+								</tr>
+								<tr>
+									<td class="tdStyle1">成员</td>
+									<td class="tdStyle">${disUser}</td>
 								</tr>
 							</tbody>
 						</table>
+                    </td>`
+                    }
+                    <td align="center">相关商机</td>
+                    <td colspan="3">
+                    `;
+                    $.each(data.opportunity, function (i, vl) {
+                        str += `<a style="text-decoration:underline;color: #428bca;"  href="../BusinessDetail/index.html?id=${vl.id}&index=${i+1}">商机${i+1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>`;
+                    });
+                    str += `
                     </td>
-                    <td align="center">信息来源</td>
-                    <td class="contactTd">
-						<table width="100%" cellspacing="0" cellpadding="0">
-							<thead class="thStyle">
-								<tr>
-									<th>用户名称</th>
-									<th>用户ID</th>
-									<th>备注</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="tdStyle">${data.dreCustomer.messagesource}</td>
-									<td class="tdStyle"></td>
-									<td class="tdStyle"></td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
                 </tr>
                 <tr>
                     <td align="center" style="font-weight: normal;line-height: 30px;padding: 15px;"></td>
