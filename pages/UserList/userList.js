@@ -141,6 +141,7 @@ function operate(isLock, userId, pageNum) {
 }
 //点击搜索或者筛选按钮
 $('#search_btn').live('click', function () {
+  $.showLoading('加载中');
   var phone = $('#search_phone').val();
   var name = $('#search_name').val();
   var Id = $('#search_Id').val();
@@ -151,6 +152,7 @@ $('#search_btn').live('click', function () {
   $('#export_Id').val(Id);
 })
 $('#filter_btn').live('click', function () {
+  $.showLoading('加载中');
   var phone = '';
   var name = '';
   var Id = '';
