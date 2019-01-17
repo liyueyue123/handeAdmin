@@ -1,6 +1,10 @@
 $(function () {
   //获取公司的下拉选框
   getCompanySelect();
+  //获取用户身份
+  getUserStateSelect();
+  // 获取角色列表
+  getRoleSelect();
   var url = window.location.href; //首先获取到你的URL地址;
   var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
@@ -19,6 +23,7 @@ $(function () {
   submit()
 });
 
+//获取用户详情
 function getUserInfo(id) {
   var token = sessionStorage.getItem("token");
   $.ajax({
@@ -73,6 +78,8 @@ function getUserInfo(id) {
       //获取部门的下拉选框
       getDepartmentSelect(data.department);
       // $("#user_address").val(data.address);
+      $("#roleId").find("option[value=" + data.roleId + "]").attr("selected", true);
+      $("#userstate").find("option[value=" + data.userstate + "]").attr("selected", true);
     }
   });
 }
@@ -90,7 +97,6 @@ $('#user_passwd').focus(function () {
 
 // 隐藏空白头像
 $('#icon-image').hide();
-
 
 // 上传头像
 $('#iconfile').change(function (e) {
@@ -145,9 +151,6 @@ $('#iconfile').change(function (e) {
   }
 });
 
-function imgSize(w, h) {
-
-}
 //上传图片时调用的接口
 function uploadImg(tag) {
   var file = tag.files[0];
@@ -190,8 +193,7 @@ function uploadImg(tag) {
   $('#icon-image').show();
 }
 
-
-// 获取公司
+// 获取公司 下拉选框
 function getCompanySelect() {
   var token = sessionStorage.getItem("token");
   $.ajax({
@@ -227,11 +229,12 @@ function getCompanySelect() {
   });
 }
 
-//当公司的下拉选框发生改变时
+//当公司的 下拉选框发生改变时
 $("#company").change(function () {
   getDepartmentSelect();
 })
 
+// 添加部门
 $('#addDepartment-btn').live('click', function () {
   var val = $('#addDepartment').val();
   if (val) {
@@ -274,11 +277,10 @@ $('#addDepartment-btn').live('click', function () {
   }
 })
 
-
-// 获取部门
+// 获取部门 下拉选框
 function getDepartmentSelect(d) {
   var companyId = $('#company option:selected').val();
-  if ($('#company option:selected').val() != '') {
+  if (companyId != '') {
     var token = sessionStorage.getItem("token");
     $.ajax({
       type: "GET",
@@ -318,6 +320,69 @@ function getDepartmentSelect(d) {
   }
 }
 
+//获取角色 下拉选框
+function getRoleSelect() {
+  $.ajax({
+    type: "GET",
+    url: APP_URL + "/role/list",
+    data: {
+      authToken: token,
+      limit: 10,
+      page: 1
+    },
+    dataType: "json",
+    success: function (res) {
+      console.log('roleId', res);
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
+      var data = res.data;
+      var str = '<option value="" selected>---请选择角色---</option>';
+      $.each(data, function (index, val) {
+        str += `
+              <option value="${val.id}">${val.rolename}</option>
+            `;
+      });
+      $("#roleId").html(str);
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+}
+
+//获取用户身份 下拉选框
+function getUserStateSelect() {
+  var userstate = sessionStorage.getItem("userstate");
+  var str = '<option value="">---请选择用户身份---</option>';
+  if (userstate == 1) {
+    str += `
+              <option value="1">平台管理员</option>
+              <option value="2">公司管理员</option>
+              <option value="3">一般职员</option>
+            `;
+  }
+  if (userstate == 2){
+    str += `
+              <option value="2">公司管理员</option>
+              <option value="3">一般职员</option>
+            `;
+  }
+  if (userstate == 3) {
+    str += `
+              <option value="3">一般职员</option>
+            `;
+  }
+  $("#userstate").html(str);
+}
 
 //提交表单
 function submit() {

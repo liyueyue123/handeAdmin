@@ -348,45 +348,7 @@ $(function () {
       }
     });
   })
-  //获取负责人下拉选框
-  function getALLPrincipals(id){
-     var token = sessionStorage.getItem("token");
-     $.ajax({
-      type: "GET",
-      url: APP_URL + "/user/all",
-      data: {
-        authToken: token,
-        limit: 99999,
-        page: 1,
-      },
-      dataType: "json",
-      success: function (res) {
-        console.log('Principals', res);
-        var data = res.data;
-        var str = "";
-        $.each(data, function (index, val) {
-          str += `
-            <div><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" />  <span width="150px;">姓名:${val.name}</span><span width="150px;">手机号:${val.phone}</span><span width="150px;">部门:${val.departMent}</span></div>
-          `;
-        });
-        $("#PrincipalsSelect").html(str);
-        if (res.code == "909090") {
-          $.show({
-            title: '操作提示',
-            content: '您已掉线,请重新登录!',
-            closeCallback: function () {
-              if (window != top) {
-                top.location.href = "../../login.html";
-              }
-            }
-          });
-        }
-      },
-      error: function (err) {
-        console.log(err);
-      }
-    });
-  }
+  
   //修改负责人
   $('#savePrincipals').click(function () {
     var token = sessionStorage.getItem("token");
@@ -745,19 +707,18 @@ $(function () {
   $('#back').click(function(){
     window.history.back(-1);
   })
-  function userList(pageNum, phone, name, Id, department) {
+
+  // 获取用户表格()
+  function userList(pageNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
       type: "GET",
       url: APP_URL + "/user/all",
       data: {
         authToken: token,
-        limit: 10,
+        authTokn: token,
+        limit: 999999999,
         page: pageNum,
-        phone: phone,
-        name: name,
-        Id: Id,
-        department: department
       },
       dataType: "json",
       success: function (res) {
@@ -765,21 +726,26 @@ $(function () {
         var data = res.data;
         var str = "";
         var pages = 10 * (pageNum - 1);
-        $.each(data, function (index, val) {
-          str += `
-            <tr>
-              <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
-              <td>${pages+(index+1)}</td>
-              <td>${val.id}</td>
-              <td>${val.name}</td>
-              <td><a href="javascript:;">${val.phone}</a></td>
-              <td>${val.departname}</td>
-              <td><img style="width:60px;height:60px;margin:10px;" src="${val.icon}"/></td>
-            </tr>
-          `;
-        });
-        $(".userList").html(str);
-        getPage(res.count, 'userList', pageNum); //分页
+        if(res.count != 0 && res.code == 0) {
+          $('.userListDiv').css('display','block');
+          $.each(data, function (index, val) {
+            str += `
+              <tr>
+                <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
+                <td>${pages+(index+1)}</td>
+                <td>${val.id}</td>
+                <td>${val.name}</td>
+                <td><a href="javascript:;">${val.phone}</a></td>
+                <td>${val.departname}</td>
+                <td><img style="width:60px;height:60px;margin:10px;" src="${val.icon}"/></td>
+              </tr>
+            `;
+          });
+          $(".userList").html(str);
+        }else{
+          str += `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
+          $('.principalsTd').html(str);
+        }
         if (res.code == "909090") {
           $.show({
             title: '操作提示',
@@ -794,40 +760,22 @@ $(function () {
       },
       error: function (err) {
         console.log(err);
+        var str = `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
+        $('.principalsTd').html(str);
       }
     });
   };
   userList(1);
+
+  // 获取客户表格
   function getCustomerList(pageNum) {
     var token = sessionStorage.getItem("token");
-    var id = parseInt($("#IdKeyWord").val()); //id
-    var name = $("#NameKeyWord").val(); //客户名称
-    var company = $("#companySelect option:selected").val(); //公司名称
-    var position = $("#PositonKeyWord").val(); //职位
-    var startTime = $("#openTime").val(); //开户时间
-    var overTime = $("#overTime").val(); //结束时间
+    var userId = sessionStorage.getItem("userId");
     var data = {};
     data.authToken = token;
-    data.limit = 9999;
+    data.limit = 999999999;
     data.page = pageNum;
-    if (position != "") {
-      data.position = position;
-    }
-    if (company != "") {
-      data.company = company;
-    }
-    if (id) {
-      data.id = id;
-    }
-    if (name != "") {
-      data.customerName = name;
-    }
-    if (startTime != "") {
-      data.startTime = startTime;
-    }
-    if (overTime != "") {
-      data.endTime = overTime;
-    }
+    data.userId = userId;
     $.ajax({
       type: "POST",
       url: APP_URL + "/customerList",
@@ -838,21 +786,26 @@ $(function () {
         var data = res.data;
         var pages = 10 * (pageNum - 1);
         var str = "";
-        $.each(data, function (index, val) {
-          str += `
+        if(res.count != 0 && res.code == 0){
+          $('.customerListDiv').css('display', 'block');
+          $.each(data, function (index, val) {
+            str += `
                   <tr>
                       <td><input type="checkbox" name="links_ID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
                       <td>${pages+(index+1)}</td>
                       <td>${val.id}</td>
                       <td>${val.customerName}</td>
                       <td>${val.company}</td>`;
-                    if(val.position){
-                      str+=  `<td>${val.position}</td>`
-                    }
-            str+= `</tr>`;
-        });
-        $(".customerList").html(str);
-        getPage(res.count, 'getCustomerList', pageNum); //分页
+            if (val.position) {
+              str += `<td>${val.position}</td>`
+            }
+            str += `</tr>`;
+          });
+          $(".customerList").html(str);
+        }else{
+          str += `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
+          $('.linksTd').html(str);
+        }
         if (res.code == "909090") {
           $.show({
             title: '操作提示',
@@ -867,6 +820,8 @@ $(function () {
       },
       error: function (err) {
         console.log(err);
+        var str = `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
+        $('.linksTd').html(str);
       }
     });
   }
