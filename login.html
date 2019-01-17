@@ -10,17 +10,19 @@
 
 <body>
     <div class="loginBox">
-        <div class="loginTitle" style="background:none;text-align: center;font-size: 40px;color: #fff;line-height: 45px;text-shadow: 0px 1px 2px #484848;">汉得·管理系统</div>
-        <div class="userInput"><label>用　户</label><input type="text" name="username" id="username" datatype="*" nullmsg="请输入用户名！"
+        <div class="loginTitle"></div>
+        <div class="userInput"><label class="userImg"></label><input type="text" name="username" id="username" datatype="*" nullmsg="请输入用户名！"
                 errormsg="用户名不能为空！" autocomplete="off"></div>
-        <div class="userInput passInput"><label>密　码</label><input type="password" name="password" id="password"
+        <div class="userInput"><label class="pwdImg"></label><input type="password" name="password" id="password"
                 datatype="*" nullmsg="密码不能为空！"></div>
         <!-- <div class="userInput codeInput"><label>验证码</label><input type="text" name="VerCode" id="VerCode" datatype="*"
                 nullmsg="验证码不能为空！" autocomplete="off">
             <div class="codeImg"><img src="__URL__/verCode" style="cursor:pointer" title="点击刷新验证码" /></div>
         </div> -->
         <div class="errorinfo" style="display: block;"></div>
-        <div class="buttonDiv"><input type="submit" class="login_button" value="登录" /></div>
+        <div class="buttonDiv">
+            <!-- <input type="submit" class="login_button" value=""/> -->
+        </div>
     </div>
 
 </body>
