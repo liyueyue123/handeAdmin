@@ -51,7 +51,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
                 <td>${val.provinesName}${val.cityName}${val.areaName}</td>
                 <td>${moment(val.time).format('YYYY年MM月DD日')}</td>
                 <td>${val.stage}</td>
-                <td>${val.groupid}</td>
+                <td>${val.group.groupName}</td>
                 <td>${val.source}</td>
                 <td width="300">
                 <div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${pages+index+1}"> 查看详情</div>

@@ -39,7 +39,9 @@ function userList(pageNum, phone, name, Id, department) {
       $.each(data, function (index, val) {
         str += `
           <tr>
-            <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
+            <td>
+            <div class="icheckbox_flat-blue" style="position: relative;"><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+            <!--<input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /> --></td>
             <td>${pages+(index+1)}</td>
             <td>${val.id}</td>
             <td>${val.name}</td>
@@ -52,7 +54,7 @@ function userList(pageNum, phone, name, Id, department) {
             <td style="display:none;"></td>
             <td style="display:none;"></td>
             <td style="display:none;"></td>
-            <td>${val.passwd}</td>
+            <td style="display:none;">${val.passwd}</td>
             <td></td>
             <td>${val.customerCount}</td>
             <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id},${pageNum})">${val.isLock == 0 ?"禁用":"启用"}</a></td>
