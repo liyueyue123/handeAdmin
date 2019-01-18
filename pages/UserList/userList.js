@@ -39,9 +39,7 @@ function userList(pageNum, phone, name, Id, department) {
       $.each(data, function (index, val) {
         str += `
           <tr>
-            <td>
-            <div class="icheckbox_flat-blue" style="position: relative;"><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-            <!--<input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /> --></td>
+            <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
             <td>${pages+(index+1)}</td>
             <td>${val.id}</td>
             <td>${val.name}</td>

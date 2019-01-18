@@ -24,8 +24,8 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
     },
     dataType: "json",
     success: function (res) {
-      console.log('businessList', res);
       $.closeLoading();
+      console.log('businessList', res);
       if (res.code == "909090") {
         $.show({
           title: '操作提示',

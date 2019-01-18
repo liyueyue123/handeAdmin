@@ -18,9 +18,6 @@ $(function () {
     getUserInfo(id);
   } else {
     $('.addForm').attr('action', APP_URL + "/register");
-    // $('#user_passwd').attr('datatype','/******//ig');
-    // $('#user_passwd').attr('nullmsg','请输入密码');
-    // $('#user_passwd').attr('errormsg','密码由6~16位之间数字或字母组成');
   }
   submit()
 });
@@ -95,9 +92,6 @@ $('#user_phone').blur(function () {
 //当点击密码框的时候清空
 $('#user_passwd').focus(function () {
   this.value = '';
-  // $('#user_passwd').attr('datatype','/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/');
-  // $('#user_passwd').attr('errormsg','密码由6~16位之间数字或字母组成');
-  // $('#user_passwd').attr('nullmsg','请输入密码');
 })
 
 
