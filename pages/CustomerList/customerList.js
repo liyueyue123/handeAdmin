@@ -71,10 +71,10 @@ function getCustomerList(pageNum) {
                     <td>${pages+(index+1)}</td>
                     <td>${val.id}</td>
                     <td><img src='${APP_IMAGE_URL+val.cardcasephoto}' style="width:60px;height:60px;margin:10px;"/></td>
-                    <td>${val.customerName}</td>
+                    <td class='hideName'>${val.customerName}</td>
                     <td>${val.gender}</td>
-                    <td>${val.position}</td>
-                    <td>${val.company}</td>
+                    <td class='hidePosition'>${val.position}</td>
+                    <td class='hideCompany'>${val.company}</td>
                     <td>${val.planfinishtime !=""?moment(val.planfinishtime).format("YYYY年MM月DD日"):''}</td>
                     <td>${val.email}</td>
                     <td>${val.messagesource}</td>
