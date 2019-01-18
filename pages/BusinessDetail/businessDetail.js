@@ -2,29 +2,12 @@ $(function () {
     var url = window.location.href;
     var id = url.split('&')[0].split('=')[1];
     var $index = url.split('&')[1].split('=')[1];
-    // console.log(id , $index)
-    $.showLoading();
-    isAdmin(id, $index);
+    $.showLoading('加载中');
+    businessDetail(id, $index);
 });
-//判断是超级管理员
-function isAdmin(id, $index) {
-    $.ajax({
-        type: "GET",
-        url: APP_URL + "/message/isAdmin",
-        data: {
-            authToken: token,
-        },
-        dataType: 'json',
-        success: function (res) {
-            if (res.code == 0) {
-                var isAdmin = res.isAdmin;
-                businessDetail(id, $index, isAdmin);
-            }
-        }
-    })
-}
+
 //获取商机详情
-function businessDetail(id, $index, isAdmin) {
+function businessDetail(id, $index) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -155,15 +138,13 @@ function businessDetail(id, $index, isAdmin) {
                 <tr>
                     <td align="center">讨论组</td>
                     <td></td>
-                </tr>`;
-            if (isAdmin != true){
-                str +=   `<tr>
+                </tr>
+                <tr>
                         <td align="center">弹性域字段</td>
                         <td></td>
-                    </tr>
-                    <tr>`;
-            }
-            str +=        `<td align="center">操作历史</td>
+                </tr>
+                <tr>`;
+            str += `<td align="center">操作历史</td>
                     <td><div style="overflow-x:auto;height:200px;">${histories}</div></td>
                 </tr>
                 <tr>

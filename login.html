@@ -11,8 +11,8 @@
 <body>
     <div class="loginBox">
         <div class="loginTitle"></div>
-        <div class="userInput"><label class="userImg"></label><input type="text" name="username" id="username" datatype="*" nullmsg="请输入用户名！"
-                errormsg="用户名不能为空！" autocomplete="off"></div>
+        <div class="userInput"><label class="userImg"></label><input type="text" name="username" id="username" datatype="*"
+                nullmsg="请输入用户名！" errormsg="用户名不能为空！" autocomplete="off"></div>
         <div class="userInput"><label class="pwdImg"></label><input type="password" name="password" id="password"
                 datatype="*" nullmsg="密码不能为空！"></div>
         <!-- <div class="userInput codeInput"><label>验证码</label><input type="text" name="VerCode" id="VerCode" datatype="*"
@@ -43,15 +43,15 @@
     function login() {
         var userName = $("#username").val();
         var passWord = $("#password").val();
-        console.log(userName,passWord);
+        console.log(userName, passWord);
         $.ajax({
             type: "GET",
             url: APP_URL + "/login",
             data: {
-                share:1,
-                loginname:userName,
-                passwd:passWord,
-                state:1,
+                share: 1,
+                loginname: userName,
+                passwd: passWord,
+                state: 1,
             },
             dataType: "json",
             success: function (res) {
@@ -61,9 +61,9 @@
                     sessionStorage.setItem("token", res.data.authToken);
                     sessionStorage.setItem("name", res.data.name);
                     sessionStorage.setItem("userId", res.data.id);
-                    sessionStorage.setItem("companyId",res.data.company);
-                    sessionStorage.setItem("userstate",res.data.userstate);
-                } else {
+                    sessionStorage.setItem("companyId", res.data.company);
+                    sessionStorage.setItem("userstate", res.data.userstate);
+                }  else {
                     $("div.errorinfo").html(res.message);
                     $("div.errorinfo").show();
                 }
