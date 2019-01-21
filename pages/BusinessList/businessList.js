@@ -60,6 +60,10 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
               `;
       });
       $(".businessList").html(str);
+      $('input[data-name=multi-select]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
       getPage(res.count, 'businessList', pageNum); //分页
     },
     error: function (err) {

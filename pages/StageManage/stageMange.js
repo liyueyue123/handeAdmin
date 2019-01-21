@@ -47,6 +47,10 @@ function stageList() {
                 <li><a>第1页/共1页</a></li>
             `;
             $(".pagination").html(pages);
+            $('input[data-name=multi-select]').iCheck({
+                checkboxClass: 'icheckbox_flat-blue',
+                radioClass: 'iradio_flat-blue'
+            });
         }
     });
 }

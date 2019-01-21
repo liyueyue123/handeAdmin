@@ -60,6 +60,10 @@ function userList(pageNum, phone, name, Id, department) {
         `;
       });
       $(".userList").html(str);
+      $('input[data-name=multi-select]').iCheck({
+        checkboxClass: 'icheckbox_flat-blue',
+        radioClass: 'iradio_flat-blue'
+      });
       getPage(res.count, 'userList', pageNum); //分页
     },
     error: function (err) {

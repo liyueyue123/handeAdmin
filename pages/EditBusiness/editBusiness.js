@@ -822,6 +822,10 @@ $(function () {
         console.log(err);
         var str = `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
         $('.linksTd').html(str);
+        $('input[data-name=multi-select]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass: 'iradio_flat-blue'
+        });
       }
     });
   }

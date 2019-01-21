@@ -88,6 +88,10 @@ function companyList(pageNum) {
                 `;
             });
             $(".list-box>table>tbody").html(str);
+            $('input[data-name=multi-select]').iCheck({
+                checkboxClass: 'icheckbox_flat-blue',
+                radioClass: 'iradio_flat-blue'
+            });
             getPage(res.count, 'companyList', pageNum); //分页
         },
         error: function (err) {

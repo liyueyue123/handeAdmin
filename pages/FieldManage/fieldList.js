@@ -47,6 +47,10 @@ function fieldList(pageNum) {
                      `;
                 });
                 $("#fieldList").html(str);
+                $('input[data-name=multi-select]').iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue'
+                });
                 getPage(res.count, 'fieldList', pageNum); //分页
             }
         },

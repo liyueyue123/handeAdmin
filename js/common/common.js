@@ -18,17 +18,9 @@ $(document).ready(function (e) {
     window.history.back(-1);
   });
   //全站复选框美化
-  // $('input[data-name=multi-select]').iCheck({
-  //   checkboxClass: 'icheckbox_flat-blue',
-  //   radioClass: 'iradio_flat-blue'
-  // });
-  $('input[data-name=multi-select]').live('click',function(){
-    $('input[data-name=multi-select]').iCheck({
-      checkboxClass: 'icheckbox_flat-blue',
-      radioClass: 'iradio_flat-blue',
-      labelHover : false, 
-      cursor : true, 
-    });
+  $('input[data-name=multi-select]').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
   });
 });
 
