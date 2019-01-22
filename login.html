@@ -3,9 +3,25 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>汉得 | 后台管理系统 V3.0</title>
+    <title>莺歌·租赁商机云 V3.0</title>
     <link rel="stylesheet" href="/css/login.css">
     <script src="/js/load.js"></script>
+    <style>
+        html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: url(./images/loginBG.png) no-repeat;
+            background-size: cover;
+            font-family: 微软雅黑;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
@@ -63,7 +79,7 @@
                     sessionStorage.setItem("userId", res.data.id);
                     sessionStorage.setItem("companyId", res.data.company);
                     sessionStorage.setItem("userstate", res.data.userstate);
-                }  else {
+                } else {
                     $("div.errorinfo").html(res.message);
                     $("div.errorinfo").show();
                 }

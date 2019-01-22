@@ -8,10 +8,11 @@ form,
 input {
 	margin: 0;
 	padding: 0;
-	background: url(../images/loginBG.png);
+	background: url(../images/loginBG.png) no-repeat;
 	filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
 	-moz-background-size: 100%;
 	background-size: 100%;
+	/* min-width: 1200px; */
 	font-family: 微软雅黑;
 	font-size: 14px;
 }
