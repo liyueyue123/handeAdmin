@@ -1,5 +1,9 @@
 $(function () {
   $.showLoading('加载中');
+  var userstate = sessionStorage.getItem("userstate");
+  if (userstate == 3){
+    $('#addBtn').css('display', 'none');
+  }
   userList(1);
 });
 //用户列表

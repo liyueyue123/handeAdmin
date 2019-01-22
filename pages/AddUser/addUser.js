@@ -1,12 +1,12 @@
 $(function () {
-  //获取公司的下拉选框
-  getCompanySelect();
-  //获取用户身份
-  getUserStateSelect();
-  // 获取角色列表
-  getRoleSelect();
-  var url = window.location.href; //首先获取到你的URL地址;
-  var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
+  var userstate = sessionStorage.getItem("userstate");
+  var companyId = sessionStorage.getItem('companyId');
+  if(userstate == 1){
+    $("#roleId").removeAttr("disabled");
+    $("#company").removeAttr("disabled");
+  }
+  var url = window.location.href; // 首先获取到你的URL地址;
+  var arr = url.split("="); // 用“&”将URL分割成2部分每部分都有你需要的东西;
   var id = arr[1];
   if (url.indexOf('=') != -1) {
     $('.addForm').attr('action', APP_URL + "/editUser");
@@ -18,12 +18,16 @@ $(function () {
     getUserInfo(id);
   } else {
     $('.addForm').attr('action', APP_URL + "/register");
+    getCompanySelect(companyId); // 获取公司的下拉选框
+    getRoleSelect(); // 获取角色列表 
+    getUserStateSelectAdd(); // 获取用户身份 (添加人员时)
+    getDepartmentSelect(companyId); // 获取部门的下拉选框
   }
   submit()
 });
 
-//获取用户详情
-function getUserInfo(id) {
+
+function getUserInfo(id) { //获取用户详情
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
@@ -52,14 +56,7 @@ function getUserInfo(id) {
       $("#user_loginname").val(data.loginname);
       $("#user_name").val(data.name);
       $("#user_passwd").val(data.passwd);
-      // if(data.gender == '女'){
-      //   var gender = 'woman'
-      // }else{
-      //   var gender = 'man'
-      // }
-      // $("#"+gender).attr('checked',true);
       $("#user_phone").val(data.phone);
-      // $("#user_wechat").val(data.wechat);
       if (data.icon.length > 30) {
         $("#icon-image").find("img").attr({
           "src": data.icon
@@ -72,34 +69,31 @@ function getUserInfo(id) {
         });
         console.log($('#icon').val())
       }
-      $("#user_email").val(data.email);
-      $("#company").find("option[value=" + data.company + "]").attr("selected", true);
-      //获取部门的下拉选框
-      getDepartmentSelect(data.department);
-      // $("#user_address").val(data.address);
-      $("#roleId").find("option[value=" + data.roleId + "]").attr("selected", true);
-      $("#userstate").find("option[value=" + data.userstate + "]").attr("selected", true);
+      getCompanySelect(data.company); // 获取公司的下拉选框
+      
+      getDepartmentSelect(data.company,data.department); // 获取部门的下拉选框
+
+      getUserStateSelect(data.userstate); // 获取用户身份
+
+      getRoleSelect(data.roleId); // 获取角色列表
     }
   });
 }
 
-//当点击手机号的时候，loginname赋值
-$('#user_phone').blur(function () {
+
+$('#user_phone').blur(function () { //当点击手机号的时候，loginname赋值
   var value = $(this).val();
   $('#user_loginname').val(value);
 })
 
-//当点击密码框的时候清空
-$('#user_passwd').focus(function () {
+
+$('#user_passwd').focus(function () { //当点击密码框的时候清空
   this.value = '';
 })
 
+$('#icon-image').hide(); // 隐藏空白头像
 
-// 隐藏空白头像
-$('#icon-image').hide();
-
-// 上传头像
-$('#iconfile').change(function (e) {
+$('#iconfile').change(function (e) { // 上传头像
   var path = $(this).val(),
     extStart = path.lastIndexOf('.'),
     ext = path.substring(extStart, path.length).toUpperCase();
@@ -151,8 +145,8 @@ $('#iconfile').change(function (e) {
   }
 });
 
-//上传图片时调用的接口
-function uploadImg(tag) {
+
+function uploadImg(tag) { //上传图片时调用的接口
   var file = tag.files[0];
   // var imgSrc;
   var token = sessionStorage.getItem("token");
@@ -189,12 +183,11 @@ function uploadImg(tag) {
       console.log($('#icon').val())
     }
   });
-  // 显示头像
-  $('#icon-image').show();
+  $('#icon-image').show(); // 显示头像
 }
 
-// 获取公司 下拉选框
-function getCompanySelect() {
+
+function getCompanySelect(c) { // 获取公司 下拉选框
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
@@ -219,23 +212,27 @@ function getCompanySelect() {
       var data = res.data;
       var str = "<option value='' selected>---请选择公司---</option>";
       $.each(data, function (index, val) {
-        str += `
-              <option value="${val.id}">${val.companyname}</option>
-          `;
+          str += `
+                <option value="${val.id}">${val.companyname}</option>
+            `;
       });
-      // console.log('str',str)
       $("#company").html(str);
+      if (c) {
+        $("#company").find("option[value=" + c + "]").attr("selected", true);
+        $("#companyInput").val(c);
+      }
     }
   });
 }
 
-//当公司的 下拉选框发生改变时
-$("#company").change(function () {
-  getDepartmentSelect();
+
+$("#company").change(function () { //当公司的 下拉选框发生改变时
+  var companyId = $('#company option:selected').val();
+  getDepartmentSelect(companyId);
 })
 
-// 添加部门
-$('#addDepartment-btn').live('click', function () {
+
+$('#addDepartment-btn').live('click', function () { // 添加部门
   var val = $('#addDepartment').val();
   if (val) {
     var token = sessionStorage.getItem("token");
@@ -265,7 +262,7 @@ $('#addDepartment-btn').live('click', function () {
           }
           $('#addDepartment').val('');
           alert(res.message)
-          getDepartmentSelect();
+          getDepartmentSelect(companyId);
         },
         fail: function (res) {
           alert(res.message)
@@ -277,17 +274,16 @@ $('#addDepartment-btn').live('click', function () {
   }
 })
 
-// 获取部门 下拉选框
-function getDepartmentSelect(d) {
-  var companyId = $('#company option:selected').val();
-  if (companyId != '') {
+
+function getDepartmentSelect(c, d) { // 获取部门 下拉选框
+  if (c != '') {
     var token = sessionStorage.getItem("token");
     $.ajax({
       type: "GET",
       url: APP_URL + "/departmentSelect",
       data: {
         authToken: token,
-        companyId: companyId
+        companyId: c
       },
       dataType: "json",
       success: function (res) {
@@ -320,8 +316,8 @@ function getDepartmentSelect(d) {
   }
 }
 
-//获取角色 下拉选框
-function getRoleSelect() {
+
+function getRoleSelect(r) { //获取角色 下拉选框
   $.ajax({
     type: "GET",
     url: APP_URL + "/role/list",
@@ -352,6 +348,9 @@ function getRoleSelect() {
             `;
       });
       $("#roleId").html(str);
+      if(r){
+          $("#roleId").find("option[value=" + r+ "]").attr("selected", true);
+      }
     },
     error: function (err) {
       console.log(err);
@@ -359,8 +358,7 @@ function getRoleSelect() {
   });
 }
 
-//获取用户身份 下拉选框
-function getUserStateSelect() {
+function getUserStateSelect(s) { //获取用户身份 下拉选框
   var userstate = sessionStorage.getItem("userstate");
   var str = '<option value="">---请选择用户身份---</option>';
   if (userstate == 1) {
@@ -382,10 +380,30 @@ function getUserStateSelect() {
             `;
   }
   $("#userstate").html(str);
+  if(s){
+    $("#userstate").find("option[value=" + s + "]").attr("selected", true);
+  }
 }
 
-//提交表单
-function submit() {
+function getUserStateSelectAdd() { //获取用户身份 下拉选框(添加人员时调用)
+  var userstate = sessionStorage.getItem("userstate");
+  var str = '<option value="">---请选择用户身份---</option>';
+  if (userstate == 1) {
+    str += `
+                <option value="2">公司管理员</option>
+                <option value="3">一般职员</option>
+              `;
+  }
+  if (userstate == 2) {
+    str += `
+                <option value="3">一般职员</option>
+              `;
+  }
+  $("#userstate").html(str);
+}
+
+
+function submit() { //提交表单
   ajax({
     type: 'post',
     success: function (res) {

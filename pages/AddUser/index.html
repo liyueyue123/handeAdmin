@@ -72,7 +72,8 @@
                     <tr>
                         <td align="center">公司</td>
                         <td>
-                            <select class="form-control" name="company" id="company" datatype="*" nullmsg="请选择公司名称" placeholder="请选择公司名称">
+                            <input type="hidden" name="company" id="companyInput" value="">
+                            <select class="form-control" id="company" datatype="*" nullmsg="请选择公司名称" placeholder="请选择公司名称" disabled>
                                 <option value="" selected>---请选择公司---</option>
                             </select>
                         </td>
@@ -104,7 +105,7 @@
                         <td align="center">角色</td>
                         <td>
                         <!-- <input type="text" name="roleid" id="roleid" value="1" hidden> -->
-                        <select class="form-control" name="roleId" id="roleId"  placeholder="请选择角色" value='' nullmsg="请选择角色">
+                        <select class="form-control" name="roleId" id="roleId"  placeholder="请选择角色" value='' nullmsg="请选择角色" disabled>
                             <option value="" selected>---请选择角色---</option>
                         </select>
                         </td>
