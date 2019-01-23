@@ -360,6 +360,11 @@ function getRoleSelect(r) { //获取角色 下拉选框
 
 function getUserStateSelect(s) { //获取用户身份 下拉选框
   var userstate = sessionStorage.getItem("userstate");
+  var userId = sessionStorage.getItem("userId");
+  var id = $('#user_id').val();
+  console.log(userstate)
+  console.log(userId);
+  console.log(id)
   var str = '<option value="">---请选择用户身份---</option>';
   if (userstate == 1) {
     str += `
@@ -368,14 +373,20 @@ function getUserStateSelect(s) { //获取用户身份 下拉选框
               <option value="3">一般职员</option>
             `;
   }
-  if (userstate == 2){
-    str += `
+  if (userstate == 2) {
+    if (userId == id){
+      str += `
               <option value="2">公司管理员</option>
               <option value="3">一般职员</option>
             `;
+    }else{
+      str += `
+              <option value="3">一般职员</option>
+            `;
+    }
   }
   if (userstate == 3) {
-    str += `
+    str += `<option value="2">公司管理员</option>
               <option value="3">一般职员</option>
             `;
   }
@@ -383,6 +394,7 @@ function getUserStateSelect(s) { //获取用户身份 下拉选框
   if(s){
     $("#userstate").find("option[value=" + s + "]").attr("selected", true);
   }
+  submit();
 }
 
 function getUserStateSelectAdd() { //获取用户身份 下拉选框(添加人员时调用)
@@ -404,22 +416,60 @@ function getUserStateSelectAdd() { //获取用户身份 下拉选框(添加人�
 
 
 function submit() { //提交表单
-  ajax({
-    type: 'post',
-    success: function (res) {
-      if (res.code == "909090") {
-        $.show({
-          title: '操作提示',
-          content: '您已掉线,请重新登录!',
-          closeCallback: function () {
-            if (window != top) {
-              top.location.href = "../../login.html";
+  var userstate = sessionStorage.getItem("userstate");
+  var state = $("#userstate").val();
+  var userId = sessionStorage.getItem("userId");
+  var id = $('#user_id').val();
+  console.log(userstate)
+  console.log(state)
+  console.log(userId);
+  console.log(id)
+  if (state == userstate && userId == id) {
+    ajax({
+      type: 'post',
+      success: function (res) {
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
             }
-          }
-        });
+          });
+        }
+        if (res.code == "0") {
+          $.show({
+            title: '操作提示',
+            content: '您的信息已修改,需重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
       }
-      console.log('success', JSON.stringify(res));
-      window.location.href = '../UserList/index.html'
-    }
-  })
+    })
+  }else{
+    ajax({
+      type: 'post',
+      success: function (res) {
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
+        console.log('success', JSON.stringify(res));
+        window.location.href = '../UserList/index.html'
+      }
+    })
+  }
 }
