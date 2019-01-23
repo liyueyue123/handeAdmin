@@ -1,5 +1,10 @@
 $(function () {
+    var userstate = sessionStorage.getItem("userstate");
     $.showLoading('加载中');
+    if (userstate == 3) {
+        $("#editroleBtn").hide();
+        $("#addroleBtn").hide();
+    }
     getRole(1) //获取角色列表
 });
 
