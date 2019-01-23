@@ -1,4 +1,11 @@
 $(function () {
+    var userstate = sessionStorage.getItem("userstate");
+    $.each($("#userState>option"), function () {
+        if ($(this).val() < userstate) {
+            $(this).attr("selected",false);
+            $(this).attr("disabled", true);
+        }
+    });
     allMenu(); //获取所有菜单项
 });
 
@@ -27,7 +34,6 @@ function allMenu() {
             }
             var data = res.data;
             var str = "";
-            // if(roleList){}
             $.each(data, function (index, val) {
                 str += `
                 <td width="10%">
@@ -155,8 +161,8 @@ function roleDetail(id) {
                 var data = res.data;
                 $("#roleName").val(data.rolename); //阶段名称
                 $("#roleId").val(data.id); //阶段ID
-                $.each($("#isSuperAdmin>option"), function () {
-                    if ($(this).val() == data.isSuperAdmin) {
+                $.each($("#userState>option"), function () {
+                    if ($(this).val() == data.userstate) {
                         $(this).attr("selected", true);
                     };
                 });

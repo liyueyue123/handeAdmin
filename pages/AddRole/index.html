@@ -28,16 +28,17 @@
                         <td colspan="7"><input type="text" name="roleName" value="" class="form-control" id="roleName"
                                 datatype="*1-50" errormsg="最多填写50个字符串" nullmsg="请输入角色名称" placeholder="请输入角色名称"></td>
                     </tr>
-                    <!-- <tr>
-                        <td align="center">管理员权限</td>
+                    <tr>
+                        <td align="center">用户身份</td>
                         <td colspan="7">
-                            <select class="form-control" name="isSuperAdmin" id="isSuperAdmin">
-                                <option value="">选择管理员权限</option>
-                                <option value="1">超级管理员</option>
-                                <option value="2">普通管理员</option>
+                            <select class="form-control" name="userstate" id="userState">
+                                <option value="">选择用户身份</option>
+                                <option value="1">平台管理员</option>
+                                <option value="2">公司管理员</option>
+                                <option value="3">一般职员</option>
                             </select>
                         </td>
-                    </tr> -->
+                    </tr>
                     <tr id="menuList">
                         <td align="center">请选择角色权限</td>
                         <input type="hidden" id="roles" name="menuIds" value="" />
