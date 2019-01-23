@@ -386,7 +386,7 @@ function getUserStateSelect(s) { //获取用户身份 下拉选框
     }
   }
   if (userstate == 3) {
-    str += `<option value="2">公司管理员</option>
+    str += `
               <option value="3">一般职员</option>
             `;
   }
