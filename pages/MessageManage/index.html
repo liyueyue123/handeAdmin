@@ -19,8 +19,10 @@
             <span class="navbar-brand">查看消息列表</span>
         </div>
         <div>
-            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/message/delMessage','GET','id')"><i class="fas fa-trash-alt"></i>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/message/delMessages','GET','ids')"><i class="fas fa-trash-alt"></i>
                 删除</button>
+            <!-- <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/message/delMessage','GET','id')"><i class="fas fa-trash-alt"></i>
+                删除</button> -->
             <!-- <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('addNews')"><i class="fas fa-edit"></i> 修改</button> -->
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddMessage/index.html')"><i
                     class="fa fa-plus" aria-hidden="true"></i> 新建</button>

@@ -1,5 +1,5 @@
 var APP_URL = 'http://hande.icpnt.com';
-var APP_URL= 'HTTP://192.168.0.192:8080';
+// var APP_URL= 'HTTP://192.168.0.192:8080';
 var APP_IMAGE_URL = 'http://hdimg.icpnt.com/';
 var token = sessionStorage.getItem("token");
 $(document).ready(function (e) {
@@ -123,14 +123,20 @@ function deleteData(table, method, id, isDel) {
       content: '确定要删除吗？',
       isConfirm: true,
       callback: function () {
+        $.showLoading('加载中');
         $.ajax({
           type: method,
           url: APP_URL + table,
           data: data,
           dataType: "json",
           success: function (res) {
+            $.closeLoading();
             console.log(res);
             if (res.code == 0) {
+              $.show({
+                title: '操作成功',
+                content: '已删除',
+              });
               window.location.reload();
             }
             if (res.code == "909090") {

@@ -426,50 +426,54 @@ $(function () {
     });
   })
   //修改附件
-  $('#saveFiles').live("click", function () {
-    var token = sessionStorage.getItem("token");
-    var fileDataOld = $('#fileDataOld').val();
-    var fileDataNow = $('#fileDataNow').val();
-    console.log('fff',fileDataOld)
-    if (fileDataOld != ''){
-      var fileData = fileDataOld.concat(',' + fileDataNow) + '';
-    }else{
-       var fileData = fileDataNow;
-    }
-    console.log(fileData)
-    if (fileData) {
-      $.ajax({
-        type: "POST",
-        url: APP_URL + "/console/updateFiles",
-        data: {
-          authToken: token,
-          opportunityId: id,
-          files: fileData
-        },
-        dataType: "json",
-        success: function (res) {
-          console.log(res)
-          if (res.code == 0) {
-            alert('附件上传成功!')
-            getBusinessDetail(id);
-          }
-          if (res.code == "909090") {
-            $.show({
-              title: '操作提示',
-              content: '您已掉线,请重新登录!',
-              closeCallback: function () {
-                if (window != top) {
-                  top.location.href = "../../login.html";
-                }
+  function clickSaveFiles(e){
+    if(e == 'true'){
+      $('#saveFiles').live("click", function () {
+        var token = sessionStorage.getItem("token");
+        var fileDataOld = $('#fileDataOld').val();
+        var fileDataNow = $('#fileDataNow').val();
+        console.log('fff',fileDataOld)
+        if (fileDataOld != ''){
+          var fileData = fileDataOld.concat(',' + fileDataNow) + '';
+        }else{
+           var fileData = fileDataNow;
+        }
+        console.log(fileData)
+        if (fileData) {
+          $.ajax({
+            type: "POST",
+            url: APP_URL + "/console/updateFiles",
+            data: {
+              authToken: token,
+              opportunityId: id,
+              files: fileData
+            },
+            dataType: "json",
+            success: function (res) {
+              console.log(res)
+              if (res.code == 0) {
+                alert('附件上传成功!')
+                getBusinessDetail(id);
               }
-            });
-          }
+              if (res.code == "909090") {
+                $.show({
+                  title: '操作提示',
+                  content: '您已掉线,请重新登录!',
+                  closeCallback: function () {
+                    if (window != top) {
+                      top.location.href = "../../login.html";
+                    }
+                  }
+                });
+              }
+            }
+          });
+        } else {
+          alert('增加附件失败');
         }
       });
-    } else {
-      alert('增加附件失败');
     }
-  });
+  }
   //删除附件
   $('.delFile').live('click', function (e) {
     console.log(e.target.dataset.id)
@@ -528,6 +532,7 @@ $(function () {
           if (res.code == 0) {
             // alert('附件上传成功!')
             $('#fileDataNow').val(res.data);
+            clickSaveFiles('true');
           }
           if (res.code == "909090") {
             $.show({
@@ -561,6 +566,7 @@ $(function () {
           if (res.code == 0) {
             // alert('附件选择成功,请按增加按钮!')
             $('#fileDataNow').val(res.data);
+            clickSaveFiles('true');
           }
           if (res.code == "909090") {
             $.show({

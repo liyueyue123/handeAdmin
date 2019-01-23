@@ -133,6 +133,7 @@ $('#search_btn').live('click', function () {
   var responsible = $('#search_responsible').val();
   var id = $('#search_id').val();
   // console.log(id);
+  $.showLoading('加载中');
   businessList(1, companyName, linkMan, responsible, id);
 })
 //点击筛选按钮
@@ -145,5 +146,6 @@ $('#filter_btn').live('click', function () {
   var stage = $('#filter_stage').val();
   var startTime = $('#filter_startTime').val();
   var city = $('#filter_city').val();
+  $.showLoading('加载中');
   businessList(1, companyName, linkMan, responsible, id, price, stage, startTime, city);
 })

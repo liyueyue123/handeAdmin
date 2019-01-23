@@ -20,8 +20,10 @@
             <span class="navbar-brand">角色管理</span>
         </div>
         <div>
-            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRole','POST','roleId')"><i
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRoles','POST','ids')"><i
                     class="fas fa-trash-alt"></i> 删除</button>
+            <!-- <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRole','POST','roleId')"><i
+                    class="fas fa-trash-alt"></i> 删除</button> -->
             <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddRole/index.html')"><i
                     class="fas fa-edit"></i> 修改</button>
             <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddRole/index.html')"><i
