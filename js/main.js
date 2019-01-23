@@ -39,10 +39,10 @@ $(document).ready(function (e) {
 		var state = $(this).attr("data-state");
 		if (state == 'hide') {
 			$(".com-leftBox").animate({
-				width: "230px"
+				width: "10%"
 			});
 			$(".com-rightBox").animate({
-				marginLeft: "230px"
+				marginLeft: "10%"
 			});
 			$(this).css({
 				"transform": "rotate(90deg)",
@@ -69,12 +69,13 @@ $(document).ready(function (e) {
 	//点击主模块获取次模块列表
 	$('.com-hmUl>li').live("click", function () {
 		var thisID = $(this).find(".com-TopMenu").attr('data-id');
-		if (thisID != '0') {
+		var num = $(this).find('.com-TopMenu').attr('data-child');
+		if (num > 1) {
 			$(".com-leftBox").animate({
-				width: "230px"
+				width: "10%"
 			});
 			$(".com-rightBox").animate({
-				marginLeft: "230px"
+				marginLeft: "10%"
 			});
 			$(".com-hideIcon").css({
 				"transform": "rotate(90deg)",
@@ -82,6 +83,20 @@ $(document).ready(function (e) {
 			});
 			$(".com-hideIcon").attr("title", "隐藏左侧菜单");
 			$(".com-hideIcon").attr("data-state", "open");
+		} else {
+			$(".com-leftBox").animate({
+				width: "0px"
+			});
+			$(".com-rightBox").animate({
+				marginLeft: "0px"
+			});
+			$(this).css({
+				"transform": "rotate(0deg)",
+				"top": "17px"
+			});
+			$('.com-hideIcon').attr("title", "展开左侧菜单");
+			$('.com-hideIcon').attr("data-state", "hide");
+			$('.com-hideIcon').css({"transform":" rotate(0deg)"},{"top":"17px"});
 		}
 		var $index = $(this).attr("data-res");
 		getChildMenus($index);
