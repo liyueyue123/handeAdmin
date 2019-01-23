@@ -79,6 +79,7 @@
                     sessionStorage.setItem("userId", res.data.id);
                     sessionStorage.setItem("companyId", res.data.company);
                     sessionStorage.setItem("userstate", res.data.userstate);
+                    sessionStorage.setItem("roleId", res.data.roleId);
                 } else {
                     $("div.errorinfo").html(res.message);
                     $("div.errorinfo").show();

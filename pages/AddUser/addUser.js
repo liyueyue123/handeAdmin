@@ -2,7 +2,7 @@ $(function () {
   var userstate = sessionStorage.getItem("userstate");
   var companyId = sessionStorage.getItem('companyId');
   if(userstate == 1){
-    $("#roleId").removeAttr("disabled");
+    // $("#roleId").removeAttr("disabled");
     $("#company").removeAttr("disabled");
   }
   var url = window.location.href; // 首先获取到你的URL地址;
@@ -20,7 +20,7 @@ $(function () {
     $('.addForm').attr('action', APP_URL + "/register");
     getCompanySelect(companyId); // 获取公司的下拉选框
     getRoleSelect(); // 获取角色列表 
-    getUserStateSelectAdd(); // 获取用户身份 (添加人员时)
+    // getUserStateSelectAdd(); // 获取用户身份 (添加人员时)
     getDepartmentSelect(companyId); // 获取部门的下拉选框
   }
   submit()
@@ -73,7 +73,7 @@ function getUserInfo(id) { //获取用户详情
       
       getDepartmentSelect(data.company,data.department); // 获取部门的下拉选框
 
-      getUserStateSelect(data.userstate); // 获取用户身份
+      // getUserStateSelect(data.userstate); // 获取用户身份
 
       getRoleSelect(data.roleId); // 获取角色列表
     }
@@ -318,6 +318,9 @@ function getDepartmentSelect(c, d) { // 获取部门 下拉选框
 
 
 function getRoleSelect(r) { //获取角色 下拉选框
+  var token = sessionStorage.getItem("token");
+  var userstate = sessionStorage.getItem("userstate");
+  console.log(userstate);
   $.ajax({
     type: "GET",
     url: APP_URL + "/role/list",
@@ -343,9 +346,11 @@ function getRoleSelect(r) { //获取角色 下拉选框
       var data = res.data;
       var str = '<option value="" selected>---请选择角色---</option>';
       $.each(data, function (index, val) {
-        str += `
-              <option value="${val.id}">${val.rolename}</option>
-            `;
+        if (userstate == val.userstate) {
+          str += `
+                <option value="${val.id}">${val.rolename}</option>
+              `;
+        }
       });
       $("#roleId").html(str);
       if(r){
@@ -356,6 +361,7 @@ function getRoleSelect(r) { //获取角色 下拉选框
       console.log(err);
     }
   });
+  submit();
 }
 
 function getUserStateSelect(s) { //获取用户身份 下拉选框
@@ -416,15 +422,15 @@ function getUserStateSelectAdd() { //获取用户身份 下拉选框(添加人�
 
 
 function submit() { //提交表单
-  var userstate = sessionStorage.getItem("userstate");
-  var state = $("#userstate").val();
+  var roleId = sessionStorage.getItem("roleId");
+  var role = $("#roleId").val();
   var userId = sessionStorage.getItem("userId");
   var id = $('#user_id').val();
-  console.log(userstate)
-  console.log(state)
+  console.log(roleId)
+  console.log(role)
   console.log(userId);
   console.log(id)
-  if (state == userstate && userId == id) {
+  if (role == roleId && userId == id) {
     ajax({
       type: 'post',
       success: function (res) {
