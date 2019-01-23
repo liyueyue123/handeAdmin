@@ -346,7 +346,7 @@ function getRoleSelect(r) { //获取角色 下拉选框
       var data = res.data;
       var str = '<option value="" selected>---请选择角色---</option>';
       $.each(data, function (index, val) {
-        if (userstate == val.userstate) {
+        if (userstate <= val.userstate) {
           str += `
                 <option value="${val.id}">${val.rolename}</option>
               `;
@@ -356,12 +356,12 @@ function getRoleSelect(r) { //获取角色 下拉选框
       if(r){
           $("#roleId").find("option[value=" + r+ "]").attr("selected", true);
       }
+      submit();
     },
     error: function (err) {
       console.log(err);
     }
   });
-  submit();
 }
 
 function getUserStateSelect(s) { //获取用户身份 下拉选框

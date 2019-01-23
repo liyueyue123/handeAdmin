@@ -1,11 +1,14 @@
 $(function () {
     var userstate = sessionStorage.getItem("userstate");
-    $.each($("#userState>option"), function () {
-        if ($(this).val() < userstate) {
-            $(this).attr("selected",false);
-            $(this).attr("disabled", true);
-        }
-    });
+    console.log(userstate);
+    if (userstate == 2) {
+        $.each($("#userState>option"), function () {
+            if ($(this).val() == 1) {
+                $(this).remove();
+            }
+        });
+    }
+
     allMenu(); //获取所有菜单项
 });
 
