@@ -26,7 +26,7 @@ function getCustomerList(pageNum) {
     var company = $("#companySelect option:selected").val(); //公司名称
     var position = $("#PositonKeyWord").val(); //职位
     var startTime = $("#openTime").val(); //开户时间
-    var overTime = $("#overTime").val(); //结束时间
+    // var overTime = $("#overTime").val(); //结束时间
     var userId = sessionStorage.getItem("userId");
     var data = {};
     data.authToken = token;
@@ -48,9 +48,9 @@ function getCustomerList(pageNum) {
     if (startTime != "") {
         data.startTime = startTime;
     }
-    if (overTime != "") {
-        data.endTime = overTime;
-    }
+    // if (overTime != "") {
+    //     data.endTime = overTime;
+    // }
     $.showLoading('加载中');
     $.ajax({
         type: "POST",

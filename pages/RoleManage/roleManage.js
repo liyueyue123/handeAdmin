@@ -33,6 +33,7 @@ function getRole(pageNum) {
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
                         <td>${pages+(index+1)}</td>
                         <td>${val.rolename}</td>
+                        <td>${val.userstate==1?'平台管理员':val.userstate==2?'公司管理员':val.userstate==3?'一般职员':''}</td>
                         <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
                         <td>${val.isSysinner}</td>
                     </tr>

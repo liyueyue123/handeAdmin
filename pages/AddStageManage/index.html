@@ -6,6 +6,7 @@
     <title>新增阶段</title>
     <script src="/js/load.js"></script>
     <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="./addStage.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,14 @@
                         <td><input type="text" class="form-control" name="stageName" id="typeName" placeholder="请输入阶段名称"
                                 datatype="*" nullmsg="请输入阶段名称"></td>
                     </tr>
-
+                    <tr id="platformCan" style="display:none;">
+                        <td align="center">所属公司</td>
+                        <td>
+                            <select class="form-control" name="comId" id="companySelect">
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td>
@@ -41,17 +49,6 @@
     </div>
 
 </body>
-<script>
-    $(function () {
-        $(".addForm").attr("action",APP_URL+"/permission/addStage");
-        ajax({
-            type: "GET",
-            success: function (res) {
-                console.log(JSON.stringify(res));
-                window.location.href = '../StageManage/index.html';
-            }
-        });
-    });
-</script>
+
 
 </html>
