@@ -54,13 +54,14 @@ function userList(pageNum, phone, name, Id, compName,department) {
             <td><img style="width:60px;height:60px;margin:10px;" src="${val.icon}"/></td>
             <td>${val.customerCount}</td>
             <td>${val.opportunityCount}</td>
-            <td>${val.companyname}</td>
+            <td class="hideCompany">${val.companyname}</td>
+            <td>${val.role == ''? '' : val.role.rolename }</td>
             <td style="display:none;"></td>
             <td style="display:none;"></td>
             <td style="display:none;"></td>
             <td style="display:none;">${val.passwd}</td>
-            <td width="150">
-                <!--<div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}"> 查看搜索历史</div>-->
+            <td width="150" style="display:none;">
+                <div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" style="display:none;"> 查看搜索历史</div>
             </td>
             <td>${val.customerCount}</td>
             <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id},${pageNum})">${val.isLock == 0 ?"禁用":"启用"}</a></td>
@@ -249,13 +250,12 @@ function nochecked() {
   })
 }
 
-// //点击查看企业历史
-// $('#search_details').live('click',function(e){
-//   console.log('id', e.target.dataset.id)
-//   var id = e.target.dataset.id;
-//   var index = e.target.dataset.index;
-//   openAddData('../BusinessDetail/index.html?id=' + id + '&index=' + index)
-// });
+//点击查看企业历史
+$('#search_details').live('click',function(e){
+  console.log('id', e.target.dataset.id)
+  var id = e.target.dataset.id;
+  openAddData('../companyHistory/index.html?id=' + id );
+});
 
 // 获取公司列表
 function companyList() {
