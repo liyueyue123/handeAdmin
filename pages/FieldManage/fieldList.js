@@ -42,6 +42,7 @@ function fieldList(pageNum) {
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
                         <td>${pages+index+1}</td>
                         <td>${val.fieldname}</td>
+                        <td>${val.company!=''?val.company.companyname:''}</td>
                         <td><a class="btn ${val.state==0?'btn-success':'btn-danger'}" onclick="fieldDisable('${val.id}',${val.state==0?'1':'0'})">${val.state==0?'启用':'禁用'}</a></td>
                     </tr>
                      `;
