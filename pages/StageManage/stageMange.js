@@ -36,6 +36,7 @@ function stageList() {
                         <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" /></td>
                         <td>${index+1}</td>
                         <td>${val.stagename}</td>
+                        <td>${val.dreCompany!=''?val.dreCompany.companyname:''}</td>
                         <td><a class="btn ${val.enable==1?'btn-success':'btn-danger'}" href="javascript:void(0);" onclick="ebableStage(${val.enable==1?'0':'1'},'${val.id}')">${val.enable==1?'启用':'禁用'}</a></td>
                     </tr>
                  `;
