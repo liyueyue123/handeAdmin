@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>企业搜索历史列表</title>
+    <script src="/js/load.js"></script>
+    <link rel="stylesheet" href="/css/rightCommon.css">
+    <script src="/js/moment.js"></script>
+    <script src="./companyHistory.js"></script>
+    <script>
+        $.closeLoading();
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <span class="navbar-brand">企业搜索历史</span>
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/deleteEnsearch','POST','ids')"><i
+                    class="fas fa-trash-alt"></i> 删除</button>
+            <!-- <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/role/deleteRole','POST','roleId')"><i
+                    class="fas fa-trash-alt"></i> 删除</button> -->
+            <button type="button" class="btn btn-primary navbar-btn listButton" id="cancelButton"><i class="fa" aria-hidden="true"></i> 返回用户列表页</button>
+
+        </div>
+    </nav>
+
+    <div class="list-box">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>序号</th>
+                    <th>企业名称</th>
+                    <th>历史时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value=""/></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr> -->
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <!-- 分页 -->
+    <ul class="pagination"></ul>
+
+</body>
+
+</html>
