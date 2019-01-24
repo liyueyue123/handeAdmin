@@ -5,9 +5,10 @@ $(function () {
     $('#addBtn').css('display', 'none');
   }
   userList(1);
+  companyList();
 });
 //用户列表
-function userList(pageNum, phone, name, Id, department) {
+function userList(pageNum, phone, name, Id, compName,department) {
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
@@ -20,7 +21,8 @@ function userList(pageNum, phone, name, Id, department) {
       phone: phone,
       name: name,
       Id: Id,
-      department: department
+      department: department,
+      compName: compName
     },
     dataType: "json",
     success: function (res) {
@@ -57,7 +59,9 @@ function userList(pageNum, phone, name, Id, department) {
             <td style="display:none;"></td>
             <td style="display:none;"></td>
             <td style="display:none;">${val.passwd}</td>
-            <td></td>
+            <td width="150">
+                <!--<div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}"> 查看搜索历史</div>-->
+            </td>
             <td>${val.customerCount}</td>
             <td><a class="btn ${val.isLock==1?'btn-success':'btn-danger'}" data-table="user" data-id="${val.id}" data-status="0" data-text1="禁用" data-text2="启用" href="javascript:void(0);"  onclick="operate(${val.isLock},${val.id},${pageNum})">${val.isLock == 0 ?"禁用":"启用"}</a></td>
           </tr>
@@ -74,6 +78,36 @@ function userList(pageNum, phone, name, Id, department) {
       console.log(err);
     }
   });
+  if(compName){
+    $.ajax({
+      type: "GET",
+      url: APP_URL + "/addEnsearch",
+      data: {
+        authToken: token,
+        userId: userId
+      },
+      dataType: "json",
+      success: function (res) {
+        if (res.code == 0) {
+          userList(pageNum);
+        }
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
 };
 // 禁用
 function operate(isLock, userId, pageNum) {
@@ -153,22 +187,26 @@ $('#search_btn').live('click', function () {
   var phone = $('#search_phone').val();
   var name = $('#search_name').val();
   var Id = $('#search_Id').val();
-  userList(1, phone, name, Id);
+  var compName = $('#search_compName').val();
+  userList(1, phone, name, Id, compName);
   $('#export_department').val('');
   $('#export_phone').val(phone);
   $('#export_name').val(name);
   $('#export_Id').val(Id);
+  $('#search_compName').val(compName);
 })
 $('#filter_btn').live('click', function () {
   $.showLoading('加载中');
   var phone = '';
   var name = '';
   var Id = '';
+  var compName = '';
   var department = $('#filter_department').val();
-  userList(1, phone, name, Id, department);
+  userList(1, phone, name, Id, compName, department);
   $('#export_phone').val('');
   $('#export_name').val('');
   $('#export_Id').val('');
+  $('#search_compName').val('');
   $('#export_department').val(department);
 })
 //点击过搜索或者筛选按钮赋值
@@ -209,4 +247,49 @@ function nochecked() {
   $("input[name=del_listID]").attr({
     'checked': false
   })
+}
+
+// //点击查看企业历史
+// $('#search_details').live('click',function(e){
+//   console.log('id', e.target.dataset.id)
+//   var id = e.target.dataset.id;
+//   var index = e.target.dataset.index;
+//   openAddData('../BusinessDetail/index.html?id=' + id + '&index=' + index)
+// });
+
+// 获取公司列表
+function companyList() {
+  var token = sessionStorage.getItem("token");
+  $.ajax({
+    type: "GET",
+    url: APP_URL + "/companySelect",
+    data: {
+      authToken: token
+    },
+    dataType: "json",
+    success: function (res) {
+      console.log(res);
+      if (res.code == "909090") {
+        $.show({
+          title: '操作提示',
+          content: '您已掉线,请重新登录!',
+          closeCallback: function () {
+            if (window != top) {
+              top.location.href = "../../login.html";
+            }
+          }
+        });
+      }
+      var data = res.data;
+      var str = "";
+      str += `<option value="" selected="">选择公司进行搜索</option>`;
+      $.each(data, function (index, val) {
+        str += `<option value="${val.id}">${val.companyname}</option>`;
+      });
+      $("#search_compName").html(str);
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
 }
