@@ -3,21 +3,42 @@ $(function () {
     var userstate = sessionStorage.getItem("userstate");
     // console.log(userstate);
     var url = window.location.href;
-    var id = url.split("=")[1];
+    console.log(url);
     if (userstate == 1) {
         $("#platformCan").show();
-        if (url.indexOf("=") == -1) {
+        if (url.indexOf("&") == -1) {
+            $("#cancelButton").show();
+            $("#cancelButtonEdit").hide();
+            var indexNum = parseInt(url.split("=")[1]) + 1;
+            sessionStorage.setItem("indexNum", indexNum);
+            var companyId = sessionStorage.getItem("companyId");
             companyList(); //获取公司下拉列表
             fieldNameAdd(); //新增
         } else {
+            $("#cancelButton").hide();
+            $("#cancelButtonEdit").show();
+            var id = url.split("&")[0].split("=")[1];
+            var indexNum = url.split("&")[1].split("=")[1];
+            sessionStorage.setItem("indexNum", indexNum);
+            $("#cancelButtonEdit").attr("data-index", indexNum);
             fieldNameEdit(id); //编辑
         }
     } else {
-        if (url.indexOf("=") == -1) {
+        if (url.indexOf("&") == -1) {
+            $("#cancelButton").show();
+            $("#cancelButtonEdit").hide();
+            var indexNum = parseInt(url.split("=")[1]) + 1;
+            sessionStorage.setItem("indexNum", indexNum);
             var companyId = sessionStorage.getItem("companyId");
             $("#companyId").val(companyId); //公司id
             fieldNameAdd(); //新增
         } else {
+            $("#cancelButton").hide();
+            $("#cancelButtonEdit").show();
+            var id = url.split("&")[0].split("=")[1];
+            var indexNum = url.split("&")[1].split("=")[1];
+            sessionStorage.setItem("indexNum", indexNum);
+            $("#cancelButtonEdit").attr("data-index", indexNum);
             fieldNameEdit(id); //编辑
         }
     }
@@ -30,7 +51,9 @@ function fieldNameAdd() {
         type: "GET",
         success: function (res) {
             console.log(JSON.stringify(res));
-            window.location.href = '../FieldManage/index.html';
+            var indexNum = sessionStorage.getItem("indexNum");
+            sessionStorage.removeItem("indexNum");
+            window.location.href = '../FieldManage/index.html?indexNum=' + indexNum;
         }
     });
 }

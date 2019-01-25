@@ -4,7 +4,7 @@ $(function () {
   if (url.indexOf('=') != -1) {
     var index = url.split('=')[1];
     var indexNum = Math.ceil(index / 10);
-    console.log(indexNum);
+    // console.log(indexNum);
     businessList(indexNum); //商机列表
   } else {
     businessList(1); // 商机列表

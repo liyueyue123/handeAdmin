@@ -4,12 +4,10 @@ $(function () {
         $('.navbar-form').show();
         $('#addButton').show();
     }
-    // companyList(1); //公司列表
     var url = window.location.href;
     if (url.indexOf('=') != -1) {
         var index = url.split('=')[1];
         var indexNum = Math.ceil(index / 10);
-        // console.log(indexNum);
         companyList(indexNum); //公司列表
     } else {
         companyList(1); //公司列表

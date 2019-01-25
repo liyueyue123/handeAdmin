@@ -165,7 +165,7 @@ function companyList(companyId) {
     }
   });
 }
-  // 添加消息
+// 添加消息
 function addMessage(ue) {
   $("#saveButton").click(function () {
     var token = sessionStorage.getItem("token");
@@ -199,7 +199,9 @@ function addMessage(ue) {
         console.log(res);
         if (res.code == 0) {
           alert('消息添加成功');
-          window.location.href = '../MessageManage/index.html'
+          var url = window.location.href;
+          var indexNum = parseInt(url.split("=")[1])+ 1;
+          window.location.href = '../MessageManage/index.html?indexNum=' + indexNum;
         }
         if (res.code == "909090") {
           $.show({
