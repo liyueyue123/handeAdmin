@@ -8,7 +8,6 @@ $(function () {
             }
         });
     }
-
     allMenu(); //获取所有菜单项
 });
 
@@ -111,14 +110,20 @@ function allMenu() {
 //判断新增编辑
 function isAdd() {
     var url = window.location.href;
-    if (url.indexOf("=") == -1) {
+    console.log(url);
+    if (url.indexOf("&") == -1) {
+        var indexNum = parseInt(url.split("=")[1])+1 ;
+        sessionStorage.setItem("indexNum", indexNum);
         $("#form1").attr("action", APP_URL + "/permission/powerCreateRole");
         addRole(); //新增角色
     } else {
         $("#form1").attr("action", APP_URL + "/permission/editPowerRoles");
         $("#changeTitle").html("修改");
         $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
-        var roleId = url.split("=")[1];
+        var roleId = url.split("&")[0].split("=")[1];
+        var indexNum = url.split("&")[1].split("=")[1];
+        console.log(indexNum);
+        sessionStorage.setItem("indexNum", indexNum);
         $.showLoading('加载中');
         roleDetail(roleId); //角色详情
     }
@@ -141,7 +146,9 @@ function addRole() {
                 });
             }
             console.log(JSON.stringify(res));
-            window.location.href = '../RoleManage/index.html';
+            var indexNum = sessionStorage.getItem("indexNum");
+            sessionStorage.removeItem("indexNum");
+            window.location.href = '../RoleManage/index.html?indexNum=' + indexNum;
         }
     });
 }

@@ -22,10 +22,10 @@
 			<!-- <button type="button" class="btn btn-danger navbar-btn listButton" onclick="deleteData('/customerDel','GET','Id')"><i
 				 class="fas fa-trash-alt"></i> 删除</button> -->
 			<form class="navbar-form navbar-right listSearch" role="search">
-				<div class="form-group">
+				<div class="form-group" >
 					<input type="text" class="form-control" id="IdKeyWord" placeholder="输入ID进行搜索" />
 					<input type="text" class="form-control" id="NameKeyWord" placeholder="输入姓名进行搜索" />
-					<select class="form-control" name="moduleType" id="companySelect" style="display:none;">
+					<select class="form-control" name="moduleType" id="companySelect" style="color:#777;display:none;">
 						<option value="" selected="">选择公司进行搜索</option>
 						<option value="">1</option>
 					</select>
@@ -34,9 +34,9 @@
 				<button type="button" id="searchBtn" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> 搜索</button>
 			</form>
 			<form class="navbar-form navbar-right listSearch" role="search">
-				<div class="form-group">
-					<input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间" />
-					<input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="选择截止时间" />
+				<div class="form-group" style="color:#777;">
+					请选择添加时间：<input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="开始时间" />
+					<input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="结束时间" />
 				</div>
 				<button type="button" id="selectBtn" class="btn btn-primary"><i class="fa fa-calendar-check" aria-hidden="true"></i>
 					筛选</button>

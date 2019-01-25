@@ -19,10 +19,10 @@ $(function () {
     $("#addTelText .pro-removeSection").live("click", function () {
         $(this).parent(".pro-section").remove();
     });
-    $(".formPhone").live("blur",function () {
+    $(".formPhone").live("blur", function () {
         var arr = [];
         $.each($(".formPhone"), function () {
-            console.log($(this).val());
+            // console.log($(this).val());
             arr.push($(this).val());
         });
         var phones = arr.toString();
@@ -32,13 +32,18 @@ $(function () {
     getCity(); //获取市
     getArea(); //获取所在区
     var url = window.location.href;
-    if (url.indexOf("=") == -1) {
+    if (url.indexOf("&") == -1) {
+        var indexNum = parseInt(url.split("=")[1])+1 ;
+        sessionStorage.setItem("indexNum", indexNum);
         $(".addForm").attr("action", APP_URL + "/addCompany");
         $("#companyId").val("");
         // $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");  //验证账号是否重复
         addCompany(); //新增公司
     } else {
-        var id = url.split("=")[1];
+        var el = url.split("&");
+        var id = el[0].split("=")[1];
+        var indexNum = el[1].split("=")[1];
+        sessionStorage.setItem("indexNum", indexNum);
         showDetails(id); //显示公司详情
     }
 });
@@ -189,7 +194,9 @@ function addCompany() {
                 });
             }
             // console.log(JSON.stringify(res));
-            window.location.href = '../CompanyList/index.html';
+            var indexNum = sessionStorage.getItem("indexNum");
+            sessionStorage.removeItem("indexNum");
+            window.location.href = '../CompanyList/index.html?indexNum=' + indexNum;
         }
     });
 }
@@ -242,8 +249,8 @@ function showDetails(id) {
                     }
                 }
                 var arr = [];
-                $.each(data.dreTelephone, function (index,val) { 
-                     arr.push(val.phone);
+                $.each(data.dreTelephone, function (index, val) {
+                    arr.push(val.phone);
                 });
                 $("#formPhones").val(arr.toString());
                 $("#allProvinces").find("option[value=" + data.provinceid + "]").attr("selected", true); //省
@@ -368,7 +375,9 @@ function editCompany() {
                 });
             }
             // console.log(JSON.stringify(res));
-            window.location.href = '../CompanyList/index.html';
+            var indexNum = sessionStorage.getItem("indexNum");
+            sessionStorage.removeItem("indexNum");
+            window.location.href = '../CompanyList/index.html?indexNum=' + indexNum;
         }
     });
 }

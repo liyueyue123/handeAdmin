@@ -1,5 +1,5 @@
 var APP_URL = 'http://hande.icpnt.com';
-// var APP_URL= 'HTTP://192.168.0.192:8080';
+// var APP_URL = 'HTTP://192.168.0.192:8080';
 var APP_IMAGE_URL = 'http://hdimg.icpnt.com/';
 var token = sessionStorage.getItem("token");
 $(document).ready(function (e) {
@@ -63,9 +63,12 @@ function ajax(obj) {
 }
 
 //打开添加数据页面
-function openAddData(src) {
+function openAddData(src, e) {
   if (typeof (src) != "undefined") {
-    window.location.href = src;
+    var count = $(e).attr("data-num");
+    if (count) {
+      window.location.href = src + "?num=" + count;
+    }
   } else {
     $.show({
       title: '操作提示',
@@ -74,14 +77,16 @@ function openAddData(src) {
   }
 }
 
-
 //列表页面点击修改按钮
 function editData(src) {
   var checkBox = $("input[name=del_listID]:checked");
   var checkBoxVal = checkBox.val();
 
   if (checkBox.length == 1) {
-    window.location.href = src + '?id=' + checkBoxVal;
+    if (checkBox.attr("data-index")) {
+      var indexNum = checkBox.attr("data-index");
+    }
+    window.location.href = src + '?id=' + checkBoxVal + '&index=' + indexNum;
   } else if (checkBox.length > 1) {
     $.show({
       title: '操作提示',

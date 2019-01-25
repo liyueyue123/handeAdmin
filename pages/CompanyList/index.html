@@ -26,7 +26,7 @@
             <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddCompany/index.html')"><i
                     class="fas fa-edit"></i>
                 修改</button>
-            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"  id="addBtn" style="display:none;"><i
+            <button type="button" class="btn btn-success navbar-btn listButton" id="addButton"  onclick="openAddData('../AddCompany/index.html',this)" style="display:none;"><i
                     class="fa fa-plus" aria-hidden="true"></i> 新建</button>
             <form class="navbar-form navbar-right listSearch" role="search" style="display:none;">
                 <input name="keyWord" type="text" class="form-control" id="IdkeyWord" placeholder="请输入编号搜索">
@@ -34,11 +34,13 @@
                     搜索</button>
             </form>
             <form class="navbar-form navbar-right listSearch" role="search" style="display:none;">
-                <div class="form-group">
+                <div class="form-group" style="color:#777;">
+                    请选择开户时间：<input type="text" id="opentimeStart" class="form-control jcDate form_datetime" placeholder="开始时间" />
+                    <input type="text" id="opentimeEnd" class="form-control jcDate form_datetime" placeholder="结束时间" />
+                    请选择截止时间：<input type="text" id="deadlineStart" class="form-control jcDate form_datetime" placeholder="开始时间" />
+                    <input type="text" id="deadlineEnd" class="form-control jcDate form_datetime" placeholder="结束时间" />
                     <input id="citySearch" type="text" class="form-control" placeholder="输入省(或市、区)">
-                    <input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间" />
-                    <input type="text" id="overTime" class="form-control jcDate form_datetime" placeholder="选择截止时间" />
-                    <select class="form-control" name="parent_id" id="status">
+                    <select class="form-control" name="parent_id" id="status" style="color:#777;">
                         <option value="">选择状态进行</option>
                         <option value="1">使用中</option>
                         <option value="2">已到期</option>
@@ -49,6 +51,7 @@
                         aria-hidden="true"></i>
                     筛选</button>
             </form>
+
         </div>
     </nav>
 

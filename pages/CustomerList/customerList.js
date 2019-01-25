@@ -1,6 +1,13 @@
 $(function () {
-    getCustomerList(1); //获取客户列表
     companyList(); //获取公司列表
+    var url = window.location.href;
+    if (url.indexOf('=') != -1) {
+        var index = url.split('=')[1];
+        var indexNum = Math.ceil(index / 10);
+        getCustomerList(indexNum); //获取客户列表
+    } else {
+        getCustomerList(1); //获取客户列表
+    }
     // 关键字搜索
     $("#searchBtn").click(function () {
         $("#openTime").val(""); //开户时间
@@ -28,7 +35,7 @@ function getCustomerList(pageNum) {
     var name = $("#NameKeyWord").val(); //客户名称
     var company = $("#companySelect option:selected").val(); //公司名称
     var position = $("#PositonKeyWord").val(); //职位
-    var startTime = $("#openTime").val(); //开户时间
+    var startTime = $("#openTime").val(); //开始时间
     var overTime = $("#overTime").val(); //结束时间
     var userId = sessionStorage.getItem("userId");
     var data = {};
@@ -70,7 +77,7 @@ function getCustomerList(pageNum) {
                 $.each(data, function (index, val) {
                     str += `
                  <tr>
-                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
+                    <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" data-index="${pages+(index+1)}"/></td>
                     <td>${pages+(index+1)}</td>
                     <td>${val.id}</td>
                     <td><img src='${APP_IMAGE_URL+val.cardcasephoto}' style="width:60px;height:60px;margin:10px;"/></td>
@@ -82,7 +89,7 @@ function getCustomerList(pageNum) {
                     <td>${val.email}</td>
                     <td>${val.messagesource}</td>
                     <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
-                    <td><a class="btn btn-success navbar-btn" href="../CustomerDetail/index.html?id=${val.id}">详情</a></td>
+                    <td><a class="btn btn-success navbar-btn" href="../CustomerDetail/index.html?id=${val.id}&indexNum=${pages+(index+1)}">详情</a></td>
                  </tr>
                  `;
                 });
