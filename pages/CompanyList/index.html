@@ -26,14 +26,14 @@
             <button type="button" class="btn btn-info navbar-btn listButton" onclick="editData('../AddCompany/index.html')"><i
                     class="fas fa-edit"></i>
                 修改</button>
-            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"><i
+            <button type="button" class="btn btn-success navbar-btn listButton" onclick="openAddData('../AddCompany/index.html')"  id="addBtn" style="display:none;"><i
                     class="fa fa-plus" aria-hidden="true"></i> 新建</button>
-            <form class="navbar-form navbar-right listSearch" role="search">
+            <form class="navbar-form navbar-right listSearch" role="search" style="display:none;">
                 <input name="keyWord" type="text" class="form-control" id="IdkeyWord" placeholder="请输入编号搜索">
                 <button type="button" class="btn btn-primary" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i>
                     搜索</button>
             </form>
-            <form class="navbar-form navbar-right listSearch" role="search">
+            <form class="navbar-form navbar-right listSearch" role="search" style="display:none;">
                 <div class="form-group">
                     <input id="citySearch" type="text" class="form-control" placeholder="输入省(或市、区)">
                     <input type="text" id="openTime" class="form-control jcDate form_datetime" placeholder="选择开户时间" />

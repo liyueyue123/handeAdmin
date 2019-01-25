@@ -34,9 +34,9 @@
 <div class="form-group">
   <input name="Id" type="text" class="form-control" style="width:75px;" id="search_linkMan" placeholder="联系人">
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
   <input name="name" type="text" class="form-control" style="width:75px;" id="search_responsible" placeholder="负责人">
-</div>
+</div> -->
 <div class="form-group">
   <input name="Id" type="text" class="form-control" style="width:50px;" id="search_id" placeholder="id">
 </div>
@@ -131,9 +131,8 @@
 <script src="./businessList.js"></script>
 <script>
   $(".form_datetime").datetimepicker({
-    format: 'yyyy/mm/dd hh:ii', //显示格式
+    format: 'yyyy-mm-dd', //显示格式
     todayHighlight: 1, //今天高亮
-    minTime: '10',
     language: 'zh-CN',
     startView: 2,
     forceParse: 0,

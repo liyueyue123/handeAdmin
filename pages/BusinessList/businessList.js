@@ -49,7 +49,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
                 <td>${val.companyname}</td>
                 <td>${val.price}</td>
                 <td>${val.provinesName}${val.cityName}${val.areaName}</td>
-                <td>${moment(val.time).format('YYYY年MM月DD日')}</td>
+                <td>${moment(val.createtime).format('YYYY年MM月DD日')}</td>
                 <td>${val.stage}</td>
                 <td>${val.group.groupName}</td>
                 <td>${val.source}</td>

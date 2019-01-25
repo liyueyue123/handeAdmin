@@ -15,7 +15,10 @@ $(function () {
         $("#PositonKeyWord").val(""); //职位
         getCustomerList(1);
     });
-
+    var userstate = sessionStorage.getItem("userstate");
+    if (userstate == 1) {
+        $('#companySelect').show();
+    }
 });
 
 //获取客户列表

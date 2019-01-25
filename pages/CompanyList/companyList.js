@@ -1,4 +1,9 @@
 $(function () {
+    var userstate = sessionStorage.getItem("userstate");
+    if (userstate == 1) {
+        $('.navbar-form').show();
+        $('#addBtn').show();
+    }
     companyList(1); //公司列表
     // 搜索
     $("#searchBtn").click(function () {

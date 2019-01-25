@@ -24,10 +24,10 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                     <input type="text" hidden name='id' id='user_id' value=''>
-                    <tr style='display:none;'>
+                    <!-- <tr style='display:none;'>
                         <td align="center">登录名</td>
                         <td><input type="text" name="loginname" id="user_loginname" class="form-control"  datatype="*" placeholder="请输入用户登录名"></td>
-                    </tr>
+                    </tr> -->
 
                     <tr>
                         <td align="center">姓名</td>
@@ -52,7 +52,7 @@
                             </div>
                             <span>图片大小200*200</span>
                             <input type="text" name="icon" id="icon" hidden>
-                            <input type="file" name="iconfile" id="iconfile" nullmsg="请上传头像" placeholder="请上传头像" accept="image/jpeg,image/png,image/jpg,image/gif" width="30%" style="margin-bottom:10px;">
+                            <input type="file" name="iconfile" id="iconfile"  placeholder="请上传头像" accept="image/jpeg,image/png,image/jpg,image/gif" width="30%" style="margin-bottom:10px;">
                         </td>
                     </tr>
 
@@ -66,17 +66,17 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr class="cabout">
                         <td align="center">公司</td>
                         <td>
                             <input type="hidden" name="company" id="companyInput" value="">
-                            <select class="form-control" id="company" datatype="*" nullmsg="请选择公司名称" placeholder="请选择公司名称" disabled>
+                            <select class="form-control" id="company" datatype="*" nullmsg="请选择公司名称" placeholder="请选择公司名称">
                                 <option value="" selected>---请选择公司---</option>
                             </select>
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr class="cabout">
                         <td align="center">可添加部门</td>
                         <td>
                             <input type="text" class="form-control" id="addDepartment" placeholder="可添加部门" value=""  style="width:40%;display:inline-block;">
@@ -84,7 +84,7 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr class="cabout">
                         <td align="center">部门</td>
                         <td>
                             <select class="form-control" name="department" id="department" datatype="*" nullmsg="请选择部门名称" placeholder="请选择部门名称">

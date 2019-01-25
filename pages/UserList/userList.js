@@ -1,8 +1,11 @@
 $(function () {
   $.showLoading('加载中');
   var userstate = sessionStorage.getItem("userstate");
-  if (userstate == 3){
-    $('#addBtn').css('display', 'none');
+  if (userstate == 1) {
+    $('#search_compName').show();
+  }
+  if (userstate != 3){
+    $('#addBtn').show();
   }
   userList(1);
   companyList();
@@ -45,7 +48,7 @@ function userList(pageNum, phone, name, Id, compName,department) {
       $.each(data, function (index, val) {
         str += `
           <tr>
-            <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
+            <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}"  data-userstate="${val.role == ''? '' : val.role.userstate }"/></td>
             <td>${pages+(index+1)}</td>
             <td>${val.id}</td>
             <td>${val.name}</td>
@@ -237,22 +240,31 @@ $('#allChecked').live('click', function () {
     $('#changeTxt').text('全选');
   }
 })
+
 //全选
 function allchecked() {
   $("input[name=del_listID]").attr({
     'checked': true
   })
+  $('input[data-name=multi-select]').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
+  });
 }
 //全不选
 function nochecked() {
   $("input[name=del_listID]").attr({
     'checked': false
   })
+  $('input[data-name=multi-select]').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
+  });
 }
 
 //点击查看企业历史
 $('#search_details').live('click',function(e){
-  console.log('id', e.target.dataset.id)
+  // console.log('id', e.target.dataset.id)
   var id = e.target.dataset.id;
   openAddData('../companyHistory/index.html?id=' + id );
 });

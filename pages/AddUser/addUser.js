@@ -1,9 +1,12 @@
 $(function () {
   var userstate = sessionStorage.getItem("userstate");
   var companyId = sessionStorage.getItem('companyId');
+  console.log(userstate)
   if(userstate == 1){
-    // $("#roleId").removeAttr("disabled");
-    $("#company").removeAttr("disabled");
+    roleState();   //用户身份为平台管理员时调用的 //不选择公司
+  }
+  if(userstate == 2){
+    $('#company').attr('disabled', 'disabled');
   }
   var url = window.location.href; // 首先获取到你的URL地址;
   var arr = url.split("="); // 用“&”将URL分割成2部分每部分都有你需要的东西;
@@ -18,7 +21,11 @@ $(function () {
     getUserInfo(id);
   } else {
     $('.addForm').attr('action', APP_URL + "/register");
-    getCompanySelect(companyId); // 获取公司的下拉选框
+    if (userstate != 1) {
+      getCompanySelect(companyId); // 获取公司的下拉选框 
+    }else{
+      getCompanySelect(); // 获取公司的下拉选框
+    }
     getRoleSelect(); // 获取角色列表 
     // getUserStateSelectAdd(); // 获取用户身份 (添加人员时)
     getDepartmentSelect(companyId); // 获取部门的下拉选框
@@ -221,6 +228,7 @@ function getCompanySelect(c) { // 获取公司 下拉选框
         $("#company").find("option[value=" + c + "]").attr("selected", true);
         $("#companyInput").val(c);
       }
+      submit();
     }
   });
 }
@@ -228,7 +236,9 @@ function getCompanySelect(c) { // 获取公司 下拉选框
 
 $("#company").change(function () { //当公司的 下拉选框发生改变时
   var companyId = $('#company option:selected').val();
+  $("#companyInput").val(companyId);
   getDepartmentSelect(companyId);
+  submit();
 })
 
 
@@ -348,7 +358,7 @@ function getRoleSelect(r) { //获取角色 下拉选框
       $.each(data, function (index, val) {
         if (userstate <= val.userstate) {
           str += `
-                <option value="${val.id}">${val.rolename}</option>
+                <option value="${val.id}" data-userstate="${val.userstate}">${val.rolename}</option>
               `;
         }
       });
@@ -362,6 +372,33 @@ function getRoleSelect(r) { //获取角色 下拉选框
       console.log(err);
     }
   });
+}
+
+function roleState() { //用户身份为平台管理员时调用的 //不选择公司
+  $("#roleId").change(function () { //当角色 下拉选框发生改变时
+    var roleId = $('#roleId option:selected').attr('data-userstate');
+    if (roleId == 1) {
+      // $('.cabout').attr('disabled','disabled');  //不选择公司
+      $("#company").find("option:selected").attr("selected", false);
+      $('#companyInput').val('');
+      $('#company').attr('disabled', 'disabled');
+      $('#addDepartment').attr('disabled', 'disabled');
+      $('#department').attr('disabled', 'disabled');
+      $('#company').removeAttr('nullmsg');
+      $('#department').removeAttr('nullmsg');
+      $('#company').removeAttr('datatype');
+      $('#department').removeAttr('datatype');
+    }else{
+      //  $('.cabout').removeAttr('disabled');
+       $('#company').removeAttr('disabled');
+       $('#addDepartment').removeAttr('disabled');
+       $('#department').removeAttr('disabled');
+       $('#company').attr('nullmsg', '请选择公司名称');
+       $('#department').attr('nullmsg', '请选择部门名称');
+       $('#company').attr('datatype','*');
+       $('#department').attr('datatype','*');
+    }
+  })
 }
 
 function getUserStateSelect(s) { //获取用户身份 下拉选框
@@ -426,10 +463,10 @@ function submit() { //提交表单
   var role = $("#roleId").val();
   var userId = sessionStorage.getItem("userId");
   var id = $('#user_id').val();
-  console.log(roleId)
-  console.log(role)
-  console.log(userId);
-  console.log(id)
+  // console.log(roleId)
+  // console.log(role)
+  // console.log(userId);
+  // console.log(id)
   if (role == roleId && userId == id) {
     ajax({
       type: 'post',
