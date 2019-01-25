@@ -1,11 +1,12 @@
 $(function () {
     var url = window.location.href;
-    var id = url.split("=")[1];
+    var id = url.split("&")[0].split("=")[1];
+    var indexNum = url.split("&")[1].split("=")[1];
     $.showLoading('加载中');
-    customerDetail(id);
+    customerDetail(id,indexNum);
 });
 
-function customerDetail(customerId) {
+function customerDetail(customerId,indexNum) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -147,7 +148,7 @@ function customerDetail(customerId) {
             `;
             $(".add-box tbody").html(str);
             $("#cancelButton").click(function () {
-                window.history.back(-1);
+                $(window).attr("location","../CustomerList/index.html?indexNum="+indexNum);
             });
         },
         error: function (err) {

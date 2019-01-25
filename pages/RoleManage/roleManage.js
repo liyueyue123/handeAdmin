@@ -5,7 +5,15 @@ $(function () {
         $("#editroleBtn").hide();
         $("#addroleBtn").hide();
     }
-    getRole(1) //获取角色列表
+    var url = window.location.href;
+    if (url.indexOf('=') != -1) {
+        var index = url.split('=')[1];
+        var indexNum = Math.ceil(index / 10);
+        // console.log(indexNum);
+        getRole(1) //获取角色列表
+    } else {
+        getRole(1) //获取角色列表
+    }
 });
 
 //获取角色
@@ -27,10 +35,11 @@ function getRole(pageNum) {
             var pages = 10 * (pageNum - 1);
             var str = '';
             if (res.code == 0) {
+                $("#addroleBtn").attr("data-num", res.count);
                 $.each(data, function (index, val) {
                     str += `
                     <tr>
-                        <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
+                        <td><input type="checkbox" name="del_listID" id="del_listID" data-name="multi-select" value="${val.id}" data-index="${pages+(index+1)}"/></td>
                         <td>${pages+(index+1)}</td>
                         <td>${val.rolename}</td>
                         <td>${val.userstate==1?'平台管理员':val.userstate==2?'公司管理员':val.userstate==3?'一般职员':''}</td>
