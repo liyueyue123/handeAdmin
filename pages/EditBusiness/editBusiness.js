@@ -223,11 +223,30 @@ $(function () {
     var token = sessionStorage.getItem("token");
     var isKeys = 1;
     var ln = [];
-    $("input[name=links_ID]:checked").each(function () {
-      ln.push(parseInt($(this).val()));
-    });
+    // $("input[name=links_ID]:checked").each(function () {
+    //   ln.push(parseInt($(this).val()));
+    // });
+    var arr = $("input[name=links_ID]:checked");
+    if (arr.length >1){
+      $.show({
+        title: '操作提示',
+        content: '关键联系人只能选择一条数据',
+        closeCallback: function () {
+          $("input[name=links_ID]").removeAttr('checked');
+        }
+      });
+      return;
+    }
+    if (arr.length == 0) {
+      $.show({
+        title: '操作提示',
+        content: '请选择关键联系人',
+      });
+      return;
+    }
     var lo = $('#linksKeyOld').val();
-    var linkIds = lo.concat(ln);
+    // var linkIds = lo.concat(ln);
+    var linkIds = parseInt($("input[name=links_ID]:checked").val());
     console.log(linkIds)
     $.ajax({
       type: "post",
@@ -243,7 +262,10 @@ $(function () {
         console.log(res)
         $.show({
           title: '操作成功',
-          content: res.message
+          content: res.message,
+          closeCallback: function () {
+            $("input[name=links_ID]").removeAttr('checked');
+          }
         });
         getBusinessDetail(id);
         if (res.code == "909090") {
@@ -292,7 +314,10 @@ $(function () {
         console.log(res)
         $.show({
           title: '操作成功',
-          content: res.message
+          content: res.message,
+          closeCallback: function () {
+            $("input[name=links_ID]").removeAttr('checked');
+          }
         });
         getBusinessDetail(id);
         if (res.code == "909090") {
@@ -331,7 +356,11 @@ $(function () {
       },
       dataType: "json",
       success: function (res) {
-        alert(res.message)
+        $.show({
+          title: '操作提醒',
+          content: res.message
+        });
+        // alert(res.message)
         getBusinessDetail(id);
         if (res.code == "909090") {
           $.show({
@@ -454,8 +483,14 @@ $(function () {
             success: function (res) {
               console.log(res)
               if (res.code == 0) {
-                alert('附件上传成功!')
-                getBusinessDetail(id);
+                $.show({
+                  title: '操作提示',
+                  content: '附件上传成功!',
+                  closeCallback: function () {
+                    getBusinessDetail(id);
+                  }
+                });
+                // alert('附件上传成功!')
               }
               if (res.code == "909090") {
                 $.show({
@@ -471,7 +506,11 @@ $(function () {
             }
           });
         } else {
-          alert('增加附件失败');
+          $.show({
+            title: '操作提示',
+            content: '增加附件失败!'
+          });
+          // alert('增加附件失败');
         }
       });
     }
@@ -492,8 +531,15 @@ $(function () {
       success: function (res) {
         console.log(res)
         if (res.code == 0) {
-          alert('附件删除成功!')
-          getBusinessDetail(id);
+          $.show({
+            title: '操作提示',
+            content: '附件删除成功!',
+            closeCallback: function () {
+              getBusinessDetail(id);
+            }
+          });
+          // alert('附件删除成功!')
+          // getBusinessDetail(id);
         }
         if (res.code == "909090") {
           $.show({
@@ -508,7 +554,11 @@ $(function () {
         }
       },
       fail: function (res) {
-        alert('附件删除失败!')
+        $.show({
+          title: '操作提示',
+          content: '附件删除失败!'
+        });
+        // alert('附件删除失败!')
       }
     });
   })
@@ -805,12 +855,13 @@ $(function () {
                       <td><input type="checkbox" name="links_ID" id="del_listID" data-name="multi-select" value="${val.id}"/></td>
                       <td>${pages+(index+1)}</td>
                       <td>${val.id}</td>
-                      <td>${val.customerName}</td>
-                      <td>${val.company}</td>`;
+                      <td class='hideName'>${val.customerName}</td>
+                      <td class='hideCompany'>${val.company}</td>
+                      <td class='hidePosition'>`;
             if (val.position) {
-              str += `<td>${val.position}</td>`
+              str += `${val.position}`
             }
-            str += `</tr>`;
+            str += `</td></tr>`;
           });
           $(".customerList").html(str);
         } else {

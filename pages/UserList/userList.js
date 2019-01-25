@@ -19,22 +19,37 @@ $(function () {
   }
 });
 //用户列表
-function userList(pageNum, phone, name, Id, compName, department) {
+function userList(pageNum) {
   var token = sessionStorage.getItem("token");
+  var phone = $('#search_phone').val();
+  var name = $('#search_name').val();
+  var Id = $('#search_Id').val();
+  var compName = $('#search_compName option:selected').val();
+  var department = $('#filter_department').val();
+   var data = {};
+   data.authToken = token;
+   data.authTokn = token;
+   data.limit = 10;
+   data.page = pageNum;
+   if (phone != "") {
+     data.phone = phone;
+   }
+   if (Id != "") {
+     data.Id = Id;
+   }
+   if (name != "") {
+     data.name = name;
+   }
+   if (department != "") {
+     data.department = department;
+   }
+   if (compName != "") {
+     data.compName = compName;
+   }
   $.ajax({
     type: "GET",
     url: APP_URL + "/user/all",
-    data: {
-      authToken: token,
-      authTokn: token,
-      limit: 10,
-      page: pageNum,
-      phone: phone,
-      name: name,
-      Id: Id,
-      department: department,
-      compName: compName
-    },
+    data: data,
     dataType: "json",
     success: function (res) {
       console.log('userList', res);
@@ -197,32 +212,17 @@ function operate(isLock, userId, pageNum) {
 //点击搜索或者筛选按钮
 $('#search_btn').live('click', function () {
   $.showLoading('加载中');
-  var phone = $('#search_phone').val();
-  var name = $('#search_name').val();
-  var Id = $('#search_Id').val();
-  var compName = $('#search_compName').val();
-  userList(1, phone, name, Id, compName);
-  $('#export_department').val('');
-  $('#export_phone').val(phone);
-  $('#export_name').val(name);
-  $('#export_Id').val(Id);
-  $('#search_compName').val(compName);
+  $('#filter_department').val('');
+  userList(1);
 })
 $('#filter_btn').live('click', function () {
   $.showLoading('加载中');
-  var phone = '';
-  var name = '';
-  var Id = '';
-  var compName = '';
-  var department = $('#filter_department').val();
-  userList(1, phone, name, Id, compName, department);
-  $('#export_phone').val('');
-  $('#export_name').val('');
-  $('#export_Id').val('');
+  $('#search_phone').val('');
+  $('#search_name').val('');
+  $('#search_Id').val('');
   $('#search_compName').val('');
-  $('#export_department').val(department);
+  userList(1);
 })
-//点击过搜索或者筛选按钮赋值
 //点击导出按钮
 $('#export').live('click', function () {
   var p = confirm("由于数据存在关联查询， 导出Exce可能需要1 - 3 分钟的时间， 确定要导出吗（ 确定后请勿刷新页面或关闭浏览器） ?")
