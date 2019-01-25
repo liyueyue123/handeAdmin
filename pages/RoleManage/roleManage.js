@@ -43,7 +43,7 @@ function getRole(pageNum) {
                         <td>${val.rolename}</td>
                         <td>${val.userstate==1?'平台管理员':val.userstate==2?'公司管理员':val.userstate==3?'一般职员':''}</td>
                         <td>${moment(val.createtime).format("YYYY年MM月DD日")}</td>
-                        <td>${val.isSysinner}</td>
+                        <td>${val.userCount}</td>
                     </tr>
                     `;
                 });

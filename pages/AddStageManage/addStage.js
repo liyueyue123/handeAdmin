@@ -7,8 +7,8 @@ $(function () {
         addStage(); //新增阶段
     }
     var url = window.location.href;
-    var indexNum = parseInt(url.split("=")[1]) + 1;
-    sessionStorage.setItem("indexNum", indexNum);
+    // var indexNum = parseInt(url.split("=")[1]) + 1;
+    sessionStorage.setItem("indexNum", 10);
 });
 
 // 新增阶段

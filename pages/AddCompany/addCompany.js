@@ -36,8 +36,8 @@ $(function () {
     if (url.indexOf("&") == -1) {
         $("#cancelButton").show();
         $("#cancelButtonEdit").hide();
-        var indexNum = parseInt(url.split("=")[1]) + 1;
-        sessionStorage.setItem("indexNum", indexNum);
+        // var indexNum = parseInt(url.split("=")[1]) + 1;
+        sessionStorage.setItem("indexNum", 10);
         $(".addForm").attr("action", APP_URL + "/addCompany");
         $("#companyId").val("");
         // $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");  //验证账号是否重复
