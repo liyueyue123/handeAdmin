@@ -53,7 +53,7 @@ $(function () {
           $.each(data.links, function (i, v) {
             if (v.isKey == 0) {
               linksOther += `<div class="contact">${v.companyName} ${v.position} ${v.name}  <button  data-id="${v.id}" type="button" class="btn btn-danger pro-removeSection dellink" style="margin-right:55%;float:right;margin-top:10px;"><i class="fa fa-minus" aria-hidden="true"></i> 移除</button> </div> </div>`;
-              k.push(v.id)
+              k.push(v.id);
             } else {
               linksKey += `<div class="contact">${v.companyName} ${v.position} ${v.name}  <button  data-id="${v.id}" type="button" class="btn btn-danger pro-removeSection dellink" style="margin-right:55%;float:right;margin-top:10px;"><i class="fa fa-minus" aria-hidden="true"></i> 移除</button> </div> </div>`;
               o.push(v.id)
@@ -64,6 +64,7 @@ $(function () {
           $('#linksOther').html(linksOther);
           if (linksKey) {
             $('#linksKeyOld').val(k);
+            console.log($('#linksKeyOld').val());
           } else {
             $('#linksKeyOld').val('');
           };
@@ -222,11 +223,21 @@ $(function () {
   $('#saveLinksKey').click(function () {
     var token = sessionStorage.getItem("token");
     var isKeys = 1;
-    var ln = [];
+    // var ln = [];
     // $("input[name=links_ID]:checked").each(function () {
     //   ln.push(parseInt($(this).val()));
     // });
     var arr = $("input[name=links_ID]:checked");
+    if ($('#linksKeyOld').val()) {
+      $.show({
+        title: '操作提示',
+        content: '请先删除存在的的关键联系人',
+        closeCallback: function () {
+          $("input[name=links_ID]").removeAttr('checked');
+        }
+      });
+      return;
+    }
     if (arr.length >1){
       $.show({
         title: '操作提示',
@@ -244,10 +255,7 @@ $(function () {
       });
       return;
     }
-    var lo = $('#linksKeyOld').val();
-    // var linkIds = lo.concat(ln);
     var linkIds = parseInt($("input[name=links_ID]:checked").val());
-    console.log(linkIds)
     $.ajax({
       type: "post",
       url: APP_URL + "/console/saveLinkInfo",
@@ -265,9 +273,9 @@ $(function () {
           content: res.message,
           closeCallback: function () {
             $("input[name=links_ID]").removeAttr('checked');
+            getBusinessDetail(id);
           }
         });
-        getBusinessDetail(id);
         if (res.code == "909090") {
           $.show({
             title: '操作提示',
@@ -293,7 +301,7 @@ $(function () {
   $('#saveLinksOther').click(function () {
     var token = sessionStorage.getItem("token");
     var isKeys = 0;
-    var ln = [];
+    var ln = [,];
     $("input[name=links_ID]:checked").each(function () {
       ln.push(parseInt($(this).val()));
     });
@@ -317,9 +325,9 @@ $(function () {
           content: res.message,
           closeCallback: function () {
             $("input[name=links_ID]").removeAttr('checked');
+            getBusinessDetail(id);
           }
         });
-        getBusinessDetail(id);
         if (res.code == "909090") {
           $.show({
             title: '操作提示',
@@ -358,10 +366,12 @@ $(function () {
       success: function (res) {
         $.show({
           title: '操作提醒',
-          content: res.message
+          content: res.message,
+           closeCallback: function () {
+             getBusinessDetail(id);
+           }
         });
         // alert(res.message)
-        getBusinessDetail(id);
         if (res.code == "909090") {
           $.show({
             title: '操作提示',
