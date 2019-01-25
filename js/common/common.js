@@ -14,9 +14,9 @@ $(document).ready(function (e) {
     tipSweep: true
   });
   //添加数据页面取消按钮
-  $("button#cancelButton").click(function () {
-    window.history.back(-1);
-  });
+  // $("button#cancelButton").click(function () {
+  //   window.history.back(-1);
+  // });
 
   //全站复选框美化
   $('input[data-name=multi-select]').iCheck({
@@ -24,6 +24,10 @@ $(document).ready(function (e) {
     radioClass: 'iradio_flat-blue'
   });
 });
+// 新建页面取消
+function backOpen(src){
+  window.location.href = src + '?indexNum=1';
+}
 //编辑页的取消按钮
 function openList(e, src) {
   var indexNum = $(e).attr("data-index");
