@@ -12,24 +12,52 @@ $(function () {
 });
 
 // 获取商机列表
-function businessList(pageNum, companyName, linkMan, responsible, id, price, stage, startTime, city) {
+function businessList(pageNum) {
   var token = sessionStorage.getItem("token");
+  var companyName = $('#search_companyName').val();
+  var linkMan = $('#search_linkMan').val();
+  var responsiblef = $('#filter_responsible').val();
+  var responsibles = $('#search_responsible').val();
+  var id = $('#search_id').val();
+  var price = $('#filter_price').val();
+  var stage = $('#filter_stage').val();
+  var startTime = $('#filter_startTime').val();
+  var city = $('#filter_city').val();
+  var data = {};
+  data.authToken = token;
+  data.limit = 10;
+  data.page = pageNum;
+  if (companyName != "") {
+    data.companyName = companyName;
+  }
+  if (linkMan != "") {
+    data.linkMan = linkMan;
+  }
+  if (responsiblef != "") {
+    data.responsible = responsiblef;
+  }
+  if (responsibles != "") {
+    data.responsible = responsibles;
+  }
+  if (id != "") {
+    data.id = id;
+  }
+  if (price != "") {
+    data.price = price;
+  }
+  if (stage != "") {
+    data.stage = stage;
+  }
+  if (startTime != "") {
+    data.startTime = startTime;
+  }
+  if (city != "") {
+    data.city = city;
+  }
   $.ajax({
     type: "GET",
     url: APP_URL + "/console/opportunityList",
-    data: {
-      authToken: token,
-      limit: 10,
-      page: pageNum,
-      companyName: companyName,
-      linkMan: linkMan,
-      responsible: responsible,
-      id: id,
-      price: price,
-      stage: stage,
-      startTime: startTime,
-      city: city
-    },
+    data: data,
     dataType: "json",
     success: function (res) {
       $.closeLoading();
@@ -59,7 +87,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
                 <td>${val.provinesName}${val.cityName}${val.areaName}</td>
                 <td>${moment(val.createtime).format('YYYY年MM月DD日')}</td>
                 <td>${val.stage}</td>
-                <td>${val.group.groupName}</td>
+                <td>${val.group == '' ? '' :val.group.groupName}</td>
                 <td>${val.source}</td>
                 <td width="300">
                 <a class="btn btn-success navbar-btn" href="../BusinessDetail/index.html?id=${val.id}&indexNum=${pages+(index+1)}">查看详情</a>
@@ -129,24 +157,20 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
 
 //点击搜索按钮
 $('#search_btn').live('click', function () {
-  var companyName = $('#search_companyName').val();
-  var linkMan = $('#search_linkMan').val();
-  var responsible = $('#search_responsible').val();
-  var id = $('#search_id').val();
-  // console.log(id);
+  $('#filter_responsible').val('');
+  $('#filter_price').val('');
+  $('#filter_stage').val('');
+  $('#filter_startTime').val('');
+  $('#filter_city').val('');
   $.showLoading('加载中');
-  businessList(1, companyName, linkMan, responsible, id);
+  businessList(1);
 })
 //点击筛选按钮
 $('#filter_btn').live('click', function () {
-  var companyName = '';
-  var linkMan = '';
-  var responsible = $('#filter_responsible').val();
-  var id = '';
-  var price = $('#filter_price').val();
-  var stage = $('#filter_stage').val();
-  var startTime = $('#filter_startTime').val();
-  var city = $('#filter_city').val();
+  $('#search_companyName').val('');
+  $('#search_linkMan').val('');
+  $('#search_responsible').val('');
+  $('#search_id').val('');
   $.showLoading('加载中');
-  businessList(1, companyName, linkMan, responsible, id, price, stage, startTime, city);
+  businessList(1);
 })

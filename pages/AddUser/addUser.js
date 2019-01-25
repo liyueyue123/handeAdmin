@@ -3,7 +3,7 @@ $(function () {
   var companyId = sessionStorage.getItem('companyId');
   // console.log(userstate)
   if (userstate == 1) {
-    roleState(); //用户身份为平台管理员时调用的 //不选择公司
+    roleState(); //用户身份为平台管理员时调用的
   }
   if (userstate == 2) {
     $('#company').attr('disabled', 'disabled');
@@ -91,7 +91,7 @@ function getUserInfo(id) { //获取用户详情
 
       // getUserStateSelect(data.userstate); // 获取用户身份
 
-      getRoleSelect(data.roleId); // 获取角色列表
+      getRoleSelect(data.roleId, data.userstate); // 获取角色列表
     }
   });
 }
@@ -336,7 +336,7 @@ function getDepartmentSelect(c, d) { // 获取部门 下拉选框
 }
 
 
-function getRoleSelect(r) { //获取角色 下拉选框
+function getRoleSelect(r,s) { //获取角色 下拉选框
   var token = sessionStorage.getItem("token");
   var userstate = sessionStorage.getItem("userstate");
   console.log(userstate);
@@ -374,6 +374,20 @@ function getRoleSelect(r) { //获取角色 下拉选框
       $("#roleId").html(str);
       if (r) {
         $("#roleId").find("option[value=" + r + "]").attr("selected", true);
+      }
+      if(s){
+        $("#company").find("option:selected").removeAttr("selected");
+        $('#companyInput').val('');
+        $("#company").val('');
+        $('#department').find("option:selected").removeAttr("selected");
+        $('#department').val('');
+        $('#company').attr('disabled', 'disabled');
+        $('#addDepartment').attr('disabled', 'disabled');
+        $('#department').attr('disabled', 'disabled');
+        $('#company').removeAttr('nullmsg');
+        $('#department').removeAttr('nullmsg');
+        $('#company').removeAttr('datatype');
+        $('#department').removeAttr('datatype');
       }
       submit();
     },
