@@ -208,6 +208,7 @@ function getPage(count, list, pageNum) {
 // 调用传过来的函数
 function test(list, num) {
   if (typeof (eval(list)) == "function") {
+    console.log(num);
     eval(list + "(" + num + ");");
   } else {
     // 函数不存在

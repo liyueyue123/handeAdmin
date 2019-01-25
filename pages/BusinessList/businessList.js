@@ -54,6 +54,7 @@ function businessList(pageNum) {
   if (city != "") {
     data.city = city;
   }
+  // console.log(data);
   $.ajax({
     type: "GET",
     url: APP_URL + "/console/opportunityList",

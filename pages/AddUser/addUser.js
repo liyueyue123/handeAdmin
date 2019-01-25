@@ -27,8 +27,8 @@ $(function () {
   } else {
     $("#cancelButton").show();
     $("#cancelButtonEdit").hide();
-    var indexNum = parseInt(url.split("=")[1]) + 1;
-    sessionStorage.setItem("indexNum", indexNum);
+    // var indexNum = parseInt(url.split("=")[1]) + 1;
+    sessionStorage.setItem("indexNum", 10);
     $('.addForm').attr('action', APP_URL + "/register");
     if (userstate != 1) {
       getCompanySelect(companyId); // 获取公司的下拉选框 
@@ -86,11 +86,8 @@ function getUserInfo(id) { //获取用户详情
         console.log($('#icon').val())
       }
       getCompanySelect(data.company); // 获取公司的下拉选框
-
       getDepartmentSelect(data.company, data.department); // 获取部门的下拉选框
-
       // getUserStateSelect(data.userstate); // 获取用户身份
-
       getRoleSelect(data.roleId, data.userstate); // 获取角色列表
     }
   });

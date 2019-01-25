@@ -114,8 +114,8 @@ function isAdd() {
     if (url.indexOf("&") == -1) {
         $("#cancelButton").show();
         $("#cancelButtonEdit").hide();
-        var indexNum = parseInt(url.split("=")[1]) + 1;
-        sessionStorage.setItem("indexNum", indexNum);
+        // var indexNum = parseInt(url.split("=")[1]) + 1;
+        sessionStorage.setItem("indexNum", 10);
         $("#form1").attr("action", APP_URL + "/permission/powerCreateRole");
         addRole(); //新增角色
     } else {

@@ -199,9 +199,9 @@ function addMessage(ue) {
         console.log(res);
         if (res.code == 0) {
           alert('消息添加成功');
-          var url = window.location.href;
-          var indexNum = parseInt(url.split("=")[1])+ 1;
-          window.location.href = '../MessageManage/index.html?indexNum=' + indexNum;
+          // var url = window.location.href;
+          // var indexNum = parseInt(url.split("=")[1])+ 1;
+          window.location.href = '../MessageManage/index.html?indexNum=10';
         }
         if (res.code == "909090") {
           $.show({

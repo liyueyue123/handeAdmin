@@ -9,8 +9,8 @@ $(function () {
         if (url.indexOf("&") == -1) {
             $("#cancelButton").show();
             $("#cancelButtonEdit").hide();
-            var indexNum = parseInt(url.split("=")[1]) + 1;
-            sessionStorage.setItem("indexNum", indexNum);
+            // var indexNum = parseInt(url.split("=")[1]) + 1;
+            sessionStorage.setItem("indexNum", 10);
             var companyId = sessionStorage.getItem("companyId");
             companyList(); //获取公司下拉列表
             fieldNameAdd(); //新增
@@ -27,8 +27,8 @@ $(function () {
         if (url.indexOf("&") == -1) {
             $("#cancelButton").show();
             $("#cancelButtonEdit").hide();
-            var indexNum = parseInt(url.split("=")[1]) + 1;
-            sessionStorage.setItem("indexNum", indexNum);
+            // var indexNum = parseInt(url.split("=")[1]) + 1;
+            sessionStorage.setItem("indexNum", 10);
             var companyId = sessionStorage.getItem("companyId");
             $("#companyId").val(companyId); //公司id
             fieldNameAdd(); //新增
