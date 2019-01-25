@@ -1,6 +1,15 @@
 $(function () {
     $.showLoading('加载中');
-    stageList(1); //阶段列表
+    stageList(); //阶段列表
+    // var url = window.location.href;
+    // if (url.indexOf('=') != -1) {
+    //     var index = url.split('=')[1];
+    //     var indexNum = Math.ceil(index / 10);
+    //     console.log(indexNum);
+    //     stageList(indexNum); //阶段列表
+    // } else {
+    //     stageList(1); //阶段列表
+    // }
 });
 
 // 阶段管理  
@@ -15,6 +24,7 @@ function stageList() {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            $("#addButton").attr('data-num', res.data.length);
             $.closeLoading();
             if (res.code == "909090") {
                 $.show({
@@ -57,7 +67,7 @@ function stageList() {
 }
 
 //启用、禁用
-function ebableStage(enable,atageid) {
+function ebableStage(enable, atageid) {
     var token = sessionStorage.getItem("token");
     $.ajax({
         type: "GET",
@@ -70,7 +80,7 @@ function ebableStage(enable,atageid) {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            if(res.code==0){
+            if (res.code == 0) {
                 stageList();
             }
             if (res.code == "909090") {

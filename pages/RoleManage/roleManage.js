@@ -9,8 +9,7 @@ $(function () {
     if (url.indexOf('=') != -1) {
         var index = url.split('=')[1];
         var indexNum = Math.ceil(index / 10);
-        // console.log(indexNum);
-        getRole(1) //获取角色列表
+        getRole(indexNum) //获取角色列表
     } else {
         getRole(1) //获取角色列表
     }

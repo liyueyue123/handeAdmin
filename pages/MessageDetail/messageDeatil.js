@@ -1,6 +1,8 @@
 $(function () {
     var url = window.location.href;
-    var id = url.split("=")[1];
+    var id = url.split("&")[0].split("=")[1];
+    var indexNum = url.split("&")[1].split("=")[1];
+    $("#detailBtn").attr("data-num", indexNum);
     $.showLoading('加载中');
     messageDetail(1, id);
 });

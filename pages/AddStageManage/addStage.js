@@ -2,12 +2,13 @@ $(function () {
     $(".addForm").attr("action", APP_URL + "/permission/addStage");
     companyList(); //获取公司下拉列表
     var userstate = sessionStorage.getItem("userstate");
-    // console.log(userstate);
     if (userstate == 1) {
         $("#platformCan").show();
         addStage(); //新增阶段
     }
-    
+    var url = window.location.href;
+    var indexNum = parseInt(url.split("=")[1]) + 1;
+    sessionStorage.setItem("indexNum", indexNum);
 });
 
 // 新增阶段
@@ -16,7 +17,9 @@ function addStage() {
         type: "GET",
         success: function (res) {
             console.log(JSON.stringify(res));
-            window.location.href = '../StageManage/index.html';
+            var indexNum = sessionStorage.getItem("indexNum");
+            sessionStorage.removeItem("indexNum");
+            window.location.href = '../StageManage/index.html?indexNum=' + indexNum;
         }
     });
 }

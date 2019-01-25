@@ -1,8 +1,17 @@
 $(function () {
   $.showLoading('加载中');
-  messageList(1);
+  var url = window.location.href;
+  if (url.indexOf('=') != -1) {
+    var index = url.split('=')[1];
+    var indexNum = Math.ceil(index / 10);
+    // console.log(index,indexNum);
+    messageList(indexNum); //消息列表
+  } else {
+    messageList(1); //消息列表
+  }
 });
 
+//消息列表
 function messageList(pageNum, startPublishTime, title) {
   var token = sessionStorage.getItem("token");
   $.ajax({
@@ -18,21 +27,22 @@ function messageList(pageNum, startPublishTime, title) {
     dataType: "json",
     success: function (res) {
       console.log('messageList', res);
+      $("#addButton").attr("data-num",res.count);
       $.closeLoading();
       var data = res.data;
       var str = "";
       var pages = 10 * (pageNum - 1);
-      if(res.code == 0){
+      if (res.code == 0) {
         $.each(data, function (index, val) {
           str += `
             <tr>
-              <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" /></td>
+              <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" data-index="${pages+(index+1)}" /></td>
               <td>${pages+(index+1)}</td>
               <td>${val.id}</td>
               <td>${val.title}</td>
               <td>${val.context}</td>
               <td>${moment(val.publishtime).format('YYYY年MM月DD日 hh:mm:ss')}</td>
-              <td><a class="btn btn-success navbar-btn" href="../MessageDetail/index.html?id=${val.id}">查看推送详情</a></td>
+              <td><a class="btn btn-success navbar-btn" href="../MessageDetail/index.html?id=${val.id}&indexNum=${pages+(index+1)}">查看推送详情</a></td>
             </tr>
           `;
         });

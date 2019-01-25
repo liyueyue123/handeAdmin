@@ -110,19 +110,24 @@ function allMenu() {
 //判断新增编辑
 function isAdd() {
     var url = window.location.href;
-    console.log(url);
+    // console.log(url);
     if (url.indexOf("&") == -1) {
-        var indexNum = parseInt(url.split("=")[1])+1 ;
+        $("#cancelButton").show();
+        $("#cancelButtonEdit").hide();
+        var indexNum = parseInt(url.split("=")[1]) + 1;
         sessionStorage.setItem("indexNum", indexNum);
         $("#form1").attr("action", APP_URL + "/permission/powerCreateRole");
         addRole(); //新增角色
     } else {
+        $("#cancelButton").hide();
+        $("#cancelButtonEdit").show();
         $("#form1").attr("action", APP_URL + "/permission/editPowerRoles");
         $("#changeTitle").html("修改");
         $("#saveButton").html('<i class="fa fa-save" aria-hidden="true"></i>保存');
         var roleId = url.split("&")[0].split("=")[1];
         var indexNum = url.split("&")[1].split("=")[1];
-        console.log(indexNum);
+        $("#cancelButtonEdit").attr("data-index", indexNum);
+        // console.log(indexNum);
         sessionStorage.setItem("indexNum", indexNum);
         $.showLoading('加载中');
         roleDetail(roleId); //角色详情

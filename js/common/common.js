@@ -1,5 +1,5 @@
 var APP_URL = 'http://hande.icpnt.com';
-// var APP_URL = 'HTTP://192.168.0.192:8080';
+var APP_URL = 'HTTP://192.168.0.192:8080';
 var APP_IMAGE_URL = 'http://hdimg.icpnt.com/';
 var token = sessionStorage.getItem("token");
 $(document).ready(function (e) {
@@ -17,17 +17,18 @@ $(document).ready(function (e) {
   $("button#cancelButton").click(function () {
     window.history.back(-1);
   });
-  //编辑页的取消按钮
-  $("button#cancelButtonEdit").click(function () {
-    var indexNum = $(this).attr("data-index");
-    window.location.href = '../UserList/index.html?indexNum=' + indexNum;
-  });
+
   //全站复选框美化
   $('input[data-name=multi-select]').iCheck({
     checkboxClass: 'icheckbox_flat-blue',
     radioClass: 'iradio_flat-blue'
   });
 });
+//编辑页的取消按钮
+function openList(e, src) {
+  var indexNum = $(e).attr("data-index");
+  window.location.href = src + '?indexNum=' + indexNum;
+}
 
 //jQueryForm封装
 function ajax(obj) {

@@ -1,6 +1,6 @@
 $(function () {
     var url = window.location.href;
-    console.log(url);
+    // console.log(url);
     var id = url.split('&')[0].split('=')[1];
     var $index = url.split('&')[1].split('=')[1];
     $.showLoading('加载中');
