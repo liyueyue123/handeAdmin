@@ -145,7 +145,7 @@ function companyList() {
             var str = "";
             str += `<option value="" selected="">选择公司进行搜索</option>`;
             $.each(data, function (index, val) {
-                str += `<option value="${val.companyname}">${val.companyname}</option>`;
+                str += `<option value="${val.id}">${val.companyname}</option>`;
             });
             $("#companySelect").html(str);
         },

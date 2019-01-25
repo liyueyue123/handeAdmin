@@ -49,7 +49,7 @@ function companyList() {
             }
             var data = res.data;
             var str = "";
-            str += `<option value="" selected="">选择公司进行搜索</option>`;
+            str += `<option value="" selected="">请选择公司</option>`;
             $.each(data, function (index, val) {
                 str += `<option value="${val.id}">${val.companyname}</option>`;
             });

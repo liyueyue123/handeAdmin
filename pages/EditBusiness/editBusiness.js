@@ -63,13 +63,13 @@ $(function () {
           $('#linksKey').html(linksKey);
           $('#linksOther').html(linksOther);
           if (linksKey) {
-            $('#linksKeyOld').val(k);
-            console.log($('#linksKeyOld').val());
+            $('#linksKeyOld').val(o);
+            // console.log($('#linksKeyOld').val());
           } else {
             $('#linksKeyOld').val('');
           };
           if (linksOther) {
-            $('#linksOtherOld').val(o);
+            $('#linksOtherOld').val(k);
           } else {
             $('#linksOtherOld').val('');
           }
@@ -228,6 +228,7 @@ $(function () {
     //   ln.push(parseInt($(this).val()));
     // });
     var arr = $("input[name=links_ID]:checked");
+    console.log($('#linksKeyOld').val())
     if ($('#linksKeyOld').val()) {
       $.show({
         title: '操作提示',
@@ -301,12 +302,32 @@ $(function () {
   $('#saveLinksOther').click(function () {
     var token = sessionStorage.getItem("token");
     var isKeys = 0;
-    var ln = [,];
-    $("input[name=links_ID]:checked").each(function () {
-      ln.push(parseInt($(this).val()));
-    });
-    var lo = $('#linksOtherOld').val();
-    var linkIds = lo.concat(ln);
+    console.log($('#linksKeyOld').val())
+    if (arr.length == 0) {
+      $.show({
+        title: '操作提示',
+        content: '请选择其他联系人',
+      });
+      return;
+    }
+    var ln = [];
+    if ($('#linksKeyOld').val() != '') {
+      $("input[name=links_ID]:checked").each(function () {
+        ln.push(parseInt($(this).val()));
+      });
+      var linkIds = parseInt(ln);
+    }else{
+      $("input[name=links_ID]:checked").each(function () {
+        ln.push(parseInt($(this).val()));
+      });
+      var lo = $('#linksOtherOld').val();
+      var linkIds = lo.concat(',',ln);
+    }
+    // $("input[name=links_ID]:checked").each(function () {
+    //   ln.push(parseInt($(this).val()));
+    // });
+    // var lo = $('#linksOtherOld').val();
+    // var linkIds = parseInt(ln);
     console.log(linkIds)
     $.ajax({
       type: "post",

@@ -25,8 +25,8 @@ function businessList(pageNum) {
   var city = $('#filter_city').val();
   var data = {};
   data.authToken = token;
-  data.limit = 10;
   data.page = pageNum;
+  data.limit = 10;
   if (companyName != "") {
     data.companyName = companyName;
   }
