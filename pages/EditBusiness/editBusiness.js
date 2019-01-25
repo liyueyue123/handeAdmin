@@ -1,10 +1,12 @@
 $(function () {
   var url = window.location.href; //首先获取到你的URL地址;
-  var arr = url.split("="); //用“&”将URL分割成2部分每部分都有你需要的东西;
-  var id = arr[1];
-  console.log(id);
-  if (url.indexOf('=') != -1) {
+  var arr = url.split("&"); //用“&”将URL分割成2部分每部分都有你需要的东西;
+  var id = arr[0].split("=")[1];
+  var indexNum = arr[1].split("=")[1];
+  console.log(id, indexNum);
+  if (url.indexOf('&') != -1) {
     //商机详情
+    sessionStorage.setItem("indexNum", indexNum);
     $.showLoading('加载中');
     getBusinessDetail(id);
   }
@@ -57,20 +59,20 @@ $(function () {
               o.push(v.id)
             }
           });
-          console.log(linksKey)
+          // console.log(linksKey)
           $('#linksKey').html(linksKey);
           $('#linksOther').html(linksOther);
           if (linksKey) {
             $('#linksKeyOld').val(k);
-          }else{
-             $('#linksKeyOld').val('');
+          } else {
+            $('#linksKeyOld').val('');
           };
           if (linksOther) {
             $('#linksOtherOld').val(o);
-          }else{
+          } else {
             $('#linksOtherOld').val('');
           }
-        }else{
+        } else {
           $('#linksKey').html('');
           $('#linksOther').html('');
         }
@@ -80,8 +82,8 @@ $(function () {
             principals += `<div class="contact"><img style="width:2%;margin-right:10px;" src="${vl.icon}"/><span width="150px;">姓名:${vl.name}</span><span width="150px;">手机号:${vl.phone}</span><span width="150px;">部门:${vl.departMent}</span> <button  data-id="${vl.id}" type="button" class="btn btn-danger pro-removeSection delPrincipal" style="margin-right:57.5%;float:right;margin-top:10px;"><i class="fa fa-minus" aria-hidden="true"></i> 移除</button></div>`;
           });
           $('#PrincipalsList').html(principals);
-        }else{
-           $('#PrincipalsList').html('');
+        } else {
+          $('#PrincipalsList').html('');
         }
         if (data.files != "") {
           var fujian = '';
@@ -93,7 +95,7 @@ $(function () {
           });
           $('#fileDataOld').val(f);
           $('#filesList').html(fujian);
-        }else{
+        } else {
           $('#filesList').html('');
           $('#fileDataOld').val('')
         }
@@ -108,7 +110,7 @@ $(function () {
   }
   $('#form1').attr('action', APP_URL + "/console/updateInfo");
   //提交基本信息
-  $('#saveButton').click(function(){
+  $('#saveButton').click(function () {
     ajax({
       type: 'post',
       success: function (res) {
@@ -133,7 +135,7 @@ $(function () {
     })
   })
   //修改概述
-  $('#saveRemark').click(function(){
+  $('#saveRemark').click(function () {
     var token = sessionStorage.getItem("token");
     var remark = $('#remark').val();
     console.log(remark);
@@ -150,7 +152,7 @@ $(function () {
         $.show({
           title: '操作成功',
           content: res.message
-        });   
+        });
         getBusinessDetail(id);
         if (res.code == "909090") {
           $.show({
@@ -348,7 +350,7 @@ $(function () {
       }
     });
   })
-  
+
   //修改负责人
   $('#savePrincipals').click(function () {
     var token = sessionStorage.getItem("token");
@@ -392,7 +394,7 @@ $(function () {
     });
   })
   //删除负责人
-  $('.delPrincipal').live('click',function(e){
+  $('.delPrincipal').live('click', function (e) {
     // console.log(e.target.dataset.id)
     var principalId = e.target.dataset.id;
     var token = sessionStorage.getItem("token");
@@ -406,7 +408,7 @@ $(function () {
       },
       dataType: "json",
       success: function (res) {
-        console.log('删除成功',res);
+        console.log('删除成功', res);
         getBusinessDetail(id);
         if (res.code == "909090") {
           $.show({
@@ -426,17 +428,17 @@ $(function () {
     });
   })
   //修改附件
-  function clickSaveFiles(e){
-    if(e == 'true'){
+  function clickSaveFiles(e) {
+    if (e == 'true') {
       $('#saveFiles').live("click", function () {
         var token = sessionStorage.getItem("token");
         var fileDataOld = $('#fileDataOld').val();
         var fileDataNow = $('#fileDataNow').val();
-        console.log('fff',fileDataOld)
-        if (fileDataOld != ''){
+        console.log('fff', fileDataOld)
+        if (fileDataOld != '') {
           var fileData = fileDataOld.concat(',' + fileDataNow) + '';
-        }else{
-           var fileData = fileDataNow;
+        } else {
+          var fileData = fileDataNow;
         }
         console.log(fileData)
         if (fileData) {
@@ -478,37 +480,37 @@ $(function () {
   $('.delFile').live('click', function (e) {
     console.log(e.target.dataset.id)
     var fileId = e.target.dataset.id;
-      $.ajax({
-        type: "POST",
-        url: APP_URL + "/console/deleteFiles",
-        data: {
-          authToken: token,
-          opportunityId: id,
-          fileId: fileId
-        },
-        dataType: "json",
-        success: function (res) {
-          console.log(res)
-          if (res.code == 0) {
-            alert('附件删除成功!')
-            getBusinessDetail(id);
-          }
-          if (res.code == "909090") {
-            $.show({
-              title: '操作提示',
-              content: '您已掉线,请重新登录!',
-              closeCallback: function () {
-                if (window != top) {
-                  top.location.href = "../../login.html";
-                }
-              }
-            });
-          }
-        },
-        fail: function(res){
-          alert('附件删除失败!')
+    $.ajax({
+      type: "POST",
+      url: APP_URL + "/console/deleteFiles",
+      data: {
+        authToken: token,
+        opportunityId: id,
+        fileId: fileId
+      },
+      dataType: "json",
+      success: function (res) {
+        console.log(res)
+        if (res.code == 0) {
+          alert('附件删除成功!')
+          getBusinessDetail(id);
         }
-      });
+        if (res.code == "909090") {
+          $.show({
+            title: '操作提示',
+            content: '您已掉线,请重新登录!',
+            closeCallback: function () {
+              if (window != top) {
+                top.location.href = "../../login.html";
+              }
+            }
+          });
+        }
+      },
+      fail: function (res) {
+        alert('附件删除失败!')
+      }
+    });
   })
   //上传附件
   $('#upload_file').live("change", function (e) {
@@ -710,8 +712,11 @@ $(function () {
     $("#allArea").html(str2);
   }
   //返回商机列表页
-  $('#back').click(function(){
-    window.history.back(-1);
+  $('#back').click(function () {
+    var indexNum = sessionStorage.getItem("indexNum");
+    sessionStorage.removeItem("indexNum");
+    window.location.href = '../BusinessList/index.html?indexNum=' + indexNum;
+    // window.history.back(-1);
   })
 
   // 获取用户表格()
@@ -732,8 +737,8 @@ $(function () {
         var data = res.data;
         var str = "";
         var pages = 10 * (pageNum - 1);
-        if(res.count != 0 && res.code == 0) {
-          $('.userListDiv').css('display','block');
+        if (res.count != 0 && res.code == 0) {
+          $('.userListDiv').css('display', 'block');
           $.each(data, function (index, val) {
             str += `
               <tr>
@@ -748,7 +753,7 @@ $(function () {
             `;
           });
           $(".userList").html(str);
-        }else{
+        } else {
           str += `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
           $('.principalsTd').html(str);
         }
@@ -792,7 +797,7 @@ $(function () {
         var data = res.data;
         var pages = 10 * (pageNum - 1);
         var str = "";
-        if(res.count != 0 && res.code == 0){
+        if (res.count != 0 && res.code == 0) {
           $('.customerListDiv').css('display', 'block');
           $.each(data, function (index, val) {
             str += `
@@ -808,7 +813,7 @@ $(function () {
             str += `</tr>`;
           });
           $(".customerList").html(str);
-        }else{
+        } else {
           str += `<div style="padding-left: 6px;color:gray;">暂无数据,无法修改负责人</div>`;
           $('.linksTd').html(str);
         }

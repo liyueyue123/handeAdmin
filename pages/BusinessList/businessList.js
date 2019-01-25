@@ -1,6 +1,14 @@
 $(function () {
   $.showLoading('加载中');
-  businessList(1);
+  var url = window.location.href;
+  if (url.indexOf('=') != -1) {
+    var index = url.split('=')[1];
+    var indexNum = Math.ceil(index / 10);
+    console.log(indexNum);
+    businessList(indexNum); //商机列表
+  } else {
+    businessList(1); // 商机列表
+  }
 });
 
 // 获取商机列表
@@ -16,7 +24,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
       companyName: companyName,
       linkMan: linkMan,
       responsible: responsible,
-      id:id,
+      id: id,
       price: price,
       stage: stage,
       startTime: startTime,
@@ -43,7 +51,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
       $.each(data, function (index, val) {
         str += `
                 <tr>
-                <td><input type="checkbox" name="del_listID" id="del_listID" data-index="${pages+index+1}"data-name="multi-select" value="${val.id}" /></td>
+                <td><input type="checkbox" name="del_listID" id="del_listID" data-index="${pages+index+1}"data-name="multi-select" value="${val.id}" data-index="${pages+index+1}"/></td>
                 <td>${pages+index+1}</td>
                 <td>${val.id}</td>
                 <td>${val.companyname}</td>
@@ -54,7 +62,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
                 <td>${val.group.groupName}</td>
                 <td>${val.source}</td>
                 <td width="300">
-                <div class="btn btn-success navbar-btn" id="search_details" data-id="${val.id}" data-index="${pages+index+1}"> 查看详情</div>
+                <a class="btn btn-success navbar-btn" href="../BusinessDetail/index.html?id=${val.id}&indexNum=${pages+(index+1)}">查看详情</a>
                 </td>
                 </tr>
               `;
@@ -71,6 +79,7 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
     }
   });
 }
+
 // $('#upload_file').live("change", function (e) {
 //   //上传单个文件
 //   if (e.target.files.length <= 1) {
@@ -117,14 +126,6 @@ function businessList(pageNum, companyName, linkMan, responsible, id, price, sta
 //     });
 //   }
 // });
-
-//点击查看详情
-$('#search_details').live('click', function (e) {
-  console.log('id',e.target.dataset.id)
-  var id = e.target.dataset.id;
-  var index = e.target.dataset.index;
-  openAddData('../BusinessDetail/index.html?id='+id+'&index='+index)
-})
 
 //点击搜索按钮
 $('#search_btn').live('click', function () {

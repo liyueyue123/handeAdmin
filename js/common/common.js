@@ -17,6 +17,11 @@ $(document).ready(function (e) {
   $("button#cancelButton").click(function () {
     window.history.back(-1);
   });
+  //编辑页的取消按钮
+  $("button#cancelButtonEdit").click(function () {
+    var indexNum = $(this).attr("data-index");
+    window.location.href = '../UserList/index.html?indexNum=' + indexNum;
+  });
   //全站复选框美化
   $('input[data-name=multi-select]').iCheck({
     checkboxClass: 'icheckbox_flat-blue',

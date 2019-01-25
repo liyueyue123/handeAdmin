@@ -1,17 +1,22 @@
 $(function () {
   var userstate = sessionStorage.getItem("userstate");
   var companyId = sessionStorage.getItem('companyId');
-  console.log(userstate)
-  if(userstate == 1){
-    roleState();   //用户身份为平台管理员时调用的 //不选择公司
+  // console.log(userstate)
+  if (userstate == 1) {
+    roleState(); //用户身份为平台管理员时调用的 //不选择公司
   }
-  if(userstate == 2){
+  if (userstate == 2) {
     $('#company').attr('disabled', 'disabled');
   }
   var url = window.location.href; // 首先获取到你的URL地址;
-  var arr = url.split("="); // 用“&”将URL分割成2部分每部分都有你需要的东西;
-  var id = arr[1];
-  if (url.indexOf('=') != -1) {
+  if (url.indexOf('&') != -1) {
+    $("#cancelButton").hide();
+    $("#cancelButtonEdit").show();
+    var arr = url.split("&"); // 用“&”将URL分割成2部分每部分都有你需要的东西;
+    var id = arr[0].split("=")[1];
+    var indexNum = arr[1].split("=")[1];
+    $("#cancelButtonEdit").attr("data-index", indexNum);
+    sessionStorage.setItem("indexNum", indexNum);
     $('.addForm').attr('action', APP_URL + "/editUser");
     $('#changeTitle').text('修改');
     $('#changeTxt').text('修改');
@@ -20,10 +25,14 @@ $(function () {
     $.showLoading('加载中');
     getUserInfo(id);
   } else {
+    $("#cancelButton").show();
+    $("#cancelButtonEdit").hide();
+    var indexNum = parseInt(url.split("=")[1]) + 1;
+    sessionStorage.setItem("indexNum", indexNum);
     $('.addForm').attr('action', APP_URL + "/register");
     if (userstate != 1) {
       getCompanySelect(companyId); // 获取公司的下拉选框 
-    }else{
+    } else {
       getCompanySelect(); // 获取公司的下拉选框
     }
     getRoleSelect(); // 获取角色列表 
@@ -77,8 +86,8 @@ function getUserInfo(id) { //获取用户详情
         console.log($('#icon').val())
       }
       getCompanySelect(data.company); // 获取公司的下拉选框
-      
-      getDepartmentSelect(data.company,data.department); // 获取部门的下拉选框
+
+      getDepartmentSelect(data.company, data.department); // 获取部门的下拉选框
 
       // getUserStateSelect(data.userstate); // 获取用户身份
 
@@ -219,7 +228,7 @@ function getCompanySelect(c) { // 获取公司 下拉选框
       var data = res.data;
       var str = "<option value='' selected>---请选择公司---</option>";
       $.each(data, function (index, val) {
-          str += `
+        str += `
                 <option value="${val.id}">${val.companyname}</option>
             `;
       });
@@ -363,8 +372,8 @@ function getRoleSelect(r) { //获取角色 下拉选框
         }
       });
       $("#roleId").html(str);
-      if(r){
-          $("#roleId").find("option[value=" + r+ "]").attr("selected", true);
+      if (r) {
+        $("#roleId").find("option[value=" + r + "]").attr("selected", true);
       }
       submit();
     },
@@ -388,15 +397,15 @@ function roleState() { //用户身份为平台管理员时调用的 //不选择�
       $('#department').removeAttr('nullmsg');
       $('#company').removeAttr('datatype');
       $('#department').removeAttr('datatype');
-    }else{
+    } else {
       //  $('.cabout').removeAttr('disabled');
-       $('#company').removeAttr('disabled');
-       $('#addDepartment').removeAttr('disabled');
-       $('#department').removeAttr('disabled');
-       $('#company').attr('nullmsg', '请选择公司名称');
-       $('#department').attr('nullmsg', '请选择部门名称');
-       $('#company').attr('datatype','*');
-       $('#department').attr('datatype','*');
+      $('#company').removeAttr('disabled');
+      $('#addDepartment').removeAttr('disabled');
+      $('#department').removeAttr('disabled');
+      $('#company').attr('nullmsg', '请选择公司名称');
+      $('#department').attr('nullmsg', '请选择部门名称');
+      $('#company').attr('datatype', '*');
+      $('#department').attr('datatype', '*');
     }
   })
 }
@@ -417,12 +426,12 @@ function getUserStateSelect(s) { //获取用户身份 下拉选框
             `;
   }
   if (userstate == 2) {
-    if (userId == id){
+    if (userId == id) {
       str += `
               <option value="2">公司管理员</option>
               <option value="3">一般职员</option>
             `;
-    }else{
+    } else {
       str += `
               <option value="3">一般职员</option>
             `;
@@ -434,7 +443,7 @@ function getUserStateSelect(s) { //获取用户身份 下拉选框
             `;
   }
   $("#userstate").html(str);
-  if(s){
+  if (s) {
     $("#userstate").find("option[value=" + s + "]").attr("selected", true);
   }
   submit();
@@ -495,7 +504,7 @@ function submit() { //提交表单
         }
       }
     })
-  }else{
+  } else {
     ajax({
       type: 'post',
       success: function (res) {
@@ -511,7 +520,9 @@ function submit() { //提交表单
           });
         }
         console.log('success', JSON.stringify(res));
-        window.location.href = '../UserList/index.html'
+        var indexNum = sessionStorage.getItem("indexNum");
+        sessionStorage.removeItem("indexNum");
+        window.location.href = '../UserList/index.html?indexNum=' + indexNum;
       }
     })
   }

@@ -4,7 +4,7 @@ $(function () {
         $('.navbar-form').show();
         $('#addButton').show();
     }
-    companyList(1); //公司列表
+    // companyList(1); //公司列表
     var url = window.location.href;
     if (url.indexOf('=') != -1) {
         var index = url.split('=')[1];

@@ -26,6 +26,7 @@ $(function () {
             arr.push($(this).val());
         });
         var phones = arr.toString();
+        console.log(phones);
         $("#formPhones").val(phones);
     });
     getAllProvinces(); //获取省份
@@ -33,17 +34,22 @@ $(function () {
     getArea(); //获取所在区
     var url = window.location.href;
     if (url.indexOf("&") == -1) {
-        var indexNum = parseInt(url.split("=")[1])+1 ;
+        $("#cancelButton").show();
+        $("#cancelButtonEdit").hide();
+        var indexNum = parseInt(url.split("=")[1]) + 1;
         sessionStorage.setItem("indexNum", indexNum);
         $(".addForm").attr("action", APP_URL + "/addCompany");
         $("#companyId").val("");
         // $("#company_password").attr("ajaxurl", APP_URL + "/addCompany");  //验证账号是否重复
         addCompany(); //新增公司
     } else {
+        $("#cancelButton").hide();
+        $("#cancelButtonEdit").show();
         var el = url.split("&");
         var id = el[0].split("=")[1];
         var indexNum = el[1].split("=")[1];
         sessionStorage.setItem("indexNum", indexNum);
+        $("#cancelButtonEdit").attr("data-index", indexNum);
         showDetails(id); //显示公司详情
     }
 });

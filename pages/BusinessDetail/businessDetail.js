@@ -1,5 +1,6 @@
 $(function () {
     var url = window.location.href;
+    console.log(url);
     var id = url.split('&')[0].split('=')[1];
     var $index = url.split('&')[1].split('=')[1];
     $.showLoading('加载中');
@@ -174,7 +175,7 @@ function businessDetail(id, $index) {
             `;
             $(".businessDetail").html(str);
             $("#cancelButton").click(function () {
-                window.history.back(-1);
+                window.location.href = '../BusinessList/index.html?indexNum=' + $index;
             });
         },
         error: function (err) {

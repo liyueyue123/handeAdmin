@@ -4,14 +4,22 @@ $(function () {
   if (userstate == 1) {
     $('#search_compName').show();
   }
-  if (userstate != 3){
+  if (userstate != 3) {
     $('#addBtn').show();
   }
-  userList(1);
   companyList();
+  var url = window.location.href;
+  if (url.indexOf('=') != -1) {
+    var index = url.split('=')[1];
+    var indexNum = Math.ceil(index / 10);
+    // console.log(indexNum);
+    userList(indexNum); //公司列表
+  } else {
+    userList(1); //公司列表
+  }
 });
 //用户列表
-function userList(pageNum, phone, name, Id, compName,department) {
+function userList(pageNum, phone, name, Id, compName, department) {
   var token = sessionStorage.getItem("token");
   $.ajax({
     type: "GET",
@@ -30,6 +38,7 @@ function userList(pageNum, phone, name, Id, compName,department) {
     dataType: "json",
     success: function (res) {
       console.log('userList', res);
+      $("#addBtn").attr("data-num",res.count);
       $.closeLoading();
       if (res.code == "909090") {
         $.show({
@@ -48,7 +57,7 @@ function userList(pageNum, phone, name, Id, compName,department) {
       $.each(data, function (index, val) {
         str += `
           <tr>
-            <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}"  data-userstate="${val.role == ''? '' : val.role.userstate }"/></td>
+            <td><input type="checkbox" name="del_listID" id="${val.id}" data-name="multi-select" value="${val.id}" data-index="${pages+(index+1)}"  data-userstate="${val.role == ''? '' : val.role.userstate }"/></td>
             <td>${pages+(index+1)}</td>
             <td>${val.id}</td>
             <td>${val.name}</td>
@@ -82,7 +91,7 @@ function userList(pageNum, phone, name, Id, compName,department) {
       console.log(err);
     }
   });
-  if(compName){
+  if (compName) {
     $.ajax({
       type: "GET",
       url: APP_URL + "/addEnsearch",
@@ -263,10 +272,10 @@ function nochecked() {
 }
 
 //点击查看企业历史
-$('#search_details').live('click',function(e){
+$('#search_details').live('click', function (e) {
   // console.log('id', e.target.dataset.id)
   var id = e.target.dataset.id;
-  openAddData('../companyHistory/index.html?id=' + id );
+  openAddData('../companyHistory/index.html?id=' + id);
 });
 
 // 获取公司列表
