@@ -21,7 +21,7 @@ input {
 	width: 474px;
 	height: 466px;
 	position: absolute;
-	right: 8.89%;
+	right: 9.1%;
 	top: 50%;
 	margin-left: -280px;
 	margin-top: -225px;
@@ -30,8 +30,8 @@ input {
 }
 
 .loginTitle {
-	width: 126px;
-	height: 70px;
+	width: 121px;
+	height: 54px;
 	margin: 0 auto;
 	margin-top: 58px;
 	background: url(../images/loginTitle.png) center no-repeat;

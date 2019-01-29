@@ -372,7 +372,7 @@ function getRoleSelect(r,s) { //获取角色 下拉选框
       if (r) {
         $("#roleId").find("option[value=" + r + "]").attr("selected", true);
       }
-      if(s){
+      if(s == 1){
         $("#company").find("option:selected").removeAttr("selected");
         $('#companyInput').val('');
         $("#company").val('');
@@ -401,6 +401,7 @@ function roleState() { //用户身份为平台管理员时调用的 //不选择�
       // $('.cabout').attr('disabled','disabled');  //不选择公司
       $("#company").find("option:selected").attr("selected", false);
       $('#companyInput').val('');
+      $('#department').val('');
       $('#company').attr('disabled', 'disabled');
       $('#addDepartment').attr('disabled', 'disabled');
       $('#department').attr('disabled', 'disabled');

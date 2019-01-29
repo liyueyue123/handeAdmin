@@ -1,5 +1,5 @@
 var APP_URL = 'http://hande.icpnt.com';
-var APP_URL = 'HTTP://192.168.0.192:8080';
+// var APP_URL = 'HTTP://192.168.0.192:8080';
 var APP_IMAGE_URL = 'http://hdimg.icpnt.com/';
 var token = sessionStorage.getItem("token");
 $(document).ready(function (e) {

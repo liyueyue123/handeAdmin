@@ -311,24 +311,26 @@ $(function () {
       return;
     }
     var ln = [];
-    if ($('#linksKeyOld').val() != '') {
-      $("input[name=links_ID]:checked").each(function () {
-        ln.push(parseInt($(this).val()));
-      });
-      var linkIds = parseInt(ln);
-    }else{
-      $("input[name=links_ID]:checked").each(function () {
-        ln.push(parseInt($(this).val()));
-      });
-      var lo = $('#linksOtherOld').val();
-      var linkIds = lo.concat(',',ln);
-    }
-    // $("input[name=links_ID]:checked").each(function () {
-    //   ln.push(parseInt($(this).val()));
-    // });
-    // var lo = $('#linksOtherOld').val();
-    // var linkIds = parseInt(ln);
-    console.log(linkIds)
+    // if ($('#linksKeyOld').val() != '') {
+    //   $("input[name=links_ID]:checked").each(function () {
+    //     ln.push(parseInt($(this).val()));
+    //   });
+    //   var lo = $('#linksOtherOld').val();
+    //   var linkIds = parseInt(ln);
+    //   // var linkIds = lo.concat(ln);
+    // }else{
+    //   $("input[name=links_ID]:checked").each(function () {
+    //     ln.push(parseInt($(this).val()));
+    //   });
+    //   var lo = $('#linksOtherOld').val();
+    //   var linkIds = lo.concat(',',ln);
+    //   console.log(linkIds)
+    // }
+    $("input[name=links_ID]:checked").each(function () {
+      ln.push(parseInt($(this).val()));
+    });
+    var linkIds = '' + ln;
+    console.log(linkIds);
     $.ajax({
       type: "post",
       url: APP_URL + "/console/saveLinkInfo",
@@ -390,6 +392,7 @@ $(function () {
           content: res.message,
            closeCallback: function () {
              getBusinessDetail(id);
+             $('#linksKeyOld').val('');
            }
         });
         // alert(res.message)
